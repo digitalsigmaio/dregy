@@ -15,7 +15,12 @@ class CreateJobAdFavsTable extends Migration
     {
         Schema::create('job_ad_favs', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('job_ad_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('job_ad_id')->references('id')->on('job_ads');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

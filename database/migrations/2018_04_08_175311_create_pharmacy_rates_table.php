@@ -15,7 +15,13 @@ class CreatePharmacyRatesTable extends Migration
     {
         Schema::create('pharmacy_rates', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('pharmacy_id');
+            $table->unsignedInteger('user_id');
+            $table->integer('rate');
             $table->timestamps();
+
+            $table->foreign('pharmacy_id')->references('id')->on('pharmacies');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

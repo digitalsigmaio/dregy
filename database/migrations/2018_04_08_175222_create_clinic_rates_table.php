@@ -4,17 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMedicalCentersTable extends Migration
+class CreateMedicalCenterRatesTable extends Migration
 {
     /**
      * Run the migrations.
      *
-     * @todo medical centers structure
      * @return void
      */
     public function up()
     {
-        Schema::create('medical_centers', function (Blueprint $table) {
+        Schema::create('clinic_rates', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -27,6 +26,6 @@ class CreateMedicalCentersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_centers');
+        Schema::dropIfExists('clinic_rates');
     }
 }

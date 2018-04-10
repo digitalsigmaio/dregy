@@ -15,7 +15,12 @@ class CreateBeautyCenterViewsTable extends Migration
     {
         Schema::create('beauty_center_views', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('beauty_center_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('beauty_center_id')->references('id')->on('beauty_centers');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -15,7 +15,12 @@ class CreateProductAdViewsTable extends Migration
     {
         Schema::create('product_ad_views', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('product_ad_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('product_ad_id')->references('id')->on('product_ads');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

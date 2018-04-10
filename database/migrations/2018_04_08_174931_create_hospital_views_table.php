@@ -15,7 +15,12 @@ class CreateHospitalViewsTable extends Migration
     {
         Schema::create('hospital_views', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('hospital_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('hospital_id')->references('id')->on('hospitals');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

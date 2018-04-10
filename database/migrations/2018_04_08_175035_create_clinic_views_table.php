@@ -13,9 +13,14 @@ class CreateMedicalCenterViewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('medical_center_views', function (Blueprint $table) {
+        Schema::create('clinic_views', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('clinic_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +31,6 @@ class CreateMedicalCenterViewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_center_views');
+        Schema::dropIfExists('clinic_views');
     }
 }
