@@ -27,7 +27,7 @@ class CreateProductAdsTable extends Migration
             $table->string('img')->nullable();
             $table->boolean('promoted')->default(false);
             $table->timestamps();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');

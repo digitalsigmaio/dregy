@@ -20,7 +20,6 @@ class CreateBeautyCentersTable extends Migration
             $table->string('en_name');
             $table->string('ar_slug');
             $table->string('en_slug');
-            $table->json('specialities');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('ar_address');
@@ -34,7 +33,7 @@ class CreateBeautyCentersTable extends Migration
             $table->string('img')->nullable();
             $table->boolean('premium')->default(false);
             $table->timestamps();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');

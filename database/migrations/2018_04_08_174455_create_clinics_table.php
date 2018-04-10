@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMedicalCentersTable extends Migration
+class CreateClinicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -36,7 +36,7 @@ class CreateMedicalCentersTable extends Migration
             $table->string('img')->nullable();
             $table->boolean('premium')->default(false);
             $table->timestamps();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
