@@ -20,10 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role')->default('subscriber');
             $table->string('avatar')->nullable();
-            $table->json('phones');
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
-            $table->string('reference');
+            $table->string('ref_id');
             $table->rememberToken();
             $table->timestamps();
         });

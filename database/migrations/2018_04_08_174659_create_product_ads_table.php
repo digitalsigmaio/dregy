@@ -24,7 +24,6 @@ class CreateProductAdsTable extends Migration
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('address')->nullable();
-            $table->json('phones');
             $table->string('img')->nullable();
             $table->boolean('promoted')->default(false);
             $table->timestamps();

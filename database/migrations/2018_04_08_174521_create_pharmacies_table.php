@@ -28,7 +28,6 @@ class CreatePharmaciesTable extends Migration
             $table->text('en_note')->nullable();
             $table->string('ar_work_times');
             $table->string('en_work_times');
-            $table->json('phones');
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->string('img')->nullable();
