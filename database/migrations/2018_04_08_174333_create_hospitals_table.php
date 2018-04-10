@@ -20,7 +20,6 @@ class CreateHospitalsTable extends Migration
             $table->string('en_name');
             $table->string('ar_slug');
             $table->string('en_slug');
-            $table->json('specialities');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('ar_address');
