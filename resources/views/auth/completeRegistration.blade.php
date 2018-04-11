@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('social.user.create') }}">
+                    <form method="POST" action="{{ route('social.user.create', $provider) }}">
                         @csrf
 
                         <input type="hidden" name="user" value="{{ $user }}">
