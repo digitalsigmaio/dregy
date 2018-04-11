@@ -55,7 +55,7 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <a href="/auth/facebook" class="btn btn-info">
+                                <a href="/auth/facebook" target="_blank" class="btn btn-info">
                                     Facebook
                                 </a>
 
