@@ -33,14 +33,9 @@ class AuthController extends Controller
     {
         $user = Socialite::driver($provider)->user();
 
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
-            Auth::login($authUser, true);
-            return redirect($this->redirectTo);
-        } else {
-            return redirect(route('social.user.form', $provider))->with('user', $user);
-        }
-
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -50,28 +45,18 @@ class AuthController extends Controller
      * @param $provider Social auth provider
      * @return  User
      */
-    public function createUser(Request $request, $provider)
+    public function findOrCreateUser($user, $provider)
     {
-        $request->validate([
-            'user' => 'required',
-            'password' => 'required'
-        ]);
-
-        $user = $request->user;
-        $password = Hash::make($request->password);
-
-        $authUser = User::create([
+        $authUser = User::where('provider_id', $user->id)->first();
+        if ($authUser) {
+            return $authUser;
+        }
+        return User::create([
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id,
-            'avatar' => $user->avatar,
-            'ref_id' => Str::uuid(),
-            'password' => $password
+            'ref_id' => Str::uuid()
         ]);
-
-        Auth::login($authUser, true);
-        return redirect($this->redirectTo);
-
     }
 }
