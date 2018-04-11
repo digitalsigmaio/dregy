@@ -21,8 +21,8 @@ Route::middleware('language')->group(function () {
 
     Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
-    Route::view('/auth/complete-registration', 'auth.completeRegistration')->name('social.user.form');
-    Route::post('/auth/complete-registration', 'Auth\AuthController@createUser')->name('social.user.create');
+    Route::view('/auth/{provider}/complete-registration', 'auth.completeRegistration')->name('social.user.form');
+    Route::post('/auth/{provider}/complete-registration', 'Auth\AuthController@createUser')->name('social.user.create');
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::view('/apiToken', 'dev.apiTokens')->name('create-token');
