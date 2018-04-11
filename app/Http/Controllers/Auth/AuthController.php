@@ -38,7 +38,7 @@ class AuthController extends Controller
             Auth::login($authUser, true);
             return redirect($this->redirectTo);
         } else {
-            return redirect(route('social.user.form'), compact(['user', 'provider']));
+            return redirect(route('social.user.form', $provider))->with(['user' => $user]);
         }
 
     }
@@ -50,17 +50,14 @@ class AuthController extends Controller
      * @param $provider Social auth provider
      * @return  User
      */
-    public function createUser(Request $request)
+    public function createUser(Request $request, $provider)
     {
         $request->validate([
             'user' => 'required',
-            'password' => 'required',
-            'provider' => 'required'
+            'password' => 'required'
         ]);
 
         $user = $request->user;
-        $provider = $request->provider;
-        
         $password = Hash::make($request->password);
 
         $authUser = User::create([
