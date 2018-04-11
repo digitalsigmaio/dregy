@@ -16,12 +16,12 @@ class CreateProductAdminReviewsTable extends Migration
         Schema::create('product_admin_reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('product_ad_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('admin_id');
             $table->boolean('approved');
             $table->timestamps();
 
             $table->foreign('product_ad_id')->references('id')->on('product_ads');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('admin_id')->references('id')->on('admins');
         });
     }
 

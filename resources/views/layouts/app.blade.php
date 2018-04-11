@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ __('words.dir') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/mdb.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -51,18 +53,37 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                    @auth('admin')
+                                        <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                        @else
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @endauth
+
+
                                 </div>
                             </li>
                         @endguest
+                            @lang('en')
+                            <li><a class="nav-link" href="{{ route('lang', 'ar') }}">عربي</a></li>
+                            @else
+                            <li><a class="nav-link" href="{{ route('lang', 'en') }}">English</a></li>
+                            @endlang
                     </ul>
                 </div>
             </div>
