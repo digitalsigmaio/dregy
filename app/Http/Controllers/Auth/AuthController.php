@@ -38,7 +38,7 @@ class AuthController extends Controller
             Auth::login($authUser, true);
             return redirect($this->redirectTo);
         } else {
-            return view('auth.completeRegistration', compact('user'));
+            return redirect(route('social.user.form', compact('user')));
         }
 
     }
