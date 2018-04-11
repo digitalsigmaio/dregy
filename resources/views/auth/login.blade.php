@@ -55,6 +55,10 @@
                                     {{ __('Login') }}
                                 </button>
 
+                                <a href="/auth/facebook" class="btn btn-info">
+                                    Facebook
+                                </a>
+
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
