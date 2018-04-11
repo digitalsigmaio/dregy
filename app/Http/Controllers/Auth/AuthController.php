@@ -32,10 +32,10 @@ class AuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-        return response()->json(['user' => $user, 'provider' => $provider]);
-        /*$authUser = $this->findOrCreateUser($user, $provider);
+        
+        $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        return redirect($this->redirectTo);*/
+        return redirect($this->redirectTo);
     }
 
     /**
