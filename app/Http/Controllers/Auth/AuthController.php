@@ -56,6 +56,7 @@ class AuthController extends Controller
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id,
+            'avatar' => $user->avatar,
             'ref_id' => Str::uuid()
         ]);
     }
