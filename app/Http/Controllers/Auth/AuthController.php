@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -16,6 +18,7 @@ class AuthController extends Controller
 
     public function redirectToProvider($provider)
     {
+        dd(Socialite::driver($provider));
         return Socialite::driver($provider)->redirect();
     }
 
@@ -30,10 +33,15 @@ class AuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-        dd($user);
-        $authUser = $this->findOrCreateUser($user, $provider);
-        Auth::login($authUser, true);
-        return redirect($this->redirectTo);
+
+        $authUser = User::where('provider_id', $user->id)->first();
+        if ($authUser) {
+            Auth::login($authUser, true);
+            return redirect($this->redirectTo);
+        } else {
+            return view('auth.completeRegistration', compact('user'));
+        }
+
     }
 
     /**
@@ -43,17 +51,28 @@ class AuthController extends Controller
      * @param $provider Social auth provider
      * @return  User
      */
-    public function findOrCreateUser($user, $provider)
+    public function createUser(Request $request, $provider)
     {
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
-            return $authUser;
-        }
-        return User::create([
+        $request->validate([
+            'user' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user = $request->user;
+        $password = Hash::make($request->password);
+
+        $authUser = User::create([
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => $user->id
+            'provider_id' => $user->id,
+            'avatar' => $user->avatar,
+            'ref_id' => Str::uuid(),
+            'password' => $password
         ]);
+
+        Auth::login($authUser, true);
+        return redirect($this->redirectTo);
+
     }
 }

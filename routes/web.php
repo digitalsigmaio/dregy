@@ -21,6 +21,7 @@ Route::middleware('language')->group(function () {
 
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::post('auth/{provider}/callback', 'Auth\AuthController@createUser')->name('social.user.create');
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::view('/apiToken', 'dev.apiTokens')->name('create-token');
