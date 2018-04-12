@@ -25,4 +25,9 @@ class ProductAd extends Model
     {
         return $this->hasOne(ProductAdminReview::class);
     }
+
+    public function phoneNumbers()
+    {
+        return $this->belongsToMany(PhoneNumber::class, 'product_ad_phone_number');
+    }
 }

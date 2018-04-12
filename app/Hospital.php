@@ -43,7 +43,7 @@ class Hospital extends Model
 
     public function phoneNumbers()
     {
-        return $this->hasMany(PhoneNumber::class);
+        return $this->belongsToMany(PhoneNumber::class, 'hospital_phone_number');
     }
 
     public function specialities()

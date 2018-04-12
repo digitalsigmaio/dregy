@@ -45,4 +45,9 @@ class JobAd extends Model
     {
         return $this->belongsTo(JobEducationLevel::class);
     }
+
+    public function phoneNumbers()
+    {
+        return $this->belongsToMany(PhoneNumber::class, 'job_ad_phone_number');
+    }
 }

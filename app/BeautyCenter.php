@@ -43,7 +43,7 @@ class BeautyCenter extends Model
 
     public function phoneNumbers()
     {
-        return $this->hasMany(PhoneNumber::class);
+        return $this->belongsToMany(PhoneNumber::class, 'beauty_center_phone_number');
     }
 
     public function specialities()

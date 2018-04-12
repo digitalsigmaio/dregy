@@ -8,31 +8,31 @@ class PhoneNumber extends Model
 {
     public function hospital()
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->belongsToMany(Hospital::class, 'hospital_phone_number');
     }
 
     public function clinic()
     {
-        return $this->belongsTo(Clinic::class);
+        return $this->belongsToMany(Clinic::class, 'clinic_phone_number');
     }
 
     public function pharmacy()
     {
-        return $this->belongsTo(Pharmacy::class);
+        return $this->belongsToMany(Pharmacy::class, 'pharmacy_phone_number');
     }
 
     public function beautyCenter()
     {
-        return $this->belongsTo(BeautyCenter::class);
+        return $this->belongsToMany(BeautyCenter::class, 'beauty_center_phone_number');
     }
 
     public function productAd()
     {
-        return $this->belongsTo(ProductAd::class);
+        return $this->belongsToMany(ProductAd::class, 'product_ad_phone_number');
     }
 
     public function jobAd()
     {
-        return $this->belongsTo(JobAd::class);
+        return $this->belongsToMany(JobAd::class, 'job_ad_phone_number');
     }
 }

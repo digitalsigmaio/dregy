@@ -43,6 +43,6 @@ class Pharmacy extends Model
 
     public function phoneNumbers()
     {
-        return $this->hasMany(PhoneNumber::class);
+        return $this->belongsToMany(PhoneNumber::class, 'pharmacy_phone_number');
     }
 }
