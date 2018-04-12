@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClinicView extends Model
+class BeautyCenterFav extends Model
 {
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function clinic()
+    public function beautyCenter()
     {
-        return $this->belongsTo(Clinic::class);
+        return $this->belongsTo(BeautyCenter::class);
     }
 }

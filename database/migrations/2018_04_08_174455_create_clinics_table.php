@@ -17,6 +17,7 @@ class CreateClinicsTable extends Migration
         Schema::create('clinics', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('admin_id');
             $table->string('ar_name');
             $table->string('en_name');
             $table->string('ar_slug');
@@ -40,6 +41,7 @@ class CreateClinicsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->foreign('degree_id')->references('id')->on('degrees');
             $table->foreign('speciality_id')->references('id')->on('specialities');
             $table->foreign('region_id')->references('id')->on('regions');

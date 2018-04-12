@@ -21,6 +21,7 @@ class CreateProductAdsTable extends Migration
             $table->string('status');
             $table->string('price');
             $table->string('ref_id');
+            $table->unsignedInteger('product_ad_category_id');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('address')->nullable();
@@ -31,6 +32,7 @@ class CreateProductAdsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('product_ad_category_id')->references('id')->on('product_ad_categories');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('city_id')->references('id')->on('cities');
         });

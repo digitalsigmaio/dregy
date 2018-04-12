@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('ref_id');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserPhoneNumberTable extends Migration
+class CreateBeautyCenterFavsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateUserPhoneNumberTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_phone_number', function (Blueprint $table) {
+        Schema::create('beauty_center_favs', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('beauty_center_id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('phone_number_id');
             $table->timestamps();
 
+            $table->foreign('beauty_center_id')->references('id')->on('beauty_centers');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('phone_number_id')->references('id')->on('phone_numbers');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateUserPhoneNumberTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_phone_number');
+        Schema::dropIfExists('beauty_center_favs');
     }
 }

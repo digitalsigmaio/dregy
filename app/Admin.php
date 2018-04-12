@@ -39,4 +39,34 @@ class Admin extends Authenticatable
     {
         $this->notify(new AdminResetPasswordNotification($token));
     }
+
+    public function hospitals()
+    {
+        return $this->hasMany(Hospital::class);
+    }
+
+    public function clinics()
+    {
+        return $this->hasMany(Clinic::class);
+    }
+
+    public function pharmacies()
+    {
+        return $this->hasMany(Pharmacy::class);
+    }
+
+    public function beautyCenters()
+    {
+        return $this->hasMany(BeautyCenter::class);
+    }
+
+    public function productAdReviews()
+    {
+        return $this->hasMany(ProductAdminReview::class);
+    }
+
+    public function jobAdReviews()
+    {
+        return $this->hasMany(JobAdminReview::class);
+    }
 }

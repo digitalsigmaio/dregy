@@ -16,6 +16,7 @@ class CreatePharmaciesTable extends Migration
         Schema::create('pharmacies', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('admin_id');
             $table->string('ar_name');
             $table->string('en_name');
             $table->string('ar_slug');
@@ -37,6 +38,7 @@ class CreatePharmaciesTable extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('city_id')->references('id')->on('cities');
         });
