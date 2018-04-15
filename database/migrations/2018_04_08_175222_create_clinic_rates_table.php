@@ -15,7 +15,13 @@ class CreateClinicRatesTable extends Migration
     {
         Schema::create('clinic_rates', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('clinic_id');
+            $table->unsignedInteger('user_id');
+            $table->integer('rate');
             $table->timestamps();
+
+            $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
