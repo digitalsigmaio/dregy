@@ -3,9 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BeautyCenter extends Model
 {
+    use SoftDeletes;
+
+    protected $casts = [
+        'premium' => 'boolean',
+    ];
+
+
     public function region()
     {
         return $this->belongsTo(Region::class);
@@ -49,5 +57,13 @@ class BeautyCenter extends Model
     public function specialities()
     {
         return $this->belongsToMany(Speciality::class);
+    }
+
+    public function getRateAttribute()
+    {
+        $countOfRates = $this->rates->count();
+        $sumOfRates = $this->rates()->sum('rate');
+
+        return round(($sumOfRates / $countOfRates), 1);
     }
 }

@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/hospitals', 'Api\HospitalController@index');
+Route::get('/clinics', 'Api\ClinicController@index');
+Route::get('/pharmacies', 'Api\PharmacyController@index');
+Route::get('/beauty-centers', 'Api\BeautyCenterController@index');
+Route::get('/beauty-centers/{beautyCenter}', 'Api\BeautyCenterController@show');
+Route::get('/product-ads', 'Api\ProductAdController@index');
+Route::get('/job-ads', 'Api\JobAdController@index');
