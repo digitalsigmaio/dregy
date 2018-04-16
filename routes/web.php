@@ -11,19 +11,22 @@
 |
 */
 
+
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
     Route::get('/', function () {
         return view('welcome');
     });
 
-    Auth::routes();
+
 
     Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::view('/apiToken', 'dev.apiTokens')->name('create-token');
+    Auth::routes();
+
+
 
 
 // Admin Login
@@ -32,6 +35,7 @@ Route::middleware('language')->group(function () {
         Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
         Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
         Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+        Route::view('/apiToken', 'dev.apiTokens')->name('create-token');
 
         Route::POST('password/email',           'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
         Route::POST('password/reset',           'Auth\AdminResetPasswordController@reset');

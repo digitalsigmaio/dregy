@@ -33,9 +33,12 @@ class BeautyCenterResource extends JsonResource
             'premium' => $this->premium,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => $this->rate,
-            'favs' => $this->favs->count(),
+            'favs' => [
+                'count' => $this->favs->count(),
+                'users_ids' => $this->favs->pluck('user_id')
+            ],
             'views' => $this->views,
-            'specialities' => $this->specialities->pluck('ar_name'),
+            'specialities' => $this->specialities->pluck('id'),
             'created_at' => $this->created_at->toFormattedDateString()
         ];
     }

@@ -61,10 +61,14 @@ class BeautyCenter extends Model
 
     public function getRateAttribute()
     {
-        $countOfRates = $this->rates->count();
-        $sumOfRates = $this->rates()->sum('rate');
+        if ($this->rates()->exists()) {
+            $countOfRates = $this->rates->count();
+            $sumOfRates = $this->rates()->sum('rate');
 
-        return round(($sumOfRates / $countOfRates), 1);
+            return round(($sumOfRates / $countOfRates), 1);
+        } else {
+            return null;
+        }
     }
 
     public function getViewsAttribute()

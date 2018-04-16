@@ -70,4 +70,9 @@ class Hospital extends Model
         }
     }
 
+    public function getViewsAttribute()
+    {
+        return $this->views()->count();
+    }
+
 }

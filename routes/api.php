@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('/hospitals', 'Api\HospitalController@index');
 Route::get('/clinics', 'Api\ClinicController@index');
 Route::get('/pharmacies', 'Api\PharmacyController@index');
@@ -33,3 +34,4 @@ Route::delete('/beauty-centers/{beautyCenter}/users/{id}/fav', 'Api\BeautyCenter
 Route::post('/beauty-centers/{beautyCenter}/users/{id}/rate', 'Api\BeautyCenterController@storeRate');
 Route::put('/beauty-centers/{beautyCenter}/users/{id}/rate', 'Api\BeautyCenterController@updateRate');
 Route::post('/beauty-centers/{beautyCenter}/users/{id}/view', 'Api\BeautyCenterController@view');
+

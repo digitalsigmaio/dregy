@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\BeautyCenter;
 use App\BeautyCenterFav;
+use App\Http\Resources\BeautyCenterCollection;
 use App\Http\Resources\BeautyCenterResource;
 use App\User;
 use Illuminate\Database\QueryException;
@@ -12,18 +13,19 @@ use App\Http\Controllers\Controller;
 
 class BeautyCenterController extends Controller
 {
+
     public function index()
     {
         $beautyCenters = BeautyCenter::with(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views'])->paginate(10);
 
-        return response(BeautyCenterResource::collection($beautyCenters));
+        return new BeautyCenterCollection($beautyCenters);
     }
 
     public function show(BeautyCenter $beautyCenter)
     {
         $beautyCenter->load(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views']);
 
-        return response(new BeautyCenterResource($beautyCenter));
+        return new BeautyCenterResource($beautyCenter);
     }
 
     public function fav(BeautyCenter $beautyCenter, $id)
