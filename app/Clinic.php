@@ -55,4 +55,21 @@ class Clinic extends Model
     {
         return $this->belongsTo(Degree::class);
     }
+
+    public function getRateAttribute()
+    {
+        if ($this->rates()->exists()) {
+            $countOfRates = $this->rates->count();
+            $sumOfRates = $this->rates()->sum('rate');
+
+            return round(($sumOfRates / $countOfRates), 1);
+        } else {
+            return null;
+        }
+    }
+
+    public function getViewsAttribute()
+    {
+        return $this->views()->count();
+    }
 }

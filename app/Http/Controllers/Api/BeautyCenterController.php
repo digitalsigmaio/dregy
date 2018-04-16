@@ -63,21 +63,7 @@ class BeautyCenterController extends Controller
     public function storeRate(BeautyCenter $beautyCenter, $id, Request $request)
     {
         try {
-            $beautyCenter->rates()->firstOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
-            return response()->json([
-                'message' => 'Beauty Center has been rated'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
-    }
-
-    public function updateRate(BeautyCenter $beautyCenter, $id, Request $request)
-    {
-        try {
-            $beautyCenter->rates()->updateOrCreate(['user_id' => $id], ['rate' => $request->rate]);
+            $beautyCenter->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
             return response()->json([
                 'message' => 'Beauty Center has been rated'
             ], 201);

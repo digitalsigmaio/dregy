@@ -14,6 +14,6 @@ class ClinicCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return ClinicResource::collection($this->collection);
     }
 }

@@ -32,7 +32,7 @@ class HospitalController extends Controller
             $hospital->favs()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
-                'message' => 'Beauty Center has been saved to favorites'
+                'message' => 'Hospital has been saved to favorites'
             ], 201);
         } catch (QueryException $e) {
             return response()->json([
@@ -48,7 +48,7 @@ class HospitalController extends Controller
             $hospital->favs()->whereUserId($id)->delete();
 
             return response()->json([
-                'message' => 'Beauty Center has been removed from favorites'
+                'message' => 'Hospital has been removed from favorites'
             ], 201);
         } catch (QueryException $e) {
             return response()->json([
@@ -60,9 +60,9 @@ class HospitalController extends Controller
     public function storeRate(Hospital $hospital, $id, Request $request)
     {
         try {
-            $hospital->rates()->firstOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
+            $hospital->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
             return response()->json([
-                'message' => 'Beauty Center has been rated'
+                'message' => 'Hospital has been rated'
             ], 201);
         } catch (QueryException $e) {
             return response()->json([
@@ -76,7 +76,7 @@ class HospitalController extends Controller
         try {
             $hospital->rates()->updateOrCreate(['user_id' => $id], ['rate' => $request->rate]);
             return response()->json([
-                'message' => 'Beauty Center has been rated'
+                'message' => 'Hospital has been rated'
             ], 201);
         } catch (QueryException $e) {
             return response()->json([
@@ -92,7 +92,7 @@ class HospitalController extends Controller
             $hospital->views()->create(['user_id' => $id]);
 
             return response()->json([
-                'message' => 'Beauty Center new view'
+                'message' => 'Hospital new view'
             ], 201);
         } catch (QueryException $e) {
             return response()->json([
