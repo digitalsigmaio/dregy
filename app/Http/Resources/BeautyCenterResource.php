@@ -34,7 +34,7 @@ class BeautyCenterResource extends JsonResource
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => $this->rate,
             'favs' => $this->favs->count(),
-            'views' => $this->views->count(),
+            'views' => $this->views,
             'specialities' => $this->specialities->pluck('ar_name'),
             'created_at' => $this->created_at->toFormattedDateString()
         ];

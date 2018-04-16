@@ -66,4 +66,9 @@ class BeautyCenter extends Model
 
         return round(($sumOfRates / $countOfRates), 1);
     }
+
+    public function getViewsAttribute()
+    {
+        return $this->views()->count();
+    }
 }
