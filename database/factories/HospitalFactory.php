@@ -11,7 +11,7 @@ $factory->define(App\Hospital::class, function (Faker $faker) {
         'ar_slug' => str_slug($name),
         'en_slug' => str_slug($name),
         'region_id' => rand(1, 13),
-        'city_id' =>rand(1, 260),
+        'city_id' => rand(1, 260),
         'ar_address' => $address = $faker->streetAddress,
         'en_address' => $address,
         'ar_note' => $note = $faker->text(50),

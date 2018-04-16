@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class HospitalSpeciality extends Model
 {
-    //
+    protected $table = ['hospital_speciality'];
 }
