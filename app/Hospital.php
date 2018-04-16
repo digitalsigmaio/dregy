@@ -60,7 +60,7 @@ class Hospital extends Model
 
     public function getRateAttribute()
     {
-        if ($this->has('rates')) {
+        if ($this->rates()->exists()) {
             $countOfRates = $this->rates->count();
             $sumOfRates = $this->rates()->sum('rate');
 
