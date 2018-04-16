@@ -11,7 +11,7 @@ class HospitalController extends Controller
 {
     public function index()
     {
-        $hospitals = Hospital::with(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers'])->get();
+        $hospitals = Hospital::with(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers'])->paginate(10);
 
         return response(HospitalResource::collection($hospitals));
     }
