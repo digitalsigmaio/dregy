@@ -15,7 +15,11 @@
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
     Route::get('/', function () {
-        return view('welcome');
+        $hospital = \App\Hospital::whereHas('rates', function($query) {
+            $query->wherePivot('rate', '=', 5);
+        })->first();
+
+        return view('layouts.main', compact('hospital'));
     });
 
 
