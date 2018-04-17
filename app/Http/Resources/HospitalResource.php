@@ -35,7 +35,7 @@ class HospitalResource extends JsonResource
             'rate' => $this->rate,
             'favs' => [
                 'count' => $this->favs->count(),
-                'users_ids' => $this->favs->pluck('user_id')
+                'users_id' => $this->favs->pluck('user_id')
             ],
             'views' => $this->views,
             'specialities' => $this->specialities->pluck('id'),

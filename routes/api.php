@@ -20,10 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::get('/pharmacies', 'Api\PharmacyController@index');
 
-Route::get('/product-ads', 'Api\ProductAdController@index');
-Route::get('/job-ads', 'Api\JobAdController@index');
+
+
+
+
 
 // Hospital
 
@@ -33,6 +34,7 @@ Route::post('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@fav'
 Route::delete('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@unfav');
 Route::post('/hospitals/{hospital}/users/{id}/rate', 'Api\HospitalController@storeRate');
 Route::post('/hospitals/{hospital}/users/{id}/view', 'Api\HospitalController@view');
+
 
 // Beauty Center
 
@@ -52,3 +54,31 @@ Route::post('/clinics/{clinic}/users/{id}/fav', 'Api\ClinicController@fav');
 Route::delete('/clinics/{clinic}/users/{id}/fav', 'Api\ClinicController@unfav');
 Route::post('/clinics/{clinic}/users/{id}/rate', 'Api\ClinicController@storeRate');
 Route::post('/clinics/{clinic}/users/{id}/view', 'Api\ClinicController@view');
+
+
+// Pharmacy
+
+Route::get('/pharmacies', 'Api\PharmacyController@index');
+Route::get('/pharmacies/{pharmacy}', 'Api\PharmacyController@show');
+Route::post('/pharmacies/{pharmacy}/users/{id}/fav', 'Api\PharmacyController@fav');
+Route::delete('/pharmacies/{pharmacy}/users/{id}/fav', 'Api\PharmacyController@unfav');
+Route::post('/pharmacies/{pharmacy}/users/{id}/rate', 'Api\PharmacyController@storeRate');
+Route::post('/pharmacies/{pharmacy}/users/{id}/view', 'Api\PharmacyController@view');
+
+
+// Job Ad
+
+Route::get('/job-ads', 'Api\JobAdController@index');
+Route::get('/job-ads/{jobAd}', 'Api\JobAdController@show');
+Route::post('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@fav');
+Route::delete('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@unfav');
+Route::post('/job-ads/{jobAd}/users/{id}/view', 'Api\JobAdController@view');
+
+
+// Product Ad
+
+Route::get('/product-ads', 'Api\ProductAdController@index');
+Route::get('/product-ads/{productAd}', 'Api\ProductAdController@show');
+Route::post('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@fav');
+Route::delete('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@unfav');
+Route::post('/product-ads/{productAd}/users/{id}/view', 'Api\ProductAdController@view');

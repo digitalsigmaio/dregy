@@ -72,4 +72,6 @@ class Clinic extends Model
     {
         return $this->views()->count();
     }
+
+
 }

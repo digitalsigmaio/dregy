@@ -75,4 +75,6 @@ class Hospital extends Model
         return $this->views()->count();
     }
 
+
+
 }

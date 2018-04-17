@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class PharmacyCollection extends ResourceCollection
+class JobAdCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,6 +14,6 @@ class PharmacyCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return PharmacyResource::collection($this->collection);
+        return JobAdResource::collection($this->collection);
     }
 }
