@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class HospitalRate extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'rate'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

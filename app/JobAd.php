@@ -3,9 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JobAd extends Model
 {
+    use SoftDeletes;
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(JobAdCategory::class);
@@ -50,4 +63,10 @@ class JobAd extends Model
     {
         return $this->belongsToMany(PhoneNumber::class, 'job_ad_phone_number');
     }
+
+    public function getViewsAttribute()
+    {
+        return $this->views()->count();
+    }
+
 }

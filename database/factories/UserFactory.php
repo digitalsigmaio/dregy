@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'provider' => $providers[$key],
         'provider_id' => str_random(10),
-        'ref_id' => '#U' . str_random(6) . time(),
+        'ref_id' => '#DEU' . str_random(6) . time(),
         'avatar' => ''
     ];
 });

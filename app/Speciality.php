@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Speciality extends Model
 {
+    protected $fillable = [
+        'ar_name',
+        'en_name'
+    ];
+
     public function hospitals()
     {
         return $this->belongsToMany(Hospital::class);
