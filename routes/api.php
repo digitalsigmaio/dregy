@@ -34,6 +34,7 @@ Route::post('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@fav'
 Route::delete('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@unfav');
 Route::post('/hospitals/{hospital}/users/{id}/rate', 'Api\HospitalController@storeRate');
 Route::post('/hospitals/{hospital}/users/{id}/view', 'Api\HospitalController@view');
+Route::post('/hospitals/search', 'Api\HospitalController@search');
 
 
 // Beauty Center
@@ -44,6 +45,7 @@ Route::post('/beauty-centers/{beautyCenter}/users/{id}/fav', 'Api\BeautyCenterCo
 Route::delete('/beauty-centers/{beautyCenter}/users/{id}/fav', 'Api\BeautyCenterController@unfav');
 Route::post('/beauty-centers/{beautyCenter}/users/{id}/rate', 'Api\BeautyCenterController@storeRate');
 Route::post('/beauty-centers/{beautyCenter}/users/{id}/view', 'Api\BeautyCenterController@view');
+Route::post('/beauty-centers/search', 'Api\BeautyCenterController@search');
 
 
 // Clinic
@@ -54,6 +56,7 @@ Route::post('/clinics/{clinic}/users/{id}/fav', 'Api\ClinicController@fav');
 Route::delete('/clinics/{clinic}/users/{id}/fav', 'Api\ClinicController@unfav');
 Route::post('/clinics/{clinic}/users/{id}/rate', 'Api\ClinicController@storeRate');
 Route::post('/clinics/{clinic}/users/{id}/view', 'Api\ClinicController@view');
+Route::post('/clinics/search', 'Api\ClinicController@search');
 
 
 // Pharmacy

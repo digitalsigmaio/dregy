@@ -100,4 +100,17 @@ class HospitalController extends Controller
             ], 403);
         }
     }
+
+    public function search(Request $request)
+    {
+        $hospitals = Hospital::fetch($request);
+
+        if (count($hospitals)) {
+            return new HospitalCollection($hospitals);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ], 404);
+        }
+    }
 }

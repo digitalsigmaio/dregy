@@ -55,7 +55,7 @@ class Hospital extends Model
 
     public function specialities()
     {
-        return $this->belongsToMany(Speciality::class);
+        return $this->belongsToMany(Speciality::class, 'hospital_speciality');
     }
 
     public function getRateAttribute()
@@ -75,6 +75,41 @@ class Hospital extends Model
         return $this->views()->count();
     }
 
+    public static function fetch($request)
+    {
+        $region = $request->region;
+        $city = $request->city;
+        $speciality = $request->speciality;
+        $keyword = trim($request->keyword);
+        $rate = $request->rate;
 
+        $data = self::with(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views'])
+            ->when($region != '', function ($query) use ($region) {
+                return $query->where('region_id', $region);
+            })
+            ->when($city != '', function ($query) use ($city) {
+                return $query->where('city_id', $city);
+            })
+            ->when($keyword != '', function ($query) use ($keyword) {
+                return $query->where('ar_name', 'like',  "%$keyword%")
+                    ->orWhere('en_name', 'like', "%$keyword%")
+                    ->orWhere('ar_address', 'like', "%$keyword%")
+                    ->orWhere('en_address', 'like', "%$keyword%");
+            })
+            ->when($rate != '', function ($query) use ($rate) {
+                return $query->whereHas('rates', function ($query) use ($rate) {
+                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id), 1) >= ' . $rate);
+                });
+            })
+            ->when($speciality != '', function ($query) use ($speciality) {
+                return $query->whereHas('specialities', function ($query) use ($speciality) {
+                    $query->where('specialities.id', $speciality);
+                });
+            })
+            ->orderBy('premium', 'DESC')
+            ->paginate(20);
+
+        return $data;
+    }
 
 }

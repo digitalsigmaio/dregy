@@ -89,4 +89,17 @@ class BeautyCenterController extends Controller
             ], 403);
         }
     }
+
+    public function search(Request $request)
+    {
+        $beautyCenters = BeautyCenter::fetch($request);
+
+        if (count($beautyCenters)) {
+            return new BeautyCenterCollection($beautyCenters);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ], 404);
+        }
+    }
 }

@@ -758,11 +758,11 @@
                                                 <div class="card-footer pb-0">
                                                     <div class="row mb-0">
                                                             <span class="float-left">
-                                                                <strong>1439$</strong>
+                                                                <strong>{{ $hospital->user->name }}</strong>
                                                             </span>
                                                         <span class="float-right">
-                                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                                                                    <i class="fa fa-shopping-cart ml-3"></i>
+                                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
+                                                                    <i class="fa fa-user ml-3"></i>
                                                                 </a>
                                                             </span>
                                                     </div>

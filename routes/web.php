@@ -15,11 +15,30 @@
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
     Route::get('/', function () {
-        $hospital = \App\Hospital::whereHas('rates', function($query) {
-            $query->wherePivot('rate', '=', 5);
-        })->first();
+        $hospitals = \App\Hospital::with(['rates', 'user'])->get();
+        $hospital = '';
+        foreach ($hospitals as $h) {
+            if($h->rate == 2) {
+                $hospital = $h;
+
+                break;
+            }
+        }
 
         return view('layouts.main', compact('hospital'));
+    });
+
+    Route::get('/test', function () {
+        $regionId = '';
+        $cityId = '170'; //170
+        $hospitals = \App\Hospital::when($regionId != '', function ($query) use ($regionId) {
+                return $query->where('region_id', $regionId);
+            })
+            ->when($cityId != '', function ($query) use ($cityId) {
+                return $query->where('city_id', $cityId);
+            })->get();
+
+        return $hospitals;
     });
 
 

@@ -85,4 +85,17 @@ class ClinicController extends Controller
             ], 403);
         }
     }
+
+    public function search(Request $request)
+    {
+        $clinics = Clinic::fetch($request);
+
+        if (count($clinics)) {
+            return new ClinicCollection($clinics);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ], 404);
+        }
+    }
 }
