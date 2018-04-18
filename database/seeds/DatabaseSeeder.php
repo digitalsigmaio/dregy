@@ -12,5 +12,65 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        factory('App\Admin', 5)->create();
+        factory('App\User', 100)->create();
+        factory('App\Region', 13)->create()->each(function ($r) {
+            $r->cities()->saveMany(factory('App\City', 20)->make());
+        });
+
+        factory('App\Speciality', 15)->create();
+        factory('App\Degree', 8)->create();
+        factory('App\ProductAdCategory', 6)->create();
+        factory('App\JobAdCategory', 6)->create();
+        factory('App\JobExperienceLevel', 5)->create();
+        factory('App\JobEmploymentType', 4)->create();
+        factory('App\JobType', 2)->create();
+        factory('App\JobEducationLevel', 6)->create();
+
+        factory('App\Hospital', 20)->create()->each(function ($h){
+            $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
+            $h->favs()->saveMany(factory('App\HospitalFav', 20)->make());
+            $h->views()->saveMany(factory('App\HospitalView', 200)->make());
+            $h->rates()->saveMany(factory('App\HospitalRate', 20)->make());
+        });
+
+        factory('App\BeautyCenter', 20)->create()->each(function ($h){
+            $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
+            $h->favs()->saveMany(factory('App\BeautyCenterFav', 20)->make());
+            $h->views()->saveMany(factory('App\BeautyCenterView', 200)->make());
+            $h->rates()->saveMany(factory('App\BeautyCenterRate', 20)->make());
+        });
+
+        factory('App\Clinic', 20)->create()->each(function ($h){
+            $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
+            $h->favs()->saveMany(factory('App\ClinicFav', 20)->make());
+            $h->views()->saveMany(factory('App\ClinicView', 200)->make());
+            $h->rates()->saveMany(factory('App\ClinicRate', 20)->make());
+        });
+
+        factory('App\Pharmacy', 20)->create()->each(function ($h){
+            $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
+            $h->favs()->saveMany(factory('App\PharmacyFav', 20)->make());
+            $h->views()->saveMany(factory('App\PharmacyView', 200)->make());
+            $h->rates()->saveMany(factory('App\PharmacyRate', 20)->make());
+        });
+
+        factory('App\JobAd', 20)->create()->each(function ($h){
+            $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
+            $h->favs()->saveMany(factory('App\JobAdFav', 20)->make());
+            $h->views()->saveMany(factory('App\JobAdView', 200)->make());
+            $h->review()->save(factory('App\JobAdminReview')->make());
+        });
+
+        factory('App\ProductAd', 20)->create()->each(function ($h){
+            $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
+            $h->favs()->saveMany(factory('App\ProductAdFav', 20)->make());
+            $h->views()->saveMany(factory('App\ProductAdView', 200)->make());
+            $h->review()->save(factory('App\ProductAdminReview')->make());
+        });
+
+        factory('App\HospitalSpeciality', 100)->create();
+        factory('App\BeautyCenterSpeciality', 100)->create();
+
     }
 }

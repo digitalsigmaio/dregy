@@ -14,8 +14,8 @@ $factory->define(App\JobAd::class, function (Faker $faker) {
         'job_employment_type_id' => rand(1, 4),
         'job_type_id' =>  rand(1, 2),
         'job_education_level_id' => rand(1, 6),
-        'region_id' => rand(1, 13),
-        'city_id' =>rand(1, 260),
+        'region_id' => $region = rand(1, 13),
+        'city_id' => \App\Region::find($region)->cities()->inRandomOrder()->first()->id,
         'address' => $faker->streetAddress,
         'img' => $faker->imageUrl(320, 240),
         'promoted' => $faker->boolean(40)
