@@ -15,31 +15,20 @@
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
     Route::get('/', function () {
-        $hospitals = \App\Hospital::with(['rates', 'user'])->get();
-        $hospital = '';
-        foreach ($hospitals as $h) {
-            if($h->rate == 2) {
-                $hospital = $h;
+        $h = \App\Hospital::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
 
-                break;
-            }
-        }
+        $p = \App\Pharmacy::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
 
-        return view('layouts.main', compact('hospital'));
+        $c = \App\Clinic::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
+
+        $hospitals = json_encode(new \App\Http\Resources\HospitalCollection($h));
+        $pharmacies = json_encode(new \App\Http\Resources\PharmacyCollection($p));
+        $clinics = json_encode(new \App\Http\Resources\ClinicCollection($c));
+
+        return view('layouts.main', compact(['hospitals', 'pharmacies', 'clinics']));
     });
 
-    Route::get('/test', function () {
-        $regionId = '';
-        $cityId = '170'; //170
-        $hospitals = \App\Hospital::when($regionId != '', function ($query) use ($regionId) {
-                return $query->where('region_id', $regionId);
-            })
-            ->when($cityId != '', function ($query) use ($cityId) {
-                return $query->where('city_id', $cityId);
-            })->get();
 
-        return $hospitals;
-    });
 
 
 

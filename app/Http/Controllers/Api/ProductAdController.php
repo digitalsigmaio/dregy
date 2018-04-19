@@ -22,7 +22,7 @@ class ProductAdController extends Controller
             'review',
             'views'
         ])
-            ->paginate(10);
+            ->paginate(4);
 
         return new ProductAdCollection($productAds);
     }

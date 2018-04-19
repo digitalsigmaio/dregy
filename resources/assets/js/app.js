@@ -17,6 +17,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('top-clients', require('./components/TopClients.vue'));
+Vue.component('last-items', require('./components/LastItems.vue'));
+
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')

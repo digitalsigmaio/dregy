@@ -39,7 +39,8 @@ class PharmacyResource extends JsonResource
             'views' => $this->views_count,
             'speciality_id' => $this->speciality_id,
             'degree_id' => $this->degree_id,
-            'created_at' => $this->created_at->toFormattedDateString()
+            'created_at' => $this->created_at->toFormattedDateString(),
+            'user' => $this->user
         ];
     }
 }
