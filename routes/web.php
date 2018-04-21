@@ -28,7 +28,9 @@ Route::middleware('language')->group(function () {
         return view('layouts.main', compact(['hospitals', 'pharmacies', 'clinics']));
     });
 
-
+    Route::get('/comingsoon', function () {
+        return view('comingsoon');
+    });
 
 
 
