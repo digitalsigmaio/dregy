@@ -23,7 +23,6 @@ class CreateClinicsTable extends Migration
             $table->string('ar_slug');
             $table->string('en_slug');
             $table->unsignedInteger('degree_id');
-            $table->unsignedInteger('speciality_id');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('ar_address');
@@ -43,7 +42,6 @@ class CreateClinicsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->foreign('degree_id')->references('id')->on('degrees');
-            $table->foreign('speciality_id')->references('id')->on('specialities');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('city_id')->references('id')->on('cities');
         });

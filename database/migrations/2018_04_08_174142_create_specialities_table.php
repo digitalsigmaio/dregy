@@ -17,7 +17,6 @@ class CreateSpecialitiesTable extends Migration
             $table->increments('id');
             $table->string('ar_name');
             $table->string('en_name');
-            $table->timestamps();
         });
     }
 

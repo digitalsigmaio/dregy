@@ -17,7 +17,6 @@ class CreateBeautyCenterSpecialityTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('beauty_center_id');
             $table->unsignedInteger('speciality_id');
-            $table->timestamps();
 
             $table->foreign('beauty_center_id')->references('id')->on('beauty_centers');
             $table->foreign('speciality_id')->references('id')->on('specialities');
