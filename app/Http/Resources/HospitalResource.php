@@ -21,8 +21,8 @@ class HospitalResource extends JsonResource
             'en_name' => $this->en_name,
             'ar_slug' => $this->ar_slug,
             'en_slug' => $this->en_slug,
-            'region' => new RegionResource($this->region),
-            'city' => new CityResource($this->city),
+            'region' => $this->region,
+            'city' => $this->city,
             'ar_address' => $this->ar_address,
             'en_address' => $this->en_address,
             'ar_note' => $this->ar_note,
@@ -33,9 +33,9 @@ class HospitalResource extends JsonResource
             'premium' => $this->premium,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => $this->rate,
-            'favs' => [
-                'count' => $this->favs->count(),
-                'users_id' => $this->favs->pluck('user_id')
+            'favorites' => [
+                'count' => $this->favorites->count(),
+                'users_id' => $this->favorites->pluck('user_id')
             ],
             'views' => $this->views,
             'specialities' => $this->specialities->pluck('id'),

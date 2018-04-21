@@ -27,7 +27,8 @@ class CreateProductAdsTable extends Migration
             $table->unsignedInteger('city_id');
             $table->string('address')->nullable();
             $table->string('img')->nullable();
-            $table->boolean('promoted')->default(false);
+            $table->boolean('approved')->nullable()->default(null);
+            $table->unsignedInteger('admin_id')->nullable();
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();
             $table->softDeletes();

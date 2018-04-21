@@ -26,24 +26,29 @@ class Clinic extends Model
         return $this->belongsTo(Admin::class);
     }
 
-    public function favs()
+    public function favorites()
     {
-        return $this->hasMany(ClinicFav::class);
+        return $this->morphMany(Favorite::class, 'favourable');
     }
 
     public function views()
     {
-        return $this->hasMany(ClinicView::class);
+        return $this->morphMany(View::class, 'viewable');
     }
 
     public function rates()
     {
-        return $this->hasMany(ClinicRate::class);
+        return $this->morphMany(Rate::class, 'rateable');
     }
 
     public function phoneNumbers()
     {
-        return $this->belongsToMany(PhoneNumber::class, 'clinic_phone_number');
+        return $this->morphMany(PhoneNumber::class, 'phonable');
+    }
+
+    public function premium()
+    {
+        return $this->morphOne(Premium::class, 'premiumable');
     }
 
     public function speciality()

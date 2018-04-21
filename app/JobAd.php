@@ -24,19 +24,24 @@ class JobAd extends Model
         return $this->belongsTo(JobAdCategory::class);
     }
 
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favourable');
+    }
+
     public function views()
     {
-        return $this->hasMany(JobAdView::class);
+        return $this->morphMany(View::class, 'viewable');
     }
 
-    public function favs()
+    public function phoneNumbers()
     {
-        return $this->hasMany(JobAdFav::class);
+        return $this->morphMany(PhoneNumber::class, 'phonable');
     }
 
-    public function review()
+    public function premium()
     {
-        return $this->hasOne(JobAdminReview::class);
+        return $this->morphOne(Premium::class, 'premiumable');
     }
 
     public function experienceLevel()
@@ -59,10 +64,6 @@ class JobAd extends Model
         return $this->belongsTo(JobEducationLevel::class);
     }
 
-    public function phoneNumbers()
-    {
-        return $this->belongsToMany(PhoneNumber::class, 'job_ad_phone_number');
-    }
 
     public function getViewsAttribute()
     {

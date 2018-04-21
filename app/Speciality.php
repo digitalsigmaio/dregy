@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Speciality extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'ar_name',
         'en_name'

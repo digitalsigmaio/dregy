@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhoneNumbersTable extends Migration
+class CreateMainSliderAdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function up()
     {
-        Schema::create('phone_numbers', function (Blueprint $table) {
+        Schema::create('main_slider_ads', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number');
-            $table->integer('phonable_id');
-            $table->string('phonable_type');
+            $table->string('img');
+            $table->string('url')->nullable();
+            $table->timestamp('expires_at');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phone_numbers');
+        Schema::dropIfExists('main_slider_ads');
     }
 }

@@ -24,24 +24,24 @@ class ProductAd extends Model
         return $this->belongsTo(ProductAdCategory::class);
     }
 
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favourable');
+    }
+
     public function views()
     {
-        return $this->hasMany(ProductAdView::class);
-    }
-
-    public function favs()
-    {
-        return $this->hasMany(ProductAdFav::class);
-    }
-
-    public function review()
-    {
-        return $this->hasOne(ProductAdminReview::class);
+        return $this->morphMany(View::class, 'viewable');
     }
 
     public function phoneNumbers()
     {
-        return $this->belongsToMany(PhoneNumber::class, 'product_ad_phone_number');
+        return $this->morphMany(PhoneNumber::class, 'phonable');
+    }
+
+    public function premium()
+    {
+        return $this->morphOne(Premium::class, 'premiumable');
     }
 
     public function getViewsAttribute()

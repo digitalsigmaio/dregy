@@ -23,6 +23,5 @@ $factory->define(App\Clinic::class, function (Faker $faker) {
         'website' => $faker->url,
         'email' => $faker->email,
         'img' => $faker->imageUrl(320, 240),
-        'premium' => $faker->boolean(40)
     ];
 });

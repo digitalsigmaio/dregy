@@ -34,7 +34,6 @@ class CreateClinicsTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->string('img')->nullable();
-            $table->boolean('premium')->default(false);
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();
             $table->softDeletes();

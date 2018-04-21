@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhoneNumbersTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function up()
     {
-        Schema::create('phone_numbers', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number');
-            $table->integer('phonable_id');
-            $table->string('phonable_type');
+            $table->unsignedInteger('user_id');
+            $table->integer('viewable_id');
+            $table->string('viewable_type');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -28,6 +31,6 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phone_numbers');
+        Schema::dropIfExists('views');
     }
 }
