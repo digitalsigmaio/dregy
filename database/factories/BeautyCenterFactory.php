@@ -20,6 +20,6 @@ $factory->define(App\BeautyCenter::class, function (Faker $faker) {
         'en_work_times' => 'From 9 a.m to 5 p.m',
         'website' => $faker->url,
         'email' => $faker->email,
-        'img' => $faker->imageUrl(320, 240),
+        'img' => $faker->imageUrl(640, 480),
     ];
 });

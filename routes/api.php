@@ -76,6 +76,7 @@ Route::get('/job-ads/{jobAd}', 'Api\JobAdController@show');
 Route::post('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@fav');
 Route::delete('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@unfav');
 Route::post('/job-ads/{jobAd}/users/{id}/view', 'Api\JobAdController@view');
+Route::post('/job-ads/search', 'Api\JobAdController@search');
 
 
 // Product Ad

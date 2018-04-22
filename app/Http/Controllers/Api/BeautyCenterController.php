@@ -16,14 +16,14 @@ class BeautyCenterController extends Controller
 
     public function index()
     {
-        $beautyCenters = BeautyCenter::with(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views'])->paginate(10);
+        $beautyCenters = BeautyCenter::with(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium'])->paginate(10);
 
         return new BeautyCenterCollection($beautyCenters);
     }
 
     public function show(BeautyCenter $beautyCenter)
     {
-        $beautyCenter->load(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views']);
+        $beautyCenter->load(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium']);
 
         return new BeautyCenterResource($beautyCenter);
     }
@@ -32,7 +32,7 @@ class BeautyCenterController extends Controller
     {
         try {
 
-            $beautyCenter->favs()->firstOrCreate(['user_id' => $id]);
+            $beautyCenter->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'Beauty Center has been saved to favorites'
@@ -48,7 +48,7 @@ class BeautyCenterController extends Controller
     {
         try {
 
-            $beautyCenter->favs()->whereUserId($id)->delete();
+            $beautyCenter->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'Beauty Center has been removed from favorites'

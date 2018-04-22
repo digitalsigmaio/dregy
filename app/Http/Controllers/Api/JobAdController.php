@@ -16,17 +16,17 @@ class JobAdController extends Controller
         $jobAds = JobAd::with([
             'region',
             'city',
-            'favs',
+            'favorites',
             'phoneNumbers',
             'category',
             'experienceLevel',
             'employmentType',
             'type',
             'educationLevel',
-            'review',
-            'views'
+            'views',
+            'premium'
         ])
-            ->paginate(10);
+            ->paginate(9);
 
         return new JobAdCollection($jobAds);
     }
@@ -36,15 +36,15 @@ class JobAdController extends Controller
         $jobAd->load([
             'region',
             'city',
-            'favs',
+            'favorites',
             'phoneNumbers',
             'category',
             'experienceLevel',
             'employmentType',
             'type',
             'educationLevel',
-            'review',
-            'views'
+            'views',
+            'premium'
         ]);
 
         return new JobAdResource($jobAd);
@@ -54,7 +54,7 @@ class JobAdController extends Controller
     {
         try {
 
-            $jobAd->favs()->firstOrCreate(['user_id' => $id]);
+            $jobAd->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'JobAd has been saved to favorites'
@@ -70,7 +70,7 @@ class JobAdController extends Controller
     {
         try {
 
-            $jobAd->favs()->whereUserId($id)->delete();
+            $jobAd->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'JobAd has been removed from favorites'
@@ -94,6 +94,19 @@ class JobAdController extends Controller
             return response()->json([
                 'error' => $e->getMessage()
             ], 403);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $jobAds = JobAd::fetch($request);
+
+        if (count($jobAds)) {
+            return new JobAdCollection($jobAds);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ], 404);
         }
     }
 }

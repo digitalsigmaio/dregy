@@ -20,7 +20,7 @@ class HospitalController extends Controller
 
     public function show(Hospital $hospital)
     {
-        $hospital->load(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views']);
+        $hospital->load(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium']);
 
         return new HospitalResource($hospital);
     }

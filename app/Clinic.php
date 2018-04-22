@@ -51,9 +51,9 @@ class Clinic extends Model
         return $this->morphOne(Premium::class, 'premiumable');
     }
 
-    public function speciality()
+    public function specialities()
     {
-        return $this->belongsTo(Speciality::class);
+        return $this->belongsToMany(Speciality::class, 'clinic_speciality');
     }
 
     public function degree()

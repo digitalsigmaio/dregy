@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        /*factory('App\BeautyCenter', 20)->create()->each(function ($h){
+        factory('App\BeautyCenter', 20)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
             $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
             $h->views()->saveMany(factory('App\View', 200)->make());
@@ -61,20 +61,20 @@ class DatabaseSeeder extends Seeder
 
         factory('App\JobAd', 20)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favs()->saveMany(factory('App\JobAdFav', 20)->make());
-            $h->views()->saveMany(factory('App\JobAdView', 200)->make());
-            $h->review()->save(factory('App\JobAdminReview')->make());
+            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
+            $h->views()->saveMany(factory('App\View', 200)->make());
+            $h->premium()->save(factory('App\Premium')->make());
         });
 
         factory('App\ProductAd', 20)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favs()->saveMany(factory('App\ProductAdFav', 20)->make());
-            $h->views()->saveMany(factory('App\ProductAdView', 200)->make());
-            $h->review()->save(factory('App\ProductAdminReview')->make());
-        });*/
+            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
+            $h->views()->saveMany(factory('App\View', 200)->make());
+            $h->premium()->save(factory('App\Premium')->make());
+        });
 
         factory('App\HospitalSpeciality', 100)->create();
-        //factory('App\BeautyCenterSpeciality', 100)->create();
-
+        factory('App\BeautyCenterSpeciality', 100)->create();
+        factory('App\ClinicSpeciality', 100)->create();
     }
 }

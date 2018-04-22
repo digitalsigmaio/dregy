@@ -16,7 +16,8 @@ $factory->define(App\ProductAd::class, function (Faker $faker) {
         'region_id' => $region = rand(1, 13),
         'city_id' => \App\Region::find($region)->cities()->inRandomOrder()->first()->id,
         'address' => $faker->streetAddress,
-        'img' => $faker->imageUrl(320, 240),
-        'promoted' => $faker->boolean(40)
+        'img' => $faker->imageUrl(640, 480),
+        'approved' => $faker->boolean(90),
+        'admin_id' => rand(1, 5)
     ];
 });

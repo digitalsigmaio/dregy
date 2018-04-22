@@ -25,7 +25,11 @@ Route::middleware('language')->group(function () {
         $pharmacies = json_encode(new \App\Http\Resources\PharmacyCollection($p));
         $clinics = json_encode(new \App\Http\Resources\ClinicCollection($c));
 
-        return view('layouts.main', compact(['hospitals', 'pharmacies', 'clinics']));
+        return view('landing', compact(['hospitals', 'pharmacies', 'clinics']));
+    });
+
+    Route::get('/job-ads', function () {
+        return view('jobs');
     });
 
 
