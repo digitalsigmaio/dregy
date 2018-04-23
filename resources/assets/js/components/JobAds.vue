@@ -26,119 +26,41 @@
 
                         <!--Radio group-->
                         <div class="form-group ">
-                            <input name="group100" type="radio" id="radio100">
-                            <label for="radio100" class="dark-grey-text">All</label>
+                            <input name="group100" type="radio" id="category0">
+                            <label for="category0" class="dark-grey-text" @click="flush('category')">All</label>
                         </div>
 
-                        <div class="form-group">
-                            <input name="group100" type="radio" id="radio101" checked>
-                            <label for="radio101" class="dark-grey-text">Laptop</label>
-                        </div>
-
-                        <div class="form-group">
-                            <input name="group100" type="radio" id="radio102">
-                            <label for="radio102" class="dark-grey-text">Smartphone</label>
-                        </div>
-
-                        <div class="form-group">
-                            <input name="group100" type="radio" id="radio103">
-                            <label for="radio103" class="dark-grey-text">Tablet</label>
-                        </div>
-
-                        <div class="form-group">
-                            <input name="group100" type="radio" id="radio104">
-                            <label for="radio104" class="dark-grey-text">Headphones</label>
+                        <div class="form-group " v-for="category in filters.categories">
+                            <input name="group100" type="radio" :id="'category' + category.id" :value="category.id"
+                            @click="fetchFilter('category', category.id)">
+                            <label :for="'category' + category.id" class="dark-grey-text">{{ category.en_name }}</label>
                         </div>
                         <!--Radio group-->
                     </div>
                     <!-- /Filter by category-->
+
+                    <!-- Filter by experience level-->
+                    <div class="col-md-6 col-lg-12 mb-5">
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Experience Level</strong></h5>
+                        <div class="divider"></div>
+
+                        <!--Radio group-->
+                        <div class="form-group ">
+                            <input name="group100" type="radio" id="experienceLevel0">
+                            <label for="experienceLevel0" class="dark-grey-text" @click="flush('experienceLevel')">All</label>
+                        </div>
+
+                        <div class="form-group " v-for="experienceLevel in filters.expLevels">
+                            <input name="group100" type="radio" :id="'experienceLevel' + experienceLevel.id" :value="experienceLevel.id"
+                                   @click="fetchFilter('experienceLevel', experienceLevel.id)">
+                            <label :for="'experienceLevel' + experienceLevel.id" class="dark-grey-text">{{ experienceLevel.en_name }}</label>
+                        </div>
+                        <!--Radio group-->
+                    </div>
+                    <!-- /Filter by experience level-->
                 </div>
                 <!-- /Grid row -->
 
-                <!-- Grid row -->
-                <div class="row">
-
-                    <!-- Filter by price  -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h5>
-                        <div class="divider"></div>
-
-                        <form class="range-field mt-3">
-                            <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30" />
-                        </form>
-
-                        <!-- Grid row -->
-                        <div class="row justify-content-center">
-
-                            <!-- Grid column -->
-                            <div class="col-md-6 text-left">
-                                <p class="dark-grey-text"><strong id="resellerEarnings">0$</strong></p>
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-md-6 text-right">
-                                <p class="dark-grey-text"><strong id="clientPrice">319$</strong></p>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-
-                    </div>
-                    <!-- /Filter by price -->
-
-                    <!-- Filter by rating -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
-                        <div class="divider"></div>
-                        <div class="row ml-1">
-                            <!-- Rating -->
-                            <ul class="rating mb-0">
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li>
-                                    <p class="ml-3 dark-grey-text"><a>4 and more</a></p>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <div class="row ml-1">
-                            <!-- Rating -->
-                            <ul class="rating mb-0">
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star grey-text"></i></li>
-                                <li>
-                                    <p class="ml-3 dark-grey-text"><a>3 - 3,99</a></p>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <div class="row ml-1">
-                            <!-- Rating -->
-                            <ul class="rating">
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star blue-text"></i></li>
-                                <li><i class="fa fa-star grey-text"></i></li>
-                                <li><i class="fa fa-star grey-text"></i></li>
-                                <li>
-                                    <p class="ml-3 dark-grey-text"><a>3.00 and less</a></p>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <!-- Filter by rating -->
-                </div>
-                <!-- /Grid row -->
             </div>
 
         </div>
@@ -177,8 +99,8 @@
             </div>
             <!-- /.Filter Area -->
 
-            <!-- Products Grid -->
-            <section class="section pt-4">
+            <!-- Job Ads Grid -->
+            <section class="section pt-4" v-if="jobs != null">
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
@@ -288,7 +210,16 @@
                 </div>
                 <!--Grid row-->
             </section>
-            <!-- /.Products Grid -->
+            <!-- /.Job Ads Grid -->
+
+            <!-- Nothing Found -->
+            <section class="section pt-4" v-if="jobs == null">
+                <div class="row">
+                    <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
+                        No job found
+                    </div>
+                </div>
+            </section>
 
         </div>
         <!-- /.Content -->
@@ -301,22 +232,40 @@
     export default {
         data () {
             return {
-                endpoint: '/api/job-ads',
+                endpoint: '/api/job-ads/search',
                 jobs: {},
                 links: {},
-                pagination: {}
+                pagination: {},
+                filters: {},
+                search: {
+                    region: '',
+                    city: '',
+                    keyword: '',
+                    category: '',
+                    experienceLevel: '',
+                    employmentType: '',
+                    type: '',
+                    educationLevel: '',
+                    orderBy: '',
+                }
             }
         },
         methods: {
             fetchJobs(){
                 let vm = this;
-                axios.get(vm.endpoint)
+                axios.post(vm.endpoint, vm.search)
                     .then(function (response) {
-                    let data = response.data;
-                        vm.jobs = data.data;
-                        vm.links = data.links;
-                        vm.pagination = data.meta;
-                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                        if (typeof response.data.data !== 'undefined') {
+                            let data = response.data;
+                            vm.jobs = data.data;
+                            vm.links = data.links;
+                            vm.pagination = data.meta;
+                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                        } else if(typeof response.status !== 'undefined') {
+                            vm.jobs = null
+                            console.log(response.data.message)
+                        }
+
                 });
             },
             changeEndpoint(page) {
@@ -327,10 +276,31 @@
             navigate(url){
                 this.endpoint = url;
                 return this.fetchJobs();
+            },
+            jobFilters(){
+                let vm = this;
+                axios.get('api/job-filters')
+                    .then(function (response) {
+                        let data = response.data;
+                        vm.filters = data.data;
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    });
+            },
+            fetchFilter($key, $value){
+                let vm = this;
+                vm.search[$key] = $value;
+                vm.endpoint = '/api/job-ads/search';
+                this.fetchJobs();
+            },
+            flush($filter){
+                this.fetchFilter($filter, '')
             }
         },
         mounted() {
             this.fetchJobs();
+            this.jobFilters()
         }
     }
 </script>

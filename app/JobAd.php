@@ -22,7 +22,7 @@ class JobAd extends Model
 
     public function category()
     {
-        return $this->belongsTo(JobAdCategory::class);
+        return $this->belongsTo(JobAdCategory::class, 'job_ad_category_id');
     }
 
     public function favorites()
@@ -107,7 +107,7 @@ class JobAd extends Model
                     ->orWhere('description', 'like', "%$keyword%");
             })
             ->when($category != '', function ($query) use ($category) {
-                return $query->where('category_id', $category);
+                return $query->where('job_ad_category_id', $category);
             })
             ->when($experienceLevel != '', function ($query) use ($experienceLevel) {
                 return $query->where('job_experience_level_id', $experienceLevel);
@@ -121,11 +121,7 @@ class JobAd extends Model
             ->when($educationLevel != '', function ($query) use ($educationLevel) {
                 return $query->where('job_education_level_id', $educationLevel);
             })
-            ->get();
-        if($orderBy != null) {
-            $data = $data->sortByDesc($orderBy);
-            $data = self::paginate($data, 9);
-        }
+            ->paginate(9);
 
         return $data;
     }

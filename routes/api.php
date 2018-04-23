@@ -79,6 +79,7 @@ Route::post('/job-ads/{jobAd}/users/{id}/view', 'Api\JobAdController@view');
 Route::post('/job-ads/search', 'Api\JobAdController@search');
 
 
+
 // Product Ad
 
 Route::get('/product-ads', 'Api\ProductAdController@index');
@@ -86,3 +87,21 @@ Route::get('/product-ads/{productAd}', 'Api\ProductAdController@show');
 Route::post('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@fav');
 Route::delete('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@unfav');
 Route::post('/product-ads/{productAd}/users/{id}/view', 'Api\ProductAdController@view');
+
+
+// Misc
+
+Route::get('/regions', 'Api\Misc\RegionController@index');
+Route::get('/cities', 'Api\Misc\CityController@index');
+Route::get('/jobAdCategories', 'Api\Misc\JobAdCategoryController@index');
+Route::get('/productAdCategories', 'Api\Misc\ProductAdCategoryController@index');
+Route::get('/degrees', 'Api\Misc\DegreeController@index');
+Route::get('/hospitalSpecialities', 'Api\Misc\HospitalSpecialityController@index');
+Route::get('/clinicSpecialities', 'Api\Misc\ClinicSpecialityController@index');
+Route::get('/beautyCenterSpecialities', 'Api\Misc\BeautyCenterSpecialityController@index');
+Route::get('/jobEducationLevels', 'Api\Misc\JobEducationLevelController@index');
+Route::get('/jobEmploymentTypes', 'Api\Misc\JobEmploymentTypeController@index');
+Route::get('/jobTypes', 'Api\Misc\JobTypeController@index');
+Route::get('/jobExperienceLevels', 'Api\Misc\JobExperienceLevelController@index');
+
+Route::get('/job-filters', 'Api\JobFilterController@index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\JobAdCollection;
 use App\Http\Resources\JobAdResource;
 use App\JobAd;
+use App\JobAdCategory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -106,7 +107,7 @@ class JobAdController extends Controller
         } else {
             return response()->json([
                 'message' => 'Nothing found'
-            ], 404);
+            ], 200);
         }
     }
 }

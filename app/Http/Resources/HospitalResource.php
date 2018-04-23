@@ -42,7 +42,6 @@ class HospitalResource extends JsonResource
             ],
             'views' => $this->views,
             'specialities' => $this->specialities,
-            'user' => $this->user,
             'created_at' => $this->created_at->toFormattedDateString()
         ];
     }
