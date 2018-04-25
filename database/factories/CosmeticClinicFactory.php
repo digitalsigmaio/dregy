@@ -2,11 +2,11 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\BeautyCenter::class, function (Faker $faker) {
+$factory->define(App\CosmeticClinic::class, function (Faker $faker) {
     return [
         'user_id' => rand(1, 100),
         'admin_id' => rand(1, 5),
-        'ar_name' => $name = $faker->name,
+        'ar_name' => $name = $faker->company,
         'en_name' => $name,
         'ar_slug' => str_slug($name),
         'en_slug' => str_slug($name),

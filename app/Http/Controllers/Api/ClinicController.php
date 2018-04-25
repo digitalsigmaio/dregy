@@ -59,6 +59,7 @@ class ClinicController extends Controller
 
     public function storeRate(Clinic $clinic, $id, Request $request)
     {
+
         try {
             $clinic->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
             return response()->json([
@@ -71,10 +72,11 @@ class ClinicController extends Controller
         }
     }
 
-    public function view(Clinic $clinic, $id)
+    public function view(Clinic $clinic, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $clinic->views()->create(['user_id' => $id]);
+            $clinic->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'

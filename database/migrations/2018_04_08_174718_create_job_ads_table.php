@@ -30,7 +30,7 @@ class CreateJobAdsTable extends Migration
             $table->unsignedInteger('city_id');
             $table->string('address')->nullable();
             $table->string('img')->nullable();
-            $table->boolean('approved')->nullable()->default(null);
+            $table->boolean('approved')->nullable();
             $table->unsignedInteger('admin_id')->nullable();
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();

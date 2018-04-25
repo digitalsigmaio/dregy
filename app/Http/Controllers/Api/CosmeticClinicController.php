@@ -2,37 +2,37 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\BeautyCenter;
+use App\CosmeticClinic;
 use App\BeautyCenterFav;
-use App\Http\Resources\BeautyCenterCollection;
-use App\Http\Resources\BeautyCenterResource;
+use App\Http\Resources\CosmeticClinicCollection;
+use App\Http\Resources\CosmeticClinicResource;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BeautyCenterController extends Controller
+class CosmeticClinicController extends Controller
 {
 
     public function index()
     {
-        $beautyCenters = BeautyCenter::with(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium'])->paginate(10);
+        $cosmeticClinics = CosmeticClinic::with(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium'])->paginate(10);
 
-        return new BeautyCenterCollection($beautyCenters);
+        return new CosmeticClinicCollection($cosmeticClinics);
     }
 
-    public function show(BeautyCenter $beautyCenter)
+    public function show(CosmeticClinic $cosmeticClinic)
     {
-        $beautyCenter->load(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium']);
+        $cosmeticClinic->load(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium']);
 
-        return new BeautyCenterResource($beautyCenter);
+        return new CosmeticClinicResource($cosmeticClinic);
     }
 
-    public function fav(BeautyCenter $beautyCenter, $id)
+    public function fav(CosmeticClinic $cosmeticClinic, $id)
     {
         try {
 
-            $beautyCenter->favorites()->firstOrCreate(['user_id' => $id]);
+            $cosmeticClinic->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'Beauty Center has been saved to favorites'
@@ -44,11 +44,11 @@ class BeautyCenterController extends Controller
         }
     }
 
-    public function unfav(BeautyCenter $beautyCenter, $id)
+    public function unfav(CosmeticClinic $cosmeticClinic, $id)
     {
         try {
 
-            $beautyCenter->favorites()->whereUserId($id)->delete();
+            $cosmeticClinic->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'Beauty Center has been removed from favorites'
@@ -60,10 +60,10 @@ class BeautyCenterController extends Controller
         }
     }
 
-    public function storeRate(BeautyCenter $beautyCenter, $id, Request $request)
+    public function storeRate(CosmeticClinic $cosmeticClinic, $id, Request $request)
     {
         try {
-            $beautyCenter->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
+            $cosmeticClinic->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
             return response()->json([
                 'message' => 'Beauty Center has been rated'
             ], 201);
@@ -74,11 +74,12 @@ class BeautyCenterController extends Controller
         }
     }
 
-    public function view(BeautyCenter $beautyCenter, $id)
+    public function view(CosmeticClinic $cosmeticClinic, Request $request)
     {
+        $userId = $request->user_id;
         try {
 
-            $beautyCenter->views()->create(['user_id' => $id]);
+            $cosmeticClinic->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Beauty Center new view'
@@ -92,10 +93,10 @@ class BeautyCenterController extends Controller
 
     public function search(Request $request)
     {
-        $beautyCenters = BeautyCenter::fetch($request);
+        $cosmeticClinics = CosmeticClinic::fetch($request);
 
-        if (count($beautyCenters)) {
-            return new BeautyCenterCollection($beautyCenters);
+        if (count($cosmeticClinics)) {
+            return new CosmeticClinicCollection($cosmeticClinics);
         } else {
             return response()->json([
                 'message' => 'Nothing found'

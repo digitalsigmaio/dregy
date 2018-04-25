@@ -33,7 +33,7 @@
 
                                 <!--Card image-->
                                 <div class="view overlay">
-                                    <img :src="hospital.img" class="img-fluid m-auto" alt="sample image">
+                                    <img :src="hospital.img" class="img-fluid" alt="sample image">
                                     <a>
                                         <div class="mask rgba-white-slight"></div>
                                     </a>

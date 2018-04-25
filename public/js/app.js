@@ -52976,7 +52976,7 @@ var render = function() {
                   _c("div", { staticClass: "card card-ecommerce" }, [
                     _c("div", { staticClass: "view overlay" }, [
                       _c("img", {
-                        staticClass: "img-fluid m-auto",
+                        staticClass: "img-fluid",
                         attrs: { src: hospital.img, alt: "sample image" }
                       }),
                       _vm._v(" "),
@@ -54057,6 +54057,110 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -54075,15 +54179,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 employmentType: '',
                 type: '',
                 educationLevel: '',
-                orderBy: ''
-            }
+                orderBy: '',
+                sort: ''
+            },
+            regionId: null,
+            region: null,
+            regionName: 'Choose City',
+            cityId: null,
+            cityName: 'Choose Area'
         };
     },
 
     methods: {
         fetchJobs: function fetchJobs() {
             var vm = this;
+            $('.jobAds').hide();
+            $('.fetching').show();
             axios.post(vm.endpoint, vm.search).then(function (response) {
+                $('.fetching').hide();
+                $('.jobAds').show();
                 if (typeof response.data.data !== 'undefined') {
                     var data = response.data;
                     vm.jobs = data.data;
@@ -54122,11 +54236,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         flush: function flush($filter) {
             this.fetchFilter($filter, '');
+        },
+        FilterOrderBy: function FilterOrderBy($order, $sort) {
+            var vm = this;
+            this.search.orderBy = $order;
+            this.search.sort = $sort;
+            vm.endpoint = '/api/job-ads/search';
+            this.fetchJobs();
+        },
+        searchByKeyword: function searchByKeyword() {
+            this.endpoint = '/api/job-ads/search';
+            _.debounce(this.fetchJobs(), 150);
         }
     },
     mounted: function mounted() {
         this.fetchJobs();
         this.jobFilters();
+    },
+
+    watch: {
+        regionId: function regionId(val) {
+            this.search.city = '';
+            this.search.region = val;
+            var region = this.filters.regions.filter(function (region) {
+                return region.id === val;
+            });
+            this.region = region.shift();
+            this.regionName = this.region.en_name;
+            this.cityName = 'Choose Area';
+            this.endpoint = '/api/job-ads/search';
+            this.fetchJobs();
+        },
+        cityId: function cityId(val) {
+            this.search.city = val;
+            var city = this.region.cities.filter(function (city) {
+                return city.id === val;
+            }).shift();
+            this.cityName = city.en_name;
+            this.endpoint = '/api/job-ads/search';
+            this.fetchJobs();
+        }
     }
 });
 
@@ -54142,111 +54291,139 @@ var render = function() {
     _c("div", { staticClass: "col-lg-3" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-md-6 col-lg-12 mb-5" },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group " }, [
-                _c("input", {
-                  attrs: { name: "group100", type: "radio", id: "category0" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "dark-grey-text",
-                    attrs: { for: "category0" },
-                    on: {
-                      click: function($event) {
-                        _vm.flush("category")
-                      }
-                    }
-                  },
-                  [_vm._v("All")]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.filters.categories, function(category) {
-                return _c("div", { staticClass: "form-group " }, [
-                  _c("input", {
-                    attrs: {
-                      name: "group100",
-                      type: "radio",
-                      id: "category" + category.id
-                    },
-                    domProps: { value: category.id },
-                    on: {
-                      click: function($event) {
-                        _vm.fetchFilter("category", category.id)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "dark-grey-text",
-                      attrs: { for: "category" + category.id }
-                    },
-                    [_vm._v(_vm._s(category.en_name))]
-                  )
-                ])
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-md-6 col-lg-12 mb-5" },
-            [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group " }, [
-                _c("input", {
-                  attrs: {
-                    name: "group100",
-                    type: "radio",
-                    id: "experienceLevel0"
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("updated_at", "desc")
                   }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "dark-grey-text",
-                    attrs: { for: "experienceLevel0" },
-                    on: {
-                      click: function($event) {
-                        _vm.flush("experienceLevel")
+                }
+              },
+              [_c("a", [_vm._v("Newest")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("updated_at", "asc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Oldest")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("salary", "asc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Salary: low to high")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("salary", "desc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Salary: high to low")])]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "fieldset",
+              { attrs: { id: "category" } },
+              [
+                _c("div", { staticClass: "form-group " }, [
+                  _c("input", {
+                    attrs: { name: "category", type: "radio", id: "category0" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "dark-grey-text",
+                      attrs: { for: "category0" },
+                      on: {
+                        click: function($event) {
+                          _vm.flush("category")
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("All")]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.filters.expLevels, function(experienceLevel) {
-                return _c("div", { staticClass: "form-group " }, [
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.filters.categories, function(category) {
+                  return _c("div", { staticClass: "form-group " }, [
+                    _c("input", {
+                      attrs: {
+                        name: "category",
+                        type: "radio",
+                        id: "category" + category.id
+                      },
+                      domProps: { value: category.id },
+                      on: {
+                        click: function($event) {
+                          _vm.fetchFilter("category", category.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "dark-grey-text",
+                        attrs: { for: "category" + category.id }
+                      },
+                      [_vm._v(_vm._s(category.en_name))]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "fieldset",
+              { attrs: { id: "experienceLevel" } },
+              [
+                _c("div", { staticClass: "form-group " }, [
                   _c("input", {
                     attrs: {
-                      name: "group100",
+                      name: "experienceLevel",
                       type: "radio",
-                      id: "experienceLevel" + experienceLevel.id
-                    },
-                    domProps: { value: experienceLevel.id },
-                    on: {
-                      click: function($event) {
-                        _vm.fetchFilter("experienceLevel", experienceLevel.id)
-                      }
+                      id: "experienceLevel0"
                     }
                   }),
                   _vm._v(" "),
@@ -54254,24 +54431,351 @@ var render = function() {
                     "label",
                     {
                       staticClass: "dark-grey-text",
-                      attrs: { for: "experienceLevel" + experienceLevel.id }
+                      attrs: { for: "experienceLevel0" },
+                      on: {
+                        click: function($event) {
+                          _vm.flush("experienceLevel")
+                        }
+                      }
                     },
-                    [_vm._v(_vm._s(experienceLevel.en_name))]
+                    [_vm._v("All")]
                   )
-                ])
-              })
-            ],
-            2
-          )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.filters.expLevels, function(experienceLevel) {
+                  return _c("div", { staticClass: "form-group " }, [
+                    _c("input", {
+                      attrs: {
+                        name: "experienceLevel",
+                        type: "radio",
+                        id: "experienceLevel" + experienceLevel.id
+                      },
+                      domProps: { value: experienceLevel.id },
+                      on: {
+                        click: function($event) {
+                          _vm.fetchFilter("experienceLevel", experienceLevel.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "dark-grey-text",
+                        attrs: { for: "experienceLevel" + experienceLevel.id }
+                      },
+                      [_vm._v(_vm._s(experienceLevel.en_name))]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "fieldset",
+              { attrs: { id: "employmentType" } },
+              [
+                _c("div", { staticClass: "form-group " }, [
+                  _c("input", {
+                    attrs: {
+                      name: "employmentType",
+                      type: "radio",
+                      id: "employmentType0"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "dark-grey-text",
+                      attrs: { for: "employmentType0" },
+                      on: {
+                        click: function($event) {
+                          _vm.flush("employmentType")
+                        }
+                      }
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.filters.empTypes, function(employmentType) {
+                  return _c("div", { staticClass: "form-group " }, [
+                    _c("input", {
+                      attrs: {
+                        name: "employmentType",
+                        type: "radio",
+                        id: "employmentType" + employmentType.id
+                      },
+                      domProps: { value: employmentType.id },
+                      on: {
+                        click: function($event) {
+                          _vm.fetchFilter("employmentType", employmentType.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "dark-grey-text",
+                        attrs: { for: "employmentType" + employmentType.id }
+                      },
+                      [_vm._v(_vm._s(employmentType.en_name))]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "fieldset",
+              { attrs: { id: "type" } },
+              [
+                _c("div", { staticClass: "form-group " }, [
+                  _c("input", {
+                    attrs: { name: "type", type: "radio", id: "type0" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "dark-grey-text",
+                      attrs: { for: "type0" },
+                      on: {
+                        click: function($event) {
+                          _vm.flush("type")
+                        }
+                      }
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.filters.types, function(type) {
+                  return _c("div", { staticClass: "form-group " }, [
+                    _c("input", {
+                      attrs: {
+                        name: "type",
+                        type: "radio",
+                        id: "type" + type.id
+                      },
+                      domProps: { value: type.id },
+                      on: {
+                        click: function($event) {
+                          _vm.fetchFilter("type", type.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "dark-grey-text",
+                        attrs: { for: "type" + type.id }
+                      },
+                      [_vm._v(_vm._s(type.en_name))]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "fieldset",
+              { attrs: { id: "educationLevel" } },
+              [
+                _c("div", { staticClass: "form-group " }, [
+                  _c("input", {
+                    attrs: {
+                      name: "educationLevel",
+                      type: "radio",
+                      id: "educationLevel0"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "dark-grey-text",
+                      attrs: { for: "educationLevel0" },
+                      on: {
+                        click: function($event) {
+                          _vm.flush("educationLevel")
+                        }
+                      }
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.filters.eduLevels, function(educationLevel) {
+                  return _c("div", { staticClass: "form-group " }, [
+                    _c("input", {
+                      attrs: {
+                        name: "educationLevel",
+                        type: "radio",
+                        id: "educationLevel" + educationLevel.id
+                      },
+                      domProps: { value: educationLevel.id },
+                      on: {
+                        click: function($event) {
+                          _vm.fetchFilter("educationLevel", educationLevel.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "dark-grey-text",
+                        attrs: { for: "educationLevel" + educationLevel.id }
+                      },
+                      [_vm._v(_vm._s(educationLevel.en_name))]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ])
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-9" }, [
-      _vm._m(3),
+      _c("div", { staticClass: "row mb-0" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "md-form form-lg" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search.keyword,
+                  expression: "search.keyword"
+                }
+              ],
+              staticClass: "form-control form-control-lg",
+              attrs: { type: "text", id: "keyword" },
+              domProps: { value: _vm.search.keyword },
+              on: {
+                keyup: _vm.searchByKeyword,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.search, "keyword", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "keyword" } }, [_vm._v("Search")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mb-0" }, [
+        _c("div", { staticClass: "dropdown" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-teal dropdown-toggle",
+              attrs: {
+                type: "button",
+                id: "RegionMenu",
+                "data-toggle": "dropdown",
+                "aria-haspopup": "true",
+                "aria-expanded": "false"
+              }
+            },
+            [_vm._v(_vm._s(_vm.regionName))]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "dropdown-menu dropdown-default" },
+            _vm._l(_vm.filters.regions, function(region) {
+              return _c(
+                "a",
+                {
+                  staticClass: "dropdown-item",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.regionId = region.id
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(region.en_name))]
+              )
+            })
+          )
+        ]),
+        _vm._v(" "),
+        _vm.region
+          ? _c("div", { staticClass: "dropdown" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-teal dropdown-toggle",
+                  attrs: {
+                    type: "button",
+                    id: "CityMenu",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.cityName))]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "dropdown-menu dropdown-default" },
+                _vm._l(_vm.region.cities, function(city) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-item",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.cityId = city.id
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(city.en_name))]
+                  )
+                })
+              )
+            ])
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _vm.jobs != null
-        ? _c("section", { staticClass: "section pt-4" }, [
+        ? _c("section", { staticClass: "section jobAds pt-4" }, [
             _c(
               "div",
               { staticClass: "row", staticStyle: { "min-height": "100vh" } },
@@ -54284,7 +54788,7 @@ var render = function() {
                         attrs: { src: job.img, alt: "" }
                       }),
                       _vm._v(" "),
-                      _vm._m(4, true)
+                      _vm._m(6, true)
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
@@ -54305,8 +54809,8 @@ var render = function() {
                         {
                           staticClass: "badge mb-2 p-2",
                           class: {
-                            "badge-primary": job.type.en_name == "Employer",
-                            "badge-success": job.type.en_name == "Job Seeker"
+                            "blue-gradient": job.type.en_name == "Employer",
+                            "aqua-gradient": job.type.en_name == "Job Seeker"
                           }
                         },
                         [_vm._v(_vm._s(job.type.en_name))]
@@ -54319,18 +54823,33 @@ var render = function() {
                           return _c("li", { staticClass: "text-grey" }, [
                             _c("i", { staticClass: "fa fa-phone blue-text" }),
                             _vm._v(" "),
-                            _c("strong", [_vm._v(_vm._s(phone))])
+                            _c("strong", { staticClass: "teal-text" }, [
+                              _vm._v(_vm._s(phone))
+                            ])
                           ])
                         })
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer pb-0" }, [
-                        _c("div", { staticClass: "row mb-0" }, [
-                          _c("span", { staticClass: "float-left" }, [
-                            _c("strong", [_vm._v(_vm._s(job.salary) + " L.E")])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(5, true)
+                        _c("div", { staticClass: "pull-left" }, [
+                          _c("p", [
+                            _c("i", {
+                              staticClass: "fa fa-bullseye pink-text"
+                            }),
+                            _c("strong", { staticClass: "p-2" }, [
+                              _vm._v(_vm._s(job.salary) + " L.E")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "pull-right" }, [
+                          _c("div", { staticClass: "footer-address" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(job.created_at) +
+                                "\n                                    "
+                            )
+                          ])
                         ])
                       ])
                     ])
@@ -54477,8 +54996,10 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.jobs == null
-        ? _c("section", { staticClass: "section pt-4" }, [_vm._m(6)])
-        : _vm._e()
+        ? _c("section", { staticClass: "section pt-4" }, [_vm._m(7)])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(8)
     ])
   ])
 }
@@ -54487,30 +55008,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
-      _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
-        _c("strong", [_vm._v("Order By")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "divider" }),
-      _vm._v(" "),
-      _c("p", { staticClass: "blue-text" }, [_c("a", [_vm._v("Default")])]),
-      _vm._v(" "),
-      _c("p", { staticClass: "dark-grey-text" }, [
-        _c("a", [_vm._v("Popularity")])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "dark-grey-text" }, [
-        _c("a", [_vm._v("Average rating")])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "dark-grey-text" }, [
-        _c("a", [_vm._v("Price: low to high")])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "dark-grey-text" }, [
-        _c("a", [_vm._v("Price: high to low")])
-      ])
+    return _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+      _c("strong", [_vm._v("Order By")])
     ])
   },
   function() {
@@ -54533,51 +55032,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4 mt-3" }, [
-        _c(
-          "select",
-          {
-            staticClass: "mdb-select grey-text",
-            attrs: { id: "options", multiple: "" }
-          },
-          [
-            _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
-              _vm._v("Choose your option")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("Option 1")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2" } }, [_vm._v("Option 2")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "3" } }, [_vm._v("Option 3")])
-          ]
-        ),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "options" } }, [_vm._v("Example label")]),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn-save btn btn-primary btn-sm" }, [
-          _vm._v("Save")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-8 text-right" }, [
-        _c("a", { staticClass: "btn btn-blue-grey btn-sm" }, [
-          _c("i", {
-            staticClass: "fa fa-th mr-2",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _c("strong", [_vm._v(" Grid")])
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-blue-grey btn-sm" }, [
-          _c("i", {
-            staticClass: "fa fa-th-list mr-2",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _c("strong", [_vm._v(" List")])
-        ])
-      ])
+    return _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+      _c("strong", [_vm._v("Employment Type")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+      _c("strong", [_vm._v("Ad Type")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+      _c("strong", [_vm._v("Education Level")])
     ])
   },
   function() {
@@ -54585,24 +55057,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("a", [_c("div", { staticClass: "mask rgba-white-slight" })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "float-right" }, [
-      _c(
-        "a",
-        {
-          attrs: {
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            title: "Add to Cart"
-          }
-        },
-        [_c("i", { staticClass: "fa fa-shopping-cart ml-3" })]
-      )
-    ])
   },
   function() {
     var _vm = this
@@ -54617,6 +55071,34 @@ var staticRenderFns = [
         },
         [_vm._v("\n                    No job found\n                ")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "section pt-4 fetching" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "preloader-wrapper big active crazy m-auto" },
+          [
+            _c("div", { staticClass: "spinner-layer spinner-blue-only" }, [
+              _c("div", { staticClass: "circle-clipper left" }, [
+                _c("div", { staticClass: "circle" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "gap-patch" }, [
+                _c("div", { staticClass: "circle" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "circle-clipper right" }, [
+                _c("div", { staticClass: "circle" })
+              ])
+            ])
+          ]
+        )
+      ])
     ])
   }
 ]

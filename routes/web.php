@@ -28,9 +28,7 @@ Route::middleware('language')->group(function () {
         return view('landing', compact(['hospitals', 'pharmacies', 'clinics']));
     });
 
-    Route::get('/job-ads', function () {
-        return view('jobs');
-    });
+    Route::get('/job-ads', 'JobAdController@index');
 
 
 
@@ -40,6 +38,7 @@ Route::middleware('language')->group(function () {
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/job-ads', 'JobAdController@index')->name('home');
     Auth::routes();
 
 

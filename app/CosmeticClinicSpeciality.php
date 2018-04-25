@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BeautyCenterSpeciality extends Model
+class CosmeticClinicSpeciality extends Model
 {
-    protected $table = 'beauty_center_speciality';
+    protected $table = 'cosmetic_clinic_speciality';
     public $timestamps = false;
 
     protected $fillable = [
-        'beauty_center_id',
+        'cosmetic_clinic_id',
         'speciality_id'
     ];
 }

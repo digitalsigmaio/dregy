@@ -85,11 +85,13 @@ class HospitalController extends Controller
         }
     }
 
-    public function view(Hospital $hospital, $id)
+    public function view(Hospital $hospital, Request $request)
     {
+        $userId = $request->user_id;
+
         try {
 
-            $hospital->views()->create(['user_id' => $id]);
+            $hospital->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Hospital new view'

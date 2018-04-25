@@ -37,7 +37,7 @@ class JobAdResource extends JsonResource
                 'users_id' => $this->favorites->pluck('user_id')
             ],
             'views' => $this->views,
-            'created_at' => $this->created_at->toFormattedDateString()
+            'created_at' => $this->created_at->diffForHumans()
         ];
     }
 }

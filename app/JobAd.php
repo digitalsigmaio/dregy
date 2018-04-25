@@ -45,6 +45,11 @@ class JobAd extends Model
         return $this->morphOne(Premium::class, 'premiumable');
     }
 
+    public function offer()
+    {
+        return $this->morphOne(Offer::class, 'offerable');
+    }
+
     public function experienceLevel()
     {
         return $this->belongsTo(JobExperienceLevel::class, 'job_experience_level_id');
@@ -82,6 +87,7 @@ class JobAd extends Model
         $type = $request->type;
         $educationLevel = $request->educationLevel;
         $orderBy = $request->orderBy;
+        $sort = $request->sort;
 
         $data = self::with([
             'region',
@@ -121,7 +127,10 @@ class JobAd extends Model
             ->when($educationLevel != '', function ($query) use ($educationLevel) {
                 return $query->where('job_education_level_id', $educationLevel);
             })
-            ->paginate(9);
+            ->when($orderBy != '', function ($query) use ($orderBy, $sort) {
+                return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
+            })
+            ->paginate(12);
 
         return $data;
     }

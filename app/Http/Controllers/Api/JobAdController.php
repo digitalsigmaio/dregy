@@ -32,6 +32,7 @@ class JobAdController extends Controller
         return new JobAdCollection($jobAds);
     }
 
+
     public function show(JobAd $jobAd)
     {
         $jobAd->load([
@@ -83,10 +84,11 @@ class JobAdController extends Controller
         }
     }
 
-    public function view(JobAd $jobAd, $id)
+    public function view(JobAd $jobAd, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $jobAd->views()->create(['user_id' => $id]);
+            $jobAd->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'

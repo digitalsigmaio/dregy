@@ -71,10 +71,11 @@ class PharmacyController extends Controller
         }
     }
 
-    public function view(Pharmacy $pharmacy, $id)
+    public function view(Pharmacy $pharmacy, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $pharmacy->views()->create(['user_id' => $id]);
+            $pharmacy->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'

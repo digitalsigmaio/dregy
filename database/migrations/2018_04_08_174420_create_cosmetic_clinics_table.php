@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBeautyCentersTable extends Migration
+class CreateCosmeticClinicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBeautyCentersTable extends Migration
      */
     public function up()
     {
-        Schema::create('beauty_centers', function (Blueprint $table) {
+        Schema::create('cosmetic_clinics', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('admin_id');
@@ -50,6 +50,6 @@ class CreateBeautyCentersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beauty_centers');
+        Schema::dropIfExists('cosmetic_clinics');
     }
 }

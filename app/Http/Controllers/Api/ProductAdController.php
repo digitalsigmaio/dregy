@@ -75,10 +75,11 @@ class ProductAdController extends Controller
         }
     }
 
-    public function view(ProductAd $productAd, $id)
+    public function view(ProductAd $productAd, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $productAd->views()->create(['user_id' => $id]);
+            $productAd->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'

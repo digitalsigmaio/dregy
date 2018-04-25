@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BeautyCenter extends Model
+class CosmeticClinic extends Model
 {
     use SoftDeletes;
 
@@ -57,6 +57,11 @@ class BeautyCenter extends Model
     public function premium()
     {
         return $this->morphOne(Premium::class, 'premiumable');
+    }
+
+    public function offer()
+    {
+        return $this->morphOne(Offer::class, 'offerable');
     }
 
     public function specialities()

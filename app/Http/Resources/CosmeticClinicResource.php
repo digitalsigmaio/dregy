@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BeautyCenterResource extends JsonResource
+class CosmeticClinicResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

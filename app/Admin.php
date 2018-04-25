@@ -57,7 +57,7 @@ class Admin extends Authenticatable
 
     public function beautyCenters()
     {
-        return $this->hasMany(BeautyCenter::class);
+        return $this->hasMany(CosmeticClinic::class);
     }
 
     public function productADReviews()

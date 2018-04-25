@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         factory('App\Admin', 5)->create();
-        factory('App\User', 100)->create();
+        factory('App\User', 200)->create();
         factory('App\Region', 13)->create()->each(function ($r) {
             $r->cities()->saveMany(factory('App\City', 20)->make());
         });
@@ -27,54 +27,54 @@ class DatabaseSeeder extends Seeder
         factory('App\JobType', 2)->create();
         factory('App\JobEducationLevel', 6)->create();
 
-        factory('App\Hospital', 20)->create()->each(function ($h){
+        factory('App\Hospital', 100)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
-            $h->views()->saveMany(factory('App\View', 200)->make());
-            $h->rates()->saveMany(factory('App\Rate', 20)->make());
+            $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
+            $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
+            $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        factory('App\BeautyCenter', 20)->create()->each(function ($h){
+        factory('App\CosmeticClinic', 100)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
-            $h->views()->saveMany(factory('App\View', 200)->make());
-            $h->rates()->saveMany(factory('App\Rate', 20)->make());
+            $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
+            $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
+            $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        factory('App\Clinic', 20)->create()->each(function ($h){
+        factory('App\Clinic', 100)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
-            $h->views()->saveMany(factory('App\View', 200)->make());
-            $h->rates()->saveMany(factory('App\Rate', 20)->make());
+            $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
+            $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
+            $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        factory('App\Pharmacy', 20)->create()->each(function ($h){
+        factory('App\Pharmacy', 100)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
-            $h->views()->saveMany(factory('App\View', 200)->make());
-            $h->rates()->saveMany(factory('App\Rate', 20)->make());
+            $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
+            $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
+            $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        factory('App\JobAd', 20)->create()->each(function ($h){
+        factory('App\JobAd', 100)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
-            $h->views()->saveMany(factory('App\View', 200)->make());
+            $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
+            $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        factory('App\ProductAd', 20)->create()->each(function ($h){
+        factory('App\ProductAd', 100)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
-            $h->favorites()->saveMany(factory('App\Favorite', 20)->make());
-            $h->views()->saveMany(factory('App\View', 200)->make());
+            $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
+            $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
             $h->premium()->save(factory('App\Premium')->make());
         });
 
         factory('App\HospitalSpeciality', 100)->create();
-        factory('App\BeautyCenterSpeciality', 100)->create();
+        factory('App\CosmeticClinicSpeciality', 100)->create();
         factory('App\ClinicSpeciality', 100)->create();
     }
 }

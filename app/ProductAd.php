@@ -44,6 +44,11 @@ class ProductAd extends Model
         return $this->morphOne(Premium::class, 'premiumable');
     }
 
+    public function offer()
+    {
+        return $this->morphOne(Offer::class, 'offerable');
+    }
+
     public function getViewsAttribute()
     {
         return $this->views()->count();

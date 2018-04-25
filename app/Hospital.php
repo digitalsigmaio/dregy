@@ -55,6 +55,11 @@ class Hospital extends Model
         return $this->morphOne(Premium::class, 'premiumable');
     }
 
+    public function offer()
+    {
+        return $this->morphOne(Offer::class, 'offerable');
+    }
+
     public function specialities()
     {
         return $this->belongsToMany(Speciality::class, 'hospital_speciality');

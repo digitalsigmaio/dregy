@@ -6,7 +6,7 @@ use App\BeautyCenterSpeciality;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BeautyCenterSpecialityController extends Controller
+class CosmeticClinicSpecialityController extends Controller
 {
     /**
      * Display a listing of the resource.

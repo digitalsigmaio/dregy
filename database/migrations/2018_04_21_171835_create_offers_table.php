@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfferSliderAdsTable extends Migration
+class CreateOffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOfferSliderAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('offer_slider_ads', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('offerable_id');
             $table->string('offerable_type');
@@ -32,6 +32,6 @@ class CreateOfferSliderAdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_slider_ads');
+        Schema::dropIfExists('offers');
     }
 }

@@ -33,19 +33,19 @@ Route::get('/hospitals/{hospital}', 'Api\HospitalController@show');
 Route::post('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@fav');
 Route::delete('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@unfav');
 Route::post('/hospitals/{hospital}/users/{id}/rate', 'Api\HospitalController@storeRate');
-Route::post('/hospitals/{hospital}/users/{id}/view', 'Api\HospitalController@view');
+Route::post('/hospitals/{hospital}/view', 'Api\HospitalController@view');
 Route::post('/hospitals/search', 'Api\HospitalController@search');
 
 
-// Beauty Center
+// Cosmetic Clinic
 
-Route::get('/beauty-centers', 'Api\BeautyCenterController@index');
-Route::get('/beauty-centers/{beautyCenter}', 'Api\BeautyCenterController@show');
-Route::post('/beauty-centers/{beautyCenter}/users/{id}/fav', 'Api\BeautyCenterController@fav');
-Route::delete('/beauty-centers/{beautyCenter}/users/{id}/fav', 'Api\BeautyCenterController@unfav');
-Route::post('/beauty-centers/{beautyCenter}/users/{id}/rate', 'Api\BeautyCenterController@storeRate');
-Route::post('/beauty-centers/{beautyCenter}/users/{id}/view', 'Api\BeautyCenterController@view');
-Route::post('/beauty-centers/search', 'Api\BeautyCenterController@search');
+Route::get('/cosmetic-clinics', 'Api\CosmeticClinicController@index');
+Route::get('/cosmetic-clinics/{cosmeticClinic}', 'Api\CosmeticClinicController@show');
+Route::post('/cosmetic-clinics/{cosmeticClinic}/users/{id}/fav', 'Api\CosmeticClinicController@fav');
+Route::delete('/cosmetic-clinics/{cosmeticClinic}/users/{id}/fav', 'Api\CosmeticClinicController@unfav');
+Route::post('/cosmetic-clinics/{cosmeticClinic}/users/{id}/rate', 'Api\CosmeticClinicController@storeRate');
+Route::post('/cosmetic-clinics/{cosmeticClinic}/view', 'Api\CosmeticClinicController@view');
+Route::post('/cosmetic-clinics/search', 'Api\CosmeticClinicController@search');
 
 
 // Clinic
@@ -55,7 +55,7 @@ Route::get('/clinics/{clinic}', 'Api\ClinicController@show');
 Route::post('/clinics/{clinic}/users/{id}/fav', 'Api\ClinicController@fav');
 Route::delete('/clinics/{clinic}/users/{id}/fav', 'Api\ClinicController@unfav');
 Route::post('/clinics/{clinic}/users/{id}/rate', 'Api\ClinicController@storeRate');
-Route::post('/clinics/{clinic}/users/{id}/view', 'Api\ClinicController@view');
+Route::post('/clinics/{clinic}/view', 'Api\ClinicController@view');
 Route::post('/clinics/search', 'Api\ClinicController@search');
 
 
@@ -66,7 +66,7 @@ Route::get('/pharmacies/{pharmacy}', 'Api\PharmacyController@show');
 Route::post('/pharmacies/{pharmacy}/users/{id}/fav', 'Api\PharmacyController@fav');
 Route::delete('/pharmacies/{pharmacy}/users/{id}/fav', 'Api\PharmacyController@unfav');
 Route::post('/pharmacies/{pharmacy}/users/{id}/rate', 'Api\PharmacyController@storeRate');
-Route::post('/pharmacies/{pharmacy}/users/{id}/view', 'Api\PharmacyController@view');
+Route::post('/pharmacies/{pharmacy}/view', 'Api\PharmacyController@view');
 
 
 // Job Ad
@@ -75,7 +75,7 @@ Route::get('/job-ads', 'Api\JobAdController@index');
 Route::get('/job-ads/{jobAd}', 'Api\JobAdController@show');
 Route::post('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@fav');
 Route::delete('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@unfav');
-Route::post('/job-ads/{jobAd}/users/{id}/view', 'Api\JobAdController@view');
+Route::post('/job-ads/{jobAd}/view', 'Api\JobAdController@view');
 Route::post('/job-ads/search', 'Api\JobAdController@search');
 
 
@@ -86,7 +86,7 @@ Route::get('/product-ads', 'Api\ProductAdController@index');
 Route::get('/product-ads/{productAd}', 'Api\ProductAdController@show');
 Route::post('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@fav');
 Route::delete('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@unfav');
-Route::post('/product-ads/{productAd}/users/{id}/view', 'Api\ProductAdController@view');
+Route::post('/product-ads/{productAd}/view', 'Api\ProductAdController@view');
 
 
 // Misc
@@ -98,7 +98,7 @@ Route::get('/productAdCategories', 'Api\Misc\ProductAdCategoryController@index')
 Route::get('/degrees', 'Api\Misc\DegreeController@index');
 Route::get('/hospitalSpecialities', 'Api\Misc\HospitalSpecialityController@index');
 Route::get('/clinicSpecialities', 'Api\Misc\ClinicSpecialityController@index');
-Route::get('/beautyCenterSpecialities', 'Api\Misc\BeautyCenterSpecialityController@index');
+Route::get('/cosmeticClinicSpecialities', 'Api\Misc\CosmeticClinicSpecialityController@index');
 Route::get('/jobEducationLevels', 'Api\Misc\JobEducationLevelController@index');
 Route::get('/jobEmploymentTypes', 'Api\Misc\JobEmploymentTypeController@index');
 Route::get('/jobTypes', 'Api\Misc\JobTypeController@index');

@@ -51,6 +51,11 @@ class Pharmacy extends Model
         return $this->morphOne(Premium::class, 'premiumable');
     }
 
+    public function offer()
+    {
+        return $this->morphOne(Offer::class, 'offerable');
+    }
+
     public function getRateAttribute()
     {
         if ($this->rates()->exists()) {

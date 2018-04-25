@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OfferSliderAd extends Model
+class PaidAd extends Model
 {
     //
 }
