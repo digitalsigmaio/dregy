@@ -27,7 +27,7 @@
                                 <a href="" class="dark-grey-text">{{ product.title }}</a>
                             </strong>
                         </h5>
-                        <span class="badge badge-danger mb-2">{{ product.status }}</span>
+                        <span class="badge mb-2 p-2" :class="{ 'badge-warning': product.status == 'used', 'badge-success' : product.status == 'new' }">{{ product.status }}</span>
                         <!-- Rating -->
                         <ul class="rating">
 

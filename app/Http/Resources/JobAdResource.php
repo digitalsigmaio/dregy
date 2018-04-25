@@ -24,21 +24,20 @@ class JobAdResource extends JsonResource
             'category'=> $this->category,
             'experience_level' => $this->experienceLevel,
             'employment_type' => $this->employmentType,
-            'type' => $this->jobType,
+            'type' => $this->type,
             'education_level' => $this->educationLevel,
             'region' => $this->region,
             'city' => $this->city,
             'address' => $this->address,
             'img' => $this->img,
-            'promoted' => $this->promoted,
+            'premium' => $this->premium,
             'phone' => $this->phoneNumbers->pluck('number'),
-            'favs' => [
-                'count' => $this->favs->count(),
-                'users_id' => $this->favs->pluck('user_id')
+            'favorites' => [
+                'count' => $this->favorites->count(),
+                'users_id' => $this->favorites->pluck('user_id')
             ],
             'views' => $this->views,
-            'review' => $this->review,
-            'created_at' => $this->created_at->toFormattedDateString()
+            'created_at' => $this->created_at->diffForHumans()
         ];
     }
 }

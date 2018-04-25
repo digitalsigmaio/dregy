@@ -19,6 +19,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 Vue.component('top-clients', require('./components/TopClients.vue'));
 Vue.component('last-items', require('./components/LastItems.vue'));
+Vue.component('job-ads-list', require('./components/JobAds.vue'));
+
 
 Vue.component(
     'passport-clients',

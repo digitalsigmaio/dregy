@@ -13,14 +13,14 @@ class ClinicController extends Controller
 {
     public function index()
     {
-        $clinics = Clinic::with(['region', 'city', 'rates', 'favs', 'phoneNumbers', 'views'])->paginate(10);
+        $clinics = Clinic::with(['region', 'city', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium', 'specialities'])->paginate(10);
 
         return new ClinicCollection($clinics);
     }
 
     public function show(Clinic $clinic)
     {
-        $clinic->load(['region', 'city', 'rates', 'favs', 'phoneNumbers', 'views']);
+        $clinic->load(['region', 'city', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium', 'specialities']);
 
         return new ClinicResource($clinic);
     }
@@ -29,7 +29,7 @@ class ClinicController extends Controller
     {
         try {
 
-            $clinic->favs()->firstOrCreate(['user_id' => $id]);
+            $clinic->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'Clinic has been saved to favorites'
@@ -45,7 +45,7 @@ class ClinicController extends Controller
     {
         try {
 
-            $clinic->favs()->whereUserId($id)->delete();
+            $clinic->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'Clinic has been removed from favorites'
@@ -59,6 +59,7 @@ class ClinicController extends Controller
 
     public function storeRate(Clinic $clinic, $id, Request $request)
     {
+
         try {
             $clinic->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
             return response()->json([
@@ -71,10 +72,11 @@ class ClinicController extends Controller
         }
     }
 
-    public function view(Clinic $clinic, $id)
+    public function view(Clinic $clinic, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $clinic->views()->create(['user_id' => $id]);
+            $clinic->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'

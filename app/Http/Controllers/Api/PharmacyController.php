@@ -13,14 +13,14 @@ class PharmacyController extends Controller
 {
     public function index()
     {
-        $pharmacies = Pharmacy::with(['region', 'city', 'rates', 'favs', 'phoneNumbers'])->withCount('views')->paginate(10);
+        $pharmacies = Pharmacy::with(['region', 'city', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium'])->paginate(10);
 
         return new PharmacyCollection($pharmacies);
     }
 
     public function show(Pharmacy $pharmacy)
     {
-        $pharmacy->load(['region', 'city', 'rates', 'favs', 'phoneNumbers', 'views']);
+        $pharmacy->load(['region', 'city', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium']);
 
         return new PharmacyResource($pharmacy);
     }
@@ -29,7 +29,7 @@ class PharmacyController extends Controller
     {
         try {
 
-            $pharmacy->favs()->firstOrCreate(['user_id' => $id]);
+            $pharmacy->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'Pharmacy has been saved to favorites'
@@ -45,7 +45,7 @@ class PharmacyController extends Controller
     {
         try {
 
-            $pharmacy->favs()->whereUserId($id)->delete();
+            $pharmacy->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'Pharmacy has been removed from favorites'
@@ -71,10 +71,11 @@ class PharmacyController extends Controller
         }
     }
 
-    public function view(Pharmacy $pharmacy, $id)
+    public function view(Pharmacy $pharmacy, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $pharmacy->views()->create(['user_id' => $id]);
+            $pharmacy->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'

@@ -33,7 +33,7 @@
 
                                 <!--Card image-->
                                 <div class="view overlay">
-                                    <img :src="hospital.img" class="img-fluid m-auto" alt="sample image">
+                                    <img :src="hospital.img" class="img-fluid" alt="sample image">
                                     <a>
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -44,16 +44,16 @@
                                 <div class="card-body">
                                     <!--Category & Title-->
 
-                                    <h5 class="card-title mb-1">
+                                    <h5 class="card-title mb-1 text-truncate">
                                         <strong>
                                             <a href="" class="dark-grey-text">{{ hospital.en_name }}</a>
                                         </strong>
                                     </h5>
-                                    <span class="badge badge-danger mb-2">bestseller</span>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium != null">Featured</span>
                                     <!-- Rating -->
                                     <ul class="rating">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, hospital.rate)"></i>
+                                            <i class="fa fa-star" :class="starColor(n, hospital.rate.value)"></i>
                                         </li>
                                     </ul>
 
@@ -61,11 +61,11 @@
                                     <div class="card-footer pb-0">
                                         <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>{{ hospital.user.name }}</strong>
+                                                <strong>{{ hospital.favorites.count }}</strong>
                                             </span>
                                             <span class="float-right">
                                                 <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-user ml-3"></i>
+                                                    <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>
                                         </div>
@@ -117,11 +117,11 @@
                                             <a href="" class="dark-grey-text">{{ pharmacy.en_name }}</a>
                                         </strong>
                                     </h5>
-                                    <span class="badge badge-danger mb-2">bestseller</span>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium != null">Featured</span>
                                     <!-- Rating -->
                                     <ul class="rating">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, pharmacy.rate)"></i>
+                                            <i class="fa fa-star" :class="starColor(n, pharmacy.rate.value)"></i>
                                         </li>
                                     </ul>
 
@@ -129,11 +129,11 @@
                                     <div class="card-footer pb-0">
                                         <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>{{ pharmacy.user.name }}</strong>
+                                                <strong>{{ pharmacy.favorites.count }}</strong>
                                             </span>
                                             <span class="float-right">
                                                 <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-user ml-3"></i>
+                                                    <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>
                                         </div>
@@ -183,11 +183,11 @@
                                             <a href="" class="dark-grey-text">{{ clinic.en_name }}</a>
                                         </strong>
                                     </h5>
-                                    <span class="badge badge-danger mb-2">bestseller</span>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium != null">Featured</span>
                                     <!-- Rating -->
                                     <ul class="rating">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, clinic.rate)"></i>
+                                            <i class="fa fa-star" :class="starColor(n, clinic.rate.value)"></i>
                                         </li>
                                     </ul>
 
@@ -195,11 +195,11 @@
                                     <div class="card-footer pb-0">
                                         <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>{{ clinic.user.name }}</strong>
+                                                <strong>{{ clinic.favorites.count }}</strong>
                                             </span>
                                             <span class="float-right">
                                                 <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-user ml-3"></i>
+                                                    <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>
                                         </div>

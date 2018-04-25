@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\JobAdCollection;
 use App\Http\Resources\JobAdResource;
 use App\JobAd;
+use App\JobAdCategory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,35 +17,36 @@ class JobAdController extends Controller
         $jobAds = JobAd::with([
             'region',
             'city',
-            'favs',
+            'favorites',
             'phoneNumbers',
             'category',
             'experienceLevel',
             'employmentType',
             'type',
             'educationLevel',
-            'review',
-            'views'
+            'views',
+            'premium'
         ])
-            ->paginate(10);
+            ->paginate(9);
 
         return new JobAdCollection($jobAds);
     }
+
 
     public function show(JobAd $jobAd)
     {
         $jobAd->load([
             'region',
             'city',
-            'favs',
+            'favorites',
             'phoneNumbers',
             'category',
             'experienceLevel',
             'employmentType',
             'type',
             'educationLevel',
-            'review',
-            'views'
+            'views',
+            'premium'
         ]);
 
         return new JobAdResource($jobAd);
@@ -54,7 +56,7 @@ class JobAdController extends Controller
     {
         try {
 
-            $jobAd->favs()->firstOrCreate(['user_id' => $id]);
+            $jobAd->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'JobAd has been saved to favorites'
@@ -70,7 +72,7 @@ class JobAdController extends Controller
     {
         try {
 
-            $jobAd->favs()->whereUserId($id)->delete();
+            $jobAd->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'JobAd has been removed from favorites'
@@ -82,10 +84,11 @@ class JobAdController extends Controller
         }
     }
 
-    public function view(JobAd $jobAd, $id)
+    public function view(JobAd $jobAd, Request $request)
     {
+        $userId = $request->user_id;
         try {
-            $jobAd->views()->create(['user_id' => $id]);
+            $jobAd->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Clinic new view'
@@ -94,6 +97,19 @@ class JobAdController extends Controller
             return response()->json([
                 'error' => $e->getMessage()
             ], 403);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $jobAds = JobAd::fetch($request);
+
+        if (count($jobAds)) {
+            return new JobAdCollection($jobAds);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ], 200);
         }
     }
 }

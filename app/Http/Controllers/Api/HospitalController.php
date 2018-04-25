@@ -13,14 +13,14 @@ class HospitalController extends Controller
 {
     public function index()
     {
-        $hospitals = Hospital::with(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views'])->paginate(10);
+        $hospitals = Hospital::with(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium'])->paginate(10);
 
         return new HospitalCollection($hospitals);
     }
 
     public function show(Hospital $hospital)
     {
-        $hospital->load(['region', 'city', 'specialities', 'rates', 'favs', 'phoneNumbers', 'views']);
+        $hospital->load(['region', 'city', 'specialities', 'rates', 'favorites', 'phoneNumbers', 'views', 'premium']);
 
         return new HospitalResource($hospital);
     }
@@ -29,7 +29,7 @@ class HospitalController extends Controller
     {
         try {
 
-            $hospital->favs()->firstOrCreate(['user_id' => $id]);
+            $hospital->favorites()->firstOrCreate(['user_id' => $id]);
 
             return response()->json([
                 'message' => 'Hospital has been saved to favorites'
@@ -45,7 +45,7 @@ class HospitalController extends Controller
     {
         try {
 
-            $hospital->favs()->whereUserId($id)->delete();
+            $hospital->favorites()->whereUserId($id)->delete();
 
             return response()->json([
                 'message' => 'Hospital has been removed from favorites'
@@ -85,11 +85,13 @@ class HospitalController extends Controller
         }
     }
 
-    public function view(Hospital $hospital, $id)
+    public function view(Hospital $hospital, Request $request)
     {
+        $userId = $request->user_id;
+
         try {
 
-            $hospital->views()->create(['user_id' => $id]);
+            $hospital->views()->create(['user_id' => $userId]);
 
             return response()->json([
                 'message' => 'Hospital new view'

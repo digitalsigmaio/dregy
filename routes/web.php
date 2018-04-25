@@ -25,12 +25,18 @@ Route::middleware('language')->group(function () {
         $pharmacies = json_encode(new \App\Http\Resources\PharmacyCollection($p));
         $clinics = json_encode(new \App\Http\Resources\ClinicCollection($c));
 
-        return view('layouts.main', compact(['hospitals', 'pharmacies', 'clinics']));
+        return view('landing', compact(['hospitals', 'pharmacies', 'clinics']));
     });
 
+<<<<<<< HEAD
     Route::get('/comingsoon', function () {
         return view('comingsoon');
     });
+=======
+    Route::get('/job-ads', 'JobAdController@index');
+
+
+>>>>>>> f6c50cf937eb43d7d75efd5fab324c1e938c53ec
 
 
 
@@ -38,6 +44,7 @@ Route::middleware('language')->group(function () {
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/job-ads', 'JobAdController@index')->name('home');
     Auth::routes();
 
 

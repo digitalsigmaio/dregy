@@ -6,7 +6,7 @@ $factory->define(App\Hospital::class, function (Faker $faker) {
     return [
         'user_id' => rand(1, 100),
         'admin_id' => rand(1, 5),
-        'ar_name' => $name = $faker->name,
+        'ar_name' => $name = $faker->company,
         'en_name' => $name,
         'ar_slug' => str_slug($name),
         'en_slug' => str_slug($name),
@@ -20,7 +20,6 @@ $factory->define(App\Hospital::class, function (Faker $faker) {
         'en_work_times' => 'From 9 a.m to 5 p.m',
         'website' => $faker->url,
         'email' => $faker->email,
-        'img' => $faker->imageUrl(320, 240),
-        'premium' => $faker->boolean(40)
+        'img' => $faker->imageUrl(640, 480),
     ];
 });
