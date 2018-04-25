@@ -28,15 +28,15 @@ Route::middleware('language')->group(function () {
         return view('landing', compact(['hospitals', 'pharmacies', 'clinics']));
     });
 
-<<<<<<< HEAD
+
     Route::get('/comingsoon', function () {
         return view('comingsoon');
     });
-=======
+
     Route::get('/job-ads', 'JobAdController@index');
 
 
->>>>>>> f6c50cf937eb43d7d75efd5fab324c1e938c53ec
+
 
 
 
@@ -44,7 +44,7 @@ Route::middleware('language')->group(function () {
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/job-ads', 'JobAdController@index')->name('home');
+
     Auth::routes();
 
 
