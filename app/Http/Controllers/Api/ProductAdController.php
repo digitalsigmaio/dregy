@@ -90,4 +90,17 @@ class ProductAdController extends Controller
             ], 403);
         }
     }
+
+    public function search(Request $request)
+    {
+        $productAds = ProductAd::fetch($request);
+
+        if (count($productAds)) {
+            return new ProductAdCollection($productAds);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ], 200);
+        }
+    }
 }

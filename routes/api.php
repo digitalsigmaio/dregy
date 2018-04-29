@@ -87,6 +87,7 @@ Route::get('/product-ads/{productAd}', 'Api\ProductAdController@show');
 Route::post('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@fav');
 Route::delete('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@unfav');
 Route::post('/product-ads/{productAd}/view', 'Api\ProductAdController@view');
+Route::post('/product-ads/search', 'Api\ProductAdController@search');
 
 
 // Misc

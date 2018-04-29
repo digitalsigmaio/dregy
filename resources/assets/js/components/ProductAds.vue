@@ -13,8 +13,8 @@
                         <div class="divider"></div>
                         <p class="dark-grey-text" @click="FilterOrderBy('updated_at', 'desc')"><a>Newest</a></p>
                         <p class="dark-grey-text" @click="FilterOrderBy('updated_at', 'asc')"><a>Oldest</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('salary', 'asc')"><a>Salary: low to high</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('salary', 'desc')"><a>Salary: high to low</a></p>
+                        <p class="dark-grey-text" @click="FilterOrderBy('price', 'asc')"><a>Price: low to high</a></p>
+                        <p class="dark-grey-text" @click="FilterOrderBy('price', 'desc')"><a>Price: high to low</a></p>
                     </div>
 
                     <!-- Filter by category-->
@@ -39,93 +39,34 @@
                     </div>
                     <!-- /Filter by category-->
 
-                    <!-- Filter by experience level-->
+                    <!-- Filter by status -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Experience Level</strong></h5>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Status</strong></h5>
                         <div class="divider"></div>
 
-                        <fieldset id="experienceLevel">
+                        <fieldset id="status">
                             <!--Radio group-->
                             <div class="form-group ">
                                 <input name="experienceLevel" type="radio" id="experienceLevel0">
-                                <label for="experienceLevel0" class="dark-grey-text" @click="flush('experienceLevel')">All</label>
+                                <label for="experienceLevel0" class="dark-grey-text" @click="flush('status')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="experienceLevel in filters.expLevels">
-                                <input name="experienceLevel" type="radio" :id="'experienceLevel' + experienceLevel.id" :value="experienceLevel.id"
-                                       @click="fetchFilter('experienceLevel', experienceLevel.id)">
-                                <label :for="'experienceLevel' + experienceLevel.id" class="dark-grey-text">{{ experienceLevel.en_name }}</label>
-                            </div>
-                            <!--Radio group-->
-                        </fieldset>
-                    </div>
-                    <!-- /Filter by experience level-->
-
-                    <!-- Filter by employment type-->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Employment Type</strong></h5>
-                        <div class="divider"></div>
-
-                        <fieldset id="employmentType">
-                            <!--Radio group-->
-                            <div class="form-group ">
-                                <input name="employmentType" type="radio" id="employmentType0">
-                                <label for="employmentType0" class="dark-grey-text" @click="flush('employmentType')">All</label>
+                            <div class="form-group">
+                                <input name="experienceLevel" type="radio" id="statusNew" value="new"
+                                       @click="fetchFilter('status', 'new')">
+                                <label for="statusNew" class="dark-grey-text">New</label>
                             </div>
 
-                            <div class="form-group " v-for="employmentType in filters.empTypes">
-                                <input name="employmentType" type="radio" :id="'employmentType' + employmentType.id" :value="employmentType.id"
-                                       @click="fetchFilter('employmentType', employmentType.id)">
-                                <label :for="'employmentType' + employmentType.id" class="dark-grey-text">{{ employmentType.en_name }}</label>
+                            <div class="form-group">
+                                <input name="experienceLevel" type="radio" id="statusUsed" value="used"
+                                       @click="fetchFilter('status', 'used')">
+                                <label for="statusUsed" class="dark-grey-text">Used</label>
                             </div>
                             <!--Radio group-->
                         </fieldset>
                     </div>
-                    <!-- /Filter by employment type-->
+                    <!-- /Filter by status -->
 
-                    <!-- Filter by job ad type-->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Ad Type</strong></h5>
-                        <div class="divider"></div>
-
-                        <fieldset id="type">
-                            <!--Radio group-->
-                            <div class="form-group ">
-                                <input name="type" type="radio" id="type0">
-                                <label for="type0" class="dark-grey-text" @click="flush('type')">All</label>
-                            </div>
-
-                            <div class="form-group " v-for="type in filters.types">
-                                <input name="type" type="radio" :id="'type' + type.id" :value="type.id"
-                                       @click="fetchFilter('type', type.id)">
-                                <label :for="'type' + type.id" class="dark-grey-text">{{ type.en_name }}</label>
-                            </div>
-                            <!--Radio group-->
-                        </fieldset>
-                    </div>
-                    <!-- /Filter by job ad type-->
-
-                    <!-- Filter by education level-->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Education Level</strong></h5>
-                        <div class="divider"></div>
-
-                        <fieldset id="educationLevel">
-                            <!--Radio group-->
-                            <div class="form-group ">
-                                <input name="educationLevel" type="radio" id="educationLevel0">
-                                <label for="educationLevel0" class="dark-grey-text" @click="flush('educationLevel')">All</label>
-                            </div>
-
-                            <div class="form-group " v-for="educationLevel in filters.eduLevels">
-                                <input name="educationLevel" type="radio" :id="'educationLevel' + educationLevel.id" :value="educationLevel.id"
-                                       @click="fetchFilter('educationLevel', educationLevel.id)">
-                                <label :for="'educationLevel' + educationLevel.id" class="dark-grey-text">{{ educationLevel.en_name }}</label>
-                            </div>
-                            <!--Radio group-->
-                        </fieldset>
-                    </div>
-                    <!-- /Filter by education level-->
                 </div>
                 <!-- /Grid row -->
 
@@ -135,7 +76,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9" id="jobs">
+        <div class="col-lg-9" id="products">
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -149,49 +90,49 @@
             <!-- Filter Area -->
             <div class="row mb-0">
 
-                    <!--Dropdown primary-->
-                    <div class="dropdown">
-                        <!--Trigger-->
-                        <button class="btn btn-teal dropdown-toggle" type="button" id="RegionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ regionName }}</button>
+                <!--Dropdown primary-->
+                <div class="dropdown">
+                    <!--Trigger-->
+                    <button class="btn btn-teal dropdown-toggle" type="button" id="RegionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ regionName }}</button>
 
 
-                        <!--Menu-->
-                        <div class="dropdown-menu dropdown-default">
-                            <a class="dropdown-item" v-for="region in filters.regions" @click.prevent="regionId = region.id">{{ region.en_name }}</a>
-                        </div>
+                    <!--Menu-->
+                    <div class="dropdown-menu dropdown-default">
+                        <a class="dropdown-item" v-for="region in filters.regions" @click.prevent="regionId = region.id">{{ region.en_name }}</a>
                     </div>
+                </div>
 
-                    <!--Dropdown primary-->
-                    <div class="dropdown" v-if="region">
+                <!--Dropdown primary-->
+                <div class="dropdown" v-if="region">
 
-                        <!--Trigger-->
-                        <button class="btn btn-teal dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
+                    <!--Trigger-->
+                    <button class="btn btn-teal dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
 
 
-                        <!--Menu-->
-                        <div class="dropdown-menu dropdown-default">
-                            <a class="dropdown-item" v-for="city in region.cities" @click.prevent="cityId = city.id">{{ city.en_name }}</a>
-                        </div>
+                    <!--Menu-->
+                    <div class="dropdown-menu dropdown-default">
+                        <a class="dropdown-item" v-for="city in region.cities" @click.prevent="cityId = city.id">{{ city.en_name }}</a>
                     </div>
+                </div>
 
             </div>
             <!-- /.Filter Area -->
 
-            <!-- Job Ads Grid -->
-            <section class="section pt-4 jobAds" v-if="jobs != null">
+            <!-- Product Ads Grid -->
+            <section class="section pt-4 productAds" v-if="products != null">
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
 
                     <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 mb-4" v-for="job in jobs">
+                    <div class="col-lg-4 col-md-12 mb-4" v-for="product in products">
 
                         <!--Card-->
                         <div class="card card-ecommerce">
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img :src="job.img " class="img-fluid" alt="">
+                                <img :src="product.img " class="img-fluid" alt="">
                                 <a>
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -202,10 +143,10 @@
                             <div class="card-body">
                                 <!--Category & Title-->
 
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">{{ job.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">{{ job.type.en_name }}</span>
+                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">{{ product.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">{{ product.status.toUpperCase() }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
-                                    <li v-for="phone in job.phone" class="text-grey">
+                                    <li v-for="phone in product.phone" class="text-grey">
                                         <i class="fa fa-phone blue-text"></i> <strong class="teal-text">{{ phone }}</strong>
                                     </li>
 
@@ -216,11 +157,11 @@
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
                                     <div class="pull-left">
-                                        <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">{{ job.salary }} L.E</strong></p>
+                                        <p><strong class="p-2">{{ product.price }} L.E</strong></p>
                                     </div>
                                     <div class="pull-right">
                                         <div class="footer-address">
-                                        {{ job.created_at }}
+                                            {{ product.created_at }}
                                         </div>
                                     </div>
                                 </div>
@@ -292,13 +233,13 @@
                 </div>
                 <!--Grid row-->
             </section>
-            <!-- /.Job Ads Grid -->
+            <!-- /.Product Ads Grid -->
 
             <!-- Nothing Found -->
-            <section class="section pt-4" v-if="jobs == null">
+            <section class="section pt-4" v-if="products == null">
                 <div class="row">
                     <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                        No job found
+                        No products found
                     </div>
                 </div>
             </section>
@@ -333,23 +274,20 @@
 
 
 <script>
+
     export default {
         props: ['filters'],
         data () {
             return {
-                endpoint: '/api/job-ads/search',
-                jobs: {},
+                endpoint: '/api/product-ads/search',
+                products: {},
                 links: {},
                 pagination: {},
                 search: {
                     region: '',
                     city: '',
                     keyword: '',
-                    category: '',
-                    experienceLevel: '',
-                    employmentType: '',
-                    type: '',
-                    educationLevel: '',
+                    status: '',
                     orderBy: '',
                     sort: ''
                 },
@@ -361,44 +299,44 @@
             }
         },
         methods: {
-            fetchJobs(){
+            fetchProducts(){
                 let vm = this;
-                $('.jobAds').hide();
+                $('.productAds').hide();
                 $('.fetching').show();
                 axios.post(vm.endpoint, vm.search)
                     .then(function (response) {
                         $('.fetching').hide();
-                        $('.jobAds').show();
+                        $('.productAds').show();
                         if (typeof response.data.data !== 'undefined') {
                             let data = response.data;
-                            vm.jobs = data.data;
+                            vm.products = data.data;
                             vm.links = data.links;
                             vm.pagination = data.meta;
                             vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                         } else if(typeof response.status !== 'undefined') {
-                            vm.jobs = null;
+                            vm.products = null;
                             console.log(response.data.message)
                         }
 
-                });
+                    });
             },
             changeEndpoint(page) {
                 let url = this.pagination.path + '?page=' + page;
-                let jobDiv = document.getElementById('jobs');
-                jobDiv.scrollIntoView();
+                let productDiv = document.getElementById('products');
+                productDiv.scrollIntoView();
                 this.endpoint = url;
 
-                return this.fetchJobs();
+                return this.fetchProducts();
             },
             navigate(url){
                 this.endpoint = url;
-                return this.fetchJobs();
+                return this.fetchProducts();
             },
             fetchFilter($key, $value){
                 let vm = this;
                 vm.search[$key] = $value;
-                vm.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                vm.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
             flush($filter){
                 this.fetchFilter($filter, '')
@@ -407,17 +345,17 @@
                 let vm = this;
                 this.search.orderBy = $order;
                 this.search.sort = $sort;
-                vm.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                vm.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
             searchByKeyword: _.debounce(function () {
-                this.endpoint = '/api/job-ads/search';
-                this.fetchJobs()
-
+                this.endpoint = '/api/product-ads/search';
+                this.fetchProducts()
             }, 500)
+
         },
         mounted() {
-            this.fetchJobs();
+            this.fetchProducts();
         },
         watch: {
             regionId: function (val) {
@@ -427,15 +365,15 @@
                 this.region = region.shift();
                 this.regionName = this.region.en_name;
                 this.cityName = 'Choose Area';
-                this.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                this.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
                 this.cityName = city.en_name;
-                this.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                this.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
         }
     }
