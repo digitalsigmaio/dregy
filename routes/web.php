@@ -37,6 +37,8 @@ Route::middleware('language')->group(function () {
 
     Route::get('/product-ads', 'ProductAdController@index');
 
+    Route::get('/hospitals', 'HospitalController@index');
+
 
 
 

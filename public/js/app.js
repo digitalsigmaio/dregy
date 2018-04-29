@@ -14316,6 +14316,7 @@ Vue.component('top-clients', __webpack_require__(47));
 Vue.component('last-items', __webpack_require__(50));
 Vue.component('job-ads-list', __webpack_require__(53));
 Vue.component('product-ads-list', __webpack_require__(56));
+Vue.component('hospitals-list', __webpack_require__(79));
 
 Vue.component('passport-clients', __webpack_require__(59));
 
@@ -55682,18 +55683,14 @@ var render = function() {
             _c("fieldset", { attrs: { id: "status" } }, [
               _c("div", { staticClass: "form-group " }, [
                 _c("input", {
-                  attrs: {
-                    name: "experienceLevel",
-                    type: "radio",
-                    id: "experienceLevel0"
-                  }
+                  attrs: { name: "status", type: "radio", id: "status0" }
                 }),
                 _vm._v(" "),
                 _c(
                   "label",
                   {
                     staticClass: "dark-grey-text",
-                    attrs: { for: "experienceLevel0" },
+                    attrs: { for: "status0" },
                     on: {
                       click: function($event) {
                         _vm.flush("status")
@@ -55707,7 +55704,7 @@ var render = function() {
               _c("div", { staticClass: "form-group" }, [
                 _c("input", {
                   attrs: {
-                    name: "experienceLevel",
+                    name: "status",
                     type: "radio",
                     id: "statusNew",
                     value: "new"
@@ -55732,7 +55729,7 @@ var render = function() {
               _c("div", { staticClass: "form-group" }, [
                 _c("input", {
                   attrs: {
-                    name: "experienceLevel",
+                    name: "status",
                     type: "radio",
                     id: "statusUsed",
                     value: "used"
@@ -58344,6 +58341,1116 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(80)
+/* template */
+var __vue_template__ = __webpack_require__(81)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Hospitals.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4ca11f92", Component.options)
+  } else {
+    hotAPI.reload("data-v-4ca11f92", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 80 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['filters'],
+    data: function data() {
+        return {
+            endpoint: '/api/hospitals/search',
+            isFav: false,
+            hospitals: {},
+            links: {},
+            pagination: {},
+            search: {
+                region: '',
+                city: '',
+                keyword: '',
+                speciality: '',
+                orderBy: '',
+                sort: ''
+            },
+            regionId: null,
+            region: null,
+            regionName: 'Choose City',
+            cityId: null,
+            cityName: 'Choose Area',
+            mouseOver: false
+        };
+    },
+
+    methods: {
+        fetchHospitals: function fetchHospitals() {
+            var vm = this;
+            $('.hospitals').hide();
+            $('.fetching').show();
+            axios.post(vm.endpoint, vm.search).then(function (response) {
+                $('.fetching').hide();
+                $('.hospitals').show();
+                if (typeof response.data.data !== 'undefined') {
+                    var data = response.data;
+                    vm.hospitals = data.data;
+                    vm.links = data.links;
+                    vm.pagination = data.meta;
+                    vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                } else if (typeof response.status !== 'undefined') {
+                    vm.hospitals = null;
+                    console.log(response.data.message);
+                }
+            });
+        },
+        changeEndpoint: function changeEndpoint(page) {
+            var url = this.pagination.path + '?page=' + page;
+            var hospitalDiv = document.getElementById('hospitals');
+            hospitalDiv.scrollIntoView();
+            this.endpoint = url;
+
+            return this.fetchHospitals();
+        },
+        navigate: function navigate(url) {
+            this.endpoint = url;
+            return this.fetchHospitals();
+        },
+        fetchFilter: function fetchFilter($key, $value) {
+            var vm = this;
+            vm.search[$key] = $value;
+            vm.endpoint = '/api/hospitals/search';
+            this.fetchHospitals();
+        },
+        flush: function flush($filter) {
+            this.fetchFilter($filter, '');
+        },
+        FilterOrderBy: function FilterOrderBy($order, $sort) {
+            var vm = this;
+            this.search.orderBy = $order;
+            this.search.sort = $sort;
+            vm.endpoint = '/api/hospitals/search';
+            this.fetchHospitals();
+        },
+
+        searchByKeyword: _.debounce(function () {
+            this.endpoint = '/api/hospitals/search';
+            this.fetchHospitals();
+        }, 500),
+        round: function round(rate) {
+            return parseInt(Math.round(rate));
+        },
+        starColor: function starColor(n, rate) {
+            if (n <= this.round(rate)) {
+                return 'blue-text';
+            } else {
+                return 'grey-text';
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.fetchHospitals();
+    },
+
+    watch: {
+        regionId: function regionId(val) {
+            this.search.city = '';
+            this.search.region = val;
+            var region = this.filters.regions.filter(function (region) {
+                return region.id === val;
+            });
+            this.region = region.shift();
+            this.regionName = this.region.en_name;
+            this.cityName = 'Choose Area';
+            this.endpoint = '/api/hospitals/search';
+            this.fetchHospitals();
+        },
+        cityId: function cityId(val) {
+            this.search.city = val;
+            var city = this.region.cities.filter(function (city) {
+                return city.id === val;
+            }).shift();
+            this.cityName = city.en_name;
+            this.endpoint = '/api/hospitals/search';
+            this.fetchHospitals();
+        }
+    }
+});
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row pt-4" }, [
+    _c("div", { staticClass: "col-lg-3" }, [
+      _c("div", {}, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("updated_at", "desc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Newest")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("updated_at", "asc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Oldest")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("rate", "asc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Rate: low to high")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "dark-grey-text",
+                on: {
+                  click: function($event) {
+                    _vm.FilterOrderBy("rate", "desc")
+                  }
+                }
+              },
+              [_c("a", [_vm._v("Rate: high to low")])]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c(
+              "fieldset",
+              { attrs: { id: "category" } },
+              [
+                _c("div", { staticClass: "form-group " }, [
+                  _c("input", {
+                    attrs: {
+                      name: "speciality",
+                      type: "radio",
+                      id: "speciality0"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "dark-grey-text",
+                      attrs: { for: "speciality0" },
+                      on: {
+                        click: function($event) {
+                          _vm.flush("speciality")
+                        }
+                      }
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.filters.specialities, function(speciality) {
+                  return _c("div", { staticClass: "form-group " }, [
+                    _c("input", {
+                      attrs: {
+                        name: "speciality",
+                        type: "radio",
+                        id: "speciality" + speciality.id
+                      },
+                      domProps: { value: speciality.id },
+                      on: {
+                        click: function($event) {
+                          _vm.fetchFilter("speciality", speciality.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "dark-grey-text",
+                        attrs: { for: "speciality" + speciality.id }
+                      },
+                      [_vm._v(_vm._s(speciality.en_name))]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(2)
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-9", attrs: { id: "hospitals" } }, [
+      _c("div", { staticClass: "row mb-0" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "md-form form-lg" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search.keyword,
+                  expression: "search.keyword"
+                }
+              ],
+              staticClass: "form-control form-control-lg",
+              attrs: { type: "text", id: "keyword" },
+              domProps: { value: _vm.search.keyword },
+              on: {
+                keyup: _vm.searchByKeyword,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.search, "keyword", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "keyword" } }, [_vm._v("Search")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mb-0" }, [
+        _c("div", { staticClass: "dropdown" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-teal dropdown-toggle",
+              attrs: {
+                type: "button",
+                id: "RegionMenu",
+                "data-toggle": "dropdown",
+                "aria-haspopup": "true",
+                "aria-expanded": "false"
+              }
+            },
+            [_vm._v(_vm._s(_vm.regionName))]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "dropdown-menu dropdown-default" },
+            _vm._l(_vm.filters.regions, function(region) {
+              return _c(
+                "a",
+                {
+                  staticClass: "dropdown-item",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.regionId = region.id
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(region.en_name))]
+              )
+            })
+          )
+        ]),
+        _vm._v(" "),
+        _vm.region
+          ? _c("div", { staticClass: "dropdown" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-teal dropdown-toggle",
+                  attrs: {
+                    type: "button",
+                    id: "CityMenu",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.cityName))]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "dropdown-menu dropdown-default" },
+                _vm._l(_vm.region.cities, function(city) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-item",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.cityId = city.id
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(city.en_name))]
+                  )
+                })
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.hospitals != null
+        ? _c("section", { staticClass: "section pt-4 hospitals" }, [
+            _c(
+              "div",
+              { staticClass: "row", staticStyle: { "min-height": "100vh" } },
+              _vm._l(_vm.hospitals, function(hospital) {
+                return _c("div", { staticClass: "col-lg-12 col-md-12 mb-4" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card",
+                      class: { "z-depth-2": _vm.mouseOver == hospital.id },
+                      on: {
+                        mouseover: function($event) {
+                          _vm.mouseOver = hospital.id
+                        },
+                        mouseleave: function($event) {
+                          _vm.mouseOver = null
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "view overlay col-md-6" }, [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: { src: hospital.img, alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(3, true)
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body col-md-6" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("h5", { staticClass: "card-title mb-1" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-hospital red-text fa-2x pr-1 pb-1"
+                                }),
+                                _vm._v(" "),
+                                _c("strong", [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "dark-grey-text",
+                                      attrs: { href: "" }
+                                    },
+                                    [_vm._v(_vm._s(hospital.en_name))]
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "divider" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row mt-1" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c(
+                                "ul",
+                                { staticClass: "rating mt-1" },
+                                _vm._l(5, function(n) {
+                                  return _c("li", [
+                                    _c("i", {
+                                      staticClass: "fa fa-star cyan-text",
+                                      class: _vm.starColor(
+                                        n,
+                                        hospital.rate.value
+                                      )
+                                    })
+                                  ])
+                                })
+                              ),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "about" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fa fa-map-marker-alt cyan-text pr-1"
+                                }),
+                                _vm._v(_vm._s(hospital.en_address))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c("i", {
+                                  staticClass: "fas fa-at pr-1 cyan-text"
+                                }),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "light-grey-text text-sm-right"
+                                  },
+                                  [_vm._v(_vm._s(hospital.email))]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mt-1" }, [
+                                _c("i", {
+                                  staticClass: "fas fa-home pr-1 cyan-text"
+                                }),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "light-grey-text text-sm-right"
+                                  },
+                                  [_vm._v(_vm._s(hospital.website))]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mt-1" }, [
+                                _c("i", {
+                                  staticClass: "fas fa-heartbeat pr-1",
+                                  class: {
+                                    "pink-text": _vm.isFav,
+                                    "grey-text": !_vm.isFav
+                                  }
+                                }),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "light-green-text text-sm-right"
+                                  },
+                                  [_vm._v(_vm._s(hospital.favorites.count))]
+                                )
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              })
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center m-4" }, [
+              _c("nav", { staticClass: "mb-4" }, [
+                _c(
+                  "ul",
+                  { staticClass: "pagination pagination-circle pg-blue mb-0" },
+                  [
+                    _c(
+                      "li",
+                      { staticClass: "page-item clearfix d-none d-md-block" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "page-link waves-effect waves-effect",
+                            class: {
+                              disabled:
+                                _vm.endpoint == _vm.links.first ||
+                                _vm.endpoint == _vm.pagination.path
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.changeEndpoint(1)
+                              }
+                            }
+                          },
+                          [_vm._v("First")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link waves-effect waves-effect",
+                          class: { disabled: _vm.links.prev == null },
+                          attrs: { "aria-label": "Previous" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.navigate(_vm.links.prev)
+                            }
+                          }
+                        },
+                        [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v("«")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Previous")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.pagination.last_page, function(n) {
+                      return _c(
+                        "li",
+                        {
+                          staticClass: "page-item",
+                          class: { active: n == _vm.pagination.current_page }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "page-link waves-effect waves-effect",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.changeEndpoint(n)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(n))]
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link waves-effect waves-effect",
+                          class: { disabled: _vm.links.next == null },
+                          attrs: { "aria-label": "Next" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.navigate(_vm.links.next)
+                            }
+                          }
+                        },
+                        [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v("»")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Next")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "page-item clearfix d-none d-md-block" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "page-link waves-effect waves-effect",
+                            class: { disabled: _vm.endpoint == _vm.links.last },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.changeEndpoint(_vm.pagination.last_page)
+                              }
+                            }
+                          },
+                          [_vm._v("Last")]
+                        )
+                      ]
+                    )
+                  ],
+                  2
+                )
+              ])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.hospitals == null
+        ? _c("section", { staticClass: "section pt-4" }, [_vm._m(4)])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(5)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+      _c("strong", [_vm._v("Order By")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+      _c("strong", [_vm._v("Speciality")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 col-lg-12 mb-5" }, [
+      _c("h5", { staticClass: "font-weight-bold dark-grey-text" }, [
+        _c("strong", [_vm._v("Rating")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "divider" }),
+      _vm._v(" "),
+      _c("fieldset", { attrs: { id: "rating" } }, [
+        _c("div", { staticClass: "form-group " }, [
+          _c("input", {
+            attrs: { name: "rating", type: "radio", id: "rating0" }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "hidden", attrs: { for: "rating0" } }, [
+            _c("ul", { staticClass: "rating inline-ul" }, [
+              _c("li", [_c("i", { staticClass: "fa fa-star blue-text" })]),
+              _vm._v(" "),
+              _c("li", [_c("i", { staticClass: "fa fa-star blue-text" })]),
+              _vm._v(" "),
+              _c("li", [_c("i", { staticClass: "fa fa-star blue-text" })]),
+              _vm._v(" "),
+              _c("li", [_c("i", { staticClass: "fa fa-star blue-text" })]),
+              _vm._v(" "),
+              _c("li", [_c("i", { staticClass: "fa fa-star grey-text" })])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [_c("div", { staticClass: "mask rgba-white-slight" })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        {
+          staticClass: "col-12 text-center text-muted",
+          staticStyle: { "font-size": "72px", "font-family": "Raleway" }
+        },
+        [_vm._v("\n                    No hospitals found\n                ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "section pt-4 fetching" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "preloader-wrapper big active crazy m-auto" },
+          [
+            _c("div", { staticClass: "spinner-layer spinner-blue-only" }, [
+              _c("div", { staticClass: "circle-clipper left" }, [
+                _c("div", { staticClass: "circle" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "gap-patch" }, [
+                _c("div", { staticClass: "circle" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "circle-clipper right" }, [
+                _c("div", { staticClass: "circle" })
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4ca11f92", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
