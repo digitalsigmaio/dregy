@@ -35,6 +35,8 @@ Route::middleware('language')->group(function () {
 
     Route::get('/job-ads', 'JobAdController@index');
 
+    Route::get('/product-ads', 'ProductAdController@index');
+
 
 
 

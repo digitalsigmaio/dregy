@@ -2,6 +2,6 @@
 
 @section('content')
 
-   <job-ads-list :regions="{{ $regions }}"></job-ads-list>
+   <job-ads-list :filters="{{ $filtersJson }}"></job-ads-list>
 
 @endsection

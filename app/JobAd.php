@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\CollectionPagination;
+use Zend\Diactoros\Request;
 
 class JobAd extends Model
 {
@@ -102,37 +103,48 @@ class JobAd extends Model
             'views',
             'premium'
         ])
-            ->when($region != '', function ($query) use ($region) {
+            ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);
             })
-            ->when($city != '', function ($query) use ($city) {
+            ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
-            ->when($keyword != '', function ($query) use ($keyword) {
+            ->when($keyword, function ($query) use ($keyword) {
                 return $query->where('title', 'like',  "%$keyword%")
                     ->orWhere('description', 'like', "%$keyword%");
             })
-            ->when($category != '', function ($query) use ($category) {
+            ->when($category, function ($query) use ($category) {
                 return $query->where('job_ad_category_id', $category);
             })
-            ->when($experienceLevel != '', function ($query) use ($experienceLevel) {
+            ->when($experienceLevel, function ($query) use ($experienceLevel) {
                 return $query->where('job_experience_level_id', $experienceLevel);
             })
-            ->when($employmentType != '', function ($query) use ($employmentType) {
+            ->when($employmentType, function ($query) use ($employmentType) {
                 return $query->where('job_employment_type_id', $employmentType);
             })
-            ->when($type != '', function ($query) use ($type) {
+            ->when($type, function ($query) use ($type) {
                 return $query->where('job_type_id', $type);
             })
-            ->when($educationLevel != '', function ($query) use ($educationLevel) {
+            ->when($educationLevel, function ($query) use ($educationLevel) {
                 return $query->where('job_education_level_id', $educationLevel);
             })
-            ->when($orderBy != '', function ($query) use ($orderBy, $sort) {
-                return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
+            ->when($orderBy, function ($query) use ($orderBy, $sort) {
+                if ($orderBy == 'salary'){
+                    return $query->orderByRaw("length($orderBy) $sort, $orderBy $sort");
+                } else {
+                    return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
+                }
             })
-            ->paginate(12);
+            ->orderBy('job_ads.updated_at', 'DESC')
+            ->get();
 
-        return $data;
+        if ($orderBy){
+            $sorted = $data;
+        } else {
+            $sorted = $data->sortBy('premium.priority');
+        }
+
+        return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 
 
