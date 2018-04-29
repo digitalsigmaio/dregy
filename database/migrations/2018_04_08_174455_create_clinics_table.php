@@ -9,7 +9,6 @@ class CreateClinicsTable extends Migration
     /**
      * Run the migrations.
      *
-     * @todo medical centers structure
      * @return void
      */
     public function up()
