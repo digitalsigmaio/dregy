@@ -120,53 +120,53 @@
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
-
                     <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 mb-4" v-for="product in products">
+                    <div class="col-lg-4 col-md-6 mb-4" v-for="product in products">
+                                        <!--Card-->
+                                        <div class="card card-cascade narrower card-ecommerce">
+                                            <!--Card image-->
+                                            <div class="view overlay">
+                                                <img :src="product.img" class="card-img-top" alt="sample photo">
+                                                <a>
+                                                    <div class="mask rgba-white-slight"></div>
+                                                </a>
+                                                </div>
+                                                <!--Card image-->
+                                                <!--Card content-->
+                                                <div class="card-body text-center">
+                                                    <!--Category & Title-->
+                                                    <a href="" class="grey-text">
+                                                        <h5>{{ product.category.en_name }}</h5>
+                                                    </a>
+                                                    <h4 class="card-title">
+                                                        <strong>
+                                                            <a href="">{{ product.title }}</a>
+                                                        </strong>
+                                                    </h4>
 
-                        <!--Card-->
-                        <div class="card card-ecommerce">
+                                                    <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">{{ product.status.toUpperCase() }}</span>
 
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img :src="product.img " class="img-fluid" alt="">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
-
-                            <!--Card content-->
-                            <div class="card-body">
-                                <!--Category & Title-->
-
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">{{ product.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">{{ product.status.toUpperCase() }}</span>
-                                <!-- Rating -->
-                                <ul class="rating">
-                                    <li v-for="phone in product.phone" class="text-grey">
-                                        <i class="fa fa-phone blue-text"></i> <strong class="teal-text">{{ phone }}</strong>
-                                    </li>
-
-                                </ul>
-
-                                <!--Card footer-->
-                                <div class="card-footer pb-0">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <p><i class="fas fa-shopping-cart"></i>  <strong class="p-2">{{ product.price }} L.E</strong></p>
-                                        </div>
-                                        <div class="col-md-5 pt-1">
-                                            <div class="footer-address">
-                                                {{ product.created_at }}
+                                                    <!--Description-->
+                                                    <p class="card-text">
+                                                        {{ product.description }}
+                                                    </p>
+                                                    <!--Card footer-->
+                                                    <div class="card-footer">
+                                                    <span class="float-left font-weight-bold">
+                                                      <strong>{{ product.price }} L.E</strong>
+                                                    </span>
+                                                    <span class="float-right">
+                                                      <a data-toggle="tooltip" data-placement="top" title="Share">
+                                                        <i class="fa fa-share-alt grey-text ml-3"></i>
+                                                      </a>
+                                                      <a data-toggle="tooltip" data-placement="top" title="Added to Favorite">
+                                                        <i class="fa fa-heart ml-3"></i>
+                                                      </a>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                                <!--Card content-->
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!--Card content-->
-
-                        </div>
                         <!--Card-->
 
                     </div>

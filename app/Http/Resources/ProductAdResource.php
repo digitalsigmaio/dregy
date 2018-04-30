@@ -23,7 +23,7 @@ class ProductAdResource extends JsonResource
             'status' => $this->status,
             'price' => $this->price,
             'ref_id' => $this->ref_id,
-            'category_id'=> $this->product_ad_category_id,
+            'category' => $this->category,
             'region' => $this->region,
             'city' => $this->city,
             'address' => $this->address,

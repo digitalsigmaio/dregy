@@ -55955,81 +55955,73 @@ var render = function() {
               "div",
               { staticClass: "row", staticStyle: { "min-height": "100vh" } },
               _vm._l(_vm.products, function(product) {
-                return _c("div", { staticClass: "col-lg-4 col-md-12 mb-4" }, [
-                  _c("div", { staticClass: "card card-ecommerce" }, [
-                    _c("div", { staticClass: "view overlay" }, [
-                      _c("img", {
-                        staticClass: "img-fluid",
-                        attrs: { src: product.img, alt: "" }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(3, true)
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title mb-1" }, [
-                        _c("strong", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dark-grey-text",
-                              attrs: { href: "" }
-                            },
-                            [_vm._v(_vm._s(product.title))]
-                          )
-                        ])
+                return _c("div", { staticClass: "col-lg-4 col-md-6 mb-4" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card card-cascade narrower card-ecommerce"
+                    },
+                    [
+                      _c("div", { staticClass: "view overlay" }, [
+                        _c("img", {
+                          staticClass: "card-img-top",
+                          attrs: { src: product.img, alt: "sample photo" }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(3, true)
                       ]),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "badge mb-2 p-2",
-                          class: {
-                            "badge-success": product.status == "new",
-                            "badge-warning": product.status == "used"
-                          }
-                        },
-                        [_vm._v(_vm._s(product.status.toUpperCase()))]
-                      ),
                       _vm._v(" "),
-                      _c(
-                        "ul",
-                        { staticClass: "rating" },
-                        _vm._l(product.phone, function(phone) {
-                          return _c("li", { staticClass: "text-grey" }, [
-                            _c("i", { staticClass: "fa fa-phone blue-text" }),
-                            _vm._v(" "),
-                            _c("strong", { staticClass: "teal-text" }, [
-                              _vm._v(_vm._s(phone))
+                      _c("div", { staticClass: "card-body text-center" }, [
+                        _c(
+                          "a",
+                          { staticClass: "grey-text", attrs: { href: "" } },
+                          [_c("h5", [_vm._v(_vm._s(product.category.en_name))])]
+                        ),
+                        _vm._v(" "),
+                        _c("h4", { staticClass: "card-title" }, [
+                          _c("strong", [
+                            _c("a", { attrs: { href: "" } }, [
+                              _vm._v(_vm._s(product.title))
                             ])
                           ])
-                        })
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-footer pb-0" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-md-7" }, [
-                            _c("p", [
-                              _c("i", { staticClass: "fas fa-shopping-cart" }),
-                              _vm._v(" "),
-                              _c("strong", { staticClass: "p-2" }, [
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "badge mb-2 p-2",
+                            class: {
+                              "badge-success": product.status == "new",
+                              "badge-warning": product.status == "used"
+                            }
+                          },
+                          [_vm._v(_vm._s(product.status.toUpperCase()))]
+                        ),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "\n                                                    " +
+                              _vm._s(product.description) +
+                              "\n                                                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-footer" }, [
+                          _c(
+                            "span",
+                            { staticClass: "float-left font-weight-bold" },
+                            [
+                              _c("strong", [
                                 _vm._v(_vm._s(product.price) + " L.E")
                               ])
-                            ])
-                          ]),
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-md-5 pt-1" }, [
-                            _c("div", { staticClass: "footer-address" }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(product.created_at) +
-                                  "\n                                        "
-                              )
-                            ])
-                          ])
+                          _vm._m(4, true)
                         ])
                       ])
-                    ])
-                  ])
+                    ]
+                  )
                 ])
               })
             ),
@@ -56172,10 +56164,10 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.products == null
-        ? _c("section", { staticClass: "section pt-4" }, [_vm._m(4)])
+        ? _c("section", { staticClass: "section pt-4" }, [_vm._m(5)])
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(6)
     ])
   ])
 }
@@ -56209,6 +56201,36 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("a", [_c("div", { staticClass: "mask rgba-white-slight" })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "float-right" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            "data-toggle": "tooltip",
+            "data-placement": "top",
+            title: "Share"
+          }
+        },
+        [_c("i", { staticClass: "fa fa-share-alt grey-text ml-3" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          attrs: {
+            "data-toggle": "tooltip",
+            "data-placement": "top",
+            title: "Added to Favorite"
+          }
+        },
+        [_c("i", { staticClass: "fa fa-heart ml-3" })]
+      )
+    ])
   },
   function() {
     var _vm = this

@@ -22,7 +22,7 @@ class ProductAd extends Model
 
     public function category()
     {
-        return $this->belongsTo(ProductAdCategory::class);
+        return $this->belongsTo(ProductAdCategory::class, 'product_ad_category_id');
     }
 
     public function favorites()
