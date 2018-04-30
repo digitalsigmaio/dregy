@@ -28,9 +28,12 @@ Route::middleware('language')->group(function () {
         return view('landing', compact(['hospitals', 'pharmacies', 'clinics']));
     });
 
+
     Route::get('/job-ads', 'JobAdController@index');
 
     Route::get('/product-ads', 'ProductAdController@index');
+
+
 
 
 
@@ -42,6 +45,9 @@ Route::middleware('language')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/job-ads', 'JobAdController@index')->name('home');
     Auth::routes();
+    Route::get('/comingsoon', function () {
+        return view('comingsoon');
+    });
 
 
 
