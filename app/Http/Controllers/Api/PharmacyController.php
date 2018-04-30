@@ -86,4 +86,17 @@ class PharmacyController extends Controller
             ], 403);
         }
     }
+
+    public function search(Request $request)
+    {
+        $pharmacies = Pharmacy::fetch($request);
+
+        if (count($pharmacies)) {
+            return new PharmacyCollection($pharmacies);
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ]);
+        }
+    }
 }

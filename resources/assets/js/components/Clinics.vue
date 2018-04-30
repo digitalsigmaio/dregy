@@ -16,13 +16,13 @@
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'asc')"><a>Rate: low to high</a></p>
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'desc')"><a>Rate: high to low</a></p>
                     </div>
-
-                    <!-- Filter by category-->
+                    
+                    <!-- Filter by speciality -->
                     <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Speciality</strong></h5>
                         <div class="divider"></div>
 
-                        <fieldset id="category">
+                        <fieldset id="speciality">
                             <!--Radio group-->
                             <div class="form-group mb-1">
                                 <input name="speciality" type="radio" id="speciality0">
@@ -37,7 +37,29 @@
                             <!--Radio group-->
                         </fieldset>
                     </div>
-                    <!-- /Filter by category-->
+                    <!-- /Filter by speciality -->
+
+                    <!-- Filter by degree -->
+                    <div class="col-md-6 col-lg-12 mb-4">
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Degree</strong></h5>
+                        <div class="divider"></div>
+
+                        <fieldset id="degree">
+                            <!--Radio group-->
+                            <div class="form-group mb-1">
+                                <input name="degree" type="radio" id="degree0">
+                                <label for="degree0" class="dark-grey-text" @click="flush('degree')">All</label>
+                            </div>
+
+                            <div class="form-group mb-1" v-for="degree in filters.degrees">
+                                <input name="degree" type="radio" :id="'degree' + degree.id" :value="degree.id"
+                                       @click="fetchFilter('degree', degree.id)">
+                                <label :for="'degree' + degree.id" class="dark-grey-text">{{ degree.en_name }}</label>
+                            </div>
+                            <!--Radio group-->
+                        </fieldset>
+                    </div>
+                    <!-- /Filter by degree -->
 
                     <!-- Filter by rate -->
                     <div class="col-md-6 col-lg-12 mb-4">
@@ -190,7 +212,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-md-10" id="hospitals">
+        <div class="col-md-10" id="clinics">
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -230,21 +252,21 @@
             <!-- /.Address Area -->
 
             <!-- Hospitals Grid -->
-            <section class="section pt-4 hospitals" v-if="hospitals != null">
+            <section class="section pt-4 clinics" v-if="clinics != null">
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
 
                     <!--Grid column-->
-                    <div class="col-md-12 mb-4" v-for="hospital in hospitals" >
+                    <div class="col-md-12 mb-4" v-for="clinic in clinics" >
 
                         <!--Card-->
-                        <div class="card" :class="{ 'z-depth-2' : mouseOver == hospital.id }" v-on:mouseover="mouseOver = hospital.id" v-on:mouseleave="mouseOver = null">
+                        <div class="card" :class="{ 'z-depth-2' : mouseOver == clinic.id }" v-on:mouseover="mouseOver = clinic.id" v-on:mouseleave="mouseOver = null">
 
                             <div class="row">
                                 <!--Card image-->
                                 <div class="view overlay col-md-6">
-                                    <img :src="hospital.img" class="img-fluid" alt="">
+                                    <img :src="clinic.img" class="img-fluid" alt="">
                                     <a>
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -258,10 +280,10 @@
                                    <div class="row">
 
                                            <div class="col-md-9">
-                                               <h5 class="card-title mb-1"><i class="fas fa-hospital red-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ hospital.en_name }}</a></strong></h5>
+                                               <h5 class="card-title mb-1"><i class="fas fa-user-md blue-text fa-2x pr-2"></i> <strong><a href="" class="dark-grey-text">{{ clinic.en_name }}</a></strong></h5>
                                            </div>
                                            <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                           </i><span class="light-green-text text-sm-right">{{ hospital.favorites.count }}</span>
+                                           </i><span class="light-green-text text-sm-right">{{ clinic.favorites.count }}</span>
                                            </div>
 
                                    </div>
@@ -271,18 +293,18 @@
 
                                             <ul class="rating mt-1">
                                                 <li v-for="n in 5">
-                                                    <i class="fa fa-star cyan-text" :class="starColor(n, hospital.rate.value)"></i>
+                                                    <i class="fa fa-star cyan-text" :class="starColor(n, clinic.rate.value)"></i>
                                                 </li>
                                             </ul>
                                             <!-- Rating -->
-                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ hospital.en_address }}</p>
+                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ clinic.en_address }}</p>
 
                                             <p><i class="fas fa-at pr-1 cyan-text">
-                                            </i><span class="light-grey-text ">{{ hospital.email }}</span>
+                                            </i><span class="light-grey-text ">{{ clinic.email }}</span>
                                             </p>
 
                                             <p><i class="fas fa-home pr-1 cyan-text">
-                                            </i><span class="light-grey-text">{{ hospital.website }}</span>
+                                            </i><span class="light-grey-text">{{ clinic.website }}</span>
                                             </p>
 
                                         </div>
@@ -360,10 +382,10 @@
             <!-- /.Hospitals Grid -->
 
             <!-- Nothing Found -->
-            <section class="section pt-4 hospitals" v-if="hospitals == null">
+            <section class="section pt-4 clinics" v-if="clinics == null">
                 <div class="row">
                     <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                        No hospital found
+                        No clinic found
                     </div>
                 </div>
             </section>
@@ -403,9 +425,9 @@
         props: ['filters'],
         data () {
             return {
-                endpoint: '/api/hospitals/search',
+                endpoint: '/api/clinics/search',
                 isFav: false,
-                hospitals: {},
+                clinics: {},
                 links: {},
                 pagination: {},
                 search: {
@@ -413,6 +435,7 @@
                     city: '',
                     keyword: '',
                     speciality: '',
+                    degree: '',
                     orderBy: '',
                     sort: '',
                     rate: ''
@@ -426,22 +449,22 @@
             }
         },
         methods: {
-            fetchHospitals(){
+            fetchClinics(){
                 let vm = this;
-                $('.hospitals').hide();
+                $('.clinics').hide();
                 $('.fetching').show();
                 axios.post(vm.endpoint, vm.search)
                     .then(function (response) {
                         $('.fetching').hide();
-                        $('.hospitals').show();
+                        $('.clinics').show();
                         if (typeof response.data.data !== 'undefined') {
                             let data = response.data;
-                            vm.hospitals = data.data;
+                            vm.clinics = data.data;
                             vm.links = data.links;
                             vm.pagination = data.meta;
                             vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                         } else if (typeof response.status !== 'undefined') {
-                            vm.hospitals = null;
+                            vm.clinics = null;
                             console.log(response.data.message)
                         }
 
@@ -452,21 +475,21 @@
             },
             changeEndpoint(page) {
                 let url = this.pagination.path + '?page=' + page;
-                let hospitalDiv = document.getElementById('hospitals');
-                hospitalDiv.scrollIntoView();
+                let clinicDiv = document.getElementById('clinics');
+                clinicDiv.scrollIntoView();
                 this.endpoint = url;
 
-                return this.fetchHospitals();
+                return this.fetchClinics();
             },
             navigate(url){
                 this.endpoint = url;
-                return this.fetchHospitals();
+                return this.fetchClinics();
             },
             fetchFilter($key, $value){
                 let vm = this;
                 vm.search[$key] = $value;
-                vm.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                vm.endpoint = '/api/clinics/search';
+                this.fetchClinics();
             },
             flush($filter){
                 if ($filter === 'region') {
@@ -482,12 +505,12 @@
                 let vm = this;
                 this.search.orderBy = $order;
                 this.search.sort = $sort;
-                vm.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                vm.endpoint = '/api/clinics/search';
+                this.fetchClinics();
             },
             searchByKeyword: _.debounce(function () {
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals()
+                this.endpoint = '/api/clinics/search';
+                this.fetchClinics()
             }, 500),
             round(rate) {
                 return parseInt(Math.round(rate));
@@ -500,12 +523,12 @@
                 }
             },
             filterByRate: _.debounce(function () {
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals()
+                this.endpoint = '/api/clinics/search';
+                this.fetchClinics()
             }, 100),
         },
         mounted() {
-            this.fetchHospitals();
+            this.fetchClinics();
         },
         watch: {
             regionId: function (val) {
@@ -515,15 +538,15 @@
                 this.region = region.shift();
                 this.regionName = this.region.en_name;
                 this.cityName = 'Choose Area';
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.endpoint = '/api/clinics/search';
+                this.fetchClinics();
             },
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
                 this.cityName = city.en_name;
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.endpoint = '/api/clinics/search';
+                this.fetchClinics();
             },
         }
     }

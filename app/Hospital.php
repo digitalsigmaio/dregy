@@ -51,7 +51,6 @@ class Hospital extends Model
         return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as total_rate');
     }
 
-
     public function phoneNumbers()
     {
         return $this->morphMany(PhoneNumber::class, 'phonable');
@@ -122,7 +121,7 @@ class Hospital extends Model
             })
             ->when($rate, function ($query) use ($rate) {
                 return $query->whereHas('rates', function ($query) use ($rate) {
-                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id), 1) >= ' . $rate);
+                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rate);
                 });
             })
             ->when($speciality, function ($query) use ($speciality) {
@@ -148,7 +147,7 @@ class Hospital extends Model
         } else {
             $sorted = $data->sortBy('premium.priority');
         }
-        return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
+        return self::paginate($sorted, 10, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 
 }

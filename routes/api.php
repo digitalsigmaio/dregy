@@ -67,6 +67,7 @@ Route::post('/pharmacies/{pharmacy}/users/{id}/fav', 'Api\PharmacyController@fav
 Route::delete('/pharmacies/{pharmacy}/users/{id}/fav', 'Api\PharmacyController@unfav');
 Route::post('/pharmacies/{pharmacy}/users/{id}/rate', 'Api\PharmacyController@storeRate');
 Route::post('/pharmacies/{pharmacy}/view', 'Api\PharmacyController@view');
+Route::post('/pharmacies/search', 'Api\PharmacyController@search');
 
 
 // Job Ad

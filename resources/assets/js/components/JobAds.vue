@@ -2,34 +2,34 @@
     <div class="row pt-4">
 
         <!-- Sidebar -->
-        <div class="col-lg-3">
+        <div class="col-md-2">
 
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h5>
                         <div class="divider"></div>
-                        <p class="dark-grey-text" @click="FilterOrderBy('updated_at', 'desc')"><a>Newest</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('updated_at', 'asc')"><a>Oldest</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('salary', 'asc')"><a>Salary: low to high</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('salary', 'desc')"><a>Salary: high to low</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('updated_at', 'desc')"><a>Newest</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('updated_at', 'asc')"><a>Oldest</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('salary', 'asc')"><a>Salary: low to high</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('salary', 'desc')"><a>Salary: high to low</a></p>
                     </div>
 
                     <!-- Filter by category-->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="category">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="category" type="radio" id="category0">
                                 <label for="category0" class="dark-grey-text" @click="flush('category')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="category in filters.categories">
+                            <div class="form-group mb-1" v-for="category in filters.categories">
                                 <input name="category" type="radio" :id="'category' + category.id" :value="category.id"
                                        @click="fetchFilter('category', category.id)">
                                 <label :for="'category' + category.id" class="dark-grey-text">{{ category.en_name }}</label>
@@ -40,18 +40,18 @@
                     <!-- /Filter by category-->
 
                     <!-- Filter by experience level-->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Experience Level</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="experienceLevel">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="experienceLevel" type="radio" id="experienceLevel0">
                                 <label for="experienceLevel0" class="dark-grey-text" @click="flush('experienceLevel')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="experienceLevel in filters.expLevels">
+                            <div class="form-group mb-1" v-for="experienceLevel in filters.expLevels">
                                 <input name="experienceLevel" type="radio" :id="'experienceLevel' + experienceLevel.id" :value="experienceLevel.id"
                                        @click="fetchFilter('experienceLevel', experienceLevel.id)">
                                 <label :for="'experienceLevel' + experienceLevel.id" class="dark-grey-text">{{ experienceLevel.en_name }}</label>
@@ -62,18 +62,18 @@
                     <!-- /Filter by experience level-->
 
                     <!-- Filter by employment type-->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Employment Type</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="employmentType">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="employmentType" type="radio" id="employmentType0">
                                 <label for="employmentType0" class="dark-grey-text" @click="flush('employmentType')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="employmentType in filters.empTypes">
+                            <div class="form-group mb-1" v-for="employmentType in filters.empTypes">
                                 <input name="employmentType" type="radio" :id="'employmentType' + employmentType.id" :value="employmentType.id"
                                        @click="fetchFilter('employmentType', employmentType.id)">
                                 <label :for="'employmentType' + employmentType.id" class="dark-grey-text">{{ employmentType.en_name }}</label>
@@ -84,18 +84,18 @@
                     <!-- /Filter by employment type-->
 
                     <!-- Filter by job ad type-->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Ad Type</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="type">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="type" type="radio" id="type0">
                                 <label for="type0" class="dark-grey-text" @click="flush('type')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="type in filters.types">
+                            <div class="form-group mb-1" v-for="type in filters.types">
                                 <input name="type" type="radio" :id="'type' + type.id" :value="type.id"
                                        @click="fetchFilter('type', type.id)">
                                 <label :for="'type' + type.id" class="dark-grey-text">{{ type.en_name }}</label>
@@ -106,18 +106,18 @@
                     <!-- /Filter by job ad type-->
 
                     <!-- Filter by education level-->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Education Level</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="educationLevel">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="educationLevel" type="radio" id="educationLevel0">
                                 <label for="educationLevel0" class="dark-grey-text" @click="flush('educationLevel')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="educationLevel in filters.eduLevels">
+                            <div class="form-group mb-1" v-for="educationLevel in filters.eduLevels">
                                 <input name="educationLevel" type="radio" :id="'educationLevel' + educationLevel.id" :value="educationLevel.id"
                                        @click="fetchFilter('educationLevel', educationLevel.id)">
                                 <label :for="'educationLevel' + educationLevel.id" class="dark-grey-text">{{ educationLevel.en_name }}</label>
@@ -140,42 +140,39 @@
             <div class="row mb-0">
                 <div class="col-md-6">
                     <!-- Search -->
-                    <div class="md-form form-lg">
+                    <div class="md-form form-lg ml-1">
                         <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="searchByKeyword">
                         <label for="keyword">Search</label>
                     </div>
                 </div>
             </div>
-            <!-- Filter Area -->
+            <!-- Address Area -->
             <div class="row mb-0">
-
-                    <!--Dropdown primary-->
-                    <div class="dropdown">
-                        <!--Trigger-->
-                        <button class="btn btn-teal dropdown-toggle" type="button" id="RegionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ regionName }}</button>
-
-
-                        <!--Menu-->
-                        <div class="dropdown-menu dropdown-default">
-                            <a class="dropdown-item" v-for="region in filters.regions" @click.prevent="regionId = region.id">{{ region.en_name }}</a>
-                        </div>
+                <!--Dropdown primary-->
+                <div class="dropdown ml-2">
+                    <!--Trigger-->
+                    <button class="btn btn-info dropdown-toggle" type="button" id="RegionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ regionName }}</button>
+                    <!--Menu-->
+                    <div class="dropdown-menu dropdown-info">
+                        <a class="dropdown-item" @click.prevent="flush('region')">All</a>
+                        <a class="dropdown-item" v-for="region in filters.regions" @click.prevent="regionId = region.id">{{ region.en_name }}</a>
                     </div>
+                </div>
 
-                    <!--Dropdown primary-->
-                    <div class="dropdown" v-if="region">
+                <!--Dropdown Secondary-->
+                <div class="dropdown ml-1" v-if="region">
+                    <!--Trigger-->
+                    <button class="btn blue-gradient dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
 
-                        <!--Trigger-->
-                        <button class="btn btn-teal dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
-
-
-                        <!--Menu-->
-                        <div class="dropdown-menu dropdown-default">
-                            <a class="dropdown-item" v-for="city in region.cities" @click.prevent="cityId = city.id">{{ city.en_name }}</a>
-                        </div>
+                    <!--Menu-->
+                    <div class="dropdown-menu dropdown-info">
+                        <a class="dropdown-item" @click.prevent="flush('city')">All</a>
+                        <a class="dropdown-item" v-for="city in region.cities" @click.prevent="cityId = city.id">{{ city.en_name }}</a>
                     </div>
+                </div>
 
             </div>
-            <!-- /.Filter Area -->
+            <!-- /.Address Area -->
 
             <!-- Job Ads Grid -->
             <section class="section pt-4 jobAds" v-if="jobs != null">
@@ -215,12 +212,14 @@
 
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
-                                    <div class="pull-left">
-                                        <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">{{ job.salary }} L.E</strong></p>
-                                    </div>
-                                    <div class="pull-right">
-                                        <div class="footer-address">
-                                        {{ job.created_at }}
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">{{ job.salary }} L.E</strong></p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="footer-address">
+                                                {{ job.created_at }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -401,6 +400,13 @@
                 this.fetchJobs();
             },
             flush($filter){
+                if ($filter === 'region') {
+                    this.regionName = 'Choose City';
+                    this.regionId = '';
+                } else if($filter === 'city') {
+                    this.cityName = 'Choose Area';
+                    this.cityId = '';
+                }
                 this.fetchFilter($filter, '')
             },
             FilterOrderBy($order, $sort) {

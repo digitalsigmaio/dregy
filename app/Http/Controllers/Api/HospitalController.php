@@ -112,7 +112,7 @@ class HospitalController extends Controller
         } else {
             return response()->json([
                 'message' => 'Nothing found'
-            ], 404);
+            ]);
         }
     }
 }

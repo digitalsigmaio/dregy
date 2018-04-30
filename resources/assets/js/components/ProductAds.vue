@@ -7,29 +7,29 @@
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h5>
                         <div class="divider"></div>
-                        <p class="dark-grey-text" @click="FilterOrderBy('updated_at', 'desc')"><a>Newest</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('updated_at', 'asc')"><a>Oldest</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('price', 'asc')"><a>Price: low to high</a></p>
-                        <p class="dark-grey-text" @click="FilterOrderBy('price', 'desc')"><a>Price: high to low</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('updated_at', 'desc')"><a>Newest</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('updated_at', 'asc')"><a>Oldest</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('price', 'asc')"><a>Price: low to high</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('price', 'desc')"><a>Price: high to low</a></p>
                     </div>
 
                     <!-- Filter by category-->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="category">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="category" type="radio" id="category0">
                                 <label for="category0" class="dark-grey-text" @click="flush('category')">All</label>
                             </div>
 
-                            <div class="form-group " v-for="category in filters.categories">
+                            <div class="form-group mb-1" v-for="category in filters.categories">
                                 <input name="category" type="radio" :id="'category' + category.id" :value="category.id"
                                        @click="fetchFilter('category', category.id)">
                                 <label :for="'category' + category.id" class="dark-grey-text">{{ category.en_name }}</label>
@@ -40,24 +40,24 @@
                     <!-- /Filter by category-->
 
                     <!-- Filter by status -->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Status</strong></h5>
                         <div class="divider"></div>
 
                         <fieldset id="status">
                             <!--Radio group-->
-                            <div class="form-group ">
+                            <div class="form-group mb-1">
                                 <input name="status" type="radio" id="status0">
                                 <label for="status0" class="dark-grey-text" @click="flush('status')">All</label>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-1">
                                 <input name="status" type="radio" id="statusNew" value="new"
                                        @click="fetchFilter('status', 'new')">
                                 <label for="statusNew" class="dark-grey-text">New</label>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-1">
                                 <input name="status" type="radio" id="statusUsed" value="used"
                                        @click="fetchFilter('status', 'used')">
                                 <label for="statusUsed" class="dark-grey-text">Used</label>
@@ -81,42 +81,39 @@
             <div class="row mb-0">
                 <div class="col-md-6">
                     <!-- Search -->
-                    <div class="md-form form-lg">
+                    <div class="md-form form-lg ml-1">
                         <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="searchByKeyword">
                         <label for="keyword">Search</label>
                     </div>
                 </div>
             </div>
-            <!-- Filter Area -->
+            <!-- Address Area -->
             <div class="row mb-0">
-
                 <!--Dropdown primary-->
-                <div class="dropdown">
+                <div class="dropdown ml-2">
                     <!--Trigger-->
-                    <button class="btn btn-teal dropdown-toggle" type="button" id="RegionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ regionName }}</button>
-
-
+                    <button class="btn btn-info dropdown-toggle" type="button" id="RegionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ regionName }}</button>
                     <!--Menu-->
-                    <div class="dropdown-menu dropdown-default">
+                    <div class="dropdown-menu dropdown-info">
+                        <a class="dropdown-item" @click.prevent="flush('region')">All</a>
                         <a class="dropdown-item" v-for="region in filters.regions" @click.prevent="regionId = region.id">{{ region.en_name }}</a>
                     </div>
                 </div>
 
-                <!--Dropdown primary-->
-                <div class="dropdown" v-if="region">
-
+                <!--Dropdown Secondary-->
+                <div class="dropdown ml-1" v-if="region">
                     <!--Trigger-->
-                    <button class="btn btn-teal dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
-
+                    <button class="btn blue-gradient dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
 
                     <!--Menu-->
-                    <div class="dropdown-menu dropdown-default">
+                    <div class="dropdown-menu dropdown-info">
+                        <a class="dropdown-item" @click.prevent="flush('city')">All</a>
                         <a class="dropdown-item" v-for="city in region.cities" @click.prevent="cityId = city.id">{{ city.en_name }}</a>
                     </div>
                 </div>
 
             </div>
-            <!-- /.Filter Area -->
+            <!-- /.Address Area -->
 
             <!-- Product Ads Grid -->
             <section class="section pt-4 productAds" v-if="products != null">
@@ -152,16 +149,16 @@
 
                                 </ul>
 
-
-
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
-                                    <div class="pull-left">
-                                        <p><strong class="p-2">{{ product.price }} L.E</strong></p>
-                                    </div>
-                                    <div class="pull-right">
-                                        <div class="footer-address">
-                                            {{ product.created_at }}
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <p><i class="fas fa-shopping-cart"></i>  <strong class="p-2">{{ product.price }} L.E</strong></p>
+                                        </div>
+                                        <div class="col-md-5 pt-1">
+                                            <div class="footer-address">
+                                                {{ product.created_at }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +236,7 @@
             <section class="section pt-4" v-if="products == null">
                 <div class="row">
                     <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                        No products found
+                        No product found
                     </div>
                 </div>
             </section>
@@ -339,6 +336,13 @@
                 this.fetchProducts();
             },
             flush($filter){
+                if ($filter === 'region') {
+                    this.regionName = 'Choose City';
+                    this.regionId = '';
+                } else if($filter === 'city') {
+                    this.cityName = 'Choose Area';
+                    this.cityId = '';
+                }
                 this.fetchFilter($filter, '')
             },
             FilterOrderBy($order, $sort) {

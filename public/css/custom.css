@@ -14,3 +14,13 @@ select {
 .dropdown-menu {
     z-index: 2000;
 }
+
+.sky-gradient {
+    background: -webkit-linear-gradient(50deg, #2096ff, cyan) !important;
+    background: -o-linear-gradient(50deg, #2096ff, cyan) !important;
+    background: linear-gradient(40deg, #2096ff, cyan) !important;
+}
+
+.checkbox-cyan [type="checkbox"]:checked+label:before {
+    border-color: transparent dodgerblue deepskyblue transparent!important;
+}

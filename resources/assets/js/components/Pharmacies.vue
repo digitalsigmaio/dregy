@@ -17,27 +17,26 @@
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'desc')"><a>Rate: high to low</a></p>
                     </div>
 
-                    <!-- Filter by category-->
+                    <!-- Filter by Features-->
                     <div class="col-md-6 col-lg-12 mb-4">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Speciality</strong></h5>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Feature</strong></h5>
                         <div class="divider"></div>
 
-                        <fieldset id="category">
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="speciality" type="radio" id="speciality0">
-                                <label for="speciality0" class="dark-grey-text" @click="flush('speciality')">All</label>
+                        <fieldset id="feature">
+
+                            <div class="form-check checkbox-cyan pl-0">
+                                <input type="checkbox" class="form-check-input" id="checkbox100" v-model="search.fullDay" @click="filterByFeature">
+                                <label class="form-check-label" for="checkbox100">24 Hour</label>
                             </div>
 
-                            <div class="form-group mb-1" v-for="speciality in filters.specialities">
-                                <input name="speciality" type="radio" :id="'speciality' + speciality.id" :value="speciality.id"
-                                       @click="fetchFilter('speciality', speciality.id)">
-                                <label :for="'speciality' + speciality.id" class="dark-grey-text">{{ speciality.en_name }}</label>
+                            <div class="form-check checkbox-cyan pl-0">
+                                <input type="checkbox" class="form-check-input" id="checkbox101" v-model="search.delivery" @click="filterByFeature">
+                                <label class="form-check-label" for="checkbox101">Home Delivery</label>
                             </div>
-                            <!--Radio group-->
+
                         </fieldset>
                     </div>
-                    <!-- /Filter by category-->
+                    <!-- /Filter by Features-->
 
                     <!-- Filter by rate -->
                     <div class="col-md-6 col-lg-12 mb-4">
@@ -190,7 +189,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-md-10" id="hospitals">
+        <div class="col-md-10" id="pharmacies">
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -230,21 +229,21 @@
             <!-- /.Address Area -->
 
             <!-- Hospitals Grid -->
-            <section class="section pt-4 hospitals" v-if="hospitals != null">
+            <section class="section pt-4 pharmacies" v-if="pharmacies != null">
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
 
                     <!--Grid column-->
-                    <div class="col-md-12 mb-4" v-for="hospital in hospitals" >
+                    <div class="col-md-12 mb-4" v-for="pharmacy in pharmacies" >
 
                         <!--Card-->
-                        <div class="card" :class="{ 'z-depth-2' : mouseOver == hospital.id }" v-on:mouseover="mouseOver = hospital.id" v-on:mouseleave="mouseOver = null">
+                        <div class="card" :class="{ 'z-depth-2' : mouseOver == pharmacy.id }" v-on:mouseover="mouseOver = pharmacy.id" v-on:mouseleave="mouseOver = null">
 
                             <div class="row">
                                 <!--Card image-->
                                 <div class="view overlay col-md-6">
-                                    <img :src="hospital.img" class="img-fluid" alt="">
+                                    <img :src="pharmacy.img" class="img-fluid" alt="">
                                     <a>
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -258,10 +257,10 @@
                                    <div class="row">
 
                                            <div class="col-md-9">
-                                               <h5 class="card-title mb-1"><i class="fas fa-hospital red-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ hospital.en_name }}</a></strong></h5>
+                                               <h5 class="card-title mb-1"><i class="fas fa-heartbeat amber-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ pharmacy.en_name }}</a></strong></h5>
                                            </div>
                                            <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                           </i><span class="light-green-text text-sm-right">{{ hospital.favorites.count }}</span>
+                                           </i><span class="light-green-text text-sm-right">{{ pharmacy.favorites.count }}</span>
                                            </div>
 
                                    </div>
@@ -271,18 +270,18 @@
 
                                             <ul class="rating mt-1">
                                                 <li v-for="n in 5">
-                                                    <i class="fa fa-star cyan-text" :class="starColor(n, hospital.rate.value)"></i>
+                                                    <i class="fa fa-star cyan-text" :class="starColor(n, pharmacy.rate.value)"></i>
                                                 </li>
                                             </ul>
                                             <!-- Rating -->
-                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ hospital.en_address }}</p>
+                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ pharmacy.en_address }}</p>
 
                                             <p><i class="fas fa-at pr-1 cyan-text">
-                                            </i><span class="light-grey-text ">{{ hospital.email }}</span>
+                                            </i><span class="light-grey-text ">{{ pharmacy.email }}</span>
                                             </p>
 
                                             <p><i class="fas fa-home pr-1 cyan-text">
-                                            </i><span class="light-grey-text">{{ hospital.website }}</span>
+                                            </i><span class="light-grey-text">{{ pharmacy.website }}</span>
                                             </p>
 
                                         </div>
@@ -360,10 +359,10 @@
             <!-- /.Hospitals Grid -->
 
             <!-- Nothing Found -->
-            <section class="section pt-4 hospitals" v-if="hospitals == null">
+            <section class="section pt-4 pharmacies" v-if="pharmacies == null">
                 <div class="row">
                     <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                        No hospital found
+                        No pharmacy found
                     </div>
                 </div>
             </section>
@@ -403,16 +402,17 @@
         props: ['filters'],
         data () {
             return {
-                endpoint: '/api/hospitals/search',
+                endpoint: '/api/pharmacies/search',
                 isFav: false,
-                hospitals: {},
+                pharmacies: {},
                 links: {},
                 pagination: {},
                 search: {
                     region: '',
                     city: '',
                     keyword: '',
-                    speciality: '',
+                    fullDay: false,
+                    delivery: false,
                     orderBy: '',
                     sort: '',
                     rate: ''
@@ -426,22 +426,22 @@
             }
         },
         methods: {
-            fetchHospitals(){
+            fetchPharmacies(){
                 let vm = this;
-                $('.hospitals').hide();
+                $('.pharmacies').hide();
                 $('.fetching').show();
                 axios.post(vm.endpoint, vm.search)
                     .then(function (response) {
                         $('.fetching').hide();
-                        $('.hospitals').show();
+                        $('.pharmacies').show();
                         if (typeof response.data.data !== 'undefined') {
                             let data = response.data;
-                            vm.hospitals = data.data;
+                            vm.pharmacies = data.data;
                             vm.links = data.links;
                             vm.pagination = data.meta;
                             vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                         } else if (typeof response.status !== 'undefined') {
-                            vm.hospitals = null;
+                            vm.pharmacies = null;
                             console.log(response.data.message)
                         }
 
@@ -456,17 +456,17 @@
                 hospitalDiv.scrollIntoView();
                 this.endpoint = url;
 
-                return this.fetchHospitals();
+                return this.fetchPharmacies();
             },
             navigate(url){
                 this.endpoint = url;
-                return this.fetchHospitals();
+                return this.fetchPharmacies();
             },
             fetchFilter($key, $value){
                 let vm = this;
                 vm.search[$key] = $value;
-                vm.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                vm.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies();
             },
             flush($filter){
                 if ($filter === 'region') {
@@ -482,12 +482,12 @@
                 let vm = this;
                 this.search.orderBy = $order;
                 this.search.sort = $sort;
-                vm.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                vm.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies();
             },
             searchByKeyword: _.debounce(function () {
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals()
+                this.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies()
             }, 500),
             round(rate) {
                 return parseInt(Math.round(rate));
@@ -500,12 +500,16 @@
                 }
             },
             filterByRate: _.debounce(function () {
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals()
+                this.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies()
+            }, 100),
+            filterByFeature: _.debounce(function () {
+                this.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies()
             }, 100),
         },
         mounted() {
-            this.fetchHospitals();
+            this.fetchPharmacies();
         },
         watch: {
             regionId: function (val) {
@@ -515,15 +519,15 @@
                 this.region = region.shift();
                 this.regionName = this.region.en_name;
                 this.cityName = 'Choose Area';
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies();
             },
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
                 this.cityName = city.en_name;
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.endpoint = '/api/pharmacies/search';
+                this.fetchPharmacies();
             },
         }
     }

@@ -38,6 +38,12 @@ Route::middleware('language')->group(function () {
 
     Route::get('/hospitals', 'HospitalController@index');
 
+    Route::get('/clinics', 'ClinicController@index');
+
+    Route::get('/cosmetic-clinics', 'CosmeticClinicController@index');
+
+    Route::get('/pharmacies', 'PharmacyController@index');
+
 
 
 

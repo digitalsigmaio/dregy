@@ -16,7 +16,7 @@
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'asc')"><a>Rate: low to high</a></p>
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'desc')"><a>Rate: high to low</a></p>
                     </div>
-
+                    
                     <!-- Filter by category-->
                     <div class="col-md-6 col-lg-12 mb-4">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Speciality</strong></h5>
@@ -190,7 +190,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-md-10" id="hospitals">
+        <div class="col-md-10" id="cosmetics">
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -218,7 +218,7 @@
                 <div class="dropdown ml-1" v-if="region">
                     <!--Trigger-->
                     <button class="btn blue-gradient dropdown-toggle" type="button" id="CityMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ cityName }}</button>
-
+                    
                     <!--Menu-->
                     <div class="dropdown-menu dropdown-info">
                         <a class="dropdown-item" @click.prevent="flush('city')">All</a>
@@ -230,21 +230,21 @@
             <!-- /.Address Area -->
 
             <!-- Hospitals Grid -->
-            <section class="section pt-4 hospitals" v-if="hospitals != null">
+            <section class="section pt-4 cosmetics" v-if="cosmetics != null">
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
 
                     <!--Grid column-->
-                    <div class="col-md-12 mb-4" v-for="hospital in hospitals" >
+                    <div class="col-md-12 mb-4" v-for="cosmetic in cosmetics" >
 
                         <!--Card-->
-                        <div class="card" :class="{ 'z-depth-2' : mouseOver == hospital.id }" v-on:mouseover="mouseOver = hospital.id" v-on:mouseleave="mouseOver = null">
+                        <div class="card" :class="{ 'z-depth-2' : mouseOver == cosmetic.id }" v-on:mouseover="mouseOver = cosmetic.id" v-on:mouseleave="mouseOver = null">
 
                             <div class="row">
                                 <!--Card image-->
                                 <div class="view overlay col-md-6">
-                                    <img :src="hospital.img" class="img-fluid" alt="">
+                                    <img :src="cosmetic.img" class="img-fluid" alt="">
                                     <a>
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -258,10 +258,10 @@
                                    <div class="row">
 
                                            <div class="col-md-9">
-                                               <h5 class="card-title mb-1"><i class="fas fa-hospital red-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ hospital.en_name }}</a></strong></h5>
+                                               <h5 class="card-title mb-1"><i class="fas fa-hand-holding-heart indigo-text fa-2x pr-2"></i> <strong><a href="" class="dark-grey-text">{{ cosmetic.en_name }}</a></strong></h5>
                                            </div>
                                            <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                           </i><span class="light-green-text text-sm-right">{{ hospital.favorites.count }}</span>
+                                           </i><span class="light-green-text text-sm-right">{{ cosmetic.favorites.count }}</span>
                                            </div>
 
                                    </div>
@@ -271,18 +271,18 @@
 
                                             <ul class="rating mt-1">
                                                 <li v-for="n in 5">
-                                                    <i class="fa fa-star cyan-text" :class="starColor(n, hospital.rate.value)"></i>
+                                                    <i class="fa fa-star cyan-text" :class="starColor(n, cosmetic.rate.value)"></i>
                                                 </li>
                                             </ul>
                                             <!-- Rating -->
-                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ hospital.en_address }}</p>
+                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ cosmetic.en_address }}</p>
 
                                             <p><i class="fas fa-at pr-1 cyan-text">
-                                            </i><span class="light-grey-text ">{{ hospital.email }}</span>
+                                            </i><span class="light-grey-text ">{{ cosmetic.email }}</span>
                                             </p>
 
                                             <p><i class="fas fa-home pr-1 cyan-text">
-                                            </i><span class="light-grey-text">{{ hospital.website }}</span>
+                                            </i><span class="light-grey-text">{{ cosmetic.website }}</span>
                                             </p>
 
                                         </div>
@@ -360,10 +360,10 @@
             <!-- /.Hospitals Grid -->
 
             <!-- Nothing Found -->
-            <section class="section pt-4 hospitals" v-if="hospitals == null">
+            <section class="section pt-4 clinics" v-if="cosmetics == null">
                 <div class="row">
                     <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                        No hospital found
+                        No cosmetic clinic found
                     </div>
                 </div>
             </section>
@@ -403,9 +403,9 @@
         props: ['filters'],
         data () {
             return {
-                endpoint: '/api/hospitals/search',
+                endpoint: '/api/cosmetic-clinics/search',
                 isFav: false,
-                hospitals: {},
+                cosmetics: {},
                 links: {},
                 pagination: {},
                 search: {
@@ -426,22 +426,22 @@
             }
         },
         methods: {
-            fetchHospitals(){
+            fetchCosmetics(){
                 let vm = this;
-                $('.hospitals').hide();
+                $('.cosmetics').hide();
                 $('.fetching').show();
                 axios.post(vm.endpoint, vm.search)
                     .then(function (response) {
                         $('.fetching').hide();
-                        $('.hospitals').show();
+                        $('.cosmetics').show();
                         if (typeof response.data.data !== 'undefined') {
                             let data = response.data;
-                            vm.hospitals = data.data;
+                            vm.cosmetics = data.data;
                             vm.links = data.links;
                             vm.pagination = data.meta;
                             vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                         } else if (typeof response.status !== 'undefined') {
-                            vm.hospitals = null;
+                            vm.cosmetics = null;
                             console.log(response.data.message)
                         }
 
@@ -452,21 +452,21 @@
             },
             changeEndpoint(page) {
                 let url = this.pagination.path + '?page=' + page;
-                let hospitalDiv = document.getElementById('hospitals');
-                hospitalDiv.scrollIntoView();
+                let cosmeticDiv = document.getElementById('cosmetics');
+                cosmeticDiv.scrollIntoView();
                 this.endpoint = url;
 
-                return this.fetchHospitals();
+                return this.fetchCosmetics();
             },
             navigate(url){
                 this.endpoint = url;
-                return this.fetchHospitals();
+                return this.fetchCosmetics();
             },
             fetchFilter($key, $value){
                 let vm = this;
                 vm.search[$key] = $value;
-                vm.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                vm.endpoint = '/api/cosmetic-clinics/search';
+                this.fetchCosmetics();
             },
             flush($filter){
                 if ($filter === 'region') {
@@ -482,12 +482,12 @@
                 let vm = this;
                 this.search.orderBy = $order;
                 this.search.sort = $sort;
-                vm.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                vm.endpoint = '/api/cosmetic-clinics/search';
+                this.fetchCosmetics();
             },
             searchByKeyword: _.debounce(function () {
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals()
+                this.endpoint = '/api/cosmetic-clinics/search';
+                this.fetchCosmetics()
             }, 500),
             round(rate) {
                 return parseInt(Math.round(rate));
@@ -500,12 +500,12 @@
                 }
             },
             filterByRate: _.debounce(function () {
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals()
+                this.endpoint = '/api/cosmetic-clinics/search';
+                this.fetchCosmetics()
             }, 100),
         },
         mounted() {
-            this.fetchHospitals();
+            this.fetchCosmetics();
         },
         watch: {
             regionId: function (val) {
@@ -515,15 +515,15 @@
                 this.region = region.shift();
                 this.regionName = this.region.en_name;
                 this.cityName = 'Choose Area';
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.endpoint = '/api/cosmetic-clinics/search';
+                this.fetchCosmetics();
             },
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
                 this.cityName = city.en_name;
-                this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.endpoint = '/api/cosmetic-clinics/search';
+                this.fetchCosmetics();
             },
         }
     }

@@ -24,6 +24,8 @@ class PharmacyResource extends JsonResource
             'city' => $this->city,
             'ar_address' => $this->ar_address,
             'en_address' => $this->en_address,
+            'ar_work_time' => $this->ar_work_time,
+            'en_work_time' => $this->en_work_time,
             'ar_note' => $this->ar_note,
             'en_note' => $this->en_note,
             'website' => $this->website,
@@ -40,7 +42,6 @@ class PharmacyResource extends JsonResource
                 'users_id' => $this->favorites->pluck('user_id')
             ],
             'views' => $this->views,
-            'degree_id' => $this->degree_id,
             'created_at' => $this->created_at->toFormattedDateString(),
         ];
     }

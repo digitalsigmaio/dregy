@@ -175,7 +175,7 @@
             <!-- SideNav slide-out button -->
             <div class="float-left mr-2">
                 <a href="#" data-activates="slide-out" class="button-collapse">
-                    <i class="fa fa-bars"></i>
+                    <i class="fa fa-bars cyan-text"></i>
                 </a>
             </div>
             <a class="navbar-brand font-weight-bold" href="#">
@@ -189,19 +189,19 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="#">
-                            <i class="fa fa-envelope blue-text"></i> Contact
+                            <i class="fa fa-envelope cyan-text"></i> Contact
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item ml-3">
                         <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="#">
-                            <i class="fa fa-gear blue-text"></i> Settings</a>
+                            <i class="fa fa-cog cyan-text"></i> Settings</a>
                     </li>
                     <li class="nav-item dropdown ml-3">
                         <a class="nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user blue-text"></i> Profile </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+                            <i class="fa fa-user cyan-text"></i> Profile </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                             <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
                             <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
                         </div>
@@ -322,7 +322,7 @@
     <div class="container-fluid mx-0 px-0">
 
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark primary-color mb-5">
+        <nav class="navbar navbar-expand-lg navbar-dark sky-gradient mb-5">
             <div class="container">
 
                 <!-- Navbar brand -->
