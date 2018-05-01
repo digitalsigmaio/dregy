@@ -30,7 +30,7 @@
         @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
     </style>
 </head>
-<body class="homepage-v1 hidden-sn cyan-skin animated">
+<body class="homepage-v1 hidden-sn white-skin white animated">
 
 
 <!--Navigation-->

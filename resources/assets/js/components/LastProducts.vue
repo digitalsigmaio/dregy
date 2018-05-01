@@ -5,56 +5,50 @@
 
             <!--Grid column-->
             <div class="col-lg-3 col-md-6 mb-4" v-for="product in products">
-
                 <!--Card-->
-                <div class="card card-ecommerce">
-
+                <div class="card card-cascade narrower card-ecommerce">
                     <!--Card image-->
                     <div class="view overlay">
-                        <img :src="product.img" class="img-fluid" alt="sample image">
+                        <img :src="product.img" class="card-img-top" alt="sample photo">
                         <a>
                             <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
                     <!--Card image-->
-
                     <!--Card content-->
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <!--Category & Title-->
-
-                        <h5 class="card-title mb-1">
+                        <a href="" class="grey-text">
+                            <h5>{{ product.category.en_name }}</h5>
+                        </a>
+                        <h4 class="card-title">
                             <strong>
-                                <a href="" class="dark-grey-text">{{ product.title }}</a>
+                                <a href="">{{ product.title }}</a>
                             </strong>
-                        </h5>
-                        <span class="badge mb-2 p-2" :class="{ 'badge-warning': product.status == 'used', 'badge-success' : product.status == 'new' }">{{ product.status }}</span>
-                        <!-- Rating -->
-                        <ul class="rating">
+                        </h4>
 
-                            <li v-for="phone in product.phone" class="text-grey">
-                                <i class="fa fa-phone blue-text"></i> <strong>{{ phone }}</strong>
-                            </li>
+                        <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">{{ product.status.toUpperCase() }}</span>
 
-                        </ul>
-
+                        <!--Description-->
+                        <p class="card-text">
+                            {{ product.description }}
+                        </p>
                         <!--Card footer-->
-                        <div class="card-footer pb-0">
-                            <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>{{ product.price }}$</strong>
-                                            </span>
-                                <span class="float-right">
-
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                                                    <i class="fa fa-shopping-cart ml-3"></i>
-                                                </a>
-                                            </span>
-                            </div>
+                        <div class="card-footer">
+                                                    <span class="float-left font-weight-bold">
+                                                      <strong>{{ product.price }} L.E</strong>
+                                                    </span>
+                            <span class="float-right">
+                                                      <a data-toggle="tooltip" data-placement="top" title="Share">
+                                                        <i class="fa fa-share-alt grey-text ml-3"></i>
+                                                      </a>
+                                                      <a data-toggle="tooltip" data-placement="top" title="Added to Favorite">
+                                                        <i class="fa fa-heart ml-3"></i>
+                                                      </a>
+                                                    </span>
                         </div>
-
                     </div>
                     <!--Card content-->
-
                 </div>
                 <!--Card-->
 
@@ -89,7 +83,7 @@
                     </li>
 
                     <!--Numbers-->
-                    <li class="page-item" :class="{ active: n == pagination.current_page }" v-for="n in pagination.last_page">
+                    <li class="page-item" :class="{ active: n == pagination.current_page }" v-for="n in pagination.last_page" v-show="( pagination.current_page <=3 && n <= 5 ) || (n <= (pagination.current_page + 2) && n >= (pagination.current_page - 2))">
                         <a class="page-link waves-effect waves-effect" @click.prevent="changeEndpoint(n)">{{ n }}</a>
                     </li>
 
@@ -152,7 +146,7 @@
             navigate(url){
                 this.endpoint = url;
                 return this.fetchProducts();
-            }
+            },
         },
         mounted() {
             this.fetchProducts();

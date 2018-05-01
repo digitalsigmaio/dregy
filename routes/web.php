@@ -14,19 +14,7 @@
 
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
-    Route::get('/', function () {
-        $h = \App\Hospital::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
-
-        $p = \App\Pharmacy::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
-
-        $c = \App\Clinic::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
-
-        $hospitals = json_encode(new \App\Http\Resources\HospitalCollection($h));
-        $pharmacies = json_encode(new \App\Http\Resources\PharmacyCollection($p));
-        $clinics = json_encode(new \App\Http\Resources\ClinicCollection($c));
-
-        return view('landing', compact(['hospitals', 'pharmacies', 'clinics']));
-    });
+    Route::get('/', 'MainPageController@index')->name('home');
 
 
 

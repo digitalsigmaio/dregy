@@ -350,7 +350,7 @@
                             </li>
 
                             <!--Numbers-->
-                            <li class="page-item" :class="{ active: n == pagination.current_page }" v-for="n in pagination.last_page">
+                            <li class="page-item" :class="{ active: n == pagination.current_page }" v-for="n in pagination.last_page" v-show="( pagination.current_page <=3 && n <= 5 ) || (n <= (pagination.current_page + 2) && n >= (pagination.current_page - 2))" >
                                 <a class="page-link waves-effect waves-effect" @click.prevent="changeEndpoint(n)">{{ n }}</a>
                             </li>
 

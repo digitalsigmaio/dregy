@@ -20,6 +20,10 @@ class ProductAd extends Model
         return $this->belongsTo(City::class);
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(ProductAdCategory::class, 'product_ad_category_id');
