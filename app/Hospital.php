@@ -43,12 +43,7 @@ class Hospital extends Model
 
     public function rates()
     {
-        return $this->morphMany(Rate::class, 'rateable');
-    }
-
-    public function totalRate()
-    {
-        return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as total_rate');
+        return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as rating, COUNT(rate) as count, rateable_id')->groupBy('rateable_id');
     }
 
     public function phoneNumbers()
@@ -71,16 +66,12 @@ class Hospital extends Model
         return $this->belongsToMany(Speciality::class, 'hospital_speciality');
     }
 
-    public function getRateAttribute()
-    {
-        if ($this->rates()->exists()) {
-            $countOfRates = $this->rates->count();
-            $sumOfRates = $this->rates()->sum('rate');
 
-            return round(($sumOfRates / $countOfRates), 1);
-        } else {
-            return null;
-        }
+    public function scopeByRate()
+    {
+        return Hospital::whereHas('rates', function ($query) {
+            $query->selectRaw();
+        });
     }
 
     public function getViewsAttribute()
@@ -99,7 +90,7 @@ class Hospital extends Model
         $city = $request->city;
         $speciality = $request->speciality;
         $keyword = trim($request->keyword);
-        $rate = $request->rate;
+        $rating = $request->rate;
         $orderBy = $request->orderBy;
         $sort = $request->sort;
 
@@ -115,7 +106,7 @@ class Hospital extends Model
             ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);
             })
-            ->when($city != '', function ($query) use ($city) {
+            ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
             ->when($keyword, function ($query) use ($keyword) {
@@ -124,9 +115,9 @@ class Hospital extends Model
                     ->orWhere('ar_address', 'like', "%$keyword%")
                     ->orWhere('en_address', 'like', "%$keyword%");
             })
-            ->when($rate, function ($query) use ($rate) {
-                return $query->whereHas('rates', function ($query) use ($rate) {
-                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rate);
+            ->when($rating, function ($query) use ($rating) {
+                return $query->whereHas('rates', function ($query) use ($rating) {
+                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rating);
                 });
             })
             ->when($speciality, function ($query) use ($speciality) {
@@ -143,9 +134,9 @@ class Hospital extends Model
             ->get();
         if ($orderBy == 'rate') {
             if ($sort == 'asc') {
-                $sorted = $data->sortBy('totalRate.total_rate');
+                $sorted = $data->sortBy('rates.rating');
             } else {
-                $sorted = $data->sortByDesc('totalRate.total_rate');
+                $sorted = $data->sortByDesc('rates.rating');
             }
         } elseif($orderBy) {
             $sorted = $data;
