@@ -14,23 +14,29 @@
 
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
-    Route::get('/', 'MainPageController@index')->name('home');
+    Route::get('/', 'MainPageController@index')->name('main');
 
 
 
 
+    // Job Ads
+    Route::get('/jobs', 'JobAdController@index')->name('jobs');
+    Route::get('/u/{user}/jobs/{jobAd}', 'JobAdController@show');
 
-    Route::get('/job-ads', 'JobAdController@index');
+    // ProductAds
+    Route::get('/products', 'ProductAdController@index')->name('products');
 
-    Route::get('/product-ads', 'ProductAdController@index');
+    // Hospitals
+    Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
 
-    Route::get('/hospitals', 'HospitalController@index');
+    // Clinics
+    Route::get('/clinics', 'ClinicController@index')->name('clinics');
 
-    Route::get('/clinics', 'ClinicController@index');
+    // Cosmetic Clinics
+    Route::get('/cosmetic-clinics', 'CosmeticClinicController@index')->name('cosmetics');
 
-    Route::get('/cosmetic-clinics', 'CosmeticClinicController@index');
-
-    Route::get('/pharmacies', 'PharmacyController@index');
+    // Pharmacies
+    Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
 
 
 

@@ -59,6 +59,11 @@ class ProductAd extends Model
         return $this->views()->count();
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public static function fetch($request)
     {
         $region = $request->region;

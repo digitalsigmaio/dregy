@@ -11,24 +11,24 @@
             <div class="row py-2 mb-4 hoverable align-items-center" v-for="job in newJobs">
 
                 <div class="col-6">
-                    <a>
+                    <a :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                         <img :src="job.img" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-6">
 
                     <!-- Title -->
-                    <a class="pt-5">
+                    <a class="pt-5 dark-grey-text" :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                         <strong>{{ job.title }}</strong>
                     </a>
 
                     <!-- Category -->
-                    <h6 class="h6-responsive font-weight-bold dark-grey-text">
+                    <h6 class="h6-responsive font-weight-bold grey-text">
                         <strong>{{ job.category.en_name }}</strong>
                     </h6>
 
                     <!-- Address -->
-                    <h6 class="h6-responsive font-weight-bold dark-grey-text">
+                    <h6 class="h6-responsive font-weight-bold grey-text">
                         <strong>{{ job.region.en_name }}, {{ job.city.en_name }}</strong>
                     </h6>
 
@@ -51,24 +51,24 @@
             <div class="row py-2 mb-4 hoverable align-items-center" v-for="job in hotJobs">
 
                 <div class="col-6">
-                    <a>
+                    <a :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                         <img :src="job.img" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-6">
 
                     <!-- Title -->
-                    <a class="pt-5">
+                    <a class="pt-5 dark-grey-text" :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                         <strong>{{ job.title }}</strong>
                     </a>
 
                     <!-- Category -->
-                    <h6 class="h6-responsive font-weight-bold dark-grey-text">
+                    <h6 class="h6-responsive font-weight-bold grey-text">
                         <strong>{{ job.category.en_name }}</strong>
                     </h6>
 
                     <!-- Address -->
-                    <h6 class="h6-responsive font-weight-bold dark-grey-text">
+                    <h6 class="h6-responsive font-weight-bold grey-text">
                         <strong>{{ job.region.en_name }}, {{ job.city.en_name }}</strong>
                     </h6>
 
@@ -91,24 +91,24 @@
             <div class="row py-2 mb-4 hoverable align-items-center" v-for="job in randomJobs">
 
                 <div class="col-6">
-                    <a>
+                    <a :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                         <img :src="job.img" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-6">
 
                     <!-- Title -->
-                    <a class="pt-5">
+                    <a class="pt-5 dark-grey-text" :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                         <strong>{{ job.title }}</strong>
                     </a>
 
                     <!-- Category -->
-                    <h6 class="h6-responsive font-weight-bold dark-grey-text">
+                    <h6 class="h6-responsive font-weight-bold grey-text">
                         <strong>{{ job.category.en_name }}</strong>
                     </h6>
 
                     <!-- Address -->
-                    <h6 class="h6-responsive font-weight-bold dark-grey-text">
+                    <h6 class="h6-responsive font-weight-bold grey-text">
                         <strong>{{ job.region.en_name }}, {{ job.city.en_name }}</strong>
                     </h6>
 

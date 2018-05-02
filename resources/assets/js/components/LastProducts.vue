@@ -35,17 +35,14 @@
                         </p>
                         <!--Card footer-->
                         <div class="card-footer">
-                                                    <span class="float-left font-weight-bold">
-                                                      <strong>{{ product.price }} L.E</strong>
-                                                    </span>
+                            <span class="float-left font-weight-bold">
+                              <strong>{{ product.price }} L.E</strong>
+                            </span>
                             <span class="float-right">
-                                                      <a data-toggle="tooltip" data-placement="top" title="Share">
-                                                        <i class="fa fa-share-alt grey-text ml-3"></i>
-                                                      </a>
-                                                      <a data-toggle="tooltip" data-placement="top" title="Added to Favorite">
-                                                        <i class="fa fa-heart ml-3"></i>
-                                                      </a>
-                                                    </span>
+                              <a data-toggle="tooltip" data-placement="top" title="Added to Favorite" class="light-green-text">
+                                <i class="fa fa-heart ml-3 pr-1 grey-text"></i> {{ product.favorites.count }}
+                              </a>
+                            </span>
                         </div>
                     </div>
                     <!--Card content-->

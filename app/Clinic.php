@@ -92,6 +92,11 @@ class Clinic extends Model
         return $this->views()->count();
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * @param $request
      * @return mixed

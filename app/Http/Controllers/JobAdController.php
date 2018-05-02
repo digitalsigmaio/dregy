@@ -11,6 +11,7 @@ use App\JobEmploymentType;
 use App\JobExperienceLevel;
 use App\JobType;
 use App\Region;
+use App\User;
 use Illuminate\Http\Request;
 use function MongoDB\BSON\toJSON;
 
@@ -35,5 +36,12 @@ class JobAdController extends Controller
         $filtersJson = json_encode($filters);
 
         return view('jobs', compact(['filtersJson']));
+    }
+
+    public function show(User $user, JobAd $jobAd){
+        $category = $jobAd->category;
+        $relatedJobs = $category->jobAds()->inrandomOrder()->take(9)->get();
+        $relatedJobsChunks = $relatedJobs->chunk(3);
+        return view('job', compact(['jobAd', 'relatedJobsChunks']));
     }
 }

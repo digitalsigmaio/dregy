@@ -136,7 +136,7 @@
 
         <!-- Content -->
         <div class="col-lg-9" id="jobs">
-
+            <!-- Search Area -->
             <div class="row mb-0">
                 <div class="col-md-6">
                     <!-- Search -->
@@ -146,6 +146,8 @@
                     </div>
                 </div>
             </div>
+            <!-- /.Search Area -->
+
             <!-- Address Area -->
             <div class="row mb-0">
                 <!--Dropdown primary-->
@@ -189,7 +191,7 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="job.img " class="img-fluid" alt="">
-                                <a>
+                                <a :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -199,7 +201,7 @@
                             <div class="card-body">
                                 <!--Category & Title-->
 
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">{{ job.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">{{ job.type.en_name }}</span>
+                                <h5 class="card-title mb-1"><strong><a :href="'/u/'+ job.user_id + '/jobs/' + job.slug" class="dark-grey-text">{{ job.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">{{ job.type.en_name }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="phone in job.phone" class="text-grey">

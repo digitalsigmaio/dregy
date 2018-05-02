@@ -19,8 +19,7 @@ class CreateClinicsTable extends Migration
             $table->unsignedInteger('admin_id');
             $table->string('ar_name');
             $table->string('en_name');
-            $table->string('ar_slug');
-            $table->string('en_slug');
+            $table->string('slug');
             $table->unsignedInteger('degree_id');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');

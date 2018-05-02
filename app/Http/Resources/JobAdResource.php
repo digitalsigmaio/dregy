@@ -19,6 +19,7 @@ class JobAdResource extends JsonResource
             'user_id' => $this->user_id,
             'title' => $this->title,
             'description' => $this->description,
+            'slug' => $this->slug,
             'salary' => $this->salary,
             'ref_id' => $this->ref_id,
             'category'=> $this->category,

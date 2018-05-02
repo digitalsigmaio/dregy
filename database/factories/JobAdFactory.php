@@ -5,8 +5,9 @@ use Faker\Generator as Faker;
 $factory->define(App\JobAd::class, function (Faker $faker) {
     return [
         'user_id' => rand(1, 100),
-        'title' => $faker->name,
+        'title' => $title = $faker->jobTitle,
         'description' => $faker->text(100),
+        'slug' => str_slug($title),
         'salary' => $faker->randomNumber(4),
         'ref_id' => '#DEJA' . str_random(6) . time(),
         'job_ad_category_id' => rand(1, 6),

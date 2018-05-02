@@ -7,8 +7,9 @@ $factory->define(App\ProductAd::class, function (Faker $faker) {
     $key = array_rand($status);
     return [
         'user_id' => rand(1, 100),
-        'title' => $faker->name,
+        'title' => $title = $faker->name,
         'description' => $faker->text(100),
+        'slug' => str_slug($title),
         'status' => $status[$key],
         'price' => $faker->randomNumber(3),
         'ref_id' => '#DEPA' . str_random(6) . time(),

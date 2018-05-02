@@ -8,8 +8,7 @@ $factory->define(App\Clinic::class, function (Faker $faker) {
         'admin_id' => rand(1, 5),
         'ar_name' => $name = $faker->company,
         'en_name' => $name,
-        'ar_slug' => str_slug($name),
-        'en_slug' => str_slug($name),
+        'slug' => str_slug($name),
         'degree_id' => rand(1, 8),
         'region_id' => $region = rand(1, 13),
         'city_id' => \App\Region::find($region)->cities()->inRandomOrder()->first()->id,
@@ -19,8 +18,8 @@ $factory->define(App\Clinic::class, function (Faker $faker) {
         'en_note' => $note,
         'ar_work_times' => 'From 9 a.m to 5 p.m',
         'en_work_times' => 'From 9 a.m to 5 p.m',
-        'website' => $faker->url,
-        'email' => $faker->email,
+        'website' => $faker->domainName,
+        'email' => $faker->companyEmail,
         'img' => $faker->imageUrl(640, 480),
     ];
 });
