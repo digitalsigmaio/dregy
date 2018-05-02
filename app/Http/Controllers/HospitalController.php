@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Hospital;
 use App\HospitalSpeciality;
+use App\Http\Resources\HospitalResource;
 use App\Region;
 use Illuminate\Http\Request;
 
@@ -20,7 +22,19 @@ class HospitalController extends Controller
             'specialities' => $specialities,
         ];
         $filtersJson = json_encode($filters);
-
-        return view('hospitals', compact(['filtersJson']));
+        $hospitals = json_encode(HospitalResource::collection(
+            Hospital::with(
+                ['region',
+                    'city',
+                    'specialities',
+                    'rates',
+                    'favorites',
+                    'phoneNumbers',
+                    'views',
+                    'premium'
+                ]
+            )->paginate(10)
+        ));
+        return view('hospitals', compact(['filtersJson', 'hospitals']));
     }
 }

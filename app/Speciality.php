@@ -15,17 +15,17 @@ class Speciality extends Model
 
     public function hospitals()
     {
-        return $this->belongsToMany(Hospital::class);
+        return $this->belongsToMany(Hospital::class, 'hospital_speciality');
     }
 
-    public function beautyCenters()
+    public function cosmicClinics()
     {
-        return $this->belongsToMany(CosmeticClinic::class);
+        return $this->belongsToMany(CosmeticClinic::class, 'cosmic_clinic_speciality');
     }
 
     public function clinics()
     {
-        return $this->hasMany(Clinic::class);
+        return $this->belongsToMany(Clinic::class, 'clinic_speciality');
     }
 
 }

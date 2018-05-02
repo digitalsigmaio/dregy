@@ -94,9 +94,8 @@ class PharmacyController extends Controller
         if (count($pharmacies)) {
             return new PharmacyCollection($pharmacies);
         } else {
-            return response()->json([
-                'message' => 'Nothing found'
-            ]);
+            return null;
         }
+
     }
 }

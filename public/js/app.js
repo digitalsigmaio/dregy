@@ -14392,8 +14392,8 @@ window.Pusher = __webpack_require__(40);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     broadcaster: 'pusher',
-    key: "62933c7ab6061d02e3d9",
-    cluster: "eu",
+    key: "",
+    cluster: "mt1",
     encrypted: true
 });
 
@@ -57425,12 +57425,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['filters'],
+    props: ['filters', 'hospitals'],
     data: function data() {
         return {
             endpoint: '/api/hospitals/search',
             isFav: false,
-            hospitals: {},
             links: {},
             pagination: {},
             search: {
@@ -62025,14 +62024,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['filters'],
     data: function data() {
         return {
+            pharmacies: {},
             endpoint: '/api/pharmacies/search',
             isFav: false,
-            pharmacies: {},
             links: {},
             pagination: {},
             search: {
                 region: '',
                 city: '',
+                pharmacies: {},
                 keyword: '',
                 fullDay: false,
                 delivery: false,
@@ -62057,24 +62057,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(vm.endpoint, vm.search).then(function (response) {
                 $('.fetching').hide();
                 $('.pharmacies').show();
-                if (typeof response.data.data !== 'undefined') {
-                    var data = response.data;
-                    vm.pharmacies = data.data;
-                    vm.links = data.links;
-                    vm.pagination = data.meta;
-                    vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                } else if (typeof response.status !== 'undefined') {
-                    vm.pharmacies = null;
-                    console.log(response.data.message);
-                }
-            }).catch(function (response) {
-                console.log(response);
+                var data = response.data;
+                vm.pharmacies = data.data;
+                vm.links = data.links;
+                vm.pagination = data.meta;
+                vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+            }).catch(function (e) {
+                console.log(e.response);
             });
         },
         changeEndpoint: function changeEndpoint(page) {
             var url = this.pagination.path + '?page=' + page;
-            var hospitalDiv = document.getElementById('hospitals');
-            hospitalDiv.scrollIntoView();
+            var pharmacyDiv = document.getElementById('pharmacies');
+            pharmacyDiv.scrollIntoView();
             this.endpoint = url;
 
             return this.fetchPharmacies();
