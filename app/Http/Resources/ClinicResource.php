@@ -20,8 +20,8 @@ class ClinicResource extends JsonResource
             'en_name' => $this->en_name,
             'ar_slug' => $this->ar_slug,
             'en_slug' => $this->en_slug,
-            'region' => new RegionResource($this->region),
-            'city' => new CityResource($this->city),
+            'region' => $this->region,
+            'city' => $this->city,
             'ar_address' => $this->ar_address,
             'en_address' => $this->en_address,
             'ar_note' => $this->ar_note,
@@ -31,16 +31,18 @@ class ClinicResource extends JsonResource
             'img' => $this->img,
             'premium' => $this->premium,
             'phone' => $this->phoneNumbers->pluck('number'),
-            'rate' => $this->rate,
-            'favs' => [
-                'count' => $this->favs->count(),
-                'users_id' => $this->favs->pluck('user_id')
+            'rate' => [
+                'count' => $this->rates->count(),
+                'value' => $this->rate
+            ],
+            'favorites' => [
+                'count' => $this->favorites->count(),
+                'users_id' => $this->favorites->pluck('user_id')
             ],
             'views' => $this->views,
-            'speciality_id' => $this->speciality_id,
+            'specialities' => $this->specialities,
             'degree_id' => $this->degree_id,
             'created_at' => $this->created_at->toFormattedDateString(),
-            'user' => $this->user
         ];
     }
 }

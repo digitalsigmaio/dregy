@@ -17,7 +17,7 @@ class CreateProductAdsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            //$table->string('slug');
+            $table->string('slug');
             $table->text('description');
             $table->string('status');
             $table->string('price');
@@ -27,7 +27,8 @@ class CreateProductAdsTable extends Migration
             $table->unsignedInteger('city_id');
             $table->string('address')->nullable();
             $table->string('img')->nullable();
-            $table->boolean('promoted')->default(false);
+            $table->boolean('approved')->nullable();
+            $table->unsignedInteger('admin_id')->nullable();
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();
             $table->softDeletes();

@@ -18,7 +18,15 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 Vue.component('top-clients', require('./components/TopClients.vue'));
-Vue.component('last-items', require('./components/LastItems.vue'));
+Vue.component('main-jobs', require('./components/MainJobs.vue'));
+Vue.component('last-products', require('./components/LastProducts.vue'));
+Vue.component('job-ads-list', require('./components/JobAds.vue'));
+Vue.component('product-ads-list', require('./components/ProductAds.vue'));
+Vue.component('hospitals-list', require('./components/Hospitals.vue'));
+Vue.component('clinics-list', require('./components/Clinics.vue'));
+Vue.component('cosmetics-list', require('./components/CosmeticClinics.vue'));
+Vue.component('pharmacies-list', require('./components/Pharmacies.vue'));
+
 
 Vue.component(
     'passport-clients',

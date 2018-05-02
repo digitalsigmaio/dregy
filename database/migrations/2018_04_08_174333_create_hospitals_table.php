@@ -19,8 +19,7 @@ class CreateHospitalsTable extends Migration
             $table->unsignedInteger('admin_id');
             $table->string('ar_name');
             $table->string('en_name');
-            $table->string('ar_slug');
-            $table->string('en_slug');
+            $table->string('slug');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('ar_address');
@@ -32,7 +31,6 @@ class CreateHospitalsTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->string('img')->nullable();
-            $table->boolean('premium')->default(false);
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();
             $table->softDeletes();

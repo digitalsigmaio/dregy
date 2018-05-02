@@ -6,21 +6,24 @@
         <div class="col-12">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-justified grey lighten-3 mx-0" role="tablist">
+            <ul class="nav nav-tabs nav-justified sky-gradient mx-0" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active dark-grey-text font-weight-bold" data-toggle="tab" href="#panel5" role="tab">Hospitals</a>
+                    <a class="nav-link active white-text font-weight-bold" data-toggle="tab" href="#hospitals" role="tab">Hospitals</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link dark-grey-text font-weight-bold" data-toggle="tab" href="#panel6" role="tab">Pharmacies</a>
+                    <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#pharmacies" role="tab">Pharmacies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link dark-grey-text font-weight-bold" data-toggle="tab" href="#panel7" role="tab">Clinics</a>
+                    <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#clinics" role="tab">Clinics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#cosmetics" role="tab">Cosmetics</a>
                 </li>
             </ul>
             <!-- Tab panels -->
             <div class="tab-content px-0">
-                <!--Panel 1-->
-                <div class="tab-pane fade in show active " id="panel5" role="tabpanel">
+                <!-- Hospitals -->
+                <div class="tab-pane fade in show active " id="hospitals" role="tabpanel">
                     <br>
                     <!-- Grid row -->
                     <div class="row">
@@ -33,7 +36,7 @@
 
                                 <!--Card image-->
                                 <div class="view overlay">
-                                    <img :src="hospital.img" class="img-fluid m-auto" alt="sample image">
+                                    <img :src="hospital.img" class="img-fluid" alt="sample image">
                                     <a>
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -44,16 +47,16 @@
                                 <div class="card-body">
                                     <!--Category & Title-->
 
-                                    <h5 class="card-title mb-1">
+                                    <h5 class="card-title mb-1 text-truncate">
                                         <strong>
                                             <a href="" class="dark-grey-text">{{ hospital.en_name }}</a>
                                         </strong>
                                     </h5>
-                                    <span class="badge badge-danger mb-2">bestseller</span>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium != null">Featured</span>
                                     <!-- Rating -->
                                     <ul class="rating">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, hospital.rate)"></i>
+                                            <i class="fa fa-star" :class="starColor(n, hospital.rate.value)"></i>
                                         </li>
                                     </ul>
 
@@ -61,11 +64,11 @@
                                     <div class="card-footer pb-0">
                                         <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>{{ hospital.user.name }}</strong>
+                                                <strong>{{ hospital.favorites.count }}</strong>
                                             </span>
                                             <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-user ml-3"></i>
+                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+                                                    <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>
                                         </div>
@@ -84,10 +87,10 @@
                     </div>
                     <!--Grid row-->
                 </div>
-                <!--/.Panel 1-->
+                <!-- /.Hospitals -->
 
-                <!--Panel 2-->
-                <div class="tab-pane fade" id="panel6" role="tabpanel">
+                <!-- Pharmacies -->
+                <div class="tab-pane fade" id="pharmacies" role="tabpanel">
                     <br>
 
                     <!-- Grid row -->
@@ -117,11 +120,11 @@
                                             <a href="" class="dark-grey-text">{{ pharmacy.en_name }}</a>
                                         </strong>
                                     </h5>
-                                    <span class="badge badge-danger mb-2">bestseller</span>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium != null">Featured</span>
                                     <!-- Rating -->
                                     <ul class="rating">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, pharmacy.rate)"></i>
+                                            <i class="fa fa-star" :class="starColor(n, pharmacy.rate.value)"></i>
                                         </li>
                                     </ul>
 
@@ -129,11 +132,11 @@
                                     <div class="card-footer pb-0">
                                         <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>{{ pharmacy.user.name }}</strong>
+                                                <strong>{{ pharmacy.favorites.count }}</strong>
                                             </span>
                                             <span class="float-right">
                                                 <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-user ml-3"></i>
+                                                    <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>
                                         </div>
@@ -151,10 +154,10 @@
                     </div>
                     <!--Grid row-->
                 </div>
-                <!--/.Panel 2-->
+                <!-- /.Pharmacies -->
 
-                <!--Panel 3-->
-                <div class="tab-pane fade" id="panel7" role="tabpanel">
+                <!-- Clinics -->
+                <div class="tab-pane fade" id="clinics" role="tabpanel">
                     <br>
                     <!-- Grid row -->
                     <div class="row">
@@ -183,11 +186,11 @@
                                             <a href="" class="dark-grey-text">{{ clinic.en_name }}</a>
                                         </strong>
                                     </h5>
-                                    <span class="badge badge-danger mb-2">bestseller</span>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium != null">Featured</span>
                                     <!-- Rating -->
                                     <ul class="rating">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, clinic.rate)"></i>
+                                            <i class="fa fa-star" :class="starColor(n, clinic.rate.value)"></i>
                                         </li>
                                     </ul>
 
@@ -195,11 +198,11 @@
                                     <div class="card-footer pb-0">
                                         <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>{{ clinic.user.name }}</strong>
+                                                <strong>{{ clinic.favorites.count }}</strong>
                                             </span>
                                             <span class="float-right">
                                                 <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-user ml-3"></i>
+                                                    <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>
                                         </div>
@@ -218,7 +221,74 @@
                     <!--Grid row-->
 
                 </div>
-                <!--/.Panel 3-->
+                <!-- /.Clinics -->
+
+                <!-- Cosmetics -->
+                <div class="tab-pane fade" id="cosmetics" role="tabpanel">
+                    <br>
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-lg-4 col-md-12 mb-4" v-for="cosmetic in cosmetics">
+
+                            <!--Card-->
+                            <div class="card card-ecommerce">
+
+                                <!--Card image-->
+                                <div class="view overlay">
+                                    <img :src="cosmetic.img" class="img-fluid m-auto" alt="sample image">
+                                    <a>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <!--Card image-->
+
+                                <!--Card content-->
+                                <div class="card-body">
+                                    <!--Category & Title-->
+
+                                    <h5 class="card-title mb-1">
+                                        <strong>
+                                            <a href="" class="dark-grey-text">{{ cosmetic.en_name }}</a>
+                                        </strong>
+                                    </h5>
+                                    <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium != null">Featured</span>
+                                    <!-- Rating -->
+                                    <ul class="rating">
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="starColor(n, cosmetic.rate.value)"></i>
+                                        </li>
+                                    </ul>
+
+                                    <!--Card footer-->
+                                    <div class="card-footer pb-0">
+                                        <div class="row mb-0">
+                                            <span class="float-left">
+                                                <strong>{{ cosmetic.favorites.count }}</strong>
+                                            </span>
+                                            <span class="float-right">
+                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
+                                                    <i class="fa fa-heart ml-3"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--Card content-->
+
+                            </div>
+                            <!--Card-->
+
+                        </div>
+                        <!--Grid column-->
+
+                    </div>
+                    <!--Grid row-->
+
+                </div>
+                <!-- /.Cosmetics -->
             </div>
 
         </div>
@@ -229,10 +299,12 @@
 
 <script>
     export default {
-        props: ['hospitals', 'pharmacies', 'clinics'],
         data () {
             return {
-
+                hospitals: {},
+                pharmacies: {},
+                clinics: {},
+                cosmetics: {}
             }
         },
         methods: {
@@ -245,7 +317,24 @@
                 } else {
                     return 'grey-text'
                 }
+            },
+            fetchData() {
+                let vm = this;
+                axios.get('/api/top-clients')
+                    .then(function (response) {
+                        let res = response.data;
+                        vm.hospitals = res.hospitals;
+                        vm.pharmacies = res.pharmacies;
+                        vm.clinics = res.clinics;
+                        vm.cosmetics = res.cosmetics;
+                    })
+                    .catch(function (response) {
+                        console.log(response)
+                    });
             }
+        },
+        mounted() {
+            this.fetchData();
         }
     }
 </script>

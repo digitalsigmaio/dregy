@@ -2,10 +2,14 @@
 
 namespace App;
 
+use App\Traits\CollectionPagination;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Clinic extends Model
 {
+    use SoftDeletes, CollectionPagination;
+
     public function region()
     {
         return $this->belongsTo(Region::class);
@@ -26,29 +30,44 @@ class Clinic extends Model
         return $this->belongsTo(Admin::class);
     }
 
-    public function favs()
+    public function favorites()
     {
-        return $this->hasMany(ClinicFav::class);
+        return $this->morphMany(Favorite::class, 'favourable');
     }
 
     public function views()
     {
-        return $this->hasMany(ClinicView::class);
+        return $this->morphMany(View::class, 'viewable');
     }
 
     public function rates()
     {
-        return $this->hasMany(ClinicRate::class);
+        return $this->morphMany(Rate::class, 'rateable');
+    }
+
+    public function totalRate()
+    {
+        return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as total_rate');
     }
 
     public function phoneNumbers()
     {
-        return $this->belongsToMany(PhoneNumber::class, 'clinic_phone_number');
+        return $this->morphMany(PhoneNumber::class, 'phonable');
     }
 
-    public function speciality()
+    public function premium()
     {
-        return $this->belongsTo(Speciality::class);
+        return $this->morphOne(Premium::class, 'premiumable');
+    }
+
+    public function offer()
+    {
+        return $this->morphOne(Offer::class, 'offerable');
+    }
+
+    public function specialities()
+    {
+        return $this->belongsToMany(Speciality::class, 'clinic_speciality');
     }
 
     public function degree()
@@ -73,6 +92,11 @@ class Clinic extends Model
         return $this->views()->count();
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * @param $request
      * @return mixed
@@ -85,36 +109,63 @@ class Clinic extends Model
         $degree = $request->degree;
         $keyword = trim($request->keyword);
         $rate = $request->rate;
+        $orderBy = $request->orderBy;
+        $sort = $request->sort;
 
-
-        $data = self::with(['region', 'city', 'rates', 'favs', 'phoneNumbers', 'views'])
-            ->when($region != '', function ($query) use ($region) {
+        $data = self::with(['region',
+            'city',
+            'specialities',
+            'degree',
+            'rates',
+            'favorites',
+            'phoneNumbers',
+            'views',
+            'premium'
+        ])
+            ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);
             })
-            ->when($city != '', function ($query) use ($city) {
+            ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
-            ->when($degree != '', function ($query) use ($degree) {
+            ->when($degree, function ($query) use ($degree) {
                 return $query->where('degree_id', $degree);
             })
-            ->when($speciality != '', function ($query) use ($speciality) {
-                return $query->where('speciality_id', $speciality);
-            })
-            ->when($rate != '', function ($query) use ($rate) {
-                return $query->whereHas('rates', function ($query) use ($rate) {
-                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id), 1) >= ' . $rate);
-                });
-            })
-            ->when($keyword != '', function ($query) use ($keyword) {
+            ->when($keyword, function ($query) use ($keyword) {
                 return $query->where('ar_name', 'like',  "%$keyword%")
                     ->orWhere('en_name', 'like', "%$keyword%")
                     ->orWhere('ar_address', 'like', "%$keyword%")
                     ->orWhere('en_address', 'like', "%$keyword%");
             })
-            ->orderBy('premium', 'desc')
-            ->paginate(20);
+            ->when($rate, function ($query) use ($rate) {
+                return $query->whereHas('rates', function ($query) use ($rate) {
+                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rate);
+                });
+            })
+            ->when($speciality, function ($query) use ($speciality) {
+                return $query->whereHas('specialities', function ($query) use ($speciality) {
+                    $query->where('specialities.id', $speciality);
+                });
+            })
+            ->when($orderBy && $orderBy != 'rate', function ($query) use ($orderBy, $sort) {
 
-        return $data;
+                return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
+
+            })
+            ->orderBy('clinics.updated_at', 'DESC')
+            ->get();
+        if ($orderBy == 'rate') {
+            if ($sort == 'asc') {
+                $sorted = $data->sortBy('totalRate.total_rate');
+            } else {
+                $sorted = $data->sortByDesc('totalRate.total_rate');
+            }
+        } elseif($orderBy) {
+            $sorted = $data;
+        } else {
+            $sorted = $data->sortBy('premium.priority');
+        }
+        return self::paginate($sorted, 10, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 
 

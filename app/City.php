@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
+    public $timestamps = false;
+
     public function region()
     {
         return $this->belongsTo(Region::class);
@@ -27,6 +29,6 @@ class City extends Model
 
     public function beautyCenters()
     {
-        return $this->hasMany(BeautyCenter::class);
+        return $this->hasMany(CosmeticClinic::class);
     }
 }

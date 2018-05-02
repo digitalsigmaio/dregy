@@ -9,7 +9,6 @@ class CreateClinicsTable extends Migration
     /**
      * Run the migrations.
      *
-     * @todo medical centers structure
      * @return void
      */
     public function up()
@@ -20,10 +19,8 @@ class CreateClinicsTable extends Migration
             $table->unsignedInteger('admin_id');
             $table->string('ar_name');
             $table->string('en_name');
-            $table->string('ar_slug');
-            $table->string('en_slug');
+            $table->string('slug');
             $table->unsignedInteger('degree_id');
-            $table->unsignedInteger('speciality_id');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('city_id');
             $table->string('ar_address');
@@ -35,7 +32,6 @@ class CreateClinicsTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->string('img')->nullable();
-            $table->boolean('premium')->default(false);
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();
             $table->softDeletes();
@@ -43,7 +39,6 @@ class CreateClinicsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->foreign('degree_id')->references('id')->on('degrees');
-            $table->foreign('speciality_id')->references('id')->on('specialities');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('city_id')->references('id')->on('cities');
         });

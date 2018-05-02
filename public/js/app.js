@@ -14313,7 +14313,14 @@ window.Vue = __webpack_require__(41);
 Vue.component('example-component', __webpack_require__(44));
 
 Vue.component('top-clients', __webpack_require__(47));
-Vue.component('last-items', __webpack_require__(94));
+Vue.component('main-jobs', __webpack_require__(50));
+Vue.component('last-products', __webpack_require__(53));
+Vue.component('job-ads-list', __webpack_require__(56));
+Vue.component('product-ads-list', __webpack_require__(59));
+Vue.component('hospitals-list', __webpack_require__(62));
+Vue.component('clinics-list', __webpack_require__(65));
+Vue.component('cosmetics-list', __webpack_require__(68));
+Vue.component('pharmacies-list', __webpack_require__(71));
 
 Vue.component('passport-clients', __webpack_require__(74));
 
@@ -52924,11 +52931,85 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['hospitals', 'pharmacies', 'clinics'],
     data: function data() {
-        return {};
+        return {
+            hospitals: {},
+            pharmacies: {},
+            clinics: {},
+            cosmetics: {}
+        };
     },
 
     methods: {
@@ -52941,7 +53022,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 return 'grey-text';
             }
+        },
+        fetchData: function fetchData() {
+            var vm = this;
+            axios.get('/api/top-clients').then(function (response) {
+                var res = response.data;
+                vm.hospitals = res.hospitals;
+                vm.pharmacies = res.pharmacies;
+                vm.clinics = res.clinics;
+                vm.cosmetics = res.cosmetics;
+            }).catch(function (response) {
+                console.log(response);
+            });
         }
+    },
+    mounted: function mounted() {
+        this.fetchData();
     }
 });
 
@@ -52962,7 +53058,7 @@ var render = function() {
           "div",
           {
             staticClass: "tab-pane fade in show active ",
-            attrs: { id: "panel5", role: "tabpanel" }
+            attrs: { id: "hospitals", role: "tabpanel" }
           },
           [
             _c("br"),
@@ -52975,7 +53071,7 @@ var render = function() {
                   _c("div", { staticClass: "card card-ecommerce" }, [
                     _c("div", { staticClass: "view overlay" }, [
                       _c("img", {
-                        staticClass: "img-fluid m-auto",
+                        staticClass: "img-fluid",
                         attrs: { src: hospital.img, alt: "sample image" }
                       }),
                       _vm._v(" "),
@@ -52983,22 +53079,30 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title mb-1" }, [
-                        _c("strong", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dark-grey-text",
-                              attrs: { href: "" }
-                            },
-                            [_vm._v(_vm._s(hospital.en_name))]
-                          )
-                        ])
-                      ]),
+                      _c(
+                        "h5",
+                        { staticClass: "card-title mb-1 text-truncate" },
+                        [
+                          _c("strong", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dark-grey-text",
+                                attrs: { href: "" }
+                              },
+                              [_vm._v(_vm._s(hospital.en_name))]
+                            )
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "badge badge-danger mb-2" }, [
-                        _vm._v("bestseller")
-                      ]),
+                      hospital.premium != null
+                        ? _c(
+                            "span",
+                            { staticClass: "badge badge-primary mb-2 p-2" },
+                            [_vm._v("Featured")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "ul",
@@ -53007,7 +53111,7 @@ var render = function() {
                           return _c("li", [
                             _c("i", {
                               staticClass: "fa fa-star",
-                              class: _vm.starColor(n, hospital.rate)
+                              class: _vm.starColor(n, hospital.rate.value)
                             })
                           ])
                         })
@@ -53016,7 +53120,9 @@ var render = function() {
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
                           _c("span", { staticClass: "float-left" }, [
-                            _c("strong", [_vm._v(_vm._s(hospital.user.name))])
+                            _c("strong", [
+                              _vm._v(_vm._s(hospital.favorites.count))
+                            ])
                           ]),
                           _vm._v(" "),
                           _vm._m(2, true)
@@ -53034,7 +53140,7 @@ var render = function() {
           "div",
           {
             staticClass: "tab-pane fade",
-            attrs: { id: "panel6", role: "tabpanel" }
+            attrs: { id: "pharmacies", role: "tabpanel" }
           },
           [
             _c("br"),
@@ -53068,9 +53174,13 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "badge badge-danger mb-2" }, [
-                        _vm._v("bestseller")
-                      ]),
+                      pharmacy.premium != null
+                        ? _c(
+                            "span",
+                            { staticClass: "badge badge-primary mb-2 p-2" },
+                            [_vm._v("Featured")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "ul",
@@ -53079,7 +53189,7 @@ var render = function() {
                           return _c("li", [
                             _c("i", {
                               staticClass: "fa fa-star",
-                              class: _vm.starColor(n, pharmacy.rate)
+                              class: _vm.starColor(n, pharmacy.rate.value)
                             })
                           ])
                         })
@@ -53088,7 +53198,9 @@ var render = function() {
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
                           _c("span", { staticClass: "float-left" }, [
-                            _c("strong", [_vm._v(_vm._s(pharmacy.user.name))])
+                            _c("strong", [
+                              _vm._v(_vm._s(pharmacy.favorites.count))
+                            ])
                           ]),
                           _vm._v(" "),
                           _vm._m(4, true)
@@ -53106,7 +53218,7 @@ var render = function() {
           "div",
           {
             staticClass: "tab-pane fade",
-            attrs: { id: "panel7", role: "tabpanel" }
+            attrs: { id: "clinics", role: "tabpanel" }
           },
           [
             _c("br"),
@@ -53140,9 +53252,13 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "badge badge-danger mb-2" }, [
-                        _vm._v("bestseller")
-                      ]),
+                      clinic.premium != null
+                        ? _c(
+                            "span",
+                            { staticClass: "badge badge-primary mb-2 p-2" },
+                            [_vm._v("Featured")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "ul",
@@ -53151,7 +53267,7 @@ var render = function() {
                           return _c("li", [
                             _c("i", {
                               staticClass: "fa fa-star",
-                              class: _vm.starColor(n, clinic.rate)
+                              class: _vm.starColor(n, clinic.rate.value)
                             })
                           ])
                         })
@@ -53160,10 +53276,90 @@ var render = function() {
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
                           _c("span", { staticClass: "float-left" }, [
-                            _c("strong", [_vm._v(_vm._s(clinic.user.name))])
+                            _c("strong", [
+                              _vm._v(_vm._s(clinic.favorites.count))
+                            ])
                           ]),
                           _vm._v(" "),
                           _vm._m(6, true)
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              })
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "tab-pane fade",
+            attrs: { id: "cosmetics", role: "tabpanel" }
+          },
+          [
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row" },
+              _vm._l(_vm.cosmetics, function(cosmetic) {
+                return _c("div", { staticClass: "col-lg-4 col-md-12 mb-4" }, [
+                  _c("div", { staticClass: "card card-ecommerce" }, [
+                    _c("div", { staticClass: "view overlay" }, [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto",
+                        attrs: { src: cosmetic.img, alt: "sample image" }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(7, true)
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title mb-1" }, [
+                        _c("strong", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dark-grey-text",
+                              attrs: { href: "" }
+                            },
+                            [_vm._v(_vm._s(cosmetic.en_name))]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      cosmetic.premium != null
+                        ? _c(
+                            "span",
+                            { staticClass: "badge badge-primary mb-2 p-2" },
+                            [_vm._v("Featured")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "rating" },
+                        _vm._l(5, function(n) {
+                          return _c("li", [
+                            _c("i", {
+                              staticClass: "fa fa-star",
+                              class: _vm.starColor(n, cosmetic.rate.value)
+                            })
+                          ])
+                        })
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer pb-0" }, [
+                        _c("div", { staticClass: "row mb-0" }, [
+                          _c("span", { staticClass: "float-left" }, [
+                            _c("strong", [
+                              _vm._v(_vm._s(cosmetic.favorites.count))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(8, true)
                         ])
                       ])
                     ])
@@ -53185,7 +53381,7 @@ var staticRenderFns = [
     return _c(
       "ul",
       {
-        staticClass: "nav nav-tabs nav-justified grey lighten-3 mx-0",
+        staticClass: "nav nav-tabs nav-justified sky-gradient mx-0",
         attrs: { role: "tablist" }
       },
       [
@@ -53193,8 +53389,8 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "nav-link active dark-grey-text font-weight-bold",
-              attrs: { "data-toggle": "tab", href: "#panel5", role: "tab" }
+              staticClass: "nav-link active white-text font-weight-bold",
+              attrs: { "data-toggle": "tab", href: "#hospitals", role: "tab" }
             },
             [_vm._v("Hospitals")]
           )
@@ -53204,8 +53400,8 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "nav-link dark-grey-text font-weight-bold",
-              attrs: { "data-toggle": "tab", href: "#panel6", role: "tab" }
+              staticClass: "nav-link white-text font-weight-bold",
+              attrs: { "data-toggle": "tab", href: "#pharmacies", role: "tab" }
             },
             [_vm._v("Pharmacies")]
           )
@@ -53215,10 +53411,21 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "nav-link dark-grey-text font-weight-bold",
-              attrs: { "data-toggle": "tab", href: "#panel7", role: "tab" }
+              staticClass: "nav-link white-text font-weight-bold",
+              attrs: { "data-toggle": "tab", href: "#clinics", role: "tab" }
             },
             [_vm._v("Clinics")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link white-text font-weight-bold",
+              attrs: { "data-toggle": "tab", href: "#cosmetics", role: "tab" }
+            },
+            [_vm._v("Cosmetics")]
           )
         ])
       ]
@@ -53241,10 +53448,10 @@ var staticRenderFns = [
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "top",
-            title: "Owner"
+            title: "Add to Favorites"
           }
         },
-        [_c("i", { staticClass: "fa fa-user ml-3" })]
+        [_c("i", { staticClass: "fa fa-heart ml-3" })]
       )
     ])
   },
@@ -53268,7 +53475,7 @@ var staticRenderFns = [
             title: "Owner"
           }
         },
-        [_c("i", { staticClass: "fa fa-user ml-3" })]
+        [_c("i", { staticClass: "fa fa-heart ml-3" })]
       )
     ])
   },
@@ -53292,7 +53499,31 @@ var staticRenderFns = [
             title: "Owner"
           }
         },
-        [_c("i", { staticClass: "fa fa-user ml-3" })]
+        [_c("i", { staticClass: "fa fa-heart ml-3" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [_c("div", { staticClass: "mask rgba-white-slight" })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "float-right" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            "data-toggle": "tooltip",
+            "data-placement": "top",
+            title: "Owner"
+          }
+        },
+        [_c("i", { staticClass: "fa fa-heart ml-3" })]
       )
     ])
   }
@@ -53307,28 +53538,68 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */,
+/* 50 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\MainJobs.vue'");
+
+/***/ }),
 /* 51 */,
 /* 52 */,
-/* 53 */,
+/* 53 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\LastProducts.vue'");
+
+/***/ }),
 /* 54 */,
 /* 55 */,
-/* 56 */,
+/* 56 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\JobAds.vue'");
+
+/***/ }),
 /* 57 */,
 /* 58 */,
-/* 59 */,
+/* 59 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\ProductAds.vue'");
+
+/***/ }),
 /* 60 */,
 /* 61 */,
-/* 62 */,
+/* 62 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\Hospitals.vue'");
+
+/***/ }),
 /* 63 */,
 /* 64 */,
-/* 65 */,
+/* 65 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\Clinics.vue'");
+
+/***/ }),
 /* 66 */,
 /* 67 */,
-/* 68 */,
+/* 68 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\CosmeticClinics.vue'");
+
+/***/ }),
 /* 69 */,
 /* 70 */,
-/* 71 */,
+/* 71 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\projects\\dregy\\resources\\assets\\js\\components\\Pharmacies.vue'");
+
+/***/ }),
 /* 72 */,
 /* 73 */,
 /* 74 */
@@ -55495,446 +55766,6 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(95)
-/* template */
-var __vue_template__ = __webpack_require__(96)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\LastItems.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8e484f3a", Component.options)
-  } else {
-    hotAPI.reload("data-v-8e484f3a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 95 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            endpoint: '/api/product-ads',
-            products: {},
-            links: {},
-            pagination: {}
-        };
-    },
-
-    methods: {
-        fetchProducts: function fetchProducts() {
-            var vm = this;
-            axios.get(vm.endpoint).then(function (response) {
-                var res = response.data;
-                vm.products = res.data;
-                vm.links = res.links;
-                vm.pagination = res.meta;
-                vm.endpoint = res.meta.path + '?page=' + vm.pagination.current_page;
-            }).catch(function (response) {
-                console.log(response);
-            });
-        },
-        changeEndpoint: function changeEndpoint(page) {
-            var url = this.pagination.path + '?page=' + page;
-            this.endpoint = url;
-            return this.fetchProducts();
-        },
-        navigate: function navigate(url) {
-            this.endpoint = url;
-            return this.fetchProducts();
-        }
-    },
-    mounted: function mounted() {
-        this.fetchProducts();
-    }
-});
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.products, function(product) {
-        return _c("div", { staticClass: "col-lg-3 col-md-6 mb-4" }, [
-          _c("div", { staticClass: "card card-ecommerce" }, [
-            _c("div", { staticClass: "view overlay" }, [
-              _c("img", {
-                staticClass: "img-fluid",
-                attrs: { src: product.img, alt: "sample image" }
-              }),
-              _vm._v(" "),
-              _vm._m(0, true)
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title mb-1" }, [
-                _c("strong", [
-                  _c(
-                    "a",
-                    { staticClass: "dark-grey-text", attrs: { href: "" } },
-                    [_vm._v(_vm._s(product.title))]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge badge-danger mb-2" }, [
-                _vm._v(_vm._s(product.status))
-              ]),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "rating" },
-                _vm._l(product.phone, function(phone) {
-                  return _c("li", { staticClass: "text-grey" }, [
-                    _c("i", { staticClass: "fa fa-phone blue-text" }),
-                    _vm._v(" "),
-                    _c("strong", [_vm._v(_vm._s(phone))])
-                  ])
-                })
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer pb-0" }, [
-                _c("div", { staticClass: "row mb-0" }, [
-                  _c("span", { staticClass: "float-left" }, [
-                    _c("strong", [_vm._v(_vm._s(product.price) + "$")])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1, true)
-                ])
-              ])
-            ])
-          ])
-        ])
-      })
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center mb-4" }, [
-      _c("nav", { staticClass: "mb-4" }, [
-        _c(
-          "ul",
-          { staticClass: "pagination pagination-circle pg-blue mb-0" },
-          [
-            _c("li", { staticClass: "page-item clearfix d-none d-md-block" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link waves-effect waves-effect",
-                  class: {
-                    disabled:
-                      _vm.endpoint == _vm.links.first ||
-                      _vm.endpoint == _vm.pagination.path
-                  },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.changeEndpoint(1)
-                    }
-                  }
-                },
-                [_vm._v("First")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link waves-effect waves-effect",
-                  class: { disabled: _vm.links.prev == null },
-                  attrs: { "aria-label": "Previous" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.navigate(_vm.links.prev)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("«")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.pagination.last_page, function(n) {
-              return _c(
-                "li",
-                {
-                  staticClass: "page-item",
-                  class: { active: n == _vm.pagination.current_page }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link waves-effect waves-effect",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.changeEndpoint(n)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(n))]
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link waves-effect waves-effect",
-                  class: { disabled: _vm.links.next == null },
-                  attrs: { "aria-label": "Next" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.navigate(_vm.links.next)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("»")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item clearfix d-none d-md-block" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link waves-effect waves-effect",
-                  class: { disabled: _vm.endpoint == _vm.links.last },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.changeEndpoint(_vm.pagination.last_page)
-                    }
-                  }
-                },
-                [_vm._v("Last")]
-              )
-            ])
-          ],
-          2
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [_c("div", { staticClass: "mask rgba-white-slight" })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "float-right" }, [
-      _c(
-        "a",
-        {
-          attrs: {
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            title: "Add to Cart"
-          }
-        },
-        [_c("i", { staticClass: "fa fa-shopping-cart ml-3" })]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8e484f3a", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

@@ -14,19 +14,29 @@
 
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
-    Route::get('/', function () {
-        $h = \App\Hospital::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
+    Route::get('/', 'MainPageController@index')->name('main');
 
-        $p = \App\Pharmacy::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
 
-        $c = \App\Clinic::with(['rates', 'user'])->inRandomOrder()->get()->take(3);
 
-        $hospitals = json_encode(new \App\Http\Resources\HospitalCollection($h));
-        $pharmacies = json_encode(new \App\Http\Resources\PharmacyCollection($p));
-        $clinics = json_encode(new \App\Http\Resources\ClinicCollection($c));
 
-        return view('layouts.main', compact(['hospitals', 'pharmacies', 'clinics']));
-    });
+    // Job Ads
+    Route::get('/jobs', 'JobAdController@index')->name('jobs');
+    Route::get('/u/{user}/jobs/{jobAd}', 'JobAdController@show');
+
+    // ProductAds
+    Route::get('/products', 'ProductAdController@index')->name('products');
+
+    // Hospitals
+    Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
+
+    // Clinics
+    Route::get('/clinics', 'ClinicController@index')->name('clinics');
+
+    // Cosmetic Clinics
+    Route::get('/cosmetic-clinics', 'CosmeticClinicController@index')->name('cosmetics');
+
+    // Pharmacies
+    Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
 
 
 
@@ -36,7 +46,11 @@ Route::middleware('language')->group(function () {
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
+
     Auth::routes();
+    Route::get('/comingsoon', function () {
+        return view('comingsoon');
+    });
 
 
 

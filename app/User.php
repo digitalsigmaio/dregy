@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function beautyCenters()
     {
-        return $this->hasMany(BeautyCenter::class);
+        return $this->hasMany(CosmeticClinic::class);
     }
 
     public function productAds()
@@ -66,85 +66,22 @@ class User extends Authenticatable
         return $this->hasMany(JobAd::class);
     }
 
-    public function hospitalViews()
+    public function favorites()
     {
-        return $this->hasMany(HospitalView::class);
+        return $this->hasMany(Favorite::class);
     }
 
-    public function clinicViews()
+    public function views()
     {
-        return $this->hasMany(ClinicView::class);
+        return $this->hasMany(View::class);
     }
 
-    public function pharmacyViews()
+    public function rates()
     {
-        return $this->hasMany(PharmacyView::class);
+        return $this->hasMany(Rate::class);
     }
 
-    public function beautyCenterViews()
-    {
-        return $this->hasMany(BeautyCenterView::class);
-    }
 
-    public function productAdViews()
-    {
-        return $this->hasMany(ProductAdView::class);
-    }
-
-    public function jobAdViews()
-    {
-        return $this->hasMany(JobAdView::class);
-    }
-
-    public function hospitalFavs()
-    {
-        return $this->hasMany(HospitalFav::class);
-    }
-
-    public function clinicFavs()
-    {
-        return $this->hasMany(ClinicFav::class);
-    }
-
-    public function pharmacyFavs()
-    {
-        return $this->hasMany(PharmacyFav::class);
-    }
-
-    public function beautyCenterFavs()
-    {
-        return $this->hasMany(BeautyCenterFav::class);
-    }
-
-    public function productAdFavs()
-    {
-        return $this->hasMany(ProductAdFav::class);
-    }
-
-    public function jobAdFavs()
-    {
-        return $this->hasMany(JobAdFav::class);
-    }
-
-    public function hospitalRates()
-    {
-        return $this->hasMany(HospitalRate::class);
-    }
-
-    public function clinicRates()
-    {
-        return $this->hasMany(ClinicRate::class);
-    }
-
-    public function pharmacyRates()
-    {
-        return $this->hasMany(PharmacyRate::class);
-    }
-
-    public function beautyCenterRates()
-    {
-        return $this->hasMany(BeautyCenterRate::class);
-    }
 
     public function deviceTokens()
     {
