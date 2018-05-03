@@ -475,7 +475,6 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/mdb.min.js') }}"></script>
 <script src="{{ asset('js/wow.min.js') }}"></script>
-
 <script>
     // Material Select Initialization
     $(document).ready(function () {
@@ -498,6 +497,7 @@
 
 
 </script>
+@yield('scripts')
 </body>
 
 </html>

@@ -400,12 +400,11 @@
 <script>
 
     export default {
-        props: ['filters'],
+        props: ['filters', 'hospitals'],
         data () {
             return {
                 endpoint: '/api/hospitals/search',
                 isFav: false,
-                hospitals: {},
                 links: {},
                 pagination: {},
                 search: {

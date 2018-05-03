@@ -2,6 +2,6 @@
 
 @section('content')
 
-   <hospitals-list :filters="{{ $filtersJson }}"></hospitals-list>
+   <hospitals-list :filters="{{ $filtersJson }}" :hospitals="{{ $hospitals }}"></hospitals-list>
 
 @endsection

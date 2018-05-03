@@ -18,7 +18,6 @@ Route::middleware('language')->group(function () {
 
 
 
-
     // Job Ads
     Route::get('/jobs', 'JobAdController@index')->name('jobs');
     Route::get('/u/{user}/jobs/{jobAd}', 'JobAdController@show');
@@ -52,6 +51,13 @@ Route::middleware('language')->group(function () {
         return view('comingsoon');
     });
 
+
+    Route::get('/test', function () {
+        $jobs = \App\Hospital::whereHas('rates', function($query) {
+            $query->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as')->whereBetween('', ['2', '3']);
+        })->get();
+        return $jobs;
+});
 
 
 

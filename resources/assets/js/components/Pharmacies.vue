@@ -402,14 +402,15 @@
         props: ['filters'],
         data () {
             return {
+                pharmacies: {},
                 endpoint: '/api/pharmacies/search',
                 isFav: false,
-                pharmacies: {},
                 links: {},
                 pagination: {},
                 search: {
                     region: '',
                     city: '',
+                    pharmacies: {},
                     keyword: '',
                     fullDay: false,
                     delivery: false,
@@ -434,26 +435,20 @@
                     .then(function (response) {
                         $('.fetching').hide();
                         $('.pharmacies').show();
-                        if (typeof response.data.data !== 'undefined') {
-                            let data = response.data;
-                            vm.pharmacies = data.data;
-                            vm.links = data.links;
-                            vm.pagination = data.meta;
-                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                        } else if (typeof response.status !== 'undefined') {
-                            vm.pharmacies = null;
-                            console.log(response.data.message)
-                        }
-
+                        let data = response.data;
+                        vm.pharmacies = data.data;
+                        vm.links = data.links;
+                        vm.pagination = data.meta;
+                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                     })
-                    .catch((response) => {
-                        console.log(response);
+                    .catch((e) => {
+                        console.log(e.response);
                     });
             },
             changeEndpoint(page) {
                 let url = this.pagination.path + '?page=' + page;
-                let hospitalDiv = document.getElementById('hospitals');
-                hospitalDiv.scrollIntoView();
+                let pharmacyDiv = document.getElementById('pharmacies');
+                pharmacyDiv.scrollIntoView();
                 this.endpoint = url;
 
                 return this.fetchPharmacies();
@@ -509,7 +504,7 @@
             }, 100),
         },
         mounted() {
-            this.fetchPharmacies();
+            this.fetchPharmacies()
         },
         watch: {
             regionId: function (val) {
