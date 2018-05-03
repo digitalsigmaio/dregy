@@ -76,7 +76,7 @@ class CosmeticClinic extends Model
         $city = $request->city;
         $speciality = $request->speciality;
         $keyword = trim($request->keyword);
-        $rate = $request->rate;
+        $rating = $request->rate;
         $orderBy = $request->orderBy;
         $sort = $request->sort;
 
@@ -101,9 +101,9 @@ class CosmeticClinic extends Model
                     ->orWhere('ar_address', 'like', "%$keyword%")
                     ->orWhere('en_address', 'like', "%$keyword%");
             })
-            ->when($rate, function ($query) use ($rate) {
-                return $query->whereHas('rates', function ($query) use ($rate) {
-                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rate);
+            ->when($rating, function ($query) use ($rating) {
+                return $query->whereHas('rates', function ($query) use ($rating) {
+                    $query->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) = $rating")->groupBy('rateable_id');
                 });
             })
             ->when($speciality, function ($query) use ($speciality) {

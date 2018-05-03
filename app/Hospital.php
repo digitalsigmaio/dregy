@@ -104,7 +104,7 @@ class Hospital extends Model
             })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
-                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rating);
+                    $query->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) = $rating")->groupBy('rateable_id');
                 });
             })
             ->when($speciality, function ($query) use ($speciality) {
