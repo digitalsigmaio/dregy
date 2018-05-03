@@ -103,7 +103,7 @@ class Pharmacy extends Model
             })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
-                    $query->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) = $rating")->groupBy('rateable_id');
+                    $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
                 });
             })
             ->when($fullDay, function ($query){
