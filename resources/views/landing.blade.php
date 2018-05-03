@@ -17,58 +17,13 @@
                     <!--Grid column-->
                     <div class="col-lg-4 col-md-12 mb-4">
 
-                        <!-- Section: Categories -->
-                        <section class="section">
 
-                            <ul class="list-group z-depth-1">
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-laptop dark-grey-text mr-2" aria-hidden="true"></i> Laptops</a>
-                                    <a href=""></a>
-                                    <span class="badge badge-danger badge-pill">43</span>
-                                    </a>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-mobile-phone dark-grey-text mr-3" aria-hidden="true"></i> Smartphone</a>
-                                    <span class="badge badge-danger badge-pill">32</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-tablet dark-grey-text mr-3" aria-hidden="true"></i> Tablet</a>
-                                    <span class="badge badge-danger badge-pill">18</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-headphones dark-grey-text mr-3" aria-hidden="true"></i>Heahphones</a>
-                                    <span class="badge badge-danger badge-pill">37</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-camera-retro dark-grey-text mr-3" aria-hidden="true"></i>Camera</a>
-                                    <span class="badge badge-danger badge-pill">15</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-suitcase dark-grey-text mr-3" aria-hidden="true"></i>Accesories</a>
-                                    <span class="badge badge-danger badge-pill">64</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a class="dark-grey-text font-small">
-                                        <i class="fa fa-television dark-grey-text mr-3" aria-hidden="true"></i>TV</a>
-                                    <span class="badge badge-danger badge-pill">2</span>
-                                </li>
-                            </ul>
-
-                        </section>
-                        <!-- Section: Categories -->
 
                     </div>
                     <!--Grid column-->
 
                     <!--Grid column-->
-                    <div class="col-lg-8 col-md-12 pb-lg-5 mb-4">
+                    <div class="col-lg-12 col-md-12 pb-lg-5 mb-4">
                         <!--Image -->
                         <div class="view zoom z-depth-1">
 
@@ -102,7 +57,7 @@
             <!--Section: Featured medical index-->
             <section>
 
-                <top-clients></top-clients>
+                @include('topClients')
 
             </section>
             <!--Section: Featured medical index-->
@@ -149,12 +104,12 @@
             <!--Section: job list-->
             <section class="mb-5">
 
-                <main-jobs></main-jobs>
+                @include('mainJobs')
 
             </section>
-            <!--/Section: product list-->
+            <!--/Section: job list-->
 
-            <!--Section: Last items-->
+            <!--Section: Last products-->
             <section>
 
                 <h4 class="font-weight-bold mt-4 dark-grey-text">
@@ -162,9 +117,9 @@
                 </h4>
                 <hr class="mb-5">
 
-                <last-products></last-products>
+                @include('lastProducts')
             </section>
-            <!-- /.Section: Last items -->
+            <!-- /.Section: Last products -->
 
         </div>
         <!-- /.Content -->

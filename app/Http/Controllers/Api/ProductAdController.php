@@ -98,9 +98,7 @@ class ProductAdController extends Controller
         if (count($productAds)) {
             return new ProductAdCollection($productAds);
         } else {
-            return response()->json([
-                'message' => 'Nothing found'
-            ], 200);
+            return null;
         }
     }
 }

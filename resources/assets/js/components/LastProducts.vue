@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="lastProducts" v-cloak>
         <!-- Grid row -->
         <div class="row">
 

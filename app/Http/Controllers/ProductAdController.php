@@ -13,13 +13,12 @@ class ProductAdController extends Controller
         $regions = Region::with('cities')->get();
         $categories = ProductAdCategory::all();
         $status = ['new', 'used'];
-        $filters = [
+        $filters = collect([
             'regions' => $regions,
             'categories' => $categories,
             'status' => $status
-        ];
-        $filtersJson = json_encode($filters);
+        ]);
 
-        return view('products', compact(['filtersJson']));
+        return view('products', compact(['filters']));
     }
 }

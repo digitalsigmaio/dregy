@@ -38,7 +38,6 @@ class PharmacyResource extends JsonResource
             ],
             'favorites' => [
                 'count' => $this->favorites->count(),
-                'users_id' => $this->favorites->pluck('user_id')
             ],
             'views' => $this->views->count(),
             'created_at' => $this->created_at->toFormattedDateString(),

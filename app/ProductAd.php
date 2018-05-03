@@ -54,11 +54,6 @@ class ProductAd extends Model
         return $this->morphOne(Offer::class, 'offerable');
     }
 
-    public function getViewsAttribute()
-    {
-        return $this->views()->count();
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';
@@ -99,22 +94,22 @@ class ProductAd extends Model
             ->when($category, function ($query) use ($category) {
                 return $query->where('product_ad_category_id', $category);
             })
-            ->when($orderBy, function ($query) use ($orderBy, $sort) {
-                if ($orderBy == 'price'){
-                    return $query->orderByRaw("length($orderBy) $sort, $orderBy $sort");
-                } else {
-                    return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
-                }
+            ->when($orderBy && $orderBy == 'price', function ($query) use ($sort){
+                return $query->orderByRaw("price - length(price) $sort");
             })
-            ->orderBy('product_ads.updated_at', 'DESC')
+            ->when($orderBy && $orderBy != 'price', function ($query) use ($orderBy, $sort) {
+                return $query->orderBy($orderBy, $sort);
+            }, function($query) {
+                return $query->orderBy('updated_at', 'DESC');
+            })
             ->get();
 
-        if ($orderBy){
+
+        if($orderBy) {
             $sorted = $data;
         } else {
             $sorted = $data->sortBy('premium.priority');
         }
-
-        return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
+        return self::paginate($sorted, 9, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 }

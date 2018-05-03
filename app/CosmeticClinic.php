@@ -42,12 +42,12 @@ class CosmeticClinic extends Model
 
     public function rates()
     {
-        return $this->morphMany(Rate::class, 'rateable');
+        return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as rating, COUNT(rate) as count, rateable_id')->groupBy('rateable_id');
     }
 
-    public function totalRate()
+    public function specialities()
     {
-        return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as total_rate');
+        return $this->hasMany(CosmeticClinicSpeciality::class);
     }
 
     public function phoneNumbers()
@@ -63,28 +63,6 @@ class CosmeticClinic extends Model
     public function offer()
     {
         return $this->morphOne(Offer::class, 'offerable');
-    }
-
-    public function specialities()
-    {
-        return $this->belongsToMany(Speciality::class);
-    }
-
-    public function getRateAttribute()
-    {
-        if ($this->rates()->exists()) {
-            $countOfRates = $this->rates->count();
-            $sumOfRates = $this->rates()->sum('rate');
-
-            return round(($sumOfRates / $countOfRates), 1);
-        } else {
-            return null;
-        }
-    }
-
-    public function getViewsAttribute()
-    {
-        return $this->views()->count();
     }
 
     public function getRouteKeyName()
@@ -130,24 +108,26 @@ class CosmeticClinic extends Model
             })
             ->when($speciality, function ($query) use ($speciality) {
                 return $query->whereHas('specialities', function ($query) use ($speciality) {
-                    $query->where('specialities.id', $speciality);
+                    $query->where('id', $speciality);
                 });
             })
-            ->when($orderBy && $orderBy != 'rate', function ($query) use ($orderBy, $sort) {
-
-                return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
-
-            })
-            ->orderBy('cosmetic_clinics.updated_at', 'DESC')
             ->get();
-        if ($orderBy == 'rate') {
-            if ($sort == 'asc') {
-                $sorted = $data->sortBy('totalRate.total_rate');
+
+
+        if($orderBy) {
+            if($sort == 'asc') {
+                if ($orderBy == 'rate') {
+                    $sorted = $data->sortBy('rates.rating');
+                } else {
+                    $sorted = $data->sortBy('updated_at');
+                }
             } else {
-                $sorted = $data->sortByDesc('totalRate.total_rate');
+                if ($orderBy == 'rate') {
+                    $sorted = $data->sortByDesc('rates.rating');
+                } else {
+                    $sorted = $data->sortByDesc('updated_at');
+                }
             }
-        } elseif($orderBy) {
-            $sorted = $data;
         } else {
             $sorted = $data->sortBy('premium.priority');
         }

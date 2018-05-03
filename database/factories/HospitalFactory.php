@@ -19,6 +19,6 @@ $factory->define(App\Hospital::class, function (Faker $faker) {
         'en_work_times' => 'From 9 a.m to 5 p.m',
         'website' => $faker->domainName,
         'email' => $faker->companyEmail,
-        'img' => $faker->imageUrl(640, 480),
+        'img' => '/img/hospitals/' . rand(1, 10) . '.jpg',
     ];
 });

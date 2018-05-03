@@ -18,8 +18,7 @@ class ClinicResource extends JsonResource
             'id' => $this->id,
             'ar_name' => $this->ar_name,
             'en_name' => $this->en_name,
-            'ar_slug' => $this->ar_slug,
-            'en_slug' => $this->en_slug,
+            'slug' => $this->slug,
             'region' => $this->region,
             'city' => $this->city,
             'ar_address' => $this->ar_address,
@@ -32,14 +31,13 @@ class ClinicResource extends JsonResource
             'premium' => $this->premium,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => [
-                'count' => $this->rates->count(),
-                'value' => $this->rate
+                'count' => $this->rates->count,
+                'value' => $this->rates->rating
             ],
             'favorites' => [
                 'count' => $this->favorites->count(),
-                'users_id' => $this->favorites->pluck('user_id')
             ],
-            'views' => $this->views,
+            'views' => $this->views->count(),
             'specialities' => $this->specialities,
             'degree_id' => $this->degree_id,
             'created_at' => $this->created_at->toFormattedDateString(),

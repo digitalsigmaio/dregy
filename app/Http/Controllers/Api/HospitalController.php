@@ -110,9 +110,7 @@ class HospitalController extends Controller
         if (count($hospitals)) {
             return new HospitalCollection($hospitals);
         } else {
-            return response()->json([
-                'message' => 'Nothing found'
-            ]);
+            return null;
         }
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClinicSpecialityTable extends Migration
+class CreateClinicSpecialitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateClinicSpecialityTable extends Migration
      */
     public function up()
     {
-        Schema::create('clinic_speciality', function (Blueprint $table) {
+        Schema::create('clinic_specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('clinic_id');
-            $table->unsignedInteger('speciality_id');
+            $table->string('ar_name');
+            $table->string('en_name');
 
             $table->foreign('clinic_id')->references('id')->on('clinics');
-            $table->foreign('speciality_id')->references('id')->on('specialities');
         });
     }
 

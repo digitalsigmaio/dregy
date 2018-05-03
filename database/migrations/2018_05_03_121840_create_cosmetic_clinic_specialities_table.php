@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCosmeticClinicSpecialityTable extends Migration
+class CreateCosmeticClinicSpecialitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCosmeticClinicSpecialityTable extends Migration
      */
     public function up()
     {
-        Schema::create('cosmetic_clinic_speciality', function (Blueprint $table) {
+        Schema::create('cosmetic_clinic_specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('cosmetic_clinic_id');
-            $table->unsignedInteger('speciality_id');
+            $table->string('ar_name');
+            $table->string('en_name');
 
             $table->foreign('cosmetic_clinic_id')->references('id')->on('cosmetic_clinics');
-            $table->foreign('speciality_id')->references('id')->on('specialities');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateCosmeticClinicSpecialityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cosmetic_clinic_speciality');
+        Schema::dropIfExists('cosmetic_clinic_specialities');
     }
 }

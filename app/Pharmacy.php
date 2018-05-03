@@ -65,20 +65,6 @@ class Pharmacy extends Model
         return $this->morphOne(Offer::class, 'offerable');
     }
 
-    public function getRateAttribute()
-    {
-        if ($this->rates()->exists()) {
-            $countOfRates = $this->rates->count();
-            $sumOfRates = $this->rates()->sum('rate');
-
-            return round(($sumOfRates / $countOfRates), 1);
-        } else {
-            return null;
-        }
-    }
-
-
-
     public function getRouteKeyName()
     {
         return 'slug';
@@ -121,12 +107,10 @@ class Pharmacy extends Model
                 });
             })
             ->when($fullDay, function ($query){
-                return $query->where('ar_work_times', 'like',  "%24%")
-                    ->orWhere('en_work_times', 'like', "%24%");
+                return $query->where('full_time', true);
             })
             ->when($delivery, function ($query){
-                return $query->where('ar_note', 'like',  "%توصيل%")
-                    ->orWhere('en_note', 'like', "%delivery%");
+                return $query->where('delivery', true);
             })
             ->get();
 

@@ -25,17 +25,16 @@ class JobAdController extends Controller
         $jobExperienceLevels = JobExperienceLevel::all();
         $jobEducationLevels = JobEducationLevel::all();
         $jobTypes = JobType::all();
-        $filters = [
+        $filters = collect([
             'regions' => $regions,
             'categories' => $categories,
             'empTypes' => $jobEmploymentTypes,
             'expLevels' => $jobExperienceLevels,
             'eduLevels' => $jobEducationLevels,
             'types' => $jobTypes
-        ];
-        $filtersJson = json_encode($filters);
+        ]);
 
-        return view('jobs', compact(['filtersJson']));
+        return view('jobs', compact(['filters']));
     }
 
     public function show(User $user, JobAd $jobAd){

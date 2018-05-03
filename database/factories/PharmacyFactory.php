@@ -21,6 +21,6 @@ $factory->define(App\Pharmacy::class, function (Faker $faker) {
         'full_time' => $faker->boolean(70),
         'website' => $faker->domainName,
         'email' => $faker->companyEmail,
-        'img' => $faker->imageUrl(640, 480),
+        'img' => '/img/pharmacies/' . rand(1, 10) . '.jpg',
     ];
 });

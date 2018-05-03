@@ -75,12 +75,6 @@ class JobAd extends Model
         return $this->belongsTo(JobEducationLevel::class, 'job_education_level_id');
     }
 
-
-    public function getViewsAttribute()
-    {
-        return $this->views()->count();
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';
@@ -136,24 +130,22 @@ class JobAd extends Model
             })
             ->when($educationLevel, function ($query) use ($educationLevel) {
                 return $query->where('job_education_level_id', $educationLevel);
+            })->when($orderBy && $orderBy == 'salary', function ($query) use ($sort){
+                return $query->orderByRaw("salary - length(salary) $sort");
             })
-            ->when($orderBy, function ($query) use ($orderBy, $sort) {
-                if ($orderBy == 'salary'){
-                    return $query->orderByRaw("length($orderBy) $sort, $orderBy $sort");
-                } else {
-                    return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
-                }
+            ->when($orderBy && $orderBy != 'salary', function ($query) use ($orderBy, $sort) {
+                return $query->orderBy($orderBy, $sort);
+            }, function($query) {
+                return $query->orderBy('updated_at', 'DESC');
             })
-            ->orderBy('job_ads.updated_at', 'DESC')
             ->get();
 
-        if ($orderBy){
+        if($orderBy) {
             $sorted = $data;
         } else {
             $sorted = $data->sortBy('premium.priority');
         }
-
-        return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
+        return self::paginate($sorted, 9, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 
 

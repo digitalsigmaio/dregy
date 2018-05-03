@@ -46,6 +46,11 @@ class Hospital extends Model
         return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as rating, COUNT(rate) as count, rateable_id')->groupBy('rateable_id');
     }
 
+    public function specialities()
+    {
+        return $this->hasMany(HospitalSpeciality::class);
+    }
+
     public function phoneNumbers()
     {
         return $this->morphMany(PhoneNumber::class, 'phonable');
@@ -59,24 +64,6 @@ class Hospital extends Model
     public function offer()
     {
         return $this->morphOne(Offer::class, 'offerable');
-    }
-
-    public function specialities()
-    {
-        return $this->belongsToMany(Speciality::class, 'hospital_speciality');
-    }
-
-
-    public function scopeByRate()
-    {
-        return Hospital::whereHas('rates', function ($query) {
-            $query->selectRaw();
-        });
-    }
-
-    public function getViewsAttribute()
-    {
-        return $this->views()->count();
     }
 
     public function getRouteKeyName()
@@ -122,24 +109,26 @@ class Hospital extends Model
             })
             ->when($speciality, function ($query) use ($speciality) {
                 return $query->whereHas('specialities', function ($query) use ($speciality) {
-                    $query->where('specialities.id', $speciality);
+                    $query->where('id', $speciality);
                 });
             })
-            ->when($orderBy && $orderBy != 'rate', function ($query) use ($orderBy, $sort) {
-
-                return $query->orderBy($orderBy, $sort != '' ? $sort : 'DESC');
-
-            })
-            ->orderBy('hospitals.updated_at', 'DESC')
             ->get();
-        if ($orderBy == 'rate') {
-            if ($sort == 'asc') {
-                $sorted = $data->sortBy('rates.rating');
+
+
+        if($orderBy) {
+            if($sort == 'asc') {
+                if ($orderBy == 'rate') {
+                    $sorted = $data->sortBy('rates.rating');
+                } else {
+                    $sorted = $data->sortBy('updated_at');
+                }
             } else {
-                $sorted = $data->sortByDesc('rates.rating');
+                if ($orderBy == 'rate') {
+                    $sorted = $data->sortByDesc('rates.rating');
+                } else {
+                    $sorted = $data->sortByDesc('updated_at');
+                }
             }
-        } elseif($orderBy) {
-            $sorted = $data;
         } else {
             $sorted = $data->sortBy('premium.priority');
         }

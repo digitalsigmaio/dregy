@@ -20,6 +20,7 @@ class ProductAdResource extends JsonResource
             'user_id' => $this->user_id,
             'title' => $this->title,
             'description' => $this->description,
+            'slug' => $this->slug,
             'status' => $this->status,
             'price' => $this->price,
             'ref_id' => $this->ref_id,
@@ -32,9 +33,8 @@ class ProductAdResource extends JsonResource
             'phone' => $this->phoneNumbers->pluck('number'),
             'favorites' => [
                 'count' => $this->favorites->count(),
-                'users_id' => $this->favorites->pluck('user_id')
             ],
-            'views' => $this->views,
+            'views' => $this->views->count(),
             'created_at' => $this->created_at->diffForHumans()
         ];
     }

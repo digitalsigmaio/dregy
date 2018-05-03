@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="row pt-4" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
         <div class="col-md-2">
@@ -192,7 +192,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-md-10" id="pharmacies">
+        <div class="col-md-10" id="pharmacies" v-cloak>
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -241,7 +241,7 @@
                     <div class="col-md-12 mb-4" v-for="pharmacy in pharmacies" >
 
                         <!--Card-->
-                        <div class="card" :class="{ 'z-depth-2' : mouseOver == pharmacy.id }" v-on:mouseover="mouseOver = pharmacy.id" v-on:mouseleave="mouseOver = null">
+                        <div class="card" :class="{ 'z-depth-2' : mouseOver == pharmacy.id }" @mouseover="mouseOver = pharmacy.id" v-on:mouseleave="mouseOver = null">
 
                             <div class="row">
                                 <!--Card image-->
@@ -395,7 +395,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         const app = new Vue({
             el: '#app',
@@ -408,7 +408,6 @@
                 search: {
                     region: '',
                     city: '',
-                    pharmacies: {},
                     keyword: '',
                     fullDay: false,
                     delivery: false,
@@ -471,7 +470,7 @@
                     }
                     this.fetchFilter(filter, '')
                 },
-                FilterOrderBy($rder, sort) {
+                FilterOrderBy(order, sort) {
                     let vm = this;
                     this.search.orderBy = order;
                     this.search.sort = sort;
@@ -508,21 +507,27 @@
                 regionId: function (val) {
                     this.search.city = '';
                     this.search.region = val;
+
                     let region = this.filters.regions.filter(function (region) { return region.id === val });
                     this.region = region.shift();
-                    this.regionName = this.region.en_name;
+                    if(this.region) {
+                        this.regionName = this.region.en_name;
+                    }
                     this.cityName = 'Choose Area';
                     this.endpoint = '/api/pharmacies/search';
                     this.fetchPharmacies();
                 },
                 cityId: function (val) {
                     this.search.city = val;
+
                     let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
-                    this.cityName = city.en_name;
+                    if(city) {
+                        this.cityName = city.en_name;
+                    }
                     this.endpoint = '/api/pharmacies/search';
                     this.fetchPharmacies();
                 },
             }
         });
     </script>
-@endsection
+@endpush

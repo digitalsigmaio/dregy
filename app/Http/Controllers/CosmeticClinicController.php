@@ -11,16 +11,12 @@ class CosmeticClinicController extends Controller
     public function index()
     {
         $regions = Region::with('cities')->get();
-        $specialities = CosmeticClinicSpeciality::join('specialities', 'cosmetic_clinic_speciality.speciality_id', '=', 'specialities.id')
-            ->select('specialities.id', 'specialities.en_name', 'specialities.ar_name')
-            ->groupBy('specialities.id', 'specialities.en_name', 'specialities.ar_name')
-            ->get();
-        $filters = [
+        $specialities = CosmeticClinicSpeciality::all();
+        $filters = collect([
             'regions' => $regions,
             'specialities' => $specialities,
-        ];
-        $filtersJson = json_encode($filters);
+        ]);
 
-        return view('cosmetics', compact(['filtersJson']));
+        return view('cosmetics', compact(['filters']));
     }
 }

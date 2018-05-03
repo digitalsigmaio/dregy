@@ -39,3 +39,5 @@ select {
 .nav-tabs .nav-link.active {
     background-color: rgba(255, 255, 255, .2);
 }
+
+[v-cloak] { display:none; }

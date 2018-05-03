@@ -35,9 +35,8 @@ class JobAdResource extends JsonResource
             'phone' => $this->phoneNumbers->pluck('number'),
             'favorites' => [
                 'count' => $this->favorites->count(),
-                'users_id' => $this->favorites->pluck('user_id')
             ],
-            'views' => $this->views,
+            'views' => $this->views->count(),
             'created_at' => $this->created_at->diffForHumans()
         ];
     }
