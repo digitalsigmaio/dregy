@@ -13,10 +13,9 @@ class PharmacyController extends Controller
     {
         $regions = Region::with('cities')->get();
 
-        $filters = [
+        $filters = collect([
             'regions' => $regions,
-        ];
-        $filtersJson = json_encode($filters);
-        return view('pharmacies', compact(['filtersJson']));
+        ]);
+        return view('pharmacies', compact(['filters']));
     }
 }
