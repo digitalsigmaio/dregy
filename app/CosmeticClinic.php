@@ -103,7 +103,7 @@ class CosmeticClinic extends Model
             })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
-                    $query->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) = $rating")->groupBy('rate', 'rateable_id');
+                    $query->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) = $rating")->groupBy('cosmetic_clinics.id');
                 });
             })
             ->when($speciality, function ($query) use ($speciality) {
