@@ -5,8 +5,8 @@
     <!-- Main Container -->
     <div class="container mt-5 pt-3">
 
-        <!--Section: Product detail -->
-        <section id="productDetails" class="pb-5">
+        <!--Section: Job detail -->
+        <section id="jobDetails" class="pb-5">
 
             <!--News card-->
             <div class="card mt-5 hoverable">
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </section>
-        <!-- /.Section: Product detail -->
+        <!-- /.Section: Job detail -->
 
         <div class="divider-new">
             <h3 class="h3-responsive font-weight-bold blue-text mx-3">Related Jobs</h3>
@@ -176,7 +176,7 @@
                                         <!--Card image-->
                                         <div class="view overlay">
                                             <img src="{{ $job->img }}" class="img-fluid" alt="">
-                                            <a href="/u/{{ $job->user_id }}/jobs/{{ $job->slug }}">
+                                            <a href="/jobs/{{ $job->id }}/{{ $job->slug }}">
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>
                                         </div>
@@ -186,7 +186,7 @@
                                         <div class="card-body">
                                             <!--Category & Title-->
 
-                                            <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">{{ $job->title }}</a></strong></h5>
+                                            <h5 class="card-title mb-1"><strong><a href="/jobs/{{ $job->id }}/{{ $job->slug }}" class="dark-grey-text">{{ $job->title }}</a></strong></h5>
                                             <span class="badge mb-2 p-2 {{
                                                 $job->type->en_name == 'Employer' ? 'blue-gradient' : 'aqua-gradient'
                                             }}">{{ $job->type->en_name }}</span>

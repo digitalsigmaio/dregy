@@ -37,10 +37,8 @@ class JobAdController extends Controller
         return view('jobs', compact(['filters']));
     }
 
-    public function show(User $user, JobAd $jobAd){
-        $category = $jobAd->category;
-
-        $relatedJobs = $category->jobAds()->inrandomOrder()->take(9)->get();
+    public function show(JobAd $jobAd, $slug){
+        $relatedJobs = $jobAd->category->jobAds()->inrandomOrder()->take(9)->get();
 
         $relatedJobsChunks = $relatedJobs->chunk(3);
 

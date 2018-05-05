@@ -20,7 +20,7 @@ Route::middleware('language')->group(function () {
 
     // Job Ads
     Route::get('/jobs', 'JobAdController@index')->name('jobs');
-    Route::get('/u/{user}/jobs/{jobAd}', 'JobAdController@show');
+    Route::get('/jobs/{jobAd}/{slug}', 'JobAdController@show');
 
     // ProductAds
     Route::get('/products', 'ProductAdController@index')->name('products');

@@ -65,11 +65,6 @@ class CosmeticClinic extends Model
         return $this->morphOne(Offer::class, 'offerable');
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     public static function fetch($request)
     {
         $region = $request->region;

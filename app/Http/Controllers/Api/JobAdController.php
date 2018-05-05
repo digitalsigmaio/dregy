@@ -71,7 +71,6 @@ class JobAdController extends Controller
     public function unfav(JobAd $jobAd, $id)
     {
         try {
-
             $jobAd->favorites()->whereUserId($id)->delete();
 
             return response()->json([

@@ -70,11 +70,6 @@ class Clinic extends Model
         return $this->belongsTo(Degree::class);
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     /**
      * @param $request
      * @return mixed
