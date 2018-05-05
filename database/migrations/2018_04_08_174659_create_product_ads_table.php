@@ -19,7 +19,7 @@ class CreateProductAdsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
-            $table->string('status');
+            $table->boolean('status');
             $table->string('price');
             $table->string('ref_id');
             $table->unsignedInteger('product_ad_category_id');

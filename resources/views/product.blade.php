@@ -24,8 +24,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="badge mb-2 p-2 {{
-                            $productAd->status == 'new' ? 'badge-success' : 'badge-warning'
-                        }}">{{ $productAd->status }}</span>
+                            $productAd->status == '1' ? 'badge-success' : 'badge-warning'
+                        }}">{{ $productAd->status == '1' ? 'New' : 'Used' }}</span>
                             </div>
                         </div>
                         @if($productAd->price)
@@ -118,7 +118,7 @@
 
             <!--Carousel Wrapper-->
             <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
+            @if(count($relatedProductsChunks) > 1)
                 <!--Controls-->
                 <div class="controls-top">
                     <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
@@ -129,75 +129,73 @@
                     </a>
                 </div>
                 <!--Controls-->
+            @endif
 
+            @if(count($relatedProductsChunks) > 1)
                 <!--Indicators-->
                 <ol class="carousel-indicators">
-                    <li class="primary-color" data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                    <li class="primary-color" data-target="#multi-item-example" data-slide-to="1"></li>
-                    <li class="primary-color" data-target="#multi-item-example" data-slide-to="2"></li>
+                    @for($i = 0; $i < count($relatedProductsChunks); $i++)
+                        <li class="primary-color {{ $i == 0 ? 'active': '' }}" data-target="#multi-item-example" data-slide-to="{{$i}}" ></li>
+                    @endfor
                 </ol>
                 <!--Indicators-->
-
+            @endif
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
 
-                    @for($i = 0; $i < 3; $i++)
+                    @for($i = 0; $i < count($relatedProductsChunks); $i++)
                         <div class="carousel-item {{ $i == 0 ? 'active': '' }}">
                         @foreach($relatedProductsChunks[$i] as $product)
-                                <div class="col-md-4 mb-4">
-                                    <!--Card-->
-                                    <div class="card card-ecommerce">
-
-                                        <!--Card image-->
-                                        <div class="view overlay">
-                                            <img src="{{ $product->img }}" class="img-fluid" alt="">
-                                            <a href="/u/{{ $product->user_id }}/jobs/{{ $product->slug }}">
-                                                <div class="mask rgba-white-slight"></div>
-                                            </a>
-                                        </div>
-                                        <!--Card image-->
-
-                                        <!--Card content-->
-                                        <div class="card-body">
-                                            <!--Category & Title-->
-
-                                            <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">{{ $product->title }}</a></strong></h5>
-                                            <span class="badge mb-2 p-2 {{
-                                                $product->type->en_name == 'Employer' ? 'blue-gradient' : 'aqua-gradient'
-                                            }}">{{ $product->type->en_name }}</span>
-                                            <!-- Rating -->
-                                            <ul class="rating">
-
-                                                @foreach($product->phoneNumbers as $phone)
-                                                    <li class="text-grey d-block">
-                                                        <i class="fa fa-phone blue-text"></i> <strong class="teal-text">{{ $phone->number }}</strong>
-                                                    </li>
-                                                @endforeach
-
-                                            </ul>
-
-
-
-                                            <!--Card footer-->
-                                            <div class="card-footer pb-0">
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">{{ $product->price }} L.E</strong></p>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="footer-address">
-                                                            {{ $product->created_at->diffForHumans() }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--Card content-->
-
+                            <!--Grid column-->
+                            <div class="col-md-4 mb-4">
+                                <!--Card-->
+                                <div class="card card-cascade narrower card-ecommerce">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img src="{{ $product->img }}" class="card-img-top" alt="sample photo">
+                                        <a href="/products/{{ $product->id }}/{{ $product->slug }}">
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
                                     </div>
-                                    <!--Card-->
+                                    <!--Card image-->
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+                                        <!--Category & Title-->
+                                        <a class="grey-text">
+                                            <h5>{{ $product->category->en_name }}</h5>
+                                        </a>
+                                        <h4 class="card-title">
+                                            <strong>
+                                                <a href="/products/{{ $product->id }}/{{ $product->slug }}">{{ $product->title }}</a>
+                                            </strong>
+                                        </h4>
+
+                                        <span class="badge mb-2 p-2 {{
+                                            $product->status == '1' ? 'badge-success' : 'badge-warning'
+                                        }}">{{ $product->status == '1' ? 'New' : 'Used'}}</span>
+
+                                        <!--Description-->
+                                        <p class="card-text">
+                                            {{ $product->description }}
+                                        </p>
+                                        <!--Card footer-->
+                                        <div class="card-footer">
+                                                <span class="float-left font-weight-bold">
+                                                  <strong>{{ $product->price }} L.E</strong>
+                                                </span>
+                                            <span class="float-right">
+                                                  <a data-toggle="tooltip" data-placement="top" title="Added to Favorite" class="light-green-text">
+                                                    <i class="fa fa-heart ml-3 pr-1 grey-text"></i> {{ $product->favorites->count() }}
+                                                  </a>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <!--Card content-->
                                 </div>
+                                <!--Card-->
+
+                            </div>
+                            <!--Grid column-->
                         @endforeach
                         </div>
                     @endfor

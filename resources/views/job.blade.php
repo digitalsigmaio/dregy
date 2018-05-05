@@ -137,31 +137,37 @@
             <h3 class="h3-responsive font-weight-bold blue-text mx-3">Related Jobs</h3>
         </div>
 
-        <!--Section: Products v.5-->
-        <section id="products" class="pb-5">
+        <!--Section: Jobs v.5-->
+        <section id="jobs" class="pb-5">
 
 
             <!--Carousel Wrapper-->
             <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
-                <!--Controls-->
-                <div class="controls-top">
-                    <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
-                        <i class="fa fa-chevron-left"></i>
-                    </a>
-                    <a class="btn-floating primary-color" href="#multi-item-example" data-slide="next">
-                        <i class="fa fa-chevron-right"></i>
-                    </a>
-                </div>
-                <!--Controls-->
+                @if(count($relatedJobsChunks) > 1)
 
-                <!--Indicators-->
-                <ol class="carousel-indicators">
-                    @for($i = 0; $i < count($relatedJobsChunks); $i++)
-                        <li class="primary-color" data-target="#multi-item-example" data-slide-to="{{$i}}" class="{{ $i == 0 ? 'active': '' }}"></li>
-                    @endfor
-                </ol>
-                <!--Indicators-->
+                    <!--Controls-->
+                        <div class="controls-top">
+                            <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
+                                <i class="fa fa-chevron-left"></i>
+                            </a>
+                            <a class="btn-floating primary-color" href="#multi-item-example" data-slide="next">
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                        <!--Controls-->
+
+                @endif
+
+                @if(count($relatedJobsChunks) > 1)
+                        <!--Indicators-->
+                        <ol class="carousel-indicators">
+                            @for($i = 0; $i < count($relatedJobsChunks); $i++)
+                                <li class="primary-color {{ $i == 0 ? 'active': '' }}" data-target="#multi-item-example" data-slide-to="{{$i}}"></li>
+                            @endfor
+                        </ol>
+                        <!--Indicators-->
+                @endif
 
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
@@ -234,7 +240,7 @@
             <!--Carousel Wrapper-->
 
         </section>
-        <!--Section: Products v.5-->
+        <!--Section: Jobs v.5-->
 
     </div>
     <!-- /.Main Container -->

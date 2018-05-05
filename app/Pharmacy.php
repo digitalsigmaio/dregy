@@ -65,6 +65,11 @@ class Pharmacy extends Model
         return $this->morphOne(Offer::class, 'offerable');
     }
 
+    public function getFeaturedAttribute()
+    {
+        return $this->premium->count() ? true : false;
+    }
+
     public static function fetch($request)
     {
         $region = $request->region;

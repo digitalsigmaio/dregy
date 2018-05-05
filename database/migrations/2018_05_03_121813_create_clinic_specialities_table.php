@@ -15,11 +15,8 @@ class CreateClinicSpecialitiesTable extends Migration
     {
         Schema::create('clinic_specialities', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('clinic_id');
             $table->string('ar_name');
             $table->string('en_name');
-
-            $table->foreign('clinic_id')->references('id')->on('clinics');
         });
     }
 

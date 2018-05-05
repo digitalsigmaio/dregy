@@ -26,7 +26,7 @@
                         </strong>
                     </h4>
 
-                    <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">@{{ product.status.toUpperCase() }}</span>
+                    <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == '1', 'badge-warning' : product.status == '2' }">@{{ product.status == '1' ? 'New' : 'Used' }}</span>
 
                     <!--Description-->
                     <p class="card-text">

@@ -179,7 +179,7 @@
                 </a>
             </div>
             <a class="navbar-brand font-weight-bold" href="#">
-                <strong>SHOP</strong>
+                <strong>Doctor Egypt</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -232,25 +232,9 @@
             <!--First slide-->
             <div class="carousel-item active">
                 <div class="view h-100">
-                    <img class="d-block h-100 w-lg-100" src="https://mdbootstrap.com/img/Photos/Others/ecommerce4.jpg" alt="First slide">
+                    <img class="d-block h-100 w-lg-100" src="/img/slider/2.jpg" alt="First slide">
                     <div class="mask">
-                        <!-- Caption -->
-                        <div class="full-bg-img flex-center white-text">
-                            <ul class="animated fadeIn col-10 list-unstyled">
-                                <li>
-                                    <p class="h1 red-text mb-4 mt-5">
-                                        <strong>Sale off 30% on every saturday!</strong>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h5 class="h5-responsive dark-grey-text font-weight-bold mb-5">Tempora incidunt ut labore et dolore veritatis et quasi architecto beatae</h5>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://mdbootstrap.com/getting-started/" class="btn btn-danger btn-rounded" rel="nofollow">See more!</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.Caption -->
+
                     </div>
                 </div>
             </div>
@@ -258,25 +242,9 @@
             <!--Second slide-->
             <div class="carousel-item h-100">
                 <div class="view h-100">
-                    <img class="d-block h-100 w-lg-100" src="https://mdbootstrap.com/img/Photos/Others/ecommerce2.jpg" alt="Second slide">
+                    <img class="d-block h-100 w-lg-100" src="/img/slider/1.jpg" alt="Second slide">
                     <div class="mask">
-                        <!-- Caption -->
-                        <div class="full-bg-img flex-center white-text">
-                            <ul class="animated fadeIn col-10 list-unstyled">
-                                <li>
-                                    <p class="h1 dark-grey-text mb-4">
-                                        <strong>Nemo enim ipsam voluptatem quia voluptas</strong>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h5 class="h5-responsive dark-grey-text font-weight-bold mb-5">Tempora incidunt ut labore et dolore veritatis et quasi architecto beatae</h5>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://mdbootstrap.com/bootstrap-tutorial/" class="btn btn-primary btn-rounded" rel="nofollow">Read more</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.Caption -->
+
                     </div>
                 </div>
             </div>
@@ -284,22 +252,8 @@
             <!--Third slide-->
             <div class="carousel-item">
                 <div class="view h-100">
-                    <img class="d-block h-100 w-lg-100" src="https://mdbootstrap.com/img/Photos/Others/ecommerce3.jpg" alt="Third slide">
+                    <img class="d-block h-100 w-lg-100" src="/img/slider/3.jpg" alt="Third slide">
                     <div class="mask">
-                        <!-- Caption -->
-                        <div class="full-bg-img flex-center white-text">
-                            <ul class="animated fadeIn col-md-10 text-center text-md-right list-unstyled">
-                                <li>
-                                    <p class="h1 blue-text mb-4 mt-5 pr-lg-5">
-                                        <strong>Sale off 20% on every headphones!</strong>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h5 class="h5-responsive dark-grey-text font-weight-bold mb-5 pr-lg-5">Tempora incidunt ut labore et dolore veritatis et quasi</h5>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.Caption -->
                     </div>
                 </div>
             </div>

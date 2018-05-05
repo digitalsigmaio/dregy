@@ -55,14 +55,14 @@
                             </div>
 
                             <div class="form-group mb-1">
-                                <input name="status" type="radio" id="statusNew" value="new"
-                                       @click="fetchFilter('status', 'new')">
+                                <input name="status" type="radio" id="statusNew" value="true"
+                                       @click="fetchFilter('status', '1')">
                                 <label for="statusNew" class="dark-grey-text">New</label>
                             </div>
 
                             <div class="form-group mb-1">
-                                <input name="status" type="radio" id="statusUsed" value="used"
-                                       @click="fetchFilter('status', 'used')">
+                                <input name="status" type="radio" id="statusUsed" value="false"
+                                       @click="fetchFilter('status', '2')">
                                 <label for="statusUsed" class="dark-grey-text">Used</label>
                             </div>
                             <!--Radio group-->
@@ -130,7 +130,7 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="product.img" class="card-img-top" alt="sample photo">
-                                <a>
+                                <a :href="'/products/' + product.id + '/' + product.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -138,16 +138,16 @@
                             <!--Card content-->
                             <div class="card-body text-center">
                                 <!--Category & Title-->
-                                <a href="" class="grey-text">
+                                <a class="grey-text">
                                     <h5>@{{ product.category.en_name }}</h5>
                                 </a>
                                 <h4 class="card-title">
                                     <strong>
-                                        <a href="">@{{ product.title }}</a>
+                                        <a :href="'/products/' + product.id + '/' + product.slug">@{{ product.title }}</a>
                                     </strong>
                                 </h4>
 
-                                <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">@{{ product.status.toUpperCase() }}</span>
+                                <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == '1', 'badge-warning' : product.status == '2' }">@{{ product.status == '1' ? 'New' : 'Used' }}</span>
 
                                 <!--Description-->
                                 <p class="card-text">

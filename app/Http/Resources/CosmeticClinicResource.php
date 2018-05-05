@@ -29,7 +29,7 @@ class CosmeticClinicResource extends JsonResource
             'website' => $this->website,
             'email' => $this->email,
             'img' => $this->img,
-            'premium' => $this->premium,
+            'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => [
                 'count' => $this->rates->count,

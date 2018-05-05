@@ -18,4 +18,14 @@ class PharmacyController extends Controller
         ]);
         return view('pharmacies', compact(['filters']));
     }
+
+    public function show(Pharmacy $pharmacy, $slug){
+        $relatedPharmacies = Pharmacy::where('full_time', $pharmacy->full_time)->where('delivery', $pharmacy->delivery)->inrandomOrder()->take(9)->get();
+        $relatedPharmacies = $relatedPharmacies->reject(function ($item) use ($pharmacy) {
+            return $item->id == $pharmacy->id;
+        });
+        $relatedPharmaciesChunks = $relatedPharmacies->chunk(3);
+
+        return view('pharmacy', compact(['pharmacy', 'relatedPharmaciesChunks']));
+    }
 }

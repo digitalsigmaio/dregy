@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CosmeticClinic;
 use App\CosmeticClinicSpeciality;
 use App\Region;
 use Illuminate\Http\Request;
@@ -18,5 +19,15 @@ class CosmeticClinicController extends Controller
         ]);
 
         return view('cosmetics', compact(['filters']));
+    }
+
+    public function show(CosmeticClinic $cosmeticClinic, $slug){
+        $relatedCosmeticClinics = $cosmeticClinic->specialities()->first()->cosmeticClinics()->inrandomOrder()->take(9)->get();
+        $relatedCosmeticClinics = $relatedCosmeticClinics->reject(function ($item) use ($cosmeticClinic) {
+            return $item->id == $cosmeticClinic->id;
+        });
+        $relatedCosmeticClinicsChunks = $relatedCosmeticClinics->chunk(3);
+
+        return view('cosmetic', compact(['cosmeticClinic', 'relatedCosmeticClinicsChunks']));
     }
 }

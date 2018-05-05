@@ -15,11 +15,10 @@ class CreateCosmeticClinicSpecialitiesTable extends Migration
     {
         Schema::create('cosmetic_clinic_specialities', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('cosmetic_clinic_id');
             $table->string('ar_name');
             $table->string('en_name');
 
-            $table->foreign('cosmetic_clinic_id')->references('id')->on('cosmetic_clinics');
+
         });
     }
 

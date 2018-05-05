@@ -27,12 +27,17 @@ class DatabaseSeeder extends Seeder
         factory('App\JobType', 2)->create();
         factory('App\JobEducationLevel', 6)->create();
 
+        factory('App\HospitalSpeciality', 10)->create();
+        factory('App\ClinicSpeciality', 8)->create();
+        factory('App\CosmeticClinicSpeciality', 6)->create();
+
         factory('App\Hospital', 30)->create()->each(function ($h){
             $h->phoneNumbers()->saveMany(factory('App\PhoneNumber', 2)->make());
             $h->favorites()->saveMany(factory('App\Favorite', rand(50, 100))->make());
             $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
             $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
+            $h->specialities()->attach(rand(1, 10));
         });
 
         factory('App\CosmeticClinic', 30)->create()->each(function ($h){
@@ -41,6 +46,7 @@ class DatabaseSeeder extends Seeder
             $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
             $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
+            $h->specialities()->attach(rand(1, 6));
         });
 
         factory('App\Clinic', 30)->create()->each(function ($h){
@@ -49,6 +55,7 @@ class DatabaseSeeder extends Seeder
             $h->views()->saveMany(factory('App\View', rand(100, 200))->make());
             $h->rates()->saveMany(factory('App\Rate', rand(50, 100))->make());
             $h->premium()->save(factory('App\Premium')->make());
+            $h->specialities()->attach(rand(1, 8));
         });
 
         factory('App\Pharmacy', 30)->create()->each(function ($h){
@@ -73,8 +80,6 @@ class DatabaseSeeder extends Seeder
             $h->premium()->save(factory('App\Premium')->make());
         });
 
-        factory('App\HospitalSpeciality', 10)->create();
-        factory('App\ClinicSpeciality', 10)->create();
-        factory('App\CosmeticClinicSpeciality', 10)->create();
+
     }
 }

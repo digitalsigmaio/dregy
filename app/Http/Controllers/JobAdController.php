@@ -39,7 +39,9 @@ class JobAdController extends Controller
 
     public function show(JobAd $jobAd, $slug){
         $relatedJobs = $jobAd->category->jobAds()->inrandomOrder()->take(9)->get();
-
+        $relatedJobs = $relatedJobs->reject(function ($item) use ($jobAd) {
+            return $item->id == $jobAd->id;
+        });
         $relatedJobsChunks = $relatedJobs->chunk(3);
 
         return view('job', compact(['jobAd', 'relatedJobsChunks']));

@@ -21,6 +21,8 @@ class PharmacyResource extends JsonResource
             'slug' => $this->slug,
             'region' => $this->region,
             'city' => $this->city,
+            'full_time' => $this->full_time,
+            'delivery' => $this->delivery,
             'ar_address' => $this->ar_address,
             'en_address' => $this->en_address,
             'ar_work_time' => $this->ar_work_time,
@@ -30,7 +32,7 @@ class PharmacyResource extends JsonResource
             'website' => $this->website,
             'email' => $this->email,
             'img' => $this->img,
-            'premium' => $this->premium,
+            'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => [
                 'count' => $this->rates->count,

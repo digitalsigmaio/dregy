@@ -48,7 +48,7 @@ class Hospital extends Model
 
     public function specialities()
     {
-        return $this->hasMany(HospitalSpeciality::class);
+        return $this->belongsToMany(HospitalSpeciality::class, 'hospital_speciality');
     }
 
     public function phoneNumbers()
@@ -64,6 +64,11 @@ class Hospital extends Model
     public function offer()
     {
         return $this->morphOne(Offer::class, 'offerable');
+    }
+
+    public function getFeaturedAttribute()
+    {
+        return $this->premium->count() ? true : false;
     }
 
     public static function fetch($request)
@@ -104,7 +109,7 @@ class Hospital extends Model
             })
             ->when($speciality, function ($query) use ($speciality) {
                 return $query->whereHas('specialities', function ($query) use ($speciality) {
-                    $query->where('id', $speciality);
+                    $query->where('hospital_speciality_id', $speciality);
                 });
             })
             ->get();

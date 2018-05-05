@@ -36,7 +36,7 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="hospital.img" class="img-fluid" alt="sample image">
-                                <a>
+                                <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -48,10 +48,10 @@
 
                                 <h5 class="card-title mb-1 text-truncate">
                                     <strong>
-                                        <a href="" class="dark-grey-text">@{{ hospital.en_name }}</a>
+                                        <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">@{{ hospital.en_name }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium != null">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">Featured</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -104,7 +104,7 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="pharmacy.img" class="img-fluid m-auto" alt="sample image">
-                                <a>
+                                <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -116,10 +116,10 @@
 
                                 <h5 class="card-title mb-1">
                                     <strong>
-                                        <a href="" class="dark-grey-text">@{{ pharmacy.en_name }}</a>
+                                        <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium != null">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium">Featured</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -170,7 +170,7 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="clinic.img" class="img-fluid m-auto" alt="sample image">
-                                <a>
+                                <a :href="'/clinics/' + clinic.id + '/' + clinic.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -182,10 +182,10 @@
 
                                 <h5 class="card-title mb-1">
                                     <strong>
-                                        <a href="" class="dark-grey-text">@{{ clinic.en_name }}</a>
+                                        <a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">@{{ clinic.en_name }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium != null">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium">Featured</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -237,7 +237,7 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="cosmetic.img" class="img-fluid m-auto" alt="sample image">
-                                <a>
+                                <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -249,10 +249,10 @@
 
                                 <h5 class="card-title mb-1">
                                     <strong>
-                                        <a href="" class="dark-grey-text">@{{ cosmetic.en_name }}</a>
+                                        <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">@{{ cosmetic.en_name }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium != null">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium">Featured</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">

@@ -24,8 +24,12 @@ class ProductAdController extends Controller
         return view('products', compact(['filters']));
     }
 
-    public function show(User $user, ProductAd $productAd){
+    public function show(ProductAd $productAd, $slug){
         $relatedProducts = $productAd->category->productAds()->inrandomOrder()->take(9)->get();
+
+        $relatedProducts = $relatedProducts->reject(function ($item) use ($productAd) {
+            return $item->id == $productAd->id;
+        });
 
         $relatedProductsChunks = $relatedProducts->chunk(3);
         return view('product', compact(['productAd', 'relatedProductsChunks']));

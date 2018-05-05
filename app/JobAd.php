@@ -75,6 +75,11 @@ class JobAd extends Model
         return $this->belongsTo(JobEducationLevel::class, 'job_education_level_id');
     }
 
+    public function getFeaturedAttribute()
+    {
+        return $this->premium->count() ? true : false;
+    }
+
     public static function fetch($request)
     {
         $region = $request->region;

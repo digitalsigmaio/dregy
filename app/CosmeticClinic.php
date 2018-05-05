@@ -47,7 +47,7 @@ class CosmeticClinic extends Model
 
     public function specialities()
     {
-        return $this->hasMany(CosmeticClinicSpeciality::class);
+        return $this->belongsToMany(CosmeticClinicSpeciality::class, 'cosmetic_clinic_speciality');
     }
 
     public function phoneNumbers()
@@ -63,6 +63,11 @@ class CosmeticClinic extends Model
     public function offer()
     {
         return $this->morphOne(Offer::class, 'offerable');
+    }
+
+    public function getFeaturedAttribute()
+    {
+        return $this->premium->count() ? true : false;
     }
 
     public static function fetch($request)
@@ -103,7 +108,7 @@ class CosmeticClinic extends Model
             })
             ->when($speciality, function ($query) use ($speciality) {
                 return $query->whereHas('specialities', function ($query) use ($speciality) {
-                    $query->where('id', $speciality);
+                    $query->where('cosmetic_clinic_speciality_id', $speciality);
                 });
             })
             ->get();
