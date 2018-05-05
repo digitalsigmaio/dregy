@@ -87,7 +87,7 @@ class JobAd extends Model
         $keyword = trim($request->keyword);
         $category = $request->category;
         $experienceLevel = $request->experienceLevel;
-        $employmentType = $request->employmenType;
+        $employmentType = $request->employmentType;
         $type = $request->type;
         $educationLevel = $request->educationLevel;
         $orderBy = $request->orderBy;
