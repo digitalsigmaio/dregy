@@ -9,7 +9,7 @@
                 <!--Card image-->
                 <div class="view overlay">
                     <img :src="product.img" class="card-img-top" alt="sample photo">
-                    <a>
+                    <a :href="'/products/' + product.id + '/' + product.slug">
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
@@ -22,7 +22,7 @@
                     </a>
                     <h4 class="card-title">
                         <strong>
-                            <a href="">@{{ product.title }}</a>
+                            <a :href="'/products/' + product.id + '/' + product.slug">@{{ product.title }}</a>
                         </strong>
                     </h4>
 
