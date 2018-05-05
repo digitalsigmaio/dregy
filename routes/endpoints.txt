@@ -1,0 +1,85 @@
+// Hospital
+
+get     /hospitals
+get     /hospitals/{hospital}
+post    /hospitals/{hospital}/users/{id}/fav
+delete  /hospitals/{hospital}/users/{id}/fav
+post    /hospitals/{hospital}/users/{id}/rate
+post    /hospitals/{hospital}/view
+post    /hospitals/search
+
+
+// Cosmetic Clinic
+
+get     /cosmetic-clinics
+get     /cosmetic-clinics/{cosmeticClinic}
+post    /cosmetic-clinics/{cosmeticClinic}/users/{id}/fav
+delete  /cosmetic-clinics/{cosmeticClinic}/users/{id}/fav
+post    /cosmetic-clinics/{cosmeticClinic}/users/{id}/rate
+post    /cosmetic-clinics/{cosmeticClinic}/view
+post    /cosmetic-clinics/search
+
+
+// Clinic
+
+get     /clinics
+get     /clinics/{clinic}
+post    /clinics/{clinic}/users/{id}/fav
+delete  /clinics/{clinic}/users/{id}/fav
+post    /clinics/{clinic}/users/{id}/rate
+post    /clinics/{clinic}/view
+post    /clinics/search
+
+
+// Pharmacy
+
+get     /pharmacies
+get     /pharmacies/{pharmacy}
+post    /pharmacies/{pharmacy}/users/{id}/fav
+delete  /pharmacies/{pharmacy}/users/{id}/fav
+post    /pharmacies/{pharmacy}/users/{id}/rate
+post    /pharmacies/{pharmacy}/view
+post    /pharmacies/search
+
+
+// Job Ad
+
+get     /job-ads
+get     /job-ads/{jobAd}
+post    /job-ads/{jobAd}/users/{id}/fav
+delete  /job-ads/{jobAd}/users/{id}/fav
+post    /job-ads/{jobAd}/view
+post    /job-ads/search
+
+
+
+// Product Ad
+
+get    /product-ads
+get    /product-ads/{productAd}
+post   /product-ads/{productAd}/users/{id}/fav
+delete /product-ads/{productAd}/users/{id}/fav
+post   /product-ads/{productAd}/view
+post   /product-ads/search
+
+
+// Misc
+
+get     /regions
+get     /cities
+get     /jobAdCategories
+get     /productAdCategories
+get     /degrees
+get     /hospitalSpecialities
+get     /clinicSpecialities
+get     /cosmeticClinicSpecialities
+get     /jobEducationLevels
+get     /jobEmploymentTypes
+get     /jobTypes
+get     /jobExperienceLevels
+
+get     /job-filters
+get     /job-filters-test
+
+get     /top-clients
+get     /job-list
