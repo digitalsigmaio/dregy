@@ -157,16 +157,16 @@
 
                 <!--Indicators-->
                 <ol class="carousel-indicators">
-                    <li class="primary-color" data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                    <li class="primary-color" data-target="#multi-item-example" data-slide-to="1"></li>
-                    <li class="primary-color" data-target="#multi-item-example" data-slide-to="2"></li>
+                    @for($i = 0; $i < count($relatedJobsChunks); $i++)
+                        <li class="primary-color" data-target="#multi-item-example" data-slide-to="{{$i}}" class="{{ $i == 0 ? 'active': '' }}"></li>
+                    @endfor
                 </ol>
                 <!--Indicators-->
 
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
 
-                    @for($i = 0; $i < 3; $i++)
+                    @for($i = 0; $i < count($relatedJobsChunks); $i++)
                         <div class="carousel-item {{ $i == 0 ? 'active': '' }}">
                         @foreach($relatedJobsChunks[$i] as $job)
                                 <div class="col-md-4 mb-4">

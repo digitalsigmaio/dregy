@@ -77,7 +77,7 @@ class Pharmacy extends Model
         $fullDay = $request->fullDay;
         $delivery = $request->delivery;
         $keyword = trim($request->keyword);
-        $rate = $request->rate;
+        $rating = $request->rate;
         $orderBy = $request->orderBy;
         $sort = $request->sort;
 
@@ -101,9 +101,9 @@ class Pharmacy extends Model
                     ->orWhere('ar_address', 'like', "%$keyword%")
                     ->orWhere('en_address', 'like', "%$keyword%");
             })
-            ->when($rate, function ($query) use ($rate) {
-                return $query->whereHas('rates', function ($query) use ($rate) {
-                    $query->havingRaw('ROUND(SUM(rate) / COUNT(id)) = ' . $rate);
+            ->when($rating, function ($query) use ($rating) {
+                return $query->whereHas('rates', function ($query) use ($rating) {
+                    $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
                 });
             })
             ->when($fullDay, function ($query){
