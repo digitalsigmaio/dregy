@@ -48,6 +48,7 @@ Route::middleware('language')->group(function () {
 
     Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('/app/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
 
