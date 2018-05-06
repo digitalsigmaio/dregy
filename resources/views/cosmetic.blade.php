@@ -1,5 +1,7 @@
 @extends('layouts.main')
-
+@section('adsSlider')
+    @include('layouts.adsSlider')
+@endsection
 @section('content')
 
     <!-- Main Container -->
@@ -116,7 +118,7 @@
                                 {{ $cosmeticClinic->created_at->diffForHumans() }}
                             </div>
                             <div class="col-md-6 text-right">
-                                <span class="light-green-text"><a href="#"><i class="fa fa-heart grey-text pr-2"></i></a>{{ $cosmeticClinic->favorites->count() }}</span>
+                                <span class="light-green-text"><a href="#"><i class="fa fa-heart grey-text pr-2"></i></a>{{ $cosmeticClinic->favorites->count }}</span>
                             </div>
                     </div>
                 </div>
@@ -200,7 +202,7 @@
                                             <div class="card-footer">
                                                 <span class="float-right">
                                                   <a data-toggle="tooltip" data-placement="top" title="Added to Favorite" class="light-green-text">
-                                                    <i class="fa fa-heart ml-3 pr-1 grey-text"></i> {{ $cosmeticClinic->favorites->count() }}
+                                                    <i class="fa fa-heart ml-3 pr-1 grey-text"></i> {{ $cosmeticClinic->favorites->count }}
                                                   </a>
                                                 </span>
                                             </div>

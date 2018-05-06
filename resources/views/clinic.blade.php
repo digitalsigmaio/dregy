@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('adsSlider')
+    @include('layouts.adsSlider')
+@endsection
+
 @section('content')
 
     <!-- Main Container -->

@@ -46,7 +46,6 @@
                                     {{ __('Remember Me') }}
                                 </label>
                             </div>
-
                         </div>
 
                         <div class="form-group row mb-0">

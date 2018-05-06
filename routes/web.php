@@ -15,7 +15,7 @@
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
     Route::get('/', 'MainPageController@index')->name('main');
-
+    Route::get('/contact', 'MainPageController@contact')->name('contact');
 
 
     // Job Ads
@@ -50,6 +50,7 @@ Route::middleware('language')->group(function () {
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('/home', 'HomeController@index')->name('home');
+
 
     Auth::routes();
     Route::get('/comingsoon', function () {

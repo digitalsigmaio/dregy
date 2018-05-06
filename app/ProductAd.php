@@ -84,15 +84,15 @@ class ProductAd extends Model
             ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('title', 'like',  "%$keyword%")
-                    ->orWhere('description', 'like', "%$keyword%");
-            })->
-            when($status, function ($query) use ($status) {
+            ->when($status, function ($query) use ($status) {
                 return $query->where('status', $status);
             })
             ->when($category, function ($query) use ($category) {
                 return $query->where('product_ad_category_id', $category);
+            })
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('title', 'like',  "%$keyword%")
+                    ->orWhere('description', 'like', "%$keyword%");
             })
             ->when($orderBy && $orderBy == 'price', function ($query) use ($sort){
                 return $query->orderByRaw("price - length(price) $sort");

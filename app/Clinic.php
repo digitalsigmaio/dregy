@@ -109,12 +109,6 @@ class Clinic extends Model
             ->when($degree, function ($query) use ($degree) {
                 return $query->where('degree_id', $degree);
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('ar_name', 'like',  "%$keyword%")
-                    ->orWhere('en_name', 'like', "%$keyword%")
-                    ->orWhere('ar_address', 'like', "%$keyword%")
-                    ->orWhere('en_address', 'like', "%$keyword%");
-            })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
                     $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
@@ -124,6 +118,12 @@ class Clinic extends Model
                 return $query->whereHas('specialities', function ($query) use ($speciality) {
                     $query->where('clinic_speciality_id', $speciality);
                 });
+            })
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('ar_name', 'like',  "%$keyword%")
+                    ->orWhere('en_name', 'like', "%$keyword%")
+                    ->orWhere('ar_address', 'like', "%$keyword%")
+                    ->orWhere('en_address', 'like', "%$keyword%");
             })
             ->get();
 

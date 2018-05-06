@@ -112,10 +112,6 @@ class JobAd extends Model
             ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('title', 'like',  "%$keyword%")
-                    ->orWhere('description', 'like', "%$keyword%");
-            })
             ->when($category, function ($query) use ($category) {
                 return $query->where('job_ad_category_id', $category);
             })
@@ -132,6 +128,10 @@ class JobAd extends Model
                 return $query->where('job_education_level_id', $educationLevel);
             })->when($orderBy && $orderBy == 'salary', function ($query) use ($sort){
                 return $query->orderByRaw("salary - length(salary) $sort");
+            })
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('title', 'like',  "%$keyword%")
+                    ->orWhere('description', 'like', "%$keyword%");
             })
             ->when($orderBy && $orderBy != 'salary', function ($query) use ($orderBy, $sort) {
                 return $query->orderBy($orderBy, $sort);

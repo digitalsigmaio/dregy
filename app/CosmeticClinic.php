@@ -32,12 +32,12 @@ class CosmeticClinic extends Model
 
     public function favorites()
     {
-        return $this->morphMany(Favorite::class, 'favourable');
+        return $this->morphOne(Favorite::class, 'favourable')->selectRaw('COUNT(id) as count, favourable_type as type, favourable_id')->groupBy('favourable_id', 'favourable_type');
     }
 
     public function views()
     {
-        return $this->morphMany(View::class, 'viewable');
+        return $this->morphOne(View::class, 'viewable')->selectRaw('COUNT(id) as count, viewable_type as type, viewable_id')->groupBy('viewable_id', 'viewable_type');
     }
 
     public function rates()
@@ -95,12 +95,6 @@ class CosmeticClinic extends Model
             ->when($city != '', function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('ar_name', 'like',  "%$keyword%")
-                    ->orWhere('en_name', 'like', "%$keyword%")
-                    ->orWhere('ar_address', 'like', "%$keyword%")
-                    ->orWhere('en_address', 'like', "%$keyword%");
-            })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
                    $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
@@ -110,6 +104,12 @@ class CosmeticClinic extends Model
                 return $query->whereHas('specialities', function ($query) use ($speciality) {
                     $query->where('cosmetic_clinic_speciality_id', $speciality);
                 });
+            })
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('ar_name', 'like',  "%$keyword%")
+                    ->orWhere('en_name', 'like', "%$keyword%")
+                    ->orWhere('ar_address', 'like', "%$keyword%")
+                    ->orWhere('en_address', 'like', "%$keyword%");
             })
             ->get();
 

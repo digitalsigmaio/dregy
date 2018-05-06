@@ -66,10 +66,10 @@
                                                 <strong>@{{ hospital.favorites.count }}</strong>
                                             </span>
                                         <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
+                                            <a class="" data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+                                            <i class="fa fa-heart ml-3"></i>
+                                        </a>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -134,10 +134,10 @@
                                                 <strong>@{{ pharmacy.favorites.count }}</strong>
                                             </span>
                                         <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
+                                            <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
+                                                <i class="fa fa-heart ml-3"></i>
+                                            </a>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -267,7 +267,7 @@
                                                 <strong>@{{ cosmetic.favorites.count }}</strong>
                                             </span>
                                         <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
+                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to favorites" @click="fav()">
                                                     <i class="fa fa-heart ml-3"></i>
                                                 </a>
                                             </span>

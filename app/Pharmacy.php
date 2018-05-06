@@ -95,12 +95,6 @@ class Pharmacy extends Model
             ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('ar_name', 'like',  "%$keyword%")
-                    ->orWhere('en_name', 'like', "%$keyword%")
-                    ->orWhere('ar_address', 'like', "%$keyword%")
-                    ->orWhere('en_address', 'like', "%$keyword%");
-            })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
                     $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
@@ -111,6 +105,12 @@ class Pharmacy extends Model
             })
             ->when($delivery, function ($query){
                 return $query->where('delivery', true);
+            })
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('ar_name', 'like',  "%$keyword%")
+                    ->orWhere('en_name', 'like', "%$keyword%")
+                    ->orWhere('ar_address', 'like', "%$keyword%")
+                    ->orWhere('en_address', 'like', "%$keyword%");
             })
             ->get();
 
