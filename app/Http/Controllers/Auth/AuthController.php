@@ -33,7 +33,7 @@ class AuthController extends Controller
     {
         $user = Socialite::driver($provider)->user();
 
-        return $user;
+        dd($user);
         /*$authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
         return redirect($this->redirectTo);*/
