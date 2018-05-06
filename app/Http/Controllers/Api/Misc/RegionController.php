@@ -15,7 +15,7 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $regions = Region::all();
+        $regions = Region::with('cities')->get();
 
         if (count($regions)) {
             return response()->json([

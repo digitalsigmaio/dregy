@@ -6,11 +6,13 @@ use App\CosmeticClinic;
 use App\CosmeticClinicSpeciality;
 use App\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CosmeticClinicController extends Controller
 {
     public function index()
     {
+        dd(Auth::user());
         $regions = Region::with('cities')->get();
         $specialities = CosmeticClinicSpeciality::all();
         $filters = collect([
