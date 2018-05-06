@@ -44,7 +44,7 @@
 
                 <div class="row my-3 d-flex justify-content-center">
                     <!--Facebook-->
-                    <a class="btn btn-white btn-rounded mr-md-3 z-depth-1a" href="/auth/facebook" @click="socialLogin('facebook')"><i class="fab fa-facebook-f text-center blue-text"></i></a>
+                    <a class="btn btn-white btn-rounded mr-md-3 z-depth-1a" @click.prevent="socialLogin('facebook')"><i class="fab fa-facebook-f text-center blue-text"></i></a>
                 </div>
             </div>
             <!--Footer-->
@@ -123,14 +123,14 @@
             },
             socialLogin(provider) {
                 let vm = this;
-                axios.get('/auth' + provider)
+                axios.get('/auth/' + provider)
                     .then(function (res) {
                         if (res.status === 200) {
                             window.location.href = '{!! route('home') !!}';
                         }
                     })
                     .catch(function (err) {
-                        vm.errors = err.response.data.errors;
+                        console.log(err)
                     })
             }
         },
