@@ -17,7 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderCallback');
 
 
 
