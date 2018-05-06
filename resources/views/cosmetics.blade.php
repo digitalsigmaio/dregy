@@ -508,6 +508,7 @@
        },
        mounted() {
            this.fetchCosmetics();
+
        },
        watch: {
            regionId: function (val) {

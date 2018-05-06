@@ -12,7 +12,7 @@ class CosmeticClinicController extends Controller
 {
     public function index()
     {
-        dd(Auth::user());
+
         $regions = Region::with('cities')->get();
         $specialities = CosmeticClinicSpeciality::all();
         $filters = collect([

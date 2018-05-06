@@ -118,7 +118,7 @@
                                 {{ $cosmeticClinic->created_at->diffForHumans() }}
                             </div>
                             <div class="col-md-6 text-right">
-                                <span class="light-green-text"><a href="#"><i class="fa fa-heart grey-text pr-2"></i></a>{{ $cosmeticClinic->favorites->count }}</span>
+                                <span class="light-green-text"><a @click.preven="fav()"><i class="fa fa-heart grey-text pr-2"></i></a>{{ $cosmeticClinic->favorites->count }}</span>
                             </div>
                     </div>
                 </div>
@@ -231,3 +231,24 @@
 
 
 @endsection
+
+@push('scripts')
+<script>
+    const cosmeticClinicDetails = new Vue({
+        el: '#cosmeticClinicDetails',
+        data () {
+            return {
+
+            }
+        },
+        methods: {
+            fav() {
+                //console.log(this.user.favorites)
+            }
+        },
+        mounted: {
+
+        }
+    });
+</script>
+@endpush
