@@ -34,7 +34,7 @@
 <body class="hidden-sn white-skin animated">
 
 <!--Navigation-->
-@include('layouts.topNave')
+@include('layouts.topNav')
 <!-- /.Navigation -->
 
 <section>

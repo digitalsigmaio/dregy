@@ -109,7 +109,7 @@
                 axios.post('{!! route('login') !!}', this.loginData)
                     .then(function (res) {
                         if (res.status === 200) {
-                            window.location.href = '{!! route('home') !!}';
+                            window.location.href = res.data.callback;
                         }
                     })
                     .catch(function (err) {
@@ -137,7 +137,8 @@
             loginData: function() {
                 return {
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    url: window.location.href
                 }
             }
         },

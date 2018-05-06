@@ -159,16 +159,12 @@
                         </a>
                     </li>
             @if(Auth::user())
-                    <li class="nav-item ml-3">
-                        <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="#">
-                            <i class="fa fa-cog cyan-text"></i> Settings</a>
-                    </li>
                     <li class="nav-item dropdown ml-3">
                         <a class="nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user cyan-text"></i> Profile </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                            <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
+                            <a class="dropdown-item waves-effect waves-light" href="{{ route('home') }}">My account</a>
                             <div id="logout">
                                 <a class="dropdown-item waves-effect waves-light" @click.prevent="logout">Log out</a>
                             </div>

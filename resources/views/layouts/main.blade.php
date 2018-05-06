@@ -34,7 +34,7 @@
 
 
 <!--Navigation-->
-@include('layouts.topNave')
+@include('layouts.topNav')
 <!-- /.Navigation -->
 
 <!--Intro-->
