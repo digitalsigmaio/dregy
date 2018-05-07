@@ -30,6 +30,13 @@ class CosmeticClinicController extends Controller
         });
         $relatedCosmeticClinicsChunks = $relatedCosmeticClinics->chunk(3);
 
+        if(Auth::check()) {
+            $user = Auth::user();
+            $user->load('favorites');
+        } else {
+            $user =
+        }
+
         return view('cosmetic', compact(['cosmeticClinic', 'relatedCosmeticClinicsChunks']));
     }
 }

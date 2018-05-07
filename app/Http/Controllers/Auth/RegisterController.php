@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'ref_id' => Str::uuid()
+            'ref_id' => strtolower(str_random(6)) . uniqid()
         ]);
     }
 }

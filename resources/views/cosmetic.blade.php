@@ -238,7 +238,7 @@
         el: '#cosmeticClinicDetails',
         data () {
             return {
-
+                user: {!! Auth::user()->load('favorites') !!}
             }
         },
         methods: {
