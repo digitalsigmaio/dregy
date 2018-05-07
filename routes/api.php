@@ -95,6 +95,7 @@ Route::post('/product-ads/search', 'Api\ProductAdController@search');
 // Misc
 
 Route::get('/regions', 'Api\Misc\RegionController@index');
+Route::get('/regions/{region}', 'Api\Misc\RegionController@show');
 Route::get('/cities', 'Api\Misc\CityController@index');
 Route::get('/jobAdCategories', 'Api\Misc\JobAdCategoryController@index');
 Route::get('/productAdCategories', 'Api\Misc\ProductAdCategoryController@index');

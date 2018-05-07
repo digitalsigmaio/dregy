@@ -57,7 +57,11 @@ class RegionController extends Controller
      */
     public function show(Region $region)
     {
-        //
+        $region->load('cities');
+
+        return response()->json([
+            'data' => $region
+        ], 200);
     }
 
     /**
