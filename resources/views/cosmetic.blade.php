@@ -118,7 +118,7 @@
                                 {{ $cosmeticClinic->created_at->diffForHumans() }}
                             </div>
                             <div class="col-md-6 text-right">
-                                <span class="light-green-text"><a @click.preven="fav()"><i class="fa fa-heart grey-text pr-2"></i></a>{{ $cosmeticClinic->favorites->count }}</span>
+                                <span class="light-green-text"><a><i class="fa fa-heart grey-text pr-2"></i></a>{{ $cosmeticClinic->favorites->count }}</span>
                             </div>
                     </div>
                 </div>
@@ -238,15 +238,10 @@
         el: '#cosmeticClinicDetails',
         data () {
             return {
-                user: {!! Auth::user()->load('favorites') !!}
+                user: {!! Auth::user()->load(['favorites']) !!}
             }
         },
         methods: {
-            fav() {
-                //console.log(this.user.favorites)
-            }
-        },
-        mounted: {
 
         }
     });

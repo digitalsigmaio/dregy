@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CosmeticClinic;
 use App\CosmeticClinicSpeciality;
 use App\Region;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,12 +32,11 @@ class CosmeticClinicController extends Controller
         $relatedCosmeticClinicsChunks = $relatedCosmeticClinics->chunk(3);
 
         if(Auth::check()) {
-            $user = Auth::user();
-            $user->load('favorites');
+            $user = User::with(['favorites'])->find(Auth::user()->id);
         } else {
-            $user =
+            $user = null;
         }
 
-        return view('cosmetic', compact(['cosmeticClinic', 'relatedCosmeticClinicsChunks']));
+        return view('cosmetic', compact(['cosmeticClinic', 'relatedCosmeticClinicsChunks', 'user']));
     }
 }

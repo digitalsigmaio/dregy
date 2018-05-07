@@ -22,11 +22,6 @@ Route::post('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderC
 
 
 
-
-
-
-
-
 // Hospital
 
 Route::get('/hospitals', 'Api\HospitalController@index');

@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->hasMany(Favorite::class)->select('favourable_type', 'favourable_id')->groupBy('favourable_type', 'favourable_id');
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_type', 'favourable_id'])->groupBy('favourable_type', 'user_id', 'favourable_id');
     }
 
     public function views()
