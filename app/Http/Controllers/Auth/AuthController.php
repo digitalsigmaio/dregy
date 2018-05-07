@@ -47,7 +47,7 @@ class AuthController extends Controller
      * @param Request $request
      * @return object
      */
-    public function appHandleProviderCallback($request)
+    public function appHandleProviderCallback(Request $request)
     {
         dd($request);
         $request = json_decode($request);
