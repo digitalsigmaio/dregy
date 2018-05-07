@@ -49,9 +49,9 @@ class AuthController extends Controller
      */
     public function appHandleProviderCallback(Request $request)
     {
-        $user = (object) $request->user;
 
-        $authUser = $this->findOrCreateUser($user, 'facebook');
+
+        $authUser = $this->findOrCreateUser($request, 'facebook');
         Auth::login($authUser, true);
         return $authUser;
     }
@@ -63,18 +63,18 @@ class AuthController extends Controller
      * @param $provider Social auth provider
      * @return  User
      */
-    public function findOrCreateUser($user, $provider)
+    public function findOrCreateUser($request, $provider)
     {
-        $authUser = User::where('provider_id', $user->id)->first();
+        $authUser = User::where('provider_id', $request->id)->first();
         if ($authUser) {
             return $authUser;
         }
         return User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'provider' => $provider,
-            'provider_id' => $user->id,
-            'avatar' => $user->avatar,
+            'provider_id' => $request->id,
+            'avatar' => $request->avatar,
             'ref_id' => strtolower(str_random(10))
         ]);
     }
