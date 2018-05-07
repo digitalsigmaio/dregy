@@ -26,16 +26,16 @@ class AuthController extends Controller
  * database by looking up their provider_id in the database.
  * If the user exists, log them in. Otherwise, create a new user then log them in. After that
  * redirect them to the authenticated users homepage.
- *
+ * @param $provider
  * @return Response
  */
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-        return response()->json($user);
-        /*$authUser = $this->findOrCreateUser($user, $provider);
+        //return response()->json($user);
+        $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        return redirect()->intended($this->redirectTo);*/
+        return redirect()->intended($this->redirectTo);
     }
 
 
@@ -44,8 +44,8 @@ class AuthController extends Controller
      * database by looking up their provider_id in the database.
      * If the user exists, log them in. Otherwise, create a new user then log them in. After that
      * redirect them to the authenticated users homepage.
-     *
-     * @return Response
+     * @param Request $request
+     * @return object
      */
     public function appHandleProviderCallback(Request $request)
     {
@@ -74,7 +74,7 @@ class AuthController extends Controller
             'provider' => $provider,
             'provider_id' => $user->id,
             'avatar' => $user->avatar,
-            'ref_id' => Str::uuid()
+            'ref_id' => strtolower(str_random(6)) . uniqid()
         ]);
     }
 }
