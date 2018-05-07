@@ -49,9 +49,7 @@ class AuthController extends Controller
      */
     public function appHandleProviderCallback(Request $request)
     {
-        dd($request->user);
-        $request = json_decode($request);
-        $user = $request->user;
+        $user = $request->user; 
         $authUser = $this->findOrCreateUser($user, 'facebook');
         Auth::login($authUser, true);
         return $authUser;
