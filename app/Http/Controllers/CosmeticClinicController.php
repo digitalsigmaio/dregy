@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CosmeticClinic;
 use App\CosmeticClinicSpeciality;
+use App\Http\Resources\CosmeticClinicResource;
 use App\Region;
 use App\User;
 use Illuminate\Http\Request;
@@ -29,14 +30,12 @@ class CosmeticClinicController extends Controller
         $relatedCosmeticClinics = $relatedCosmeticClinics->reject(function ($item) use ($cosmeticClinic) {
             return $item->id == $cosmeticClinic->id;
         });
+        $relatedCosmeticClinics = CosmeticClinicResource::collection($relatedCosmeticClinics);
         $relatedCosmeticClinicsChunks = $relatedCosmeticClinics->chunk(3);
+        $relatedCosmeticClinicsChunks = json_encode($relatedCosmeticClinicsChunks);
+        $cosmetic = new CosmeticClinicResource($cosmeticClinic);
+        $cosmetic = json_encode($cosmetic);
 
-        if(Auth::check()) {
-            $user = User::with(['favorites'])->find(Auth::user()->id);
-        } else {
-            $user = null;
-        }
-
-        return view('cosmetic', compact(['cosmeticClinic', 'relatedCosmeticClinicsChunks', 'user']));
+        return view('cosmetic', compact(['cosmetic', 'relatedCosmeticClinicsChunks']));
     }
 }

@@ -71,6 +71,36 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_type', 'favourable_id'])->groupBy('favourable_type', 'user_id', 'favourable_id');
     }
 
+    public function favoriteHospitals()
+    {
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\Hospital')->groupBy('user_id', 'favourable_id');
+    }
+
+    public function favoriteClinics()
+    {
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\Clinic')->groupBy('user_id', 'favourable_id');
+    }
+
+    public function favoriteCosmeticClinics()
+    {
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\CosmeticClinic')->groupBy('user_id', 'favourable_id');
+    }
+
+    public function favoritePharmacies()
+    {
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\Pharmacy')->groupBy('user_id', 'favourable_id');
+    }
+
+    public function favoriteProductAds()
+    {
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\ProductAd')->groupBy('user_id', 'favourable_id');
+    }
+
+    public function favoriteJobAds()
+    {
+        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\JobAd')->groupBy('user_id', 'favourable_id');
+    }
+
     public function views()
     {
         return $this->hasMany(View::class);
