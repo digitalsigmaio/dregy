@@ -49,11 +49,11 @@ class AuthController extends Controller
      */
     public function appHandleProviderCallback(Request $request)
     {
-        $user = $request->user;
-        return response()->json($user->id);
-        /*$authUser = $this->findOrCreateUser($user, 'facebook');
+        $user = (object) $request->user;
+
+        $authUser = $this->findOrCreateUser($user, 'facebook');
         Auth::login($authUser, true);
-        return $authUser;*/
+        return $authUser;
     }
 
     /**
@@ -75,7 +75,7 @@ class AuthController extends Controller
             'provider' => $provider,
             'provider_id' => $user->id,
             'avatar' => $user->avatar,
-            'ref_id' => strtolower(str_random(6)) . uniqid()
+            'ref_id' => strtolower(str_random(10))
         ]);
     }
 }
