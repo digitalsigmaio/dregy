@@ -267,7 +267,9 @@
                               <div class="col-md-9">
                                  <h5 class="card-title mb-1"><i class="fas fa-hand-holding-heart indigo-text fa-2x pr-2"></i> <strong><a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">@{{ cosmetic.en_name }}</a></strong></h5>
                               </div>
-                              <div class="col-md-3 mt-1 text-center"><a @click.prevent="fav(cosmetic.id)"><i class="fas fa-heart pr-1 animated"  :class="favClass(cosmetic.id)">
+                              <div class="col-md-3 mt-1 text-center">
+                                  <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)" @click.prevent="fav(cosmetic.id)" >
+                                      <i class="fas fa-heart pr-1 animated"  :class="favClass(cosmetic.id)">
                                       </i></a><span class="light-green-text text-sm-right">@{{ cosmetic.favorites.count }}</span>
                               </div>
 
@@ -519,6 +521,13 @@
                return {
                    'grey-text pulse': !fav,
                    'pink-text bounceIn': fav
+               }
+           },
+           originalTitle(id) {
+               if(this.isFav(id)) {
+                   return 'Remove from Favorites'
+               } else {
+                   return 'Add to Favorites'
                }
            },
            fav(id) {

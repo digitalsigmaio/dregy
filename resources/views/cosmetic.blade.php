@@ -118,7 +118,11 @@
                                 @{{ cosmetic.created_at }}
                             </div>
                             <div class="col-md-6 text-right">
-                                <span class="light-green-text"><a @click.prevent="fav(cosmetic.id)"><i class="fa fa-heart pr-2 animated" :class="favClass(cosmetic.id)"></i></a>@{{ cosmetic.favorites.count }}</span>
+                                <span class="light-green-text">
+                                    <a @click.prevent="fav(cosmetic.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)">
+                                        <i class="fa fa-heart pr-2 animated" :class="favClass(cosmetic.id)"></i>
+                                    </a>
+                                    @{{ cosmetic.favorites.count }}</span>
                             </div>
                     </div>
                 </div>
@@ -201,7 +205,7 @@
                                         <!--Card footer-->
                                         <div class="card-footer">
                                             <span class="float-right">
-                                              <a data-toggle="tooltip" data-placement="top" title="Add to Favorite" class="light-green-text" @click.prevent="fav(cosmetic.id)">
+                                              <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)" class="light-green-text" @click.prevent="fav(cosmetic.id)">
                                                 <i class="fa fa-heart ml-3 pr-1" :class="favClass(cosmetic.id)"></i> @{{ cosmetic.favorites.count }}
                                               </a>
                                             </span>
@@ -257,6 +261,13 @@
                 return {
                     'grey-text pulse': !fav,
                     'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
                 }
             },
             fav(id) {
