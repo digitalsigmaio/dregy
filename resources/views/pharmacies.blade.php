@@ -266,8 +266,11 @@
                                         <div class="col-md-9">
                                             <h5 class="card-title mb-1"><i class="fas fa-heartbeat amber-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a></strong></h5>
                                         </div>
-                                        <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                            </i><span class="light-green-text text-sm-right">@{{ pharmacy.favorites.count }}</span>
+                                        <div class="col-md-3 mt-1 text-center">
+                                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(pharmacy.id)" @click.prevent="fav(pharmacy.id)" >
+                                                <i class="fas fa-heart pr-1 animated"  :class="favClass(pharmacy.id)"></i>
+                                            </a>
+                                            <span class="light-green-text text-sm-right">@{{ pharmacy.favorites.count }}</span>
                                         </div>
 
                                     </div>
@@ -275,11 +278,21 @@
                                     <div class="row mt-1">
                                         <div class="col-md-12">
 
-                                            <ul class="rating mt-1">
-                                                <li v-for="n in 5">
-                                                    <i class="fa fa-star cyan-text" :class="starColor(n, pharmacy.rate.value)"></i>
-                                                </li>
-                                            </ul>
+                                            <!-- Cosmetic Clinic Rating -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="m-auto h2-responsive grey-text">
+                                                            @{{ pharmacy.rate.rating }}
+                                                        </div>
+                                                    </div>
+                                                    <ul class="rating mt-1">
+                                                        <li v-for="n in 5">
+                                                            <i class="fa fa-star cyan-text" :class="starColor(n, pharmacy.rate.rating)"></i>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                             <!-- Rating -->
                                             <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ pharmacy.en_address }}</p>
 
@@ -406,7 +419,6 @@
             data: {
                 pharmacies: {},
                 endpoint: '/api/pharmacies/search',
-                isFav: false,
                 links: {},
                 pagination: {},
                 search: {
@@ -425,7 +437,8 @@
                 regionName: 'Choose City',
                 cityId: null,
                 cityName: 'Choose Area',
-                mouseOver: false
+                mouseOver: false,
+                user: {!! Auth::check() ? Auth::user()->load(['favoritePharmacies']) : 'null' !!}
             },
             methods: {
                 fetchPharmacies(){
@@ -503,6 +516,77 @@
                     this.endpoint = '/api/pharmacies/search';
                     this.fetchPharmacies()
                 }, 100),
+                isFav(id) {
+                    @if(Auth::check())
+                        let favorites = this.user.favorite_pharmacies;
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+                                return true
+                            }
+                        }
+                    @endif
+                        return false;
+                },
+                favClass(id) {
+                    let fav = this.isFav(id);
+                    return {
+                        'grey-text pulse': !fav,
+                        'pink-text bounceIn': fav
+                    }
+                },
+                originalTitle(id) {
+                    if(this.isFav(id)) {
+                        return 'Remove from Favorites'
+                    } else {
+                        return 'Add to Favorites'
+                    }
+                },
+                fav(id) {
+                    if(this.user) {
+                        if (this.isFav(id)) {
+                            let user = this.user;
+                            let pharmacies = this.pharmacies;
+                            let favorites = this.user.favorite_pharmacies;
+                            for(let i = 0; i < favorites.length; i++ ){
+                                if(favorites[i].favourable_id === id) {
+
+                                    favorites.splice(i, 1);
+                                }
+                            }
+
+                            for(let i = 0; i < pharmacies.length; i++ ){
+                                if(pharmacies[i].id === id) {
+
+                                    pharmacies[i].favorites.count--
+                                }
+                            }
+                            axios.delete('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
+                                .then(function (res) {
+
+                                })
+                        } else {
+
+                            let user = this.user;
+                            let pharmacies = this.pharmacies;
+                            let favorites = this.user.favorite_pharmacies;
+                            favorites.push({
+                                favourable_id: id,
+                                user_id: user.id
+                            });
+                            for(let i = 0; i < pharmacies.length; i++ ){
+                                if(pharmacies[i].id === id) {
+                                    pharmacies[i].favorites.count++
+                                }
+                            }
+                            axios.post('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
+                                .then(function (res) {
+
+                                })
+                        }
+                    } else {
+                        $('#elegantModalForm').modal('show');
+                    }
+                }
             },
             mounted() {
                 this.fetchPharmacies()

@@ -200,7 +200,7 @@
 
                                         <!--Card footer-->
                                         <div class="card-footer">
-                                            <span class="float-righ light-green-text">
+                                            <span class="float-right light-green-text">
                                                 <i class="fa fa-heart ml-3 pr-1" :class="favClass(cosmetic.id)"></i> @{{ cosmetic.favorites.count }}
                                             </span>
                                         </div>

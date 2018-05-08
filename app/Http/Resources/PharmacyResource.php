@@ -34,14 +34,9 @@ class PharmacyResource extends JsonResource
             'img' => $this->img,
             'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
-            'rate' => [
-                'count' => $this->rates->count,
-                'value' => $this->rates->rating
-            ],
-            'favorites' => [
-                'count' => $this->favorites->count(),
-            ],
-            'views' => $this->views->count(),
+            'rate' => $this->rates,
+            'favorites' => $this->favorites,
+            'views' => $this->views,
             'created_at' => $this->created_at->toFormattedDateString(),
         ];
     }

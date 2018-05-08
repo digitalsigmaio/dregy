@@ -25,6 +25,12 @@ select {
     border-color: transparent dodgerblue deepskyblue transparent!important;
 }
 
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-cascade .card-text {
     min-height: 92px;
     max-height: 92px;

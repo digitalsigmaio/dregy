@@ -55,20 +55,15 @@
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
-                                        <i class="fa fa-star" :class="starColor(n, hospital.rate.value)"></i>
+                                        <i class="fa fa-star" :class="starColor(n, hospital.rate.rating)"></i>
                                     </li>
                                 </ul>
 
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>@{{ hospital.favorites.count }}</strong>
-                                            </span>
-                                        <span class="float-right">
-                                            <a class="" data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-                                            <i class="fa fa-heart ml-3"></i>
-                                        </a>
+                                        <span class="float-left">
+                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ hospital.views.count }}</strong>
                                         </span>
                                     </div>
                                 </div>
@@ -123,7 +118,7 @@
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
-                                        <i class="fa fa-star" :class="starColor(n, pharmacy.rate.value)"></i>
+                                        <i class="fa fa-star" :class="starColor(n, pharmacy.rate.rating)"></i>
                                     </li>
                                 </ul>
 
@@ -131,13 +126,8 @@
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>@{{ pharmacy.favorites.count }}</strong>
+                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ pharmacy.views.count }}</strong>
                                             </span>
-                                        <span class="float-right">
-                                            <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                <i class="fa fa-heart ml-3"></i>
-                                            </a>
-                                        </span>
                                     </div>
                                 </div>
 
@@ -189,7 +179,7 @@
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
-                                        <i class="fa fa-star" :class="starColor(n, clinic.rate.value)"></i>
+                                        <i class="fa fa-star" :class="starColor(n, clinic.rate.rating)"></i>
                                     </li>
                                 </ul>
 
@@ -197,12 +187,7 @@
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
                                             <span class="float-left">
-                                                <strong>@{{ clinic.favorites.count }}</strong>
-                                            </span>
-                                        <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
+                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ clinic.views.count }}</strong>
                                             </span>
                                     </div>
                                 </div>
@@ -256,21 +241,16 @@
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
-                                        <i class="fa fa-star" :class="starColor(n, cosmetic.rate.value)"></i>
+                                        <i class="fa fa-star" :class="starColor(n, cosmetic.rate.rating)"></i>
                                     </li>
                                 </ul>
 
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>@{{ cosmetic.favorites.count }}</strong>
-                                            </span>
-                                        <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to favorites" @click="fav()">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
+                                        <span class="float-left">
+                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ cosmetic.views.count }}</strong>
+                                        </span>
                                     </div>
                                 </div>
 

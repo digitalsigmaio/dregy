@@ -207,7 +207,9 @@
                             <div class="card-body">
                                 <!--Category & Title-->
 
-                                <h5 class="card-title mb-1"><strong><a :href="'/jobs/' + job.id + '/' + job.slug" class="dark-grey-text">@{{ job.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">@{{ job.type.en_name }}</span>
+                                <h5 class="card-title mb-1" :title="job.title">
+                                    <strong><a :href="'/jobs/' + job.id + '/' + job.slug" class="dark-grey-text">@{{ job.title }}</a></strong>
+                                </h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">@{{ job.type.en_name }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="phone in job.phone" class="text-grey">

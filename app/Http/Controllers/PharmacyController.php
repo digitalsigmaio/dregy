@@ -24,7 +24,12 @@ class PharmacyController extends Controller
         $relatedPharmacies = $relatedPharmacies->reject(function ($item) use ($pharmacy) {
             return $item->id == $pharmacy->id;
         });
+        $relatedPharmacies = PharmacyResource::collection($relatedPharmacies);
         $relatedPharmaciesChunks = $relatedPharmacies->chunk(3);
+        $relatedPharmaciesChunks = json_encode($relatedPharmaciesChunks);
+
+        $pharmacy = new PharmacyResource($pharmacy);
+        $pharmacy = json_encode($pharmacy);
 
         return view('pharmacy', compact(['pharmacy', 'relatedPharmaciesChunks']));
     }

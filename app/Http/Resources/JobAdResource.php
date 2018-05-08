@@ -33,10 +33,8 @@ class JobAdResource extends JsonResource
             'img' => $this->img,
             'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
-            'favorites' => [
-                'count' => $this->favorites->count(),
-            ],
-            'views' => $this->views->count(),
+            'favorites' => $this->favorites,
+            'views' => $this->views,
             'created_at' => $this->created_at->diffForHumans()
         ];
     }

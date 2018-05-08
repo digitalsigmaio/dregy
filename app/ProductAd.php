@@ -31,12 +31,12 @@ class ProductAd extends Model
 
     public function favorites()
     {
-        return $this->morphMany(Favorite::class, 'favourable');
+        return $this->morphOne(Favorite::class, 'favourable')->selectRaw('COUNT(id) as count, favourable_type as type, favourable_id')->groupBy('favourable_id', 'favourable_type');
     }
 
     public function views()
     {
-        return $this->morphMany(View::class, 'viewable');
+        return $this->morphOne(View::class, 'viewable')->selectRaw('COUNT(id) as count, viewable_type as type, viewable_id')->groupBy('viewable_id', 'viewable_type');
     }
 
     public function phoneNumbers()

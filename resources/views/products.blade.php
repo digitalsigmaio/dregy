@@ -145,7 +145,7 @@
                                 <a class="grey-text">
                                     <h5>@{{ product.category.en_name }}</h5>
                                 </a>
-                                <h4 class="card-title">
+                                <h4 class="card-title" :title="product.title">
                                     <strong>
                                         <a :href="'/products/' + product.id + '/' + product.slug">@{{ product.title }}</a>
                                     </strong>

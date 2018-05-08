@@ -20,7 +20,7 @@
                     <a href="" class="grey-text">
                         <h5>@{{ product.category.en_name }}</h5>
                     </a>
-                    <h4 class="card-title">
+                    <h4 class="card-title" :title="product.title">
                         <strong>
                             <a :href="'/products/' + product.id + '/' + product.slug">@{{ product.title }}</a>
                         </strong>
@@ -38,10 +38,11 @@
                               <strong>@{{ product.price }} L.E</strong>
                             </span>
                         <span class="float-right">
-                              <a data-toggle="tooltip" data-placement="top" title="Added to Favorite" class="light-green-text">
-                                <i class="fa fa-heart ml-3 pr-1 grey-text"></i> @{{ product.favorites.count }}
-                              </a>
-                            </span>
+                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" >
+                                      <i class="fas fa-heart pr-1 animated"  :class="favClass(product.id)"></i>
+                                  </a>
+                                  <span class="light-green-text text-sm-right">@{{ product.favorites.count }}</span>
+                        </span>
                     </div>
                 </div>
                 <!--Card content-->
@@ -118,7 +119,8 @@
                 endpoint: '/api/product-ads',
                 products: {},
                 links: {},
-                pagination: {}
+                pagination: {},
+                user: {!! Auth::check() ? Auth::user()->load(['favoriteProductAds']) : 'null' !!}
             }
         },
         methods: {
@@ -145,6 +147,77 @@
                 this.endpoint = url;
                 return this.fetchProducts();
             },
+            isFav(id) {
+                @if(Auth::check())
+                    let favorites = this.user.favorite_product_ads;
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
+                    }
+                @endif
+                    return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    if (this.isFav(id)) {
+                        let user = this.user;
+                        let products = this.products;
+                        let favorites = this.user.favorite_product_ads;
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+
+                                products[i].favorites.count--
+                            }
+                        }
+                        axios.delete('/api/product-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+
+                        let user = this.user;
+                        let products = this.products;
+                        let favorites = this.user.favorite_product_ads;
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+                                products[i].favorites.count++
+                            }
+                        }
+                        axios.post('/api/product-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
         },
         mounted() {
             this.fetchProducts();

@@ -273,12 +273,12 @@
                                   </a>
                                   <span class="light-green-text text-sm-right">@{{ cosmetic.favorites.count }}</span>
                               </div>
-
                            </div>
                            <div class="divider"></div>
                            <div class="row mt-1">
 
                                <div class="col-md-12">
+                                   <!-- Cosmetic Clinic Rating -->
                                    <div class="row">
                                        <div class="col-md-6">
                                            <div class="col-md-12">
@@ -294,15 +294,14 @@
                                        </div>
                                    </div>
 
-                                   <!-- Rating -->
+                                   <!-- Address -->
                                    <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ cosmetic.en_address }}</p>
 
                                    <p><i class="fas fa-at pr-1 cyan-text">
                                        </i><span class="light-grey-text ">@{{ cosmetic.email }}</span>
                                    </p>
 
-                                   <p><i class="fas fa-home pr-1 cyan-text">
-                                       </i><span class="light-grey-text">@{{ cosmetic.website }}</span>
+                                   <p><i class="fas fa-home pr-1 cyan-text"></i><span class="light-grey-text">@{{ cosmetic.website }}</span>
                                    </p>
                                </div>
 
@@ -577,7 +576,6 @@
                         });
                         for(let i = 0; i < cosmetics.length; i++ ){
                             if(cosmetics[i].id === id) {
-                                console.log(cosmetics[i]);
                                 cosmetics[i].favorites.count++
                             }
                         }
