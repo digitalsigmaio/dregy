@@ -197,21 +197,36 @@
                             <!--Card image-->
                             <div class="view overlay">
                                 <img :src="job.img " class="img-fluid" :alt="job.title">
+
                                 <a :href="'/jobs/' + job.id + '/' + job.slug" >
-                                    <div class="mask rgba-white-slight"></div>
+                                    <div class="mask rgba-white-slight">
+                                    </div>
                                 </a>
                             </div>
                             <!--Card image-->
 
                             <!--Card content-->
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <!--Category & Title-->
 
-                                <h5 class="card-title mb-1" :title="job.title">
-                                    <strong><a :href="'/jobs/' + job.id + '/' + job.slug" class="dark-grey-text">@{{ job.title }}</a></strong>
-                                </h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">@{{ job.type.en_name }}</span>
+                                <h5 class="card-title" :title="job.title">
+                                    <strong>
+                                        <a :href="'/jobs/' + job.id + '/' + job.slug">@{{ job.title }}</a>
+                                    </strong>
+                                </h5>
+                                <div class="row my-2">
+                                    <div class="col-md-6 pt-1">
+                                        <span class="badge p-2 float-right" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                    @{{ job.type.en_name }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(job.id)" @click.prevent="fav(job.id)" class="h3-responsive mr-2">
+                                            <i class="fas fa-heart pr-1 animated"  :class="favClass(job.id)"></i>
+                                        </a>
+                                    </div>
+                                </div>
                                 <!-- Rating -->
-                                <ul class="rating">
+                                <ul class="rating text-left">
                                     <li v-for="phone in job.phone" class="text-grey">
                                         <i class="fa fa-phone blue-text"></i> <strong class="teal-text">@{{ phone }}</strong>
                                     </li>
@@ -221,15 +236,13 @@
 
 
                                 <!--Card footer-->
-                                <div class="card-footer pb-0">
+                                <div class="card-footer pb-0 px-0">
                                     <div class="row">
-                                        <div class="col-md-7">
-                                            <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">@{{ job.salary }} L.E</strong></p>
+                                        <div class="col-md-7 text-left">
+                                            <i class="far fa-circle cyan-text pr-2"></i><strong>@{{ job.salary }} L.E</strong>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="footer-address">
-                                                @{{ job.created_at }}
-                                            </div>
+                                        <div class="col-md-5 text-center pr-0">
+                                            <span class="small">@{{ job.created_at }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -368,6 +381,7 @@
                 regionName: 'Choose City',
                 cityId: null,
                 cityName: 'Choose Area',
+                user: {!! Auth::check() ? Auth::user()->load(['favoriteJobAds']) : 'null' !!}
             }
         },
         methods: {
@@ -425,7 +439,79 @@
                 this.endpoint = '/api/job-ads/search';
                 this.fetchJobs()
 
-            }, 500)
+            }, 500),
+            isFav(id) {
+                        @if(Auth::check())
+                let favorites = this.user.favorite_job_ads;
+                for(let i = 0; i < favorites.length; i++ ){
+                    if(favorites[i].favourable_id === id) {
+                        return true
+                    }
+                }
+                @endif
+                    return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    if (this.isFav(id)) {
+                        let user = this.user;
+                        let jobs = this.jobs;
+                        let favorites = this.user.favorite_job_ads;
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < jobs.length; i++ ){
+                            if(jobs[i].id === id) {
+
+                                jobs[i].favorites.count--
+                            }
+                        }
+                        axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+
+                        let user = this.user;
+                        let jobs = this.jobs;
+                        let favorites = this.user.favorite_job_ads;
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < jobs.length; i++ ){
+                            if(jobs[i].id === id) {
+                                jobs[i].favorites.count++
+                            }
+                        }
+                        axios.post('/api/job-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
+
         },
         mounted() {
             this.fetchJobs();

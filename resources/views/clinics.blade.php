@@ -298,15 +298,27 @@
 
                            </div>
                            <div class="divider"></div>
+
                            <div class="row mt-1">
                               <div class="col-md-12">
+                                  <!-- Clinic Rating -->
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="col-md-12">
+                                              <div class="m-auto h2-responsive grey-text">
+                                                  @{{ clinic.rate.rating }}
+                                              </div>
+                                          </div>
+                                          <ul class="rating mt-1">
+                                              <li v-for="n in 5">
+                                                  <i class="fa fa-star cyan-text" :class="starColor(n, clinic.rate.rating)"></i>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
 
-                                 <ul class="rating mt-1">
-                                    <li v-for="n in 5">
-                                       <i class="fa fa-star cyan-text" :class="starColor(n, clinic.rate.value)"></i>
-                                    </li>
-                                 </ul>
-                                 <!-- Rating -->
+
+                                 <!-- Address -->
                                  <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ clinic.en_address }}</p>
 
                                  <p><i class="fas fa-at pr-1 cyan-text">

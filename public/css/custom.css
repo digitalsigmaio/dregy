@@ -37,8 +37,8 @@ select {
 }
 
 .card-text {
+    white-space: nowrap;
     overflow: hidden;
-    white-space: inherit;
     text-overflow: ellipsis;
 }
 

@@ -264,7 +264,7 @@
                                     <div class="row">
 
                                         <div class="col-md-9">
-                                            <h5 class="card-title mb-1"><i class="fas fa-heartbeat amber-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a></strong></h5>
+                                            <h5 class="card-title mb-1"><i class="fas fa-first-aid brown-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a></strong></h5>
                                         </div>
                                         <div class="col-md-3 mt-1 text-center">
                                             <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(pharmacy.id)" @click.prevent="fav(pharmacy.id)" >

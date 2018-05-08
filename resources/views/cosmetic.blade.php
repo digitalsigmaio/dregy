@@ -1,7 +1,9 @@
 @extends('layouts.main')
+
 @section('adsSlider')
     @include('layouts.adsSlider')
 @endsection
+
 @section('content')
 
     <!-- Main Container -->
@@ -183,7 +185,7 @@
                                         <a class="grey-text">
                                             <h5>@{{ cosmetic.specialities[0].en_name }}</h5>
                                         </a>
-                                        <h4 class="card-title">
+                                        <h4 class="card-title" :title="cosmetic.en_name">
                                             <strong>
                                                 <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug">@{{ cosmetic.en_name }}</a>
                                             </strong>

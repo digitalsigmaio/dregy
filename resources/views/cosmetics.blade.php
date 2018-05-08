@@ -275,8 +275,8 @@
                               </div>
                            </div>
                            <div class="divider"></div>
-                           <div class="row mt-1">
 
+                           <div class="row mt-1">
                                <div class="col-md-12">
                                    <!-- Cosmetic Clinic Rating -->
                                    <div class="row">

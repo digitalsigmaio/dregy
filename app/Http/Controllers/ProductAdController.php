@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductAdResource;
 use App\ProductAd;
 use App\ProductAdCategory;
 use App\Region;
@@ -31,7 +32,13 @@ class ProductAdController extends Controller
             return $item->id == $productAd->id;
         });
 
+        $relatedProducts = ProductAdResource::collection($relatedProducts);
         $relatedProductsChunks = $relatedProducts->chunk(3);
+        $relatedProductsChunks = json_encode($relatedProductsChunks);
+
+        $productAd = new ProductAdResource($productAd);
+        $productAd = json_encode($productAd);
+
         return view('product', compact(['productAd', 'relatedProductsChunks']));
     }
 }

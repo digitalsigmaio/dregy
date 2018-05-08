@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\JobAdCollection;
+use App\Http\Resources\JobAdResource;
 use App\Http\Resources\ProductAdCollection;
 use App\JobAd;
 use App\JobAdCategory;
@@ -42,7 +43,12 @@ class JobAdController extends Controller
         $relatedJobs = $relatedJobs->reject(function ($item) use ($jobAd) {
             return $item->id == $jobAd->id;
         });
+        $relatedJobs = JobAdResource::collection($relatedJobs);
         $relatedJobsChunks = $relatedJobs->chunk(3);
+        $relatedJobsChunks = json_encode($relatedJobsChunks);
+
+        $jobAd = new JobAdResource($jobAd);
+        $jobAd = json_encode($jobAd);
 
         return view('job', compact(['jobAd', 'relatedJobsChunks']));
     }
