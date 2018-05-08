@@ -7,7 +7,7 @@
 @section('content')
 
     <!-- Main Container -->
-    <div class="container mt-5 pt-3">
+    <div class="container mt-5 pt-3" v-cloak>
 
         <!--Section: Job detail -->
         <section id="jobDetails" class="pb-5">
