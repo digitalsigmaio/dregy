@@ -55,7 +55,7 @@
                                 </div>
                                 <div id="address" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
-                                        <p>@{{ cosmetic.region.en_name }}, @{{ cosmetic.city.en_name }}, @{{ cosmetic.en_address }}</p>
+                                        <p>@{{ pharmacy.region.en_name }}, @{{ pharmacy.city.en_name }}, @{{ pharmacy.en_address }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
-                                        <p v-for="phone in cosmetic.phone"><i class="fa fa-phone pr-2 blue-text"></i>@{{ phone }}</p>
+                                        <p v-for="phone in pharmacy.phone"><i class="fa fa-phone pr-2 blue-text"></i>@{{ phone }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -147,9 +147,9 @@
 
             <!--Carousel Wrapper-->
             <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-            @if(count($relatedPharmaciesChunks) > 1)
+
                 <!--Controls-->
-                <div class="controls-top">
+                <div class="controls-top" v-if="pharmacies.length > 1">
                     <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
                         <i class="fa fa-chevron-left"></i>
                     </a>
@@ -158,82 +158,74 @@
                     </a>
                 </div>
                 <!--Controls-->
-            @endif
 
-            @if(count($relatedPharmaciesChunks) > 1)
+
                 <!--Indicators-->
-                <ol class="carousel-indicators">
-                    @for($i = 0; $i < count($relatedPharmaciesChunks); $i++)
-                        <li class="primary-color {{ $i == 0 ? 'active': '' }}" data-target="#multi-item-example" data-slide-to="{{$i}}"></li>
-                    @endfor
+                <ol class="carousel-indicators" v-if="pharmacies.length > 1" >
+                    <li class="primary-color" :class="{ active: n ==1 }" data-target="#multi-item-example" :data-slide-to="(n-1)" v-for="n in pharmacies.length"></li>
                 </ol>
                 <!--Indicators-->
-            @endif
+
+
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
 
-                    @for($i = 0; $i < count($relatedPharmaciesChunks); $i++)
-                        <div class="carousel-item {{ $i == 0 ? 'active': '' }}">
-                        @foreach($relatedPharmaciesChunks[$i] as $pharmacy)
-                            <!--Grid column-->
-                                <div class="col-md-4 mb-4">
-                                    <!--Card-->
-                                    <div class="card card-cascade narrower card-ecommerce">
-                                        <!--Card image-->
-                                        <div class="view overlay">
-                                            <img src="{{ $pharmacy->img }}" class="card-img-top" alt="sample photo">
-                                            <a href="/pharmacies/{{ $pharmacy->id }}/{{ $pharmacy->slug }}">
-                                                <div class="mask rgba-white-slight"></div>
-                                            </a>
-                                        </div>
-                                        <!--Card image-->
-                                        <!--Card content-->
-                                        <div class="card-body text-center">
-                                            <!--Category & Title-->
-                                            <div class="row">
-                                                <div class="col-md-12 text-center">
-                                                    @if($pharmacy->full_time)
-                                                        <a class="btn-floating btn-sm sky-gradient mr-0 mt-0" data-toggle="tooltip" data-placement="top" title="Open 24 hour"><div class="m-auto pt-2 white-text"><strong>24</strong></div></a>
-                                                    @endif
-                                                    @if($pharmacy->delivery)
-                                                        <a class="btn-floating btn-sm purple-gradient ml-1 mt-0" data-toggle="tooltip" data-placement="top" title="Home Delivery"><i class="fas fa-truck"></i></a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <h4 class="card-title mt-2">
-                                                <strong>
-                                                    <a href="/pharmacies/{{ $pharmacy->id }}/{{ $pharmacy->slug }}">{{ $pharmacy->en_name }}</a>
-                                                </strong>
-                                            </h4>
+                    <div class="carousel-item" :class="{ active: n == 1 }" v-for="n in pharmacies.length">
 
-                                            @if($pharmacy->premium)
-                                                <span class="badge mb-2 p-2 badge-info">Featured</span>
-                                            @endif
-
-                                        <!--Description-->
-                                            <p class="card-text">
-                                                {{ $pharmacy->region->en_name }}, {{ $pharmacy->city->en_name }}, {{ $pharmacy->en_address }}
-                                            </p>
-
-
-                                            <!--Card footer-->
-                                            <div class="card-footer">
-                                                <span class="float-right">
-                                                  <a data-toggle="tooltip" data-placement="top" title="Added to Favorite" class="light-green-text">
-                                                    <i class="fa fa-heart ml-3 pr-1 grey-text"></i> {{ $pharmacy->favorites->count() }}
-                                                  </a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <!--Card content-->
+                        <!--Grid column-->
+                        <div class="col-md-4 mb-4" v-for="pharmacy in pharmacies[(n-1)]">
+                                <!--Card-->
+                                <div class="card card-cascade narrower card-ecommerce">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img :src="pharmacy.img" class="card-img-top" :alt="pharmacy.en_name">
+                                        <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug">
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
                                     </div>
-                                    <!--Card-->
+                                    <!--Card image-->
 
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+                                        <!--Category & Title-->
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <a class="btn-floating btn-sm sky-gradient mr-0 mt-0" data-toggle="tooltip" data-placement="top" title="Open 24 hour" v-if="pharmacy.full_time"><div class="m-auto pt-2 white-text"><strong>24</strong></div></a>
+
+
+                                                <a class="btn-floating btn-sm purple-gradient ml-1 mt-0" data-toggle="tooltip" data-placement="top" title="Home Delivery" v-if="pharmacy.delivery"><i class="fas fa-truck"></i></a>
+
+                                            </div>
+                                        </div>
+                                        <h4 class="card-title mt-2">
+                                            <strong>
+                                                <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug">@{{ pharmacy.en_name }}</a>
+                                            </strong>
+                                        </h4>
+
+                                        <span class="badge mb-2 p-2 badge-info" v-if="pharmacy.premium">Featured</span>
+
+                                        <!--Address-->
+                                        <p class="card-text">
+                                            @{{ pharmacy.region.en_name }}, @{{ pharmacy.city.en_name }}, @{{ pharmacy.en_address }}
+                                        </p>
+
+
+                                        <!--Card footer-->
+                                        <div class="card-footer">
+                                            <span class="float-right light-green-text">
+                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(pharmacy.id)"></i> @{{ pharmacy.favorites.count }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!--Card content-->
                                 </div>
-                                <!--Grid column-->
-                            @endforeach
+                                <!--Card-->
+
+                            </div>
+                            <!--Grid column-->
+
                         </div>
-                    @endfor
 
                 </div>
                 <!--Slides-->
@@ -310,7 +302,7 @@
                     } else {
 
                         let user = this.user;
-                        let favorites = this.user.favorite_cosmetic_clinics;
+                        let favorites = this.user.favorite_pharmacies;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id

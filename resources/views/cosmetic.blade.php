@@ -170,12 +170,13 @@
                                 <div class="card card-cascade narrower card-ecommerce">
                                     <!--Card image-->
                                     <div class="view overlay">
-                                        <img :src="cosmetic.img" class="card-img-top" alt="sample photo">
+                                        <img :src="cosmetic.img" class="card-img-top" :alt="cosmetic.en_name">
                                         <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug">
                                             <div class="mask rgba-white-slight"></div>
                                         </a>
                                     </div>
                                     <!--Card image-->
+
                                     <!--Card content-->
                                     <div class="card-body text-center">
                                         <!--Category & Title-->

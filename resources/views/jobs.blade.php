@@ -196,7 +196,7 @@
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img :src="job.img " class="img-fluid" alt="">
+                                <img :src="job.img " class="img-fluid" :alt="job.title">
                                 <a :href="'/jobs/' + job.id + '/' + job.slug" >
                                     <div class="mask rgba-white-slight"></div>
                                 </a>

@@ -289,9 +289,12 @@
                               <div class="col-md-9">
                                  <h5 class="card-title mb-1"><i class="fas fa-user-md blue-text fa-2x pr-2"></i> <strong><a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">@{{ clinic.en_name }}</a></strong></h5>
                               </div>
-                              <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                 </i><span class="light-green-text text-sm-right">@{{ clinic.favorites.count }}</span>
-                              </div>
+                               <div class="col-md-3 mt-1 text-center">
+                                   <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(clinic.id)" @click.prevent="fav(clinic.id)" >
+                                       <i class="fas fa-heart pr-1 animated"  :class="favClass(clinic.id)"></i>
+                                   </a>
+                                   <span class="light-green-text text-sm-right">@{{ clinic.favorites.count }}</span>
+                               </div>
 
                            </div>
                            <div class="divider"></div>
@@ -433,7 +436,6 @@
        data () {
            return {
                endpoint: '/api/clinics/search',
-               isFav: false,
                clinics: {},
                links: {},
                pagination: {},
@@ -453,7 +455,8 @@
                regionName: 'Choose City',
                cityId: null,
                cityName: 'Choose Area',
-               mouseOver: false
+               mouseOver: false,
+               user: {!! Auth::check() ? Auth::user()->load(['favoriteClinics']) : 'null' !!}
            }
        },
        methods: {
@@ -528,6 +531,77 @@
                this.endpoint = '/api/clinics/search';
                this.fetchClinics()
            }, 100),
+           isFav(id) {
+               @if(Auth::check())
+                   let favorites = this.user.favorite_clinics;
+                   for(let i = 0; i < favorites.length; i++ ){
+                       if(favorites[i].favourable_id === id) {
+                           return true
+                       }
+                   }
+               @endif
+                   return false;
+           },
+           favClass(id) {
+               let fav = this.isFav(id);
+               return {
+                   'grey-text pulse': !fav,
+                   'pink-text bounceIn': fav
+               }
+           },
+           originalTitle(id) {
+               if(this.isFav(id)) {
+                   return 'Remove from Favorites'
+               } else {
+                   return 'Add to Favorites'
+               }
+           },
+           fav(id) {
+               if(this.user) {
+                   if (this.isFav(id)) {
+                       let user = this.user;
+                       let clinics = this.clinics;
+                       let favorites = this.user.favorite_clinics;
+                       for(let i = 0; i < favorites.length; i++ ){
+                           if(favorites[i].favourable_id === id) {
+
+                               favorites.splice(i, 1);
+                           }
+                       }
+
+                       for(let i = 0; i < clinics.length; i++ ){
+                           if(clinics[i].id === id) {
+
+                               clinics[i].favorites.count--
+                           }
+                       }
+                       axios.delete('/api/clinics/' + id + '/users/' + user.id + '/fav')
+                           .then(function (res) {
+
+                           })
+                   } else {
+
+                       let user = this.user;
+                       let clinics = this.clinics;
+                       let favorites = this.user.favorite_clinics;
+                       favorites.push({
+                           favourable_id: id,
+                           user_id: user.id
+                       });
+                       for(let i = 0; i < clinics.length; i++ ){
+                           if(clinics[i].id === id) {
+                               clinics[i].favorites.count++
+                           }
+                       }
+                       axios.post('/api/clinics/' + id + '/users/' + user.id + '/fav')
+                           .then(function (res) {
+
+                           })
+                   }
+               } else {
+                   $('#elegantModalForm').modal('show');
+               }
+           }
        },
        mounted() {
            this.fetchClinics();

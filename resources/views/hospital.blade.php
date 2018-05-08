@@ -165,7 +165,7 @@
                                     <div class="card card-cascade narrower card-ecommerce">
                                         <!--Card image-->
                                         <div class="view overlay">
-                                            <img :src="hospital.img" class="card-img-top" alt="sample photo">
+                                            <img :src="hospital.img" class="card-img-top" :alt="hospital.en_name">
                                             <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug">
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>

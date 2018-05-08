@@ -1,6 +1,6 @@
 <header>
     <!-- Sidebar navigation -->
-    <ul id="slide-out" class="side-nav custom-scrollbar">
+    {{--<ul id="slide-out" class="side-nav custom-scrollbar">
         <!-- Logo -->
         <li>
             <div class="logo-wrapper waves-light">
@@ -45,6 +45,7 @@
             </form>
         </li>
         <!--/.Search Form-->
+
         <!-- Side navigation links -->
         <li>
             <ul class="collapsible collapsible-accordion">
@@ -130,19 +131,20 @@
             </ul>
         </li>
         <!--/. Side navigation links -->
+
         <div class="sidenav-bg mask-strong"></div>
-    </ul>
+    </ul>--}}
     <!--/. Sidebar navigation -->
 
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg  navbar-light scrolling-navbar white">
         <div class="container">
             <!-- SideNav slide-out button -->
-            <div class="float-left mr-2">
+            {{--<div class="float-left mr-2">
                 <a href="#" data-activates="slide-out" class="button-collapse">
                     <i class="fa fa-bars light-blue-text"></i>
                 </a>
-            </div>
+            </div>--}}
             <a class="navbar-brand font-weight-bold" href="{{ route('main') }}">
                 <strong>Doctor Egypt</strong>
             </a>

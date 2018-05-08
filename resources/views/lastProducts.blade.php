@@ -8,7 +8,7 @@
             <div class="card card-cascade narrower card-ecommerce">
                 <!--Card image-->
                 <div class="view overlay">
-                    <img :src="product.img" class="card-img-top" alt="sample photo">
+                    <img :src="product.img" class="card-img-top" :alt="product.title">
                     <a :href="'/products/' + product.id + '/' + product.slug">
                         <div class="mask rgba-white-slight"></div>
                     </a>
