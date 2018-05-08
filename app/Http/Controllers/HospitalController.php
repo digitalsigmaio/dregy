@@ -27,7 +27,11 @@ class HospitalController extends Controller
         $relatedHospitals = $relatedHospitals->reject(function ($item) use ($hospital){
             return $item->id == $hospital->id;
         });
+        $relatedHospitals = HospitalResource::collection($relatedHospitals);
         $relatedHospitalsChunks = $relatedHospitals->chunk(3);
+        $relatedHospitalsChunks = json_encode($relatedHospitalsChunks);
+        $hospital = new HospitalResource($hospital);
+        $hospital = json_encode($hospital);
 
         return view('hospital', compact(['hospital', 'relatedHospitalsChunks']));
     }

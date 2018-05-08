@@ -561,7 +561,6 @@
 
                         for(let i = 0; i < hospitals.length; i++ ){
                             if(hospitals[i].id === id) {
-
                                 hospitals[i].favorites.count--
                             }
                         }

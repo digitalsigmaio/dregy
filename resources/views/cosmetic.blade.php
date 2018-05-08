@@ -24,11 +24,9 @@
                             <strong>@{{ cosmetic.en_name }}</strong>
                         </h2>
                         <div class="row">
-
                             <div class="col-md-6" v-if="cosmetic.premium">
                                 <span class="badge mb-2 p-2 badge-info">Featured</span>
                             </div>
-
                         </div>
 
                         <!--Accordion wrapper-->
@@ -156,9 +154,7 @@
 
                 <!--Indicators-->
                 <ol class="carousel-indicators" v-if="cosmetics.length > 1" >
-
-                        <li class="primary-color" :class="{ active: n ==1 }" data-target="#multi-item-example" :data-slide-to="(n-1)" v-for="n in cosmetics.length"></li>
-
+                    <li class="primary-color" :class="{ active: n ==1 }" data-target="#multi-item-example" :data-slide-to="(n-1)" v-for="n in cosmetics.length"></li>
                 </ol>
                 <!--Indicators-->
 
@@ -196,7 +192,7 @@
                                         <span class="badge mb-2 p-2 badge-info" v-if="cosmetic.premium">Featured</span>
 
 
-                                    <!--Description-->
+                                        <!--Address-->
                                         <p class="card-text">
                                             @{{ cosmetic.region.en_name }}, @{{ cosmetic.city.en_name }}, @{{ cosmetic.en_address }}
                                         </p>
@@ -204,10 +200,8 @@
 
                                         <!--Card footer-->
                                         <div class="card-footer">
-                                            <span class="float-right">
-                                              <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)" class="light-green-text" @click.prevent="fav(cosmetic.id)">
+                                            <span class="float-righ light-green-text">
                                                 <i class="fa fa-heart ml-3 pr-1" :class="favClass(cosmetic.id)"></i> @{{ cosmetic.favorites.count }}
-                                              </a>
                                             </span>
                                         </div>
                                     </div>
@@ -276,7 +270,6 @@
                 if(this.user) {
                     if (this.isFav(id)) {
                         let user = this.user;
-                        let cosmetics = this.cosmetics;
                         let favorites = this.user.favorite_cosmetic_clinics;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
@@ -285,12 +278,10 @@
                             }
                         }
 
-                        for(let i = 0; i < cosmetics.length; i++ ){
-                            if(cosmetics[i].id === id) {
-
-                                cosmetics[i].favorites.count--
-                            }
+                        if (this.cosmetic.id === id) {
+                            this.cosmetic.favorites.count--
                         }
+
                         axios.delete('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
@@ -298,18 +289,17 @@
                     } else {
 
                         let user = this.user;
-                        let cosmetics = this.cosmetics;
                         let favorites = this.user.favorite_cosmetic_clinics;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
-                        for(let i = 0; i < cosmetics.length; i++ ){
-                            if(cosmetics[i].id === id) {
-                                console.log(cosmetics[i]);
-                                cosmetics[i].favorites.count++
-                            }
+
+
+                        if (this.cosmetic.id === id) {
+                            this.cosmetic.favorites.count++
                         }
+
                         axios.post('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 

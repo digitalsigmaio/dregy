@@ -40,7 +40,7 @@ class HospitalResource extends JsonResource
             ],
             'views' => $this->views->count(),
             'specialities' => $this->specialities,
-            'created_at' => $this->created_at->diffForHumans(),
+            'created_at' => $this->created_at->toFormattedDateString(),
         ];
     }
 }
