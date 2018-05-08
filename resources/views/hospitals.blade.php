@@ -267,8 +267,11 @@
                                         <div class="col-md-9">
                                             <h5 class="card-title mb-1"><i class="fas fa-hospital red-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">@{{ hospital.en_name }}</a></strong></h5>
                                         </div>
-                                        <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                            </i><span class="light-green-text text-sm-right">@{{ hospital.favorites.count }}</span>
+                                        <div class="col-md-3 mt-1 text-center">
+                                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(hospital.id)" @click.prevent="fav(hospital.id)" >
+                                                <i class="fas fa-heart pr-1 animated"  :class="favClass(hospital.id)"></i>
+                                            </a>
+                                            <span class="light-green-text text-sm-right">@{{ hospital.favorites.count }}</span>
                                         </div>
 
                                     </div>
@@ -278,16 +281,22 @@
 
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="m-auto h2-responsive grey-text">
+                                                            @{{ hospital.rate.rating }}
+                                                        </div>
+                                                    </div>
                                                     <ul class="rating mt-1">
                                                         <li v-for="n in 5">
                                                             <i class="fa fa-star cyan-text" :class="starColor(n, hospital.rate.rating)"></i>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                {{--<div class="col-md-6">
+                                                <div class="col-md-6 m-auto">
                                                     <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">Featured</span>
-                                                </div>--}}
+                                                </div>
                                             </div>
+
                                             <!-- Rating -->
                                             <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ hospital.en_address }}</p>
 
@@ -419,7 +428,6 @@
             return {
                 hospitals: {},
                 endpoint: '/api/hospitals/search',
-                isFav: false,
                 links: {},
                 pagination: {},
                 search: {
@@ -437,7 +445,8 @@
                 regionName: 'Choose City',
                 cityId: null,
                 cityName: 'Choose Area',
-                mouseOver: false
+                mouseOver: false,
+                user: {!! Auth::check() ? Auth::user()->load(['favoriteHospitals']) : 'null' !!},
             }
         },
         methods: {
@@ -512,6 +521,78 @@
                 this.endpoint = '/api/hospitals/search';
                 this.fetchHospitals()
             }, 100),
+            isFav(id) {
+                @if(Auth::check())
+                    let favorites = this.user.favorite_hospitals;
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
+                    }
+                @endif
+                return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    if (this.isFav(id)) {
+                        let user = this.user;
+                        let hospitals = this.hospitals;
+                        let favorites = this.user.favorite_hospitals;
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < hospitals.length; i++ ){
+                            if(hospitals[i].id === id) {
+
+                                hospitals[i].favorites.count--
+                            }
+                        }
+                        axios.delete('/api/hospitals/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+
+                        let user = this.user;
+                        let hospitals = this.hospitals;
+                        let favorites = this.user.favorite_hospitals;
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < hospitals.length; i++ ){
+                            if(hospitals[i].id === id) {
+                                console.log(hospitals[i]);
+                                hospitals[i].favorites.count++
+                            }
+                        }
+                        axios.post('/api/hospitals/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
         },
         mounted() {
             this.fetchHospitals();

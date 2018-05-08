@@ -269,33 +269,44 @@
                               </div>
                               <div class="col-md-3 mt-1 text-center">
                                   <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)" @click.prevent="fav(cosmetic.id)" >
-                                      <i class="fas fa-heart pr-1 animated"  :class="favClass(cosmetic.id)">
-                                      </i></a><span class="light-green-text text-sm-right">@{{ cosmetic.favorites.count }}</span>
+                                      <i class="fas fa-heart pr-1 animated"  :class="favClass(cosmetic.id)"></i>
+                                  </a>
+                                  <span class="light-green-text text-sm-right">@{{ cosmetic.favorites.count }}</span>
                               </div>
 
                            </div>
                            <div class="divider"></div>
                            <div class="row mt-1">
-                              <div class="col-md-12">
 
-                                 <ul class="rating mt-1">
-                                    <li v-for="n in 5">
-                                       <i class="fa fa-star cyan-text" :class="starColor(n, cosmetic.rate.rating)"></i>
-                                    </li>
-                                 </ul>
-                                 <!-- Rating -->
-                                 <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ cosmetic.en_address }}</p>
+                               <div class="col-md-12">
+                                   <div class="row">
+                                       <div class="col-md-6">
+                                           <div class="col-md-12">
+                                               <div class="m-auto h2-responsive grey-text">
+                                                   @{{ cosmetic.rate.rating }}
+                                               </div>
+                                           </div>
+                                           <ul class="rating mt-1">
+                                               <li v-for="n in 5">
+                                                   <i class="fa fa-star cyan-text" :class="starColor(n, cosmetic.rate.rating)"></i>
+                                               </li>
+                                           </ul>
+                                       </div>
+                                   </div>
 
-                                 <p><i class="fas fa-at pr-1 cyan-text">
-                                    </i><span class="light-grey-text ">@{{ cosmetic.email }}</span>
-                                 </p>
+                                   <!-- Rating -->
+                                   <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ cosmetic.en_address }}</p>
 
-                                 <p><i class="fas fa-home pr-1 cyan-text">
-                                    </i><span class="light-grey-text">@{{ cosmetic.website }}</span>
-                                 </p>
+                                   <p><i class="fas fa-at pr-1 cyan-text">
+                                       </i><span class="light-grey-text ">@{{ cosmetic.email }}</span>
+                                   </p>
 
-                              </div>
-                           </div>
+                                   <p><i class="fas fa-home pr-1 cyan-text">
+                                       </i><span class="light-grey-text">@{{ cosmetic.website }}</span>
+                                   </p>
+                               </div>
+
+                          </div>
 
 
                         </div>

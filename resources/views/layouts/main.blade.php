@@ -70,28 +70,8 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/mdb.min.js') }}"></script>
 <script src="{{ asset('js/wow.min.js') }}"></script>
-<script>
-    // Material Select Initialization
-    $(document).ready(function () {
-        new WOW().init();
+<script src="{{ asset('js/custom.js') }}"></script>
 
-        // Tooltips Initialization
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-
-        $('.mdb-select').material_select();
-
-        // SideNav Initialization
-        $(".button-collapse").sideNav();
-
-        $('.nav-item').hover(function () {
-            $(this).toggleClass('active');
-        })
-    });
-
-
-</script>
 @stack('scripts')
 </body>
 
