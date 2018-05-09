@@ -60,9 +60,12 @@ class PharmacyController extends Controller
     public function storeRate(Pharmacy $pharmacy, $id, Request $request)
     {
         try {
-            $pharmacy->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
+            $rate = $pharmacy->rawRates()->firstOrNew(['user_id' => $id]);
+            $rate->rate = $request->rate;
+            $rate->save();
+
             return response()->json([
-                'message' => 'Clinic has been rated'
+                'message' => 'Pharmacy has been rated',
             ], 201);
         } catch (QueryException $e) {
             return response()->json([

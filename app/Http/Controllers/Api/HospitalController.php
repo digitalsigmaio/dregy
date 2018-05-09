@@ -60,7 +60,10 @@ class HospitalController extends Controller
     public function storeRate(Hospital $hospital, $id, Request $request)
     {
         try {
-            $hospital->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
+            $rate = $hospital->rawRates()->firstOrNew(['user_id' => $id]);
+            $rate->rate = $request->rate;
+            $rate->save();
+
             return response()->json([
                 'message' => 'Hospital has been rated'
             ], 201);
@@ -71,19 +74,6 @@ class HospitalController extends Controller
         }
     }
 
-    public function updateRate(Hospital $hospital, $id, Request $request)
-    {
-        try {
-            $hospital->rates()->updateOrCreate(['user_id' => $id], ['rate' => $request->rate]);
-            return response()->json([
-                'message' => 'Hospital has been rated'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
-    }
 
     public function view(Hospital $hospital, Request $request)
     {

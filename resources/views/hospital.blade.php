@@ -29,6 +29,46 @@
                             <div class="col-md-6" v-if="hospital.premium">
                                 <span class="badge mb-2 p-2 badge-info">Featured</span>
                             </div>
+                            <div class="col-md-6 text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="m-auto h2-responsive grey-text">
+                                            @{{ hospital.rate.rating }}
+                                        </div>
+                                    </div>
+                                    <ul class="rating mt-1 m-auto">
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star cyan-text" :class="starColor(n, hospital.rate.rating)"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- User Rating -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="divider m-auto"></div>
+                                    </div>
+                                    <div class="col-md-4 pt-2 pr-0" v-if="user"><h6><span class="badge badge-dark">Rate</span></h6></div>
+                                    <div class="col-md-8 pl-0">
+                                        <div class="br-wrapper br-theme-css-stars" v-if="user">
+                                            <select id="example-fontawesome" name="rating" autocomplete="off" style="display: none!important;">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center grey-text" v-if="!user">
+                                        <a @click.prevent="rateThis()">
+                                            <i class="far fa-star fa-2x pr-2"></i><strong>Rate this</strong>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
 
                         <!--Accordion wrapper-->
@@ -228,7 +268,7 @@
         el: '#app',
         data () {
             return {
-                user: {!! Auth::check() ? Auth::user()->load(['favoriteHospitals']) : 'null' !!},
+                user: {!! Auth::check() ? Auth::user()->load(['favoriteHospitals', 'rateForHospitals']) : 'null' !!},
                 hospitals: {!! $relatedHospitalsChunks !!},
                 hospital: {!! $hospital !!}
             }
@@ -301,7 +341,57 @@
                 } else {
                     $('#elegantModalForm').modal('show');
                 }
+            },
+            rate() {
+                if(this.user) {
+                    let vm = this;
+                    let rates = this.user.rate_for_hospitals;
+                    let id = this.hospital.id;
+                    let rate;
+                    for(let i = 0; i < rates.length; i++ ){
+                        if(rates[i].rateable_id === id) {
+                            rate = rates[i].rate;
+                        }
+                    }
+                    $('#example-fontawesome').barrating('show', {
+                        theme: 'css-stars',
+                        initialRating: rate,
+                        onSelect: function(value, text, event) {
+                            if (typeof(event) !== 'undefined') {
+                                // rating was selected by a user
+
+                                let endpoint = '/api/hospitals/' + vm.hospital.id + '/users/' + vm.user.id + '/rate';
+                                axios.post( endpoint, {
+                                    user_id: vm.user.id,
+                                    rate: value
+                                })
+                                    .then(function (res) {
+
+                                    })
+                            } else {
+                                // rating was selected programmatically
+                                // by calling `set` method
+                            }
+                        }
+                    });
+                }
+            },
+            rateThis() {
+                $('#elegantModalForm').modal('show');
+            },
+            round(rate) {
+                return parseInt(Math.round(rate));
+            },
+            starColor(n, rate) {
+                if (n <= this.round(rate)) {
+                    return 'blue-text'
+                } else {
+                    return 'grey-text'
+                }
             }
+        },
+        mounted() {
+            this.rate();
         }
     });
 </script>

@@ -108,9 +108,28 @@ class User extends Authenticatable
 
     public function rates()
     {
-        return $this->hasMany(Rate::class);
+        return $this->hasMany(Rate::class)->select(['user_id', 'rateable_type', 'rateable_id', 'rate'])->groupBy('rateable_type', 'user_id', 'rateable_id', 'rate');
     }
 
+    public function rateForHospitals()
+    {
+        return $this->hasMany(Rate::class)->select(['user_id', 'rateable_id', 'rate'])->where('rateable_type', 'App\\Hospital')->groupBy('user_id', 'rateable_id', 'rate');
+    }
+
+    public function rateForClinics()
+    {
+        return $this->hasMany(Rate::class)->select(['user_id', 'rateable_id', 'rate'])->where('rateable_type', 'App\\Clinic')->groupBy('user_id', 'rateable_id', 'rate');
+    }
+
+    public function rateForPharmacies()
+    {
+        return $this->hasMany(Rate::class)->select(['user_id', 'rateable_id', 'rate'])->where('rateable_type', 'App\\Pharmacy')->groupBy('user_id', 'rateable_id', 'rate');
+    }
+
+    public function rateForCosmeticClinics()
+    {
+        return $this->hasMany(Rate::class)->select(['user_id', 'rateable_id', 'rate'])->where('rateable_type', 'App\\CosmeticClinic')->groupBy('user_id', 'rateable_id', 'rate');
+    }
 
 
     public function deviceTokens()

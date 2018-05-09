@@ -63,9 +63,12 @@ class CosmeticClinicController extends Controller
     public function storeRate(CosmeticClinic $cosmeticClinic, $id, Request $request)
     {
         try {
-            $cosmeticClinic->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
+            $rate = $cosmeticClinic->rawRates()->firstOrNew(['user_id' => $id]);
+            $rate->rate = $request->rate;
+            $rate->save();
+
             return response()->json([
-                'message' => 'Beauty Center has been rated'
+                'message' => 'Cosmetic clinic has been rated'
             ], 201);
         } catch (QueryException $e) {
             return response()->json([

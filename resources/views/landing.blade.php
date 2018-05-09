@@ -12,6 +12,16 @@
         <!-- Content -->
         <div class="col-lg-12">
 
+
+
+            <!--Section: Featured medical index-->
+            <section>
+
+                @include('topClients')
+
+            </section>
+            <!--Section: Featured medical index-->
+
             <!-- Categories & Adv -->
             <section class="section pt-2">
 
@@ -47,13 +57,13 @@
             </section>
             <!-- Categories & Adv -->
 
-            <!--Section: Featured medical index-->
-            <section>
+            <!--Section: job list-->
+            <section class="mb-5">
 
-                @include('topClients')
+                @include('mainJobs')
 
             </section>
-            <!--Section: Featured medical index-->
+            <!--/Section: job list-->
 
             <!--Section: Advertising-->
             <section>
@@ -81,14 +91,6 @@
 
             </section>
             <!--/Section: Advertising-->
-
-            <!--Section: job list-->
-            <section class="mb-5">
-
-                @include('mainJobs')
-
-            </section>
-            <!--/Section: job list-->
 
             <!--Section: Last products-->
             <section>

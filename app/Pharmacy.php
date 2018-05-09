@@ -50,6 +50,11 @@ class Pharmacy extends Model
         return $this->morphOne(Rate::class, 'rateable')->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as rating, COUNT(rate) as count, rateable_id')->groupBy('rateable_id');
     }
 
+    public function rawRates()
+    {
+        return $this->morphMany(Rate::class, 'rateable');
+    }
+
     public function phoneNumbers()
     {
         return $this->morphMany(PhoneNumber::class, 'phonable');

@@ -61,7 +61,9 @@ class ClinicController extends Controller
     {
 
         try {
-            $clinic->rates()->updateOrCreate(['user_id' => $id],[ 'rate' => $request->rate]);
+            $rate = $clinic->rawRates()->firstOrNew(['user_id' => $id]);
+            $rate->rate = $request->rate;
+            $rate->save();
             return response()->json([
                 'message' => 'Clinic has been rated'
             ], 201);
@@ -95,9 +97,7 @@ class ClinicController extends Controller
         if (count($clinics)) {
             return new ClinicCollection($clinics);
         } else {
-            return response()->json([
-                'message' => 'Nothing found'
-            ]);
+            return null;
         }
     }
 }

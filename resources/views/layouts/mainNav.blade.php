@@ -44,12 +44,13 @@
 
                 </ul>
                 <!-- Links -->
-
+                <!--
                 <form class="search-form" role="search">
                     <div class="form-group md-form my-0 waves-light">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                 </form>
+                -->
             </div>
             <!-- Collapsible content -->
         </div>

@@ -322,5 +322,6 @@
             }
         }
     });
+
 </script>
 @endpush
