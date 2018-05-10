@@ -549,7 +549,6 @@
                             let favorites = this.user.favorite_pharmacies;
                             for(let i = 0; i < favorites.length; i++ ){
                                 if(favorites[i].favourable_id === id) {
-
                                     favorites.splice(i, 1);
                                 }
                             }
@@ -562,7 +561,7 @@
                             }
                             axios.delete('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
                                 .then(function (res) {
-
+                                    console.log(res.data)
                                 })
                         } else {
 
@@ -580,7 +579,7 @@
                             }
                             axios.post('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
                                 .then(function (res) {
-
+                                    console.log(res.data)
                                 })
                         }
                     } else {

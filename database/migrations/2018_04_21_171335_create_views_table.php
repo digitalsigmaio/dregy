@@ -16,6 +16,8 @@ class CreateViewsTable extends Migration
         Schema::create('views', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
+            $table->string('user_agent')->nullable();
+            $table->string('user_ip')->nullable();
             $table->integer('viewable_id');
             $table->string('viewable_type');
             $table->timestamps();

@@ -78,10 +78,16 @@ class HospitalController extends Controller
     public function view(Hospital $hospital, Request $request)
     {
         $userId = $request->user_id;
+        $userAgent = $request->header('user-agent');
+        $userIp = Request::ip();
 
         try {
 
-            $hospital->views()->create(['user_id' => $userId]);
+            $hospital->views()->create([
+                'user_id' => $userId,
+                'user_agent' => $userAgent,
+                'user_ip'   => $userIp
+                ]);
 
             return response()->json([
                 'message' => 'Hospital new view'

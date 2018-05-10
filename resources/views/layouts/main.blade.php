@@ -39,7 +39,7 @@
 
 
 <!--Navigation-->
-@include('layouts.topNav')
+@include('layouts.mainNav')
 <!-- /.Navigation -->
 
 <!--Intro-->
@@ -51,7 +51,7 @@
 
     <div class="container-fluid mx-0 px-0">
 
-        @include('layouts.mainNav')
+
 
     </div>
 
