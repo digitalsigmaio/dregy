@@ -58,14 +58,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light white-text font-weight-bold" href="{{ route('contact') }}" target="_blank">
+                        <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('contact') }}" target="_blank">
                             <i class="fa fa-envelope white-text"></i> Contact
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     @if(Auth::user())
                         <li class="nav-item dropdown ml-3">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light white-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user white-text"></i> Profile </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
@@ -77,7 +77,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light white-text font-weight-bold" data-toggle="modal" data-target="#elegantModalForm">
+                            <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" data-toggle="modal" data-target="#elegantModalForm">
                                 <i class="fas fa-sign-in-alt white-text"></i> Sign In
                                 <span class="sr-only">Sign In</span>
                             </a>
