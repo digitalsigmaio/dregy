@@ -1,6 +1,8 @@
  <header>
+
+
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark sky-gradient">
+    <nav class="navbar navbar-expand-lg navbar-dark sky-gradient fixed-top scrolling-navbar">
         <div class="container">
 
             <!-- Navbar brand -->

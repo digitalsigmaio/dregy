@@ -1,10 +1,10 @@
 <header>
     <!-- Sidebar navigation -->
-    {{--<ul id="slide-out" class="side-nav custom-scrollbar">
+    <ul id="slide-out" class="side-nav custom-scrollbar" style="transform: translateX(0px);">
         <!-- Logo -->
         <li>
-            <div class="logo-wrapper waves-light">
-                <a href="{{ route('main') }}">
+            <div class="logo-wrapper waves-light waves-effect waves-light">
+                <a href="#">
                     <img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" class="img-fluid flex-center">
                 </a>
             </div>
@@ -14,22 +14,22 @@
         <li>
             <ul class="social">
                 <li>
-                    <a class="p-2 m-2 fb-ic">
+                    <a class="fb-ic">
                         <i class="fa fa-facebook"> </i>
                     </a>
                 </li>
                 <li>
-                    <a class="p-2 m-2 pin-ic">
+                    <a class="pin-ic">
                         <i class="fa fa-pinterest"> </i>
                     </a>
                 </li>
                 <li>
-                    <a class="p-2 m-2 gplus-ic">
+                    <a class="gplus-ic">
                         <i class="fa fa-google-plus"> </i>
                     </a>
                 </li>
                 <li>
-                    <a class="p-2 m-2 tw-ic">
+                    <a class="tw-ic">
                         <i class="fa fa-twitter"> </i>
                     </a>
                 </li>
@@ -39,13 +39,12 @@
         <!--Search Form-->
         <li>
             <form class="search-form" role="search">
-                <div class="form-group md-form mt-0 pt-1 waves-light">
+                <div class="form-group md-form mt-0 pt-1 waves-light waves-effect waves-light">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
             </form>
         </li>
         <!--/.Search Form-->
-
         <!-- Side navigation links -->
         <li>
             <ul class="collapsible collapsible-accordion">
@@ -131,20 +130,19 @@
             </ul>
         </li>
         <!--/. Side navigation links -->
-
         <div class="sidenav-bg mask-strong"></div>
-    </ul>--}}
+    </ul>
     <!--/. Sidebar navigation -->
 
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg  navbar-light scrolling-navbar white">
         <div class="container">
             <!-- SideNav slide-out button -->
-            {{--<div class="float-left mr-2">
+            <div class="float-left mr-2">
                 <a href="#" data-activates="slide-out" class="button-collapse">
-                    <i class="fa fa-bars light-blue-text"></i>
+                    <i class="fa fa-bars white-text"></i>
                 </a>
-            </div>--}}
+            </div>
             <a class="navbar-brand font-weight-bold" href="{{ route('main') }}">
                 <strong>Doctor Egypt</strong>
             </a>

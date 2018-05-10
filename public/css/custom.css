@@ -50,8 +50,22 @@ select {
     color: cyan;
 }
 
+.black-skin .side-nav .collapsible li .collapsible-header.active {
+    color: white;
+}
+
+.logo-sn {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.black-skin .side-nav .collapsible li .collapsible-body a:hover {
+    color: white;
+}
+
+.black-skin .side-nav .collapsible li .collapsible-header.active, .black-skin .side-nav .collapsible li .collapsible-header:hover
+
 .side-nav {
-    background-image: url('/img/sidenav.jpg');
+
 }
 
 [v-cloak] { display:none; }
@@ -77,6 +91,7 @@ select {
     color: #2196f3!important; }
 
 .form-elegant .modal-body, .form-elegant .modal-footer {
-    font-weight: 400; }
+    font-weight: 400;
+}
 
 /** ELEGANT FORM **/

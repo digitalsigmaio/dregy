@@ -49,12 +49,6 @@
     @yield('adsSlider')
     <!--/.Ads Slider-->
 
-    <div class="container-fluid mx-0 px-0">
-
-
-
-    </div>
-
 </section>
 <!--/Intro-->
 
