@@ -122,7 +122,7 @@
     <!-- Copyright-->
     <div class="footer-copyright py-3 text-center">
         <div class="container-fluid">
-            © 2018 Copyright: <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> doctor-egypt.com </a>
+            © 2018 Developed and designed by <a href="http://teleone.tech/" target="_blank">TeleOne</a>
         </div>
     </div>
     <!--/.Copyright -->
