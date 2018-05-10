@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container black-skin">
+<div class="container black-skin" style="height: 100vh">
     <div id="slide-out" class="side-nav stylish-color-dark fixed" style="transform: translateX(0px);">
         <ul class="custom-scrollbar list-unstyled ps ps--theme_default" style="max-height:100vh;" data-ps-id="66760783-727f-13c2-96d3-4ef521ac2096">
             <!-- Logo -->
