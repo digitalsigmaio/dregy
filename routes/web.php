@@ -51,7 +51,7 @@ Route::middleware('language')->group(function () {
 
 
     Route::get('/home', 'HomeController@index')->name('home');
-
+    Route::get('/favorites/hospitals', 'HomeController@myFavoriteHospitals')->name('favoriteHospitals');
 
     Auth::routes();
     Route::get('/comingsoon', function () {
@@ -59,12 +59,7 @@ Route::middleware('language')->group(function () {
     });
 
 
-    Route::get('/test', function () {
-        $jobs = \App\Hospital::whereHas('rates', function($query) {
-            $query->selectRaw('ROUND((SUM(rate) / COUNT(rate)), 1) as')->whereBetween('', ['2', '3']);
-        })->get();
-        return $jobs;
-});
+
 
 
 

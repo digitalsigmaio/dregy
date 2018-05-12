@@ -174,7 +174,6 @@
         <section id="hospitals" class="pb-5">
             <!--Carousel Wrapper-->
             <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-            @
 
             <!--Controls-->
                 <div class="controls-top" v-if="hospitals.length > 1">

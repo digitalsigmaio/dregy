@@ -78,32 +78,33 @@ class User extends Authenticatable
 
     public function favoriteHospitals()
     {
-        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\Hospital')->groupBy('user_id', 'favourable_id');
+        return $this->hasMany(Favorite::class)->where('favourable_type', 'App\\Hospital');
     }
+
 
     public function favoriteClinics()
     {
-        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\Clinic');
+        return $this->hasMany(Favorite::class)->where('favourable_type', 'App\\Clinic');
     }
 
     public function favoriteCosmeticClinics()
     {
-        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\CosmeticClinic');
+        return $this->hasMany(Favorite::class)->where('favourable_type', 'App\\CosmeticClinic');
     }
 
     public function favoritePharmacies()
     {
-        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\Pharmacy');
+        return $this->hasMany(Favorite::class)->where('favourable_type', 'App\\Pharmacy');
     }
 
     public function favoriteProductAds()
     {
-        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\ProductAd');
+        return $this->hasMany(Favorite::class)->where('favourable_type', 'App\\ProductAd');
     }
 
     public function favoriteJobAds()
     {
-        return $this->hasMany(Favorite::class)->select(['user_id', 'favourable_id'])->where('favourable_type', 'App\\JobAd');
+        return $this->hasMany(Favorite::class)->where('favourable_type', 'App\\JobAd');
     }
 
     public function views()

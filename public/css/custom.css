@@ -95,3 +95,9 @@ select {
 }
 
 /** ELEGANT FORM **/
+
+.dismiss-favorite {
+    position: absolute;
+    top: -20px;
+    right: -5px;
+}
