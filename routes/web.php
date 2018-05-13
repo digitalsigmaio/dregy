@@ -51,7 +51,14 @@ Route::middleware('language')->group(function () {
 
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/favorites/hospitals', 'HomeController@myFavoriteHospitals')->name('favoriteHospitals');
+    Route::get('/favorites/hospitals', 'HomeController@favoriteHospitals')->name('favoriteHospitals');
+    Route::get('/favorites/clinics', 'HomeController@favoriteClinics')->name('favoriteClinics');
+    Route::get('/favorites/pharmacies', 'HomeController@favoritePharmacies')->name('favoritePharmacies');
+    Route::get('/favorites/cosmetic-clinics', 'HomeController@favoriteCosmeticClinics')->name('favoriteCosmeticClinics');
+    Route::get('/favorites/products', 'HomeController@favoriteProducts')->name('favoriteProducts');
+    Route::get('/favorites/jobs', 'HomeController@favoriteJobs')->name('favoriteJobs');
+
+    Route::get('/new/product', 'HomeController@createProduct')->name('createProduct');
 
     Auth::routes();
     Route::get('/comingsoon', function () {

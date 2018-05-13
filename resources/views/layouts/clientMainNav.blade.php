@@ -1,5 +1,5 @@
  <header>
-     <div id="slide-out" class="side-nav stylish-color-dark" style="transform: translateX(0px);">
+     <div id="slide-out" class="side-nav" style="transform: translateX(0px);">
          <ul class="custom-scrollbar list-unstyled ps ps--theme_default" style="max-height:100vh;" data-ps-id="66760783-727f-13c2-96d3-4ef521ac2096">
              <!-- Logo -->
              <li class="logo-sn waves-light  waves-effect waves-light">
@@ -17,11 +17,11 @@
                          <div class="collapsible-body" style="display: none;">
                              <ul class="sub-menu">
                                  <li id="menu-item-44240" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44240"><a class="collapsible-header waves-effect" id="link-menu-item-44240" href="{{ route('favoriteHospitals') }}">Hospitals</a></li>
-                                 <li id="menu-item-44241" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44241"><a class="collapsible-header waves-effect" id="link-menu-item-44241" href="">Clinics</a></li>
-                                 <li id="menu-item-44242" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44242"><a class="collapsible-header waves-effect" id="link-menu-item-44242" href="">Pharmacies</a></li>
-                                 <li id="menu-item-44243" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44243"><a class="collapsible-header waves-effect" id="link-menu-item-44243" href="">Cosmetic Clinics</a></li>
-                                 <li id="menu-item-44244" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44244"><a class="collapsible-header waves-effect" id="link-menu-item-44244" href="">Products</a></li>
-                                 <li id="menu-item-44245" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44245"><a class="collapsible-header waves-effect" id="link-menu-item-44245" href="">Jobs</a></li>
+                                 <li id="menu-item-44241" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44241"><a class="collapsible-header waves-effect" id="link-menu-item-44241" href="{{ route('favoriteClinics') }}">Clinics</a></li>
+                                 <li id="menu-item-44242" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44242"><a class="collapsible-header waves-effect" id="link-menu-item-44242" href="{{ route('favoritePharmacies') }}">Pharmacies</a></li>
+                                 <li id="menu-item-44243" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44243"><a class="collapsible-header waves-effect" id="link-menu-item-44243" href="{{ route('favoriteCosmeticClinics') }}">Cosmetic Clinics</a></li>
+                                 <li id="menu-item-44244" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44244"><a class="collapsible-header waves-effect" id="link-menu-item-44244" href="{{ route('favoriteProducts') }}">Products</a></li>
+                                 <li id="menu-item-44245" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44245"><a class="collapsible-header waves-effect" id="link-menu-item-44245" href="{{ route('favoriteJobs') }}">Jobs</a></li>
                              </ul>
                          </div>
                      </li>
@@ -35,7 +35,7 @@
                          <div class="collapsible-body" style="display: none;">
                              <ul class="sub-menu">
                                  <li id="menu-item-44240" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44240"><a class="collapsible-header waves-effect" id="link-menu-item-44240" href="">List</a></li>
-                                 <li id="menu-item-44241" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44241"><a class="collapsible-header waves-effect" id="link-menu-item-44241" href="">New</a></li>
+                                 <li id="menu-item-44241" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44241"><a class="collapsible-header waves-effect" id="link-menu-item-44241" href="{{ route('createProduct') }}">New</a></li>
                              </ul>
                          </div>
                      </li>
@@ -62,8 +62,8 @@
 
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark sky-gradient fixed-top scrolling-navbar">
-        <div class="container">
-            <div class="float-left mr-2">
+        <div class="container mr-2">
+            <div class="float-left mr-4">
                 <a href="#" data-activates="slide-out" class="button-collapse">
                     <i class="fa fa-bars white-text"></i>
                 </a>
