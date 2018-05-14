@@ -3,12 +3,15 @@
 namespace App;
 
 use App\Traits\CollectionPagination;
+use App\Traits\ImageUploader;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductAd extends Model
 {
-    use SoftDeletes, CollectionPagination;
+    use SoftDeletes, CollectionPagination, ImageUploader;
+
+    private $imagePath = 'img/products';
 
     public function region()
     {
@@ -56,7 +59,7 @@ class ProductAd extends Model
 
     public function getFeaturedAttribute()
     {
-        return $this->premium->count() ? true : false;
+        return $this->premium ? true : false;
     }
 
     public static function fetch($request)
@@ -102,6 +105,7 @@ class ProductAd extends Model
             }, function($query) {
                 return $query->orderBy('updated_at', 'DESC');
             })
+
             ->get();
 
 

@@ -108,7 +108,9 @@
                                     <a @click.prevent="fav(product.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)">
                                         <i class="fa fa-heart pr-2 animated" :class="favClass(product.id)"></i>
                                     </a>
-                                    @{{ product.favorites.count }}</span>
+                                    <span v-if="product.favorites">@{{ product.favorites.count }}</span>
+                                    <span v-else>0</span>
+                                </span>
                         </div>
                     </div>
                 </div>
@@ -190,7 +192,9 @@
                                               <strong>@{{ product.price }} L.E</strong>
                                             </span>
                                         <span class="float-right light-green-text">
-                                            <i class="fa fa-heart ml-3 pr-1" :class="favClass(product.id)"></i> @{{ product.favorites.count }}
+                                            <i class="fa fa-heart ml-3 pr-1" :class="favClass(product.id)"></i>
+                                            <span v-if="product.favorites">@{{ product.favorites.count }}</span>
+                                            <span v-else>0</span>
                                         </span>
                                     </div>
                                 </div>

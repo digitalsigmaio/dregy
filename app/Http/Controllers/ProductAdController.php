@@ -7,7 +7,10 @@ use App\ProductAd;
 use App\ProductAdCategory;
 use App\Region;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class ProductAdController extends Controller
 {
@@ -40,5 +43,44 @@ class ProductAdController extends Controller
         $productAd = json_encode($productAd);
 
         return view('product', compact(['productAd', 'relatedProductsChunks']));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required | min:3',
+            'price' => 'required',
+            'description' => 'required | min:20',
+            'status' => 'required',
+            'categoryId' => 'required',
+            'regionId' => 'required',
+            'cityId' => 'required',
+            'address' => 'required',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $product = new ProductAd;
+        $product->user_id = Auth::user()->id;
+        $product->title = $request->title;
+        $product->slug = str_slug($request->title);
+        $product->ref_id = 'pro-'. str_random(6) . '-' . time();
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->status = $request->status;
+        $product->product_ad_category_id = $request->categoryId;
+        $product->region_id = $request->regionId;
+        $product->city_id = $request->cityId;
+        $product->address = $request->address;
+        $product->expires_at = now()->addDays(30);
+        try {
+            $product->uploadImage($request);
+            $product->save();
+            session()->flash('success', 'Product has been added and waiting for review');
+            return redirect()->back();
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+
+
+
     }
 }

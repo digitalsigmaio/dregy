@@ -8,6 +8,7 @@ use App\ProductAd;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductAdController extends Controller
 {
@@ -100,5 +101,25 @@ class ProductAdController extends Controller
         } else {
             return null;
         }
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required | min:3',
+            'price' => 'required',
+            'description' => 'required | min:30',
+            'status' => 'required',
+            'categoryId' => 'required',
+            'regionId' => 'required',
+            'cityId' => 'required',
+            'address' => 'required',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $user = Auth::user();
+        $img = $request->img;
+        $path = $img->hashName('images');
+        dd($path);
+
     }
 }

@@ -25,6 +25,7 @@ Route::middleware('language')->group(function () {
     // ProductAds
     Route::get('/products', 'ProductAdController@index')->name('products');
     Route::get('/products/{productAd}/{slug}', 'ProductAdController@show');
+    Route::post('/product-ads', 'ProductAdController@store');
 
     // Hospitals
     Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
