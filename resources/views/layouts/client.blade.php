@@ -39,7 +39,7 @@
 
 
 <!--Navigation-->
-@include('layouts.ClientMainNav')
+@include('layouts.clientMainNav')
 <!-- /.Navigation -->
 
 <!--Intro-->
