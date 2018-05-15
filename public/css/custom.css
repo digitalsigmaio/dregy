@@ -62,11 +62,7 @@ select {
     color: white;
 }
 
-.black-skin .side-nav .collapsible li .collapsible-header.active, .black-skin .side-nav .collapsible li .collapsible-header:hover
 
-.side-nav {
-
-}
 
 [v-cloak] { display:none; }
 
@@ -96,8 +92,57 @@ select {
 
 /** ELEGANT FORM **/
 
+
 .dismiss-favorite {
     position: absolute;
     top: -20px;
     right: -5px;
+}
+
+.col-md-4 .card-img-top {
+    height: 225px;
+}
+
+.col-lg-4 .card-img-top {
+    height: 176px;
+}
+
+.product-img, .job-img {
+    min-height: 176px;
+    max-height: 225px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.col-md-4 .product-img, .col-md-4 .job-img {
+    height: 225px;
+}
+
+.col-lg-4 .product-img, .col-lg-4 .job-img {
+    height: 176px;
+}
+
+.client-menu {
+    position: relative;
+    z-index: 10;
+    height: calc(100vh + 400px);
+}
+
+.zoom img {
+    max-height: 400px;
+}
+
+@media only screen and (max-width: 770px){
+    .client-menu {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 910px){
+    .client-menu .rotate-icon {
+        display: none;
+    }
 }

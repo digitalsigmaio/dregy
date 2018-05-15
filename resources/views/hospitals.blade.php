@@ -271,7 +271,7 @@
                                             <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(hospital.id)" @click.prevent="fav(hospital.id)" >
                                                 <i class="fas fa-heart pr-1 animated"  :class="favClass(hospital.id)"></i>
                                             </a>
-                                            <span class="light-green-text text-sm-right">@{{ hospital.favorites.count }}</span>
+                                            <span class="light-green-text text-sm-right">@{{ favorites(hospital) }}</span>
                                         </div>
 
                                     </div>
@@ -450,6 +450,13 @@
             }
         },
         methods: {
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             fetchHospitals(){
                 let vm = this;
                 $('.hospitals').hide();
@@ -522,15 +529,19 @@
                 this.fetchHospitals()
             }, 100),
             isFav(id) {
-                @if(Auth::check())
-                    let favorites = this.user.favorite_hospitals;
+                        @if(Auth::check())
+                let favorites = this.user.favorite_hospitals;
+                if(favorites.length) {
                     for(let i = 0; i < favorites.length; i++ ){
                         if(favorites[i].favourable_id === id) {
                             return true
                         }
                     }
+                } else {
+                    return false;
+                }
                 @endif
-                return false;
+                    return false;
             },
             favClass(id) {
                 let fav = this.isFav(id);
@@ -548,10 +559,10 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let hospitals = this.hospitals;
+                    let favorites = this.user.favorite_hospitals;
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let hospitals = this.hospitals;
-                        let favorites = this.user.favorite_hospitals;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -561,7 +572,10 @@
 
                         for(let i = 0; i < hospitals.length; i++ ){
                             if(hospitals[i].id === id) {
-                                hospitals[i].favorites.count--
+
+                                if(hospitals[i].favorites !== null) {
+                                    hospitals[i].favorites.count--
+                                }
                             }
                         }
                         axios.delete('/api/hospitals/' + id + '/users/' + user.id + '/fav')
@@ -569,18 +583,17 @@
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let hospitals = this.hospitals;
-                        let favorites = this.user.favorite_hospitals;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
                         for(let i = 0; i < hospitals.length; i++ ){
                             if(hospitals[i].id === id) {
-                                console.log(hospitals[i]);
-                                hospitals[i].favorites.count++
+                                if(hospitals[i].favorites !== null) {
+                                    hospitals[i].favorites.count++
+                                } else {
+                                    hospitals[i].favorites = { count: 1 };
+                                }
                             }
                         }
                         axios.post('/api/hospitals/' + id + '/users/' + user.id + '/fav')

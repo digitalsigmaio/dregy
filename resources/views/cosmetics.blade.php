@@ -518,15 +518,19 @@
                this.fetchCosmetics()
            }, 100),
            isFav(id) {
-               @if(Auth::check())
+                       @if(Auth::check())
                let favorites = this.user.favorite_cosmetic_clinics;
-               for(let i = 0; i < favorites.length; i++ ){
-                   if(favorites[i].favourable_id === id) {
-                       return true
+               if(favorites.length) {
+                   for(let i = 0; i < favorites.length; i++ ){
+                       if(favorites[i].favourable_id === id) {
+                           return true
+                       }
                    }
+               } else {
+                   return false;
                }
                @endif
-               return false;
+                   return false;
            },
            favClass(id) {
                let fav = this.isFav(id);
@@ -543,50 +547,52 @@
                }
            },
            fav(id) {
-                if(this.user) {
-                    if (this.isFav(id)) {
-                        let user = this.user;
-                        let cosmetics = this.cosmetics;
-                        let favorites = this.user.favorite_cosmetic_clinics;
-                        for(let i = 0; i < favorites.length; i++ ){
-                            if(favorites[i].favourable_id === id) {
+               if(this.user) {
+                   let user = this.user;
+                   let cosmetics = this.cosmetics;
+                   let favorites = this.user.favorite_cosmetic_clinics;
+                   if (this.isFav(id)) {
+                       for(let i = 0; i < favorites.length; i++ ){
+                           if(favorites[i].favourable_id === id) {
 
-                                favorites.splice(i, 1);
-                            }
-                        }
+                               favorites.splice(i, 1);
+                           }
+                       }
 
-                        for(let i = 0; i < cosmetics.length; i++ ){
-                            if(cosmetics[i].id === id) {
+                       for(let i = 0; i < cosmetics.length; i++ ){
+                           if(cosmetics[i].id === id) {
 
-                                cosmetics[i].favorites.count--
-                            }
-                        }
-                        axios.delete('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
-                            .then(function (res) {
+                               if(cosmetics[i].favorites !== null) {
+                                   cosmetics[i].favorites.count--
+                               }
+                           }
+                       }
+                       axios.delete('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
+                           .then(function (res) {
 
-                            })
-                    } else {
+                           })
+                   } else {
+                       favorites.push({
+                           favourable_id: id,
+                           user_id: user.id
+                       });
+                       for(let i = 0; i < cosmetics.length; i++ ){
+                           if(cosmetics[i].id === id) {
+                               if(cosmetics[i].favorites !== null) {
+                                   cosmetics[i].favorites.count++
+                               } else {
+                                   cosmetics[i].favorites = { count: 1 };
+                               }
+                           }
+                       }
+                       axios.post('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
+                           .then(function (res) {
 
-                        let user = this.user;
-                        let cosmetics = this.cosmetics;
-                        let favorites = this.user.favorite_cosmetic_clinics;
-                        favorites.push({
-                            favourable_id: id,
-                            user_id: user.id
-                        });
-                        for(let i = 0; i < cosmetics.length; i++ ){
-                            if(cosmetics[i].id === id) {
-                                cosmetics[i].favorites.count++
-                            }
-                        }
-                        axios.post('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
-                            .then(function (res) {
-
-                            })
-                    }
-                } else {
-                    $('#elegantModalForm').modal('show');
-                }
+                           })
+                   }
+               } else {
+                   $('#elegantModalForm').modal('show');
+               }
            }
        },
        mounted() {

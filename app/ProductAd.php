@@ -105,7 +105,6 @@ class ProductAd extends Model
             }, function($query) {
                 return $query->orderBy('updated_at', 'DESC');
             })
-
             ->get();
 
 
@@ -114,6 +113,6 @@ class ProductAd extends Model
         } else {
             $sorted = $data->sortBy('premium.priority');
         }
-        return self::paginate($sorted, 9, null, ['path'=> $request->url(), 'query' => $request->query()]);
+        return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 }

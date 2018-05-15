@@ -5,7 +5,7 @@
 
 
         <div class="container">
-            <form action="/product-ads" method="post" enctype="multipart/form-data">
+            <form action="/job-ads" method="post" enctype="multipart/form-data">
                 <!--Section: Inputs-->
                 @csrf
                 <section class="section card mb-5">
@@ -13,7 +13,7 @@
                     <div class="card-body">
 
                         <!--Section heading-->
-                        <h1 class="text-center my-5 h1">New Product</h1>
+                        <h1 class="text-center my-5 h1">New Job</h1>
 
                         <div class="container">
 
@@ -37,8 +37,8 @@
 
                                     <div class="md-form">
                                         <i class="fas fa-tag prefix"></i>
-                                        <input type="text" name="price" id="price" class="form-control" maxlength="6" v-model="price" required>
-                                        <label for="price" class="">Price</label>
+                                        <input type="text" name="salary" id="salary" class="form-control" v-model="salary" maxlength="5" required>
+                                        <label for="salary" class="">Salary</label>
                                     </div>
 
                                 </div>
@@ -47,7 +47,25 @@
 
                             <div class="row">
                                 <!--Grid column-->
-                                <div class="col-md-12 mb-4">
+                                <div class="col-md-6 mb-4">
+                                    <fieldset class="form-check mb-4 text-center" id="status">
+                                        <div class="row pt-4">
+                                            <div class="form-group col-md-6">
+                                                <input class="form-check-input" name="jobTypeId" type="radio" id="employer" value="1" v-model="jobTypeId" checked="checked">
+                                                <label class="form-check-label" for="employer">Employer</label>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <input class="form-check-input" name="jobTypeId" type="radio" id="jobSeeker" value="2" v-model="jobTypeId">
+                                                <label class="form-check-label" for="jobSeeker">Job Seeker</label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-6 mb-4">
 
                                     <!--Basic textarea-->
                                     <div class="md-form">
@@ -58,6 +76,7 @@
 
                                 </div>
                                 <!--Grid column-->
+
                             </div>
 
                             <div class="row">
@@ -111,27 +130,46 @@
                                             <option :value="category.id" v-for="category in categories">@{{ category.en_name }}</option>
                                         </select>
                                     </div>
-
                                 </div>
                                 <!--Grid column-->
 
                                 <!--Grid column-->
                                 <div class="col-md-6 mb-4">
-
-                                    <div class="md-form">
-                                        <div class="file-field">
-                                            <div class="btn btn-primary btn-sm float-left waves-effect waves-light">
-                                                <span>Choose file</span>
-                                                <input type="file" name="img" @change="uploadImage($event)" required>
-                                            </div>
-                                            <div class="file-path-wrapper">
-                                                <input class="file-path validate" type="text" placeholder="Upload product image">
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="experienceLevel"></label>
+                                        <select class="form-control custom-select-lg" name="experienceLevelId" v-model="experienceLevelId" id="experienceLevel" required>
+                                            <option value="101" selected disabled>Experience Level</option>
+                                            <option :value="experienceLevel.id" v-for="experienceLevel in experienceLevels">@{{ experienceLevel.en_name }}</option>
+                                        </select>
                                     </div>
-
                                 </div>
                                 <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label for="educationLevel"></label>
+                                        <select class="form-control custom-select-lg" name="educationLevelId" v-model="educationLevelId" id="educationLevel" required>
+                                            <option value="101" selected disabled>Education Level</option>
+                                            <option :value="educationLevel.id" v-for="educationLevel in educationLevels">@{{ educationLevel.en_name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-group">
+                                        <label for="employmentType"></label>
+                                        <select class="form-control custom-select-lg" name="employmentTypeId" v-model="employmentTypeId" id="employmentType" required>
+                                            <option value="101" selected disabled>Employment Type</option>
+                                            <option :value="employmentType.id" v-for="employmentType in employmentTypes">@{{ employmentType.en_name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+
 
                             </div>
 
@@ -146,36 +184,39 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input type="tel" class="form-control py-0" name="phone[]" placeholder="Phone" maxlength="15" aria-describedby="basic-addon1" required>
+                                            <input type="tel" class="form-control py-0" maxlength="15" name="phone[]" placeholder="Phone" aria-describedby="basic-addon1" required>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-success btn-sm btn-add-phone" @click.prevent="addPhone"><span class="fas fa-plus-plus"></span> Add Phone</button>
+                                    <button type="button" class="btn btn-success btn-sm btn-add-phone" @click.prevent="addPhone"><span class="fas fa-plus"></span> Add Phone</button>
                                 </div>
                                 <!--Grid column-->
 
                                 <!--Grid column-->
                                 <div class="col-md-6 mb-4">
-                                    <fieldset class="form-check mb-4 text-center" id="status">
-                                        <div class="row pt-4">
-                                            <div class="form-group col-md-3 col-md-offset-3">
-                                                <input class="form-check-input" name="status" type="radio" id="new" value="1" v-model="status" checked="checked">
-                                                <label class="form-check-label" for="new">New</label>
-                                            </div>
 
-                                            <div class="form-group col-md-3">
-                                                <input class="form-check-input" name="status" type="radio" id="used" value="2" v-model="status">
-                                                <label class="form-check-label" for="used">Used</label>
+                                    <div class="md-form">
+                                        <div class="file-field">
+                                            <div class="btn btn-primary btn-sm float-left waves-effect waves-light">
+                                                <span>Choose file</span>
+                                                <input type="file" name="img" @change="uploadImage($event)" required>
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text" placeholder="Upload job image">
                                             </div>
                                         </div>
-                                    </fieldset>
+                                    </div>
+
                                 </div>
                                 <!--Grid column-->
+                                <!--Grid column-->
+
+
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 mb-4">
                                     <div class="waves-input-wrapper waves-effect waves-light float-right mt-2">
-                                        <input type="submit" value="Add Product" class="btn btn-primary">
+                                        <input type="submit" value="Add Job" class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>
@@ -245,13 +286,19 @@
             return {
                 regions: {!! $regions !!},
                 categories: {!! $categories !!},
+                experienceLevels: {!! $experienceLevels !!},
+                educationLevels: {!! $educationLevels !!},
+                employmentTypes: {!! $employmentTypes !!},
                 cities: null,
                 errors: [],
                 title: null,
                 description: null,
-                price: null,
+                salary: null,
                 categoryId: 101,
-                status: 1,
+                jobTypeId: 1,
+                experienceLevelId: 101,
+                educationLevelId: 101,
+                employmentTypeId: 101,
                 regionId: 101,
                 cityId: 101,
                 address: null,
@@ -313,7 +360,7 @@
             },
             addPhone() {
                 $('.phone-input').append("<div class='md-form input-group pl-0 second-phone'><div class='input-group-prepend'><span class='input-group-text' id='basic-addon2'><i class='fas fa-phone'></i></span></div>" +
-                    "<input type='tel' class='form-control py-0' name='phone[]' placeholder='Phone' aria-describedby='basic-addon2'>" +
+                    "<input type='tel' class='form-control py-0' maxlength='15' name='phone[]' placeholder='Phone' aria-describedby='basic-addon2'>" +
                         "<div class='input-group-append' ><a><span class='input-group-text badge-danger remove-phone'><i class='fas fa-times'></i></span></a></div></div>");
                 $('.btn-add-phone').prop('disabled', true);
             },

@@ -131,7 +131,7 @@
                                     <a @click.prevent="fav(job.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(job.id)">
                                         <i class="fa fa-heart pr-2 animated" :class="favClass(job.id)"></i>
                                     </a>
-                                    @{{ job.favorites.count }}</span>
+                                    @{{ favorites(job) }}</span>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@
                                           <strong>Negotiable</strong>
                                         </span>
                                         <span class="float-right light-green-text">
-                                            <i class="fa fa-heart ml-3 pr-1" :class="favClass(job.id)"></i> @{{ job.favorites.count }}
+                                            <i class="fa fa-heart ml-3 pr-1" :class="favClass(job.id)"></i> @{{ favorites(job) }}
                                         </span>
                                     </div>
                                 </div>
@@ -252,14 +252,25 @@
             }
         },
         methods: {
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             isFav(id) {
-                @if(Auth::check())
-                    let favorites = this.user.favorite_job_ads;
+                        @if(Auth::check())
+                let favorites = this.user.favorite_job_ads;
+                if(favorites.length) {
                     for(let i = 0; i < favorites.length; i++ ){
                         if(favorites[i].favourable_id === id) {
                             return true
                         }
                     }
+                } else {
+                    return false;
+                }
                 @endif
                     return false;
             },
@@ -279,9 +290,12 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let job = this.job;
+                    let jobs = this.jobs;
+                    let favorites = this.user.favorite_job_ads;
+
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let favorites = this.user.favorite_job_ads;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -289,28 +303,32 @@
                             }
                         }
 
-                        if (this.job.id === id) {
-                            this.job.favorites.count--
-                        }
+                        for(let i = 0; i < jobs.length; i++ ){
+                            if(jobs[i].id === id) {
 
+                                if(jobs[i].favorites !== null) {
+                                    jobs[i].favorites.count--
+                                }
+                            }
+                        }
                         axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let favorites = this.user.favorite_job_ads;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
-
-
-                        if (this.job.id === id) {
-                            this.job.favorites.count++
+                        for(let i = 0; i < jobs.length; i++ ){
+                            if(jobs[i].id === id) {
+                                if(jobs[i].favorites !== null) {
+                                    jobs[i].favorites.count++
+                                } else {
+                                    jobs[i].favorites = { count: 1 };
+                                }
+                            }
                         }
-
                         axios.post('/api/job-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 

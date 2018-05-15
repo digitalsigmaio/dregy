@@ -32,7 +32,7 @@ class HospitalResource extends JsonResource
             'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => $this->rates,
-            'favorites' => $this->favorites,
+            'favorites' => $this->favorites ? $this->favorites : [ 'count' => 0],
             'views' => $this->views,
             'specialities' => $this->specialities,
             'created_at' => $this->created_at->toFormattedDateString(),

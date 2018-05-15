@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\ImageUploader;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\CollectionPagination;
@@ -9,7 +10,10 @@ use Zend\Diactoros\Request;
 
 class JobAd extends Model
 {
-    use SoftDeletes, CollectionPagination;
+    use SoftDeletes, CollectionPagination, ImageUploader;
+
+    private $imagePath = 'img/jobs';
+
 
     public function region()
     {
@@ -77,7 +81,7 @@ class JobAd extends Model
 
     public function getFeaturedAttribute()
     {
-        return $this->premium->count() ? true : false;
+        return $this->premium ? true : false;
     }
 
     public static function fetch($request)

@@ -132,8 +132,8 @@
                         <!--Card-->
                         <div class="card card-cascade narrower card-ecommerce">
                             <!--Card image-->
-                            <div class="view overlay">
-                                <img :src="product.img" class="card-img-top" :alt="product.title">
+                            <div class="view overlay product-img" :style="backgroundImg(product.img)">
+
                                 <a :href="'/products/' + product.id + '/' + product.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -170,10 +170,10 @@
                                 <!--Card footer-->
                                 <div class="card-footer pb-0 pl-0">
                                     <div class="row">
-                                        <div class="col-md-7 text-left">
+                                        <div class="col-md-6 text-left">
                                             <strong>@{{ product.price }} L.E</strong>
                                         </div>
-                                        <div class="col-md-5 text-center pr-0">
+                                        <div class="col-md-6 text-center pr-0">
                                             <span class="small">
                                                 @{{ product.created_at }}
                                             </span>
@@ -314,6 +314,11 @@
             }
         },
         methods: {
+           backgroundImg(src) {
+               let style =  "background-image: url('" + src + "')";
+               console.log(style);
+               return style
+           },
             fetchProducts(){
                 let vm = this;
                 $('.productAds').hide();
@@ -368,16 +373,21 @@
                 this.endpoint = '/api/product-ads/search';
                 this.fetchProducts()
             }, 500),
+
             isFav(id) {
-                        @if(Auth::check())
+                @if(Auth::check())
                 let favorites = this.user.favorite_product_ads;
-                for(let i = 0; i < favorites.length; i++ ){
-                    if(favorites[i].favourable_id === id) {
-                        return true
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
                     }
+                } else {
+                    return false;
                 }
                 @endif
-                    return false;
+                return false;
             },
             favClass(id) {
                 let fav = this.isFav(id);
@@ -395,10 +405,10 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let products = this.products;
+                    let favorites = this.user.favorite_product_ads;
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let products = this.products;
-                        let favorites = this.user.favorite_product_ads;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -409,7 +419,11 @@
                         for(let i = 0; i < products.length; i++ ){
                             if(products[i].id === id) {
 
-                                products[i].favorites.count--
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count--
+                                } else {
+                                    products[i].favorites.count = 0;
+                                }
                             }
                         }
                         axios.delete('/api/product-ads/' + id + '/users/' + user.id + '/fav')
@@ -417,17 +431,17 @@
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let products = this.products;
-                        let favorites = this.user.favorite_product_ads;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
                         for(let i = 0; i < products.length; i++ ){
                             if(products[i].id === id) {
-                                products[i].favorites.count++
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count++
+                                } else {
+                                    products[i].favorites = { count: 1 };
+                                }
                             }
                         }
                         axios.post('/api/product-ads/' + id + '/users/' + user.id + '/fav')

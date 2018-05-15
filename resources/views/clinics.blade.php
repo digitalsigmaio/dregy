@@ -293,7 +293,7 @@
                                    <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(clinic.id)" @click.prevent="fav(clinic.id)" >
                                        <i class="fas fa-heart pr-1 animated"  :class="favClass(clinic.id)"></i>
                                    </a>
-                                   <span class="light-green-text text-sm-right">@{{ clinic.favorites.count }}</span>
+                                   <span class="light-green-text text-sm-right">@{{ favorites(clinic) }}</span>
                                </div>
 
                            </div>
@@ -472,6 +472,13 @@
            }
        },
        methods: {
+           favorites(val) {
+               if(val.favorites !== null) {
+                   return val.favorites.count;
+               } else {
+                   return 0;
+               }
+           },
            fetchClinics(){
                let vm = this;
                $('.clinics').hide();
@@ -546,11 +553,15 @@
            isFav(id) {
                @if(Auth::check())
                    let favorites = this.user.favorite_clinics;
+                   if(favorites.length) {
                    for(let i = 0; i < favorites.length; i++ ){
                        if(favorites[i].favourable_id === id) {
                            return true
                        }
                    }
+               } else {
+                   return false;
+               }
                @endif
                    return false;
            },
@@ -570,10 +581,10 @@
            },
            fav(id) {
                if(this.user) {
+                   let user = this.user;
+                   let clinics = this.clinics;
+                   let favorites = this.user.favorite_clinics;
                    if (this.isFav(id)) {
-                       let user = this.user;
-                       let clinics = this.clinics;
-                       let favorites = this.user.favorite_clinics;
                        for(let i = 0; i < favorites.length; i++ ){
                            if(favorites[i].favourable_id === id) {
 
@@ -584,7 +595,9 @@
                        for(let i = 0; i < clinics.length; i++ ){
                            if(clinics[i].id === id) {
 
-                               clinics[i].favorites.count--
+                               if(clinics[i].favorites !== null) {
+                                   clinics[i].favorites.count--
+                               }
                            }
                        }
                        axios.delete('/api/clinics/' + id + '/users/' + user.id + '/fav')
@@ -592,17 +605,17 @@
 
                            })
                    } else {
-
-                       let user = this.user;
-                       let clinics = this.clinics;
-                       let favorites = this.user.favorite_clinics;
                        favorites.push({
                            favourable_id: id,
                            user_id: user.id
                        });
                        for(let i = 0; i < clinics.length; i++ ){
                            if(clinics[i].id === id) {
-                               clinics[i].favorites.count++
+                               if(clinics[i].favorites !== null) {
+                                   clinics[i].favorites.count++
+                               } else {
+                                   clinics[i].favorites = { count: 1 };
+                               }
                            }
                        }
                        axios.post('/api/clinics/' + id + '/users/' + user.id + '/fav')

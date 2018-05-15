@@ -31,7 +31,7 @@ class ClinicResource extends JsonResource
             'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => $this->rates,
-            'favorites' => $this->favorites,
+            'favorites' => $this->favorites ? $this->favorites : [ 'count' => 0],
             'views' => $this->views,
             'specialities' => $this->specialities,
             'degree_id' => $this->degree_id,

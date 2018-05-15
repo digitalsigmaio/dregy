@@ -158,7 +158,7 @@
                                     <a @click.prevent="fav(clinic.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(clinic.id)">
                                         <i class="fa fa-heart pr-2 animated" :class="favClass(clinic.id)"></i>
                                     </a>
-                                    @{{ clinic.favorites.count }}</span>
+                                    @{{ favorites(clinic) }}</span>
                         </div>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                                         <!--Card footer-->
                                         <div class="card-footer">
                                             <span class="float-right light-green-text">
-                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(clinics.id)"></i> @{{ clinic.favorites.count }}
+                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(clinics.id)"></i> @{{ favorites(clinic) }}
                                             </span>
                                         </div>
                                     </div>
@@ -275,14 +275,25 @@
             }
         },
         methods: {
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             isFav(id) {
-                @if(Auth::check())
-                    let favorites = this.user.favorite_clinics;
+                        @if(Auth::check())
+                let favorites = this.user.favorite_clinics;
+                if(favorites.length) {
                     for(let i = 0; i < favorites.length; i++ ){
                         if(favorites[i].favourable_id === id) {
                             return true
                         }
                     }
+                } else {
+                    return false;
+                }
                 @endif
                     return false;
             },
@@ -302,9 +313,11 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let clinic = this.clinic;
+                    let clinics = this.clinics;
+                    let favorites = this.user.favorite_clinics;
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let favorites = this.user.favorite_clinics;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -312,28 +325,45 @@
                             }
                         }
 
-                        if (this.clinic.id === id) {
-                            this.clinic.favorites.count--
+                        for(let i = 0; i < clinics.length; i++ ){
+                            if(clinics[i].id === id) {
+                                if(clinics[i].favorites !== null) {
+                                    clinics[i].favorites.count--
+                                }
+                            }
                         }
 
+                        if(clinic.id === id) {
+                            if(clinic.favorites !== null) {
+                                clinic.favorites.count--
+                            }
+                        }
                         axios.delete('/api/clinics/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let favorites = this.user.favorite_clinics;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
-
-
-                        if (this.clinic.id === id) {
-                            this.clinic.favorites.count++
+                        for(let i = 0; i < clinics.length; i++ ){
+                            if(clinics[i].id === id) {
+                                if(clinics[i].favorites !== null) {
+                                    clinics[i].favorites.count++
+                                } else {
+                                    clinics[i].favorites = { count: 1 };
+                                }
+                            }
                         }
 
+                        if(clinic.id === id) {
+                            if(clinic.favorites !== null) {
+                                clinic.favorites.count++
+                            } else {
+                                clinic.favorites = { count: 1 };
+                            }
+                        }
                         axios.post('/api/clinics/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 

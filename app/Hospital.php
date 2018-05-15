@@ -73,7 +73,7 @@ class Hospital extends Model
 
     public function getFeaturedAttribute()
     {
-        return $this->premium->count() ? true : false;
+        return $this->premium ? true : false;
     }
 
     public static function fetch($request)

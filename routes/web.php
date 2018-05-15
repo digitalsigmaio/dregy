@@ -21,8 +21,8 @@ Route::middleware('language')->group(function () {
     // Job Ads
     Route::get('/jobs', 'JobAdController@index')->name('jobs');
     Route::get('/jobs/{jobAd}/{slug}', 'JobAdController@show');
+    Route::post('/job-ads', 'JobAdController@store');
 
-    // ProductAds
     Route::get('/products', 'ProductAdController@index')->name('products');
     Route::get('/products/{productAd}/{slug}', 'ProductAdController@show');
     Route::post('/product-ads', 'ProductAdController@store');
@@ -60,6 +60,7 @@ Route::middleware('language')->group(function () {
     Route::get('/favorites/jobs', 'HomeController@favoriteJobs')->name('favoriteJobs');
 
     Route::get('/new/product', 'HomeController@createProduct')->name('createProduct');
+    Route::get('/new/job', 'HomeController@createJob')->name('createJob');
 
     Auth::routes();
     Route::get('/comingsoon', function () {

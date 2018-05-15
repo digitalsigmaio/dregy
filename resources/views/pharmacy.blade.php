@@ -170,7 +170,7 @@
                                     <a @click.prevent="fav(pharmacy.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(pharmacy.id)">
                                         <i class="fa fa-heart pr-2 animated" :class="favClass(pharmacy.id)"></i>
                                     </a>
-                                    @{{ pharmacy.favorites.count }}</span>
+                                    @{{ favorites(pharmacy) }}</span>
                         </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                                         <!--Card footer-->
                                         <div class="card-footer">
                                             <span class="float-right light-green-text">
-                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(pharmacy.id)"></i> @{{ pharmacy.favorites.count }}
+                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(pharmacy.id)"></i> @{{ favorites(pharmacy) }}
                                             </span>
                                         </div>
                                     </div>
@@ -295,13 +295,24 @@
             }
         },
         methods: {
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             isFav(id) {
                         @if(Auth::check())
                 let favorites = this.user.favorite_pharmacies;
-                for(let i = 0; i < favorites.length; i++ ){
-                    if(favorites[i].favourable_id === id) {
-                        return true
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
                     }
+                } else {
+                    return false;
                 }
                 @endif
                     return false;
@@ -322,9 +333,11 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let pharmacy = this.pharmacy
+                    let pharmacies = this.pharmacies;
+                    let favorites = this.user.favorite_pharmacies;
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let favorites = this.user.favorite_pharmacies;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -332,28 +345,45 @@
                             }
                         }
 
-                        if (this.pharmacy.id === id) {
-                            this.pharmacy.favorites.count--
+                        for(let i = 0; i < pharmacies.length; i++ ){
+                            if(pharmacies[i].id === id) {
+                                if(pharmacies[i].favorites !== null) {
+                                    pharmacies[i].favorites.count--
+                                }
+                            }
                         }
 
+                        if(pharmacy.id === id) {
+                            if(pharmacy.favorites !== null) {
+                                pharmacy.favorites.count--
+                            }
+                        }
                         axios.delete('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let favorites = this.user.favorite_pharmacies;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
-
-
-                        if (this.pharmacy.id === id) {
-                            this.pharmacy.favorites.count++
+                        for(let i = 0; i < pharmacies.length; i++ ){
+                            if(pharmacies[i].id === id) {
+                                if(pharmacies[i].favorites !== null) {
+                                    pharmacies[i].favorites.count++
+                                } else {
+                                    pharmacies[i].favorites = { count: 1 };
+                                }
+                            }
                         }
 
+                        if(pharmacy.id === id) {
+                            if(pharmacy.favorites !== null) {
+                                pharmacy.favorites.count++
+                            } else {
+                                pharmacy.favorites = { count: 1 };
+                            }
+                        }
                         axios.post('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 

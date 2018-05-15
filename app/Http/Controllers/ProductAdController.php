@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductAdResource;
+use App\PhoneNumber;
 use App\ProductAd;
 use App\ProductAdCategory;
 use App\Region;
@@ -56,6 +57,7 @@ class ProductAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
+            'phone' => 'required',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $product = new ProductAd;
@@ -74,6 +76,22 @@ class ProductAdController extends Controller
         try {
             $product->uploadImage($request);
             $product->save();
+            if(count($request->phone) > 2) {
+                for($i=0;$i<count($request->phone);$i++) {
+                    if($i==2) {
+                        break;
+                    }
+                    $phone = new PhoneNumber;
+                    $phone->number = $phone[$i];
+                    $product->phoneNumbers()->save($phone);
+                }
+            } else {
+                foreach($request->phone as $number) {
+                    $phone = new PhoneNumber;
+                    $phone->number = $number;
+                    $product->phoneNumbers()->save($phone);
+                }
+            }
             session()->flash('success', 'Product has been added and waiting for review');
             return redirect()->back();
         } catch (QueryException $e) {

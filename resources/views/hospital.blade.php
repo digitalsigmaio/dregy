@@ -158,7 +158,7 @@
                                 <span class="light-green-text">
                                     <a @click.prevent="fav(hospital.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(hospital.id)">
                                         <i class="fa fa-heart pr-2 animated" :class="favClass(hospital.id)"></i>
-                                    </a>@{{ hospital.favorites.count }}</span>
+                                    </a>@{{ favorites(hospital) }}</span>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                                             <!--Card footer-->
                                             <div class="card-footer">
                                             <span class="float-right light-green-text">
-                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(hospital.id)"></i>@{{ hospital.favorites.count }}
+                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(hospital.id)"></i>@{{ favorites(hospital) }}
                                             </span>
                                             </div>
                                         </div>
@@ -273,13 +273,24 @@
             }
         },
         methods: {
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             isFav(id) {
                         @if(Auth::check())
                 let favorites = this.user.favorite_hospitals;
-                for(let i = 0; i < favorites.length; i++ ){
-                    if(favorites[i].favourable_id === id) {
-                        return true
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
                     }
+                } else {
+                    return false;
                 }
                 @endif
                     return false;
@@ -299,10 +310,13 @@
                 }
             },
             fav(id) {
+                let user = this.user;
+                let hospitals = this.hospitals;
+                let hospital = this.hospital
+                let favorites = this.user.favorite_hospitals;
                 if(this.user) {
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let favorites = this.user.favorite_hospitals;
+
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -310,28 +324,49 @@
                             }
                         }
 
-                        if (this.hospital.id === id) {
-                            this.hospital.favorites.count--
+                        for(let i = 0; i < hospitals.length; i++ ){
+                            if(hospitals[i].id === id) {
+
+                                if(hospitals[i].favorites !== null) {
+                                    hospitals[i].favorites.count--
+                                }
+                            }
                         }
 
+                        if(hospital.id === id) {
+
+                            if(hospital.favorites !== null) {
+                                hospital.favorites.count--
+                            }
+                        }
                         axios.delete('/api/hospitals/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
                             })
                     } else {
 
-                        let user = this.user;
-                        let favorites = this.user.favorite_hospitals;
+
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
-
-
-                        if (this.hospital.id === id) {
-                            this.hospital.favorites.count++
+                        for(let i = 0; i < hospitals.length; i++ ){
+                            if(hospitals[i].id === id) {
+                                if(hospitals[i].favorites !== null) {
+                                    hospitals[i].favorites.count++
+                                } else {
+                                    hospitals[i].favorites = { count: 1 };
+                                }
+                            }
                         }
 
+                        if(hospital.id === id) {
+                            if(hospital.favorites !== null) {
+                                hospital.favorites.count++
+                            } else {
+                                hospital.favorites = { count: 1 };
+                            }
+                        }
                         axios.post('/api/hospitals/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 

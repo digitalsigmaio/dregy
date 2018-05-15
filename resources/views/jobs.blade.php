@@ -195,8 +195,7 @@
                         <div class="card card-ecommerce">
 
                             <!--Card image-->
-                            <div class="view overlay">
-                                <img :src="job.img " class="img-fluid" :alt="job.title">
+                            <div class="view overlay job-img" :style="backgroundImg(job.img)">
 
                                 <a :href="'/jobs/' + job.id + '/' + job.slug" >
                                     <div class="mask rgba-white-slight">
@@ -385,6 +384,11 @@
             }
         },
         methods: {
+            backgroundImg(src) {
+                let style =  "background-image: url('" + src + "')";
+                console.log(style);
+                return style
+            },
             fetchJobs(){
                 let vm = this;
                 $('.jobAds').hide();
@@ -441,13 +445,17 @@
 
             }, 500),
             isFav(id) {
-                        @if(Auth::check())
-                let favorites = this.user.favorite_job_ads;
-                for(let i = 0; i < favorites.length; i++ ){
-                    if(favorites[i].favourable_id === id) {
-                        return true
+                @if(Auth::check())
+                    let favorites = this.user.favorite_job_ads;
+                    if(favorites.length) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+                                return true
+                            }
+                        }
+                    } else {
+                        return false;
                     }
-                }
                 @endif
                     return false;
             },
@@ -467,10 +475,10 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let jobs = this.jobs;
+                    let favorites = this.user.favorite_job_ads;
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let jobs = this.jobs;
-                        let favorites = this.user.favorite_job_ads;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -481,7 +489,9 @@
                         for(let i = 0; i < jobs.length; i++ ){
                             if(jobs[i].id === id) {
 
-                                jobs[i].favorites.count--
+                                if(jobs[i].favorites !== null) {
+                                    jobs[i].favorites.count--
+                                }
                             }
                         }
                         axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav')
@@ -489,17 +499,17 @@
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let jobs = this.jobs;
-                        let favorites = this.user.favorite_job_ads;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
                         for(let i = 0; i < jobs.length; i++ ){
                             if(jobs[i].id === id) {
-                                jobs[i].favorites.count++
+                                if(jobs[i].favorites !== null) {
+                                    jobs[i].favorites.count++
+                                } else {
+                                    jobs[i].favorites = { count: 1 };
+                                }
                             }
                         }
                         axios.post('/api/job-ads/' + id + '/users/' + user.id + '/fav')

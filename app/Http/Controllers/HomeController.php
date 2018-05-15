@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\JobAdCategory;
+use App\JobEducationLevel;
+use App\JobEmploymentType;
+use App\JobExperienceLevel;
 use App\ProductAdCategory;
 use App\Region;
 use Illuminate\Http\Request;
@@ -106,5 +110,16 @@ class HomeController extends Controller
         $categories = ProductAdCategory::all();
         $regions = Region::with('cities')->get();
         return view('client.newProduct', compact(['categories', 'regions']));
+    }
+
+    public function createJob()
+    {
+        $categories = JobAdCategory::all();
+        $regions = Region::with('cities')->get();
+        $experienceLevels = JobExperienceLevel::all();
+        $educationLevels = JobEducationLevel::all();
+        $employmentTypes = JobEmploymentType::all();
+
+        return view('client.newJob', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes']));
     }
 }

@@ -35,7 +35,7 @@ class PharmacyResource extends JsonResource
             'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
             'rate' => $this->rates,
-            'favorites' => $this->favorites,
+            'favorites' => $this->favorites ? $this->favorites : [ 'count' => 0],
             'views' => $this->views,
             'created_at' => $this->created_at->toFormattedDateString(),
         ];

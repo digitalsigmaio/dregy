@@ -270,7 +270,7 @@
                                             <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(pharmacy.id)" @click.prevent="fav(pharmacy.id)" >
                                                 <i class="fas fa-heart pr-1 animated"  :class="favClass(pharmacy.id)"></i>
                                             </a>
-                                            <span class="light-green-text text-sm-right">@{{ pharmacy.favorites.count }}</span>
+                                            <span class="light-green-text text-sm-right">@{{ favorites(pharmacy) }}</span>
                                         </div>
 
                                     </div>
@@ -441,6 +441,13 @@
                 user: {!! Auth::check() ? Auth::user()->load(['favoritePharmacies']) : 'null' !!}
             },
             methods: {
+                favorites(val) {
+                    if(val.favorites !== null) {
+                        return val.favorites.count;
+                    } else {
+                        return 0;
+                    }
+                },
                 fetchPharmacies(){
                     let vm = this;
                     $('.pharmacies').hide();
@@ -517,13 +524,17 @@
                     this.fetchPharmacies()
                 }, 100),
                 isFav(id) {
-                    @if(Auth::check())
-                        let favorites = this.user.favorite_pharmacies;
+                            @if(Auth::check())
+                    let favorites = this.user.favorite_pharmacies;
+                    if(favorites.length) {
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
                                 return true
                             }
                         }
+                    } else {
+                        return false;
+                    }
                     @endif
                         return false;
                 },
@@ -543,12 +554,13 @@
                 },
                 fav(id) {
                     if(this.user) {
+                        let user = this.user;
+                        let pharmacies = this.pharmacies;
+                        let favorites = this.user.favorite_pharmacies;
                         if (this.isFav(id)) {
-                            let user = this.user;
-                            let pharmacies = this.pharmacies;
-                            let favorites = this.user.favorite_pharmacies;
                             for(let i = 0; i < favorites.length; i++ ){
                                 if(favorites[i].favourable_id === id) {
+
                                     favorites.splice(i, 1);
                                 }
                             }
@@ -556,30 +568,32 @@
                             for(let i = 0; i < pharmacies.length; i++ ){
                                 if(pharmacies[i].id === id) {
 
-                                    pharmacies[i].favorites.count--
+                                    if(pharmacies[i].favorites !== null) {
+                                        pharmacies[i].favorites.count--
+                                    }
                                 }
                             }
                             axios.delete('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
                                 .then(function (res) {
-                                    console.log(res.data)
+
                                 })
                         } else {
-
-                            let user = this.user;
-                            let pharmacies = this.pharmacies;
-                            let favorites = this.user.favorite_pharmacies;
                             favorites.push({
                                 favourable_id: id,
                                 user_id: user.id
                             });
                             for(let i = 0; i < pharmacies.length; i++ ){
                                 if(pharmacies[i].id === id) {
-                                    pharmacies[i].favorites.count++
+                                    if(pharmacies[i].favorites !== null) {
+                                        pharmacies[i].favorites.count++
+                                    } else {
+                                        pharmacies[i].favorites = { count: 1 };
+                                    }
                                 }
                             }
                             axios.post('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
                                 .then(function (res) {
-                                    console.log(res.data)
+
                                 })
                         }
                     } else {

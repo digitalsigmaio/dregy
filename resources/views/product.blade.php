@@ -107,9 +107,7 @@
                                 <span class="light-green-text">
                                     <a @click.prevent="fav(product.id)" data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)">
                                         <i class="fa fa-heart pr-2 animated" :class="favClass(product.id)"></i>
-                                    </a>
-                                    <span v-if="product.favorites">@{{ product.favorites.count }}</span>
-                                    <span v-else>0</span>
+                                    </a>@{{ favorites(product) }}
                                 </span>
                         </div>
                     </div>
@@ -158,8 +156,8 @@
                             <!--Card-->
                             <div class="card card-cascade narrower card-ecommerce">
                                 <!--Card image-->
-                                <div class="view overlay">
-                                    <img :src="product.img" class="card-img-top" :alt="product.title">
+                                <div class="view overlay product-img" :style="backgroundImg(product.img)">
+
                                     <a :href="'/products/' + product.id + '/' + product.slug">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -193,8 +191,7 @@
                                             </span>
                                         <span class="float-right light-green-text">
                                             <i class="fa fa-heart ml-3 pr-1" :class="favClass(product.id)"></i>
-                                            <span v-if="product.favorites">@{{ product.favorites.count }}</span>
-                                            <span v-else>0</span>
+                                            @{{ favorites(product) }}
                                         </span>
                                     </div>
                                 </div>
@@ -235,13 +232,29 @@
             }
         },
         methods: {
+            backgroundImg(src) {
+                let style =  "background-image: url('" + src + "')";
+                console.log(style);
+                return style
+            },
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             isFav(id) {
                         @if(Auth::check())
                 let favorites = this.user.favorite_product_ads;
-                for(let i = 0; i < favorites.length; i++ ){
-                    if(favorites[i].favourable_id === id) {
-                        return true
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
                     }
+                } else {
+                    return false;
                 }
                 @endif
                     return false;
@@ -262,9 +275,11 @@
             },
             fav(id) {
                 if(this.user) {
+                    let user = this.user;
+                    let products = this.products;
+                    let product = this.product;
+                    let favorites = this.user.favorite_product_ads;
                     if (this.isFav(id)) {
-                        let user = this.user;
-                        let favorites = this.user.favorite_product_ads;
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
@@ -272,28 +287,44 @@
                             }
                         }
 
-                        if (this.product.id === id) {
-                            this.product.favorites.count--
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count--
+                                }
+                            }
                         }
 
+                        if(product.favorites !== null) {
+                            product.favorites.count--
+                        }
                         axios.delete('/api/product-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
                             })
                     } else {
-
-                        let user = this.user;
-                        let favorites = this.user.favorite_product_ads;
                         favorites.push({
                             favourable_id: id,
                             user_id: user.id
                         });
-
-
-                        if (this.product.id === id) {
-                            this.product.favorites.count++
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count++
+                                } else {
+                                    products[i].favorites = { count: 1 };
+                                }
+                            }
                         }
 
+                        if(product.id === id) {
+                            if(product.favorites !== null) {
+                                product.favorites.count++
+                            } else {
+                                product.favorites = { count: 1 };
+                            }
+                        }
                         axios.post('/api/product-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
