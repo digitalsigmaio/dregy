@@ -413,6 +413,14 @@
             rateThis() {
                 $('#elegantModalForm').modal('show');
             },
+            view() {
+                axios.post('/api/hospitals/'+this.hospital.id+'/view', {
+                    userId: this.user.id
+                })
+                    .then(function (res) {
+                        console.log(res.data)
+                    })
+            },
             round(rate) {
                 return parseInt(Math.round(rate));
             },
@@ -426,6 +434,7 @@
         },
         mounted() {
             this.rate();
+            this.view();
         }
     });
 </script>

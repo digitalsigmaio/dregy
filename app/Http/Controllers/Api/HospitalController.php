@@ -8,6 +8,7 @@ use App\Http\Resources\HospitalResource;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HospitalController extends Controller
 {
@@ -77,9 +78,10 @@ class HospitalController extends Controller
 
     public function view(Hospital $hospital, Request $request)
     {
-        $userId = $request->user_id;
+        $userId = $request->userId;
+
         $userAgent = $request->header('user-agent');
-        $userIp = Request::ip();
+        $userIp = \Request::ip();
 
         try {
 
