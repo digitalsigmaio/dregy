@@ -12,6 +12,7 @@ use App\Http\Resources\JobAdCollection;
 use App\Http\Resources\PharmacyCollection;
 use App\JobAd;
 use App\Pharmacy;
+use App\View;
 use Illuminate\Http\Request;
 
 class MainPageController extends Controller
@@ -63,5 +64,6 @@ class MainPageController extends Controller
     {
         return view('contact');
     }
+
 
 }

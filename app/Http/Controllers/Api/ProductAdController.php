@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\ProductAdCollection;
 use App\Http\Resources\ProductAdResource;
 use App\ProductAd;
+use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,18 +79,7 @@ class ProductAdController extends Controller
 
     public function view(ProductAd $productAd, Request $request)
     {
-        $userId = $request->user_id;
-        try {
-            $productAd->views()->create(['user_id' => $userId]);
-
-            return response()->json([
-                'message' => 'Clinic new view'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
+        View::new($productAd, $request);
     }
 
     public function search(Request $request)

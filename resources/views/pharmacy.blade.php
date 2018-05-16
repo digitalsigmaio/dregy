@@ -439,10 +439,16 @@
                 } else {
                     return 'grey-text'
                 }
+            },
+            view() {
+                axios.post('/api/pharmacies/'+this.pharmacy.id+'/view', {
+                    userId: this.user ? this.user.id : null
+                })
             }
         },
         mounted() {
             this.rate();
+            this.view();
         }
     });
 </script>

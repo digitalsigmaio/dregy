@@ -73,6 +73,7 @@ class CosmeticClinic extends Model
     public function getFeaturedAttribute()
     {
         return $this->premium ? true : false;
+
     }
 
     public static function fetch($request)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Clinic;
 use App\Http\Resources\ClinicCollection;
 use App\Http\Resources\ClinicResource;
+use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,18 +77,8 @@ class ClinicController extends Controller
 
     public function view(Clinic $clinic, Request $request)
     {
-        $userId = $request->user_id;
-        try {
-            $clinic->views()->create(['user_id' => $userId]);
+        View::new($clinic, $request);
 
-            return response()->json([
-                'message' => 'Clinic new view'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
     }
 
     public function search(Request $request)

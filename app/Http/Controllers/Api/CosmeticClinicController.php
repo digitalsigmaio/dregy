@@ -7,6 +7,7 @@ use App\BeautyCenterFav;
 use App\Http\Resources\CosmeticClinicCollection;
 use App\Http\Resources\CosmeticClinicResource;
 use App\User;
+use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -79,19 +80,7 @@ class CosmeticClinicController extends Controller
 
     public function view(CosmeticClinic $cosmeticClinic, Request $request)
     {
-        $userId = $request->user_id;
-        try {
-
-            $cosmeticClinic->views()->create(['user_id' => $userId]);
-
-            return response()->json([
-                'message' => 'Beauty Center new view'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
+        View::new($cosmeticClinic, $request);
     }
 
     public function search(Request $request)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Hospital;
 use App\Http\Resources\HospitalCollection;
 use App\Http\Resources\HospitalResource;
+use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,27 +79,7 @@ class HospitalController extends Controller
 
     public function view(Hospital $hospital, Request $request)
     {
-        $userId = $request->userId;
-
-        $userAgent = $request->header('user-agent');
-        $userIp = \Request::ip();
-
-        try {
-
-            $hospital->views()->create([
-                'user_id' => $userId,
-                'user_agent' => $userAgent,
-                'user_ip'   => $userIp
-                ]);
-
-            return response()->json([
-                'message' => 'Hospital new view'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
+        View::new($hospital, $request);
     }
 
     public function search(Request $request)

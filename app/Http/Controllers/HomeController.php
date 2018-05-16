@@ -8,6 +8,7 @@ use App\JobEmploymentType;
 use App\JobExperienceLevel;
 use App\ProductAdCategory;
 use App\Region;
+use App\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -122,4 +123,5 @@ class HomeController extends Controller
 
         return view('client.newJob', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes']));
     }
+
 }

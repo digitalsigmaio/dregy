@@ -6,6 +6,7 @@ use App\Http\Resources\JobAdCollection;
 use App\Http\Resources\JobAdResource;
 use App\JobAd;
 use App\JobAdCategory;
+use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -85,18 +86,7 @@ class JobAdController extends Controller
 
     public function view(JobAd $jobAd, Request $request)
     {
-        $userId = $request->user_id;
-        try {
-            $jobAd->views()->create(['user_id' => $userId]);
-
-            return response()->json([
-                'message' => 'Clinic new view'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
+        View::new($jobAd, $request);
     }
 
     public function search(Request $request)

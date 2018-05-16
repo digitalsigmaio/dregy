@@ -426,10 +426,16 @@
                 } else {
                     return 'grey-text'
                 }
+            },
+            view() {
+                axios.post('/api/cosmetic-clinics/'+this.cosmetic.id+'/view', {
+                    userId: this.user ? this.user.id : null
+                })
             }
         },
         mounted() {
             this.rate();
+            this.view();
         }
     });
 </script>

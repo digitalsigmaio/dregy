@@ -333,7 +333,15 @@
                 } else {
                     $('#elegantModalForm').modal('show');
                 }
+            },
+            view() {
+                axios.post('/api/product-ads/'+this.product.id+'/view', {
+                    userId: this.user ? this.user.id : null
+                });
             }
+        },
+        mounted() {
+            this.view();
         }
     });
 </script>

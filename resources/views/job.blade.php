@@ -337,7 +337,15 @@
                 } else {
                     $('#elegantModalForm').modal('show');
                 }
+            },
+            view() {
+                axios.post('/api/job-ads/'+this.job.id+'/view', {
+                    userId: this.user ? this.user.id : null
+                })
             }
+        },
+        mounted() {
+            this.view();
         }
     });
 

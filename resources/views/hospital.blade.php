@@ -415,11 +415,8 @@
             },
             view() {
                 axios.post('/api/hospitals/'+this.hospital.id+'/view', {
-                    userId: this.user.id
+                    userId: this.user ? this.user.id : null
                 })
-                    .then(function (res) {
-                        console.log(res.data)
-                    })
             },
             round(rate) {
                 return parseInt(Math.round(rate));

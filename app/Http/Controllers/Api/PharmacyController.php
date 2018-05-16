@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\PharmacyCollection;
 use App\Http\Resources\PharmacyResource;
 use App\Pharmacy;
+use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,18 +77,7 @@ class PharmacyController extends Controller
 
     public function view(Pharmacy $pharmacy, Request $request)
     {
-        $userId = $request->user_id;
-        try {
-            $pharmacy->views()->create(['user_id' => $userId]);
-
-            return response()->json([
-                'message' => 'Clinic new view'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
-        }
+        View::new($pharmacy, $request);
     }
 
     public function search(Request $request)
