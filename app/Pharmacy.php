@@ -105,10 +105,10 @@ class Pharmacy extends Model
                     $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
                 });
             })
-            ->when($fullDay, function ($query) use ($fullDay){
+            ->when($fullDay == true, function ($query) use ($fullDay){
                 return $query->where('full_time', $fullDay);
             })
-            ->when($delivery, function ($query) use ($delivery){
+            ->when($delivery == true, function ($query) use ($delivery){
                 return $query->where('delivery', $delivery);
             })
             ->when($keyword, function ($query) use ($keyword) {
