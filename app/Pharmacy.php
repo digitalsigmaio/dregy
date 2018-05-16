@@ -109,11 +109,13 @@ class Pharmacy extends Model
                 if ($fullDay == true) {
                     return $query->where('full_time', $fullDay);
                 }
+                return false;
             })
             ->when($delivery, function ($query) use ($delivery){
                 if($delivery == true) {
                     return $query->where('delivery', $delivery);
                 }
+                return false;
             })
             ->when($keyword, function ($query) use ($keyword) {
                 return $query->where('ar_name', 'like',  "%$keyword%")
