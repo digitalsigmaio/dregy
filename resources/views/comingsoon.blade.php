@@ -25,7 +25,7 @@
     }
 
     .intro-2 {
-        background: url("img/homepage-2.jpg")no-repeat center center;
+        background: url("img/home.jpg")no-repeat center center;
         background-size: cover;
     }
 
