@@ -29,6 +29,19 @@ trait ImageUploader
         $img = $request->img;
         $filename = $img->hashName();
         $path = $img->move(public_path($this->imagePath), $filename);
+        // Create new imagick object
+        $optimizer = new \Imagick($path);
+
+        // Optimize the image layers
+        $optimizer->optimizeImageLayers();
+
+        // Compression and quality
+        $optimizer->setImageCompression(\Imagick::COMPRESSION_JPEG);
+        $optimizer->setImageCompressionQuality(25);
+
+        // Write the image back
+        $optimizer->writeImages($path, true);
+
         $uri = '/' . $this->imagePath . '/' . $filename;
         $this->img = $uri;
 
