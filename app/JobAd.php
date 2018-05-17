@@ -133,16 +133,26 @@ class JobAd extends Model
             })->when($orderBy && $orderBy == 'salary', function ($query) use ($sort){
                 return $query->orderByRaw("salary - length(salary) $sort");
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('title', 'like',  "%$keyword%")
-                    ->orWhere('description', 'like', "%$keyword%");
-            })
             ->when($orderBy && $orderBy != 'salary', function ($query) use ($orderBy, $sort) {
                 return $query->orderBy($orderBy, $sort);
             }, function($query) {
                 return $query->orderBy('updated_at', 'DESC');
             })
             ->get();
+
+        if($keyword) {
+            $keyword = strtolower($keyword);
+            $data = $data->filter(function ($record) use ($keyword) {
+
+                if(
+                    strpos(strtolower($record->title), $keyword) !== false ||
+                    strpos(strtolower($record->description), $keyword) !== false
+                ) {
+                    return true;
+                }
+
+            });
+        }
 
         if($orderBy) {
             $sorted = $data;

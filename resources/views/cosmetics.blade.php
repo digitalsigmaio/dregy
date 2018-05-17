@@ -46,147 +46,89 @@
                </div>
                <!-- /Filter by category-->
 
-               <!-- Filter by rate -->
-               <div class="col-md-6 col-lg-12 mb-4">
-                  <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
-                  <div class="divider"></div>
+                <!-- Filter by rate -->
+                <div class="col-md-6 col-lg-12 mb-4">
+                    <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
+                    <div class="divider"></div>
 
-                  <fieldset id="rating">
+                    <fieldset id="rating">
 
-                     <div class="form-group mb-1">
-                        <input name="speciality" type="radio" id="allRatings">
-                        <label for="allRatings" class="dark-grey-text" @click="flush('rate')">All</label>
-                     </div>
+                        <div class="form-group mb-1">
+                            <input name="speciality" type="radio" id="allRatings">
+                            <label for="allRatings" class="dark-grey-text" @click="flush('rate')">All</label>
+                        </div>
 
-                     <!--Radio group-->
-                     <div class="form-group mb-1">
-                        <input name="rating" type="radio" id="rating0" value="5" v-model="search.rate" @click="filterByRate">
-                        <label for="rating0" class="hidden">
-                           <!-- Rating -->
-                           <ul class="rating inline-ul">
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                           </ul>
-                        </label>
-                     </div>
-                     <!--Radio group-->
-                     <div class="form-group mb-1">
-                        <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
-                        <label for="rating1" class="hidden">
-                           <!-- Rating -->
-                           <ul class="rating inline-ul">
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                           </ul>
-                        </label>
-                     </div>
+                        <!--Radio group-->
+                        <div class="form-group mb-1">
+                            <!--Radio group-->
+                            <div class="form-group mb-1">
+                                <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
+                                <label for="rating1" class="hidden">
+                                    <!-- Rating -->
+                                    <ul class="rating inline-ul">
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <=4, 'grey-text': n > 4 }"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-plus small"></i>
+                                        </li>
+                                    </ul>
+                                </label>
+                            </div>
 
-                     <!--Radio group-->
-                     <div class="form-group mb-1">
-                        <input name="rating" type="radio" id="rating2" value="3" v-model="search.rate" @click="filterByRate">
-                        <label for="rating2" class="hidden">
-                           <!-- Rating -->
-                           <ul class="rating inline-ul">
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                           </ul>
-                        </label>
-                     </div>
+                            <!--Radio group-->
+                            <div class="form-group mb-1">
+                                <input name="rating" type="radio" id="rating2" value="3" v-model="search.rate" @click="filterByRate">
+                                <label for="rating2" class="hidden">
+                                    <!-- Rating -->
+                                    <ul class="rating inline-ul">
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <= 3, 'grey-text': n > 3 }"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-plus small"></i>
+                                        </li>
+                                    </ul>
+                                </label>
+                            </div>
 
-                     <!--Radio group-->
-                     <div class="form-group mb-1">
-                        <input name="rating" type="radio" id="rating3" value="2" v-model="search.rate" @click="filterByRate">
-                        <label for="rating3" class="hidden">
-                           <!-- Rating -->
-                           <ul class="rating inline-ul">
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                           </ul>
-                        </label>
-                     </div>
+                            <!--Radio group-->
+                            <div class="form-group mb-1">
+                                <input name="rating" type="radio" id="rating3" value="2" v-model="search.rate" @click="filterByRate">
+                                <label for="rating3" class="hidden">
+                                    <!-- Rating -->
+                                    <ul class="rating inline-ul">
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <= 2, 'grey-text': n > 2 }"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-plus small"></i>
+                                        </li>
+                                    </ul>
+                                </label>
+                            </div>
 
-                     <!--Radio group-->
-                     <div class="form-group mb-1">
-                        <input name="rating" type="radio" id="rating4" value="1" v-model="search.rate" @click="filterByRate">
-                        <label for="rating4" class="hidden">
-                           <!-- Rating -->
-                           <ul class="rating inline-ul">
-                              <li>
-                                 <i class="fa fa-star blue-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star grey-text"></i>
-                              </li>
-                           </ul>
-                        </label>
-                     </div>
+                            <!--Radio group-->
+                            <div class="form-group mb-1">
+                                <input name="rating" type="radio" id="rating4" value="1" v-model="search.rate" @click="filterByRate">
+                                <label for="rating4" class="hidden">
+                                    <!-- Rating -->
+                                    <ul class="rating inline-ul">
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <= 1, 'grey-text': n > 1 }"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-plus small"></i>
+                                        </li>
+                                    </ul>
+                                </label>
+                            </div>
 
 
-                     <!--Radio group-->
-                  </fieldset>
-               </div>
-               <!-- /Filter by rate-->
+                            <!--Radio group-->
+                    </fieldset>
+                </div>
+                <!-- /Filter by rate-->
 
             </div>
             <!-- /Grid row -->
@@ -269,7 +211,7 @@
                               </div>
                               <div class="col-md-3 mt-1 text-center">
                                   <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)" @click.prevent="fav(cosmetic.id)" >
-                                      <i class="fas fa-heart pr-1 animated"  :class="favClass(cosmetic.id)"></i>
+                                      <i class="fa fa-heart pr-1 animated"  :class="favClass(cosmetic.id)"></i>
                                   </a>
                                   <span class="light-green-text text-sm-right">@{{ cosmetic.favorites.count }}</span>
                               </div>
@@ -295,13 +237,13 @@
                                    </div>
 
                                    <!-- Address -->
-                                   <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ cosmetic.en_address }}</p>
+                                   <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>@{{ cosmetic.en_address }}</p>
 
-                                   <p><i class="fas fa-at pr-1 cyan-text">
+                                   <p><i class="fa fa-at pr-1 cyan-text">
                                        </i><span class="light-grey-text ">@{{ cosmetic.email }}</span>
                                    </p>
 
-                                   <p><i class="fas fa-home pr-1 cyan-text"></i><span class="light-grey-text">@{{ cosmetic.website }}</span>
+                                   <p><i class="fa fa-home pr-1 cyan-text"></i><span class="light-grey-text">@{{ cosmetic.website }}</span>
                                    </p>
                                </div>
 
@@ -503,14 +445,22 @@
                this.endpoint = '/api/cosmetic-clinics/search';
                this.fetchCosmetics()
            }, 500),
+           floor(rate) {
+               return parseInt(Math.floor(rate));
+           },
+           ceil(rate) {
+               return parseInt(Math.ceil(rate));
+           },
            round(rate) {
                return parseInt(Math.round(rate));
            },
            starColor(n, rate) {
-               if (n <= this.round(rate)) {
-                   return 'blue-text'
+               if (n <= this.floor(rate)) {
+                   return 'fa fa-star cyan-text'
+               } else if (n === this.ceil(rate)) {
+                   return 'fa fa-star-half-full cyan-text'
                } else {
-                   return 'grey-text'
+                   return 'fa fa-star-o cyan-text'
                }
            },
            filterByRate: _.debounce(function () {

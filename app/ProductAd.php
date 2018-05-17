@@ -93,10 +93,6 @@ class ProductAd extends Model
             ->when($category, function ($query) use ($category) {
                 return $query->where('product_ad_category_id', $category);
             })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('title', 'like',  "%$keyword%")
-                    ->orWhere('description', 'like', "%$keyword%");
-            })
             ->when($orderBy && $orderBy == 'price', function ($query) use ($sort){
                 return $query->orderByRaw("price - length(price) $sort");
             })
@@ -107,6 +103,19 @@ class ProductAd extends Model
             })
             ->get();
 
+        if($keyword) {
+            $keyword = strtolower($keyword);
+            $data = $data->filter(function ($record) use ($keyword) {
+
+                if(
+                    strpos(strtolower($record->title), $keyword) !== false ||
+                    strpos(strtolower($record->description), $keyword) !== false
+                ) {
+                    return true;
+                }
+
+            });
+        }
 
         if($orderBy) {
             $sorted = $data;

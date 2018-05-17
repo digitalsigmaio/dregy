@@ -79,8 +79,8 @@ class Pharmacy extends Model
     {
         $region = $request->region;
         $city = $request->city;
-        $fullDay = $request->fullDay;
-        $delivery = $request->delivery;
+        $fullDay = filter_var($request->fullDay, FILTER_VALIDATE_BOOLEAN);
+        $delivery = filter_var($request->delivery, FILTER_VALIDATE_BOOLEAN);
         $keyword = trim($request->keyword);
         $rating = $request->rate;
         $orderBy = $request->orderBy;
@@ -102,28 +102,30 @@ class Pharmacy extends Model
             })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
-                    $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
+                    $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id), 1) >= $rating")->groupBy('rateable_id');
                 });
             })
-            ->when($fullDay, function ($query) use ($fullDay){
-                if ($fullDay == true) {
-                    return $query->where('full_time', $fullDay);
-                }
-                return false;
+            ->when($fullDay, function ($query) {
+                return $query->where('full_time', 1);
             })
-            ->when($delivery, function ($query) use ($delivery){
-                if($delivery == true) {
-                    return $query->where('delivery', $delivery);
-                }
-                return false;
-            })
-            ->when($keyword, function ($query) use ($keyword) {
-                return $query->where('ar_name', 'like',  "%$keyword%")
-                    ->orWhere('en_name', 'like', "%$keyword%")
-                    ->orWhere('ar_address', 'like', "%$keyword%")
-                    ->orWhere('en_address', 'like', "%$keyword%");
+            ->when($delivery, function ($query) {
+                return $query->where('delivery', 1);
             })
             ->get();
+
+        if($keyword) {
+            $keyword = strtolower($keyword);
+            $data = $data->filter(function ($record) use ($keyword) {
+
+                if(
+                    strpos(strtolower($record->ar_name), $keyword) !== false ||
+                    strpos(strtolower($record->en_name), $keyword) !== false
+                ) {
+                    return true;
+                }
+
+            });
+        }
 
         if($orderBy) {
             if($sort == 'asc') {
@@ -142,6 +144,7 @@ class Pharmacy extends Model
         } else {
             $sorted = $data->sortBy('premium.priority');
         }
+
         return self::paginate($sorted, 10, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 }

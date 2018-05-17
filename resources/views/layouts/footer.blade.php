@@ -15,23 +15,23 @@
                 <div class="col-md-6 col-lg-7 text-center text-md-right">
                     <!--Facebook-->
                     <a class="p-2 m-2 fb-ic ml-0">
-                        <i class="fab fa-facebook-f white-text"> </i>
+                        <i class="fa fa-facebook-f white-text"> </i>
                     </a>
                     <!--Twitter-->
                     <a class="p-2 m-2 tw-ic">
-                        <i class="fab fa-twitter white-text"> </i>
+                        <i class="fa fa-twitter white-text"> </i>
                     </a>
                     <!--Google +-->
                     <a class="p-2 m-2 gplus-ic">
-                        <i class="fab fa-google-plus-g white-text"> </i>
+                        <i class="fa fa-google-plus white-text"> </i>
                     </a>
                     <!--Linkedin-->
                     <a class="p-2 m-2 li-ic">
-                        <i class="fab fa-linkedin-in white-text"> </i>
+                        <i class="fa fa-linkedin white-text"> </i>
                     </a>
                     <!--Instagram-->
                     <a class="p-2 m-2 ins-ic">
-                        <i class="fab fa-instagram white-text"> </i>
+                        <i class="fa fa-instagram white-text"> </i>
                     </a>
                 </div>
                 <!--Grid column-->

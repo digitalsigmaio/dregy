@@ -59,48 +59,17 @@
 
                             <!--Radio group-->
                             <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating0" value="5" v-model="search.rate" @click="filterByRate">
-                                <label for="rating0" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
                             <!--Radio group-->
                             <div class="form-group mb-1">
                                 <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
                                 <label for="rating1" class="hidden">
                                     <!-- Rating -->
                                     <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <=4, 'grey-text': n > 4 }"></i>
                                         </li>
                                         <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
+                                            <i class="fa fa-plus small"></i>
                                         </li>
                                     </ul>
                                 </label>
@@ -112,20 +81,11 @@
                                 <label for="rating2" class="hidden">
                                     <!-- Rating -->
                                     <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <= 3, 'grey-text': n > 3 }"></i>
                                         </li>
                                         <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
+                                            <i class="fa fa-plus small"></i>
                                         </li>
                                     </ul>
                                 </label>
@@ -137,20 +97,11 @@
                                 <label for="rating3" class="hidden">
                                     <!-- Rating -->
                                     <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <= 2, 'grey-text': n > 2 }"></i>
                                         </li>
                                         <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
+                                            <i class="fa fa-plus small"></i>
                                         </li>
                                     </ul>
                                 </label>
@@ -162,20 +113,11 @@
                                 <label for="rating4" class="hidden">
                                     <!-- Rating -->
                                     <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
+                                        <li v-for="n in 5">
+                                            <i class="fa fa-star" :class="{ 'blue-text': n <= 1, 'grey-text': n > 1 }"></i>
                                         </li>
                                         <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
+                                            <i class="fa fa-plus small"></i>
                                         </li>
                                     </ul>
                                 </label>
@@ -264,11 +206,11 @@
                                     <div class="row">
 
                                         <div class="col-md-9">
-                                            <h5 class="card-title mb-1"><i class="fas fa-first-aid brown-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a></strong></h5>
+                                            <h5 class="card-title mb-1"><i class="fa fa-medkit brown-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a></strong></h5>
                                         </div>
                                         <div class="col-md-3 mt-1 text-center">
                                             <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(pharmacy.id)" @click.prevent="fav(pharmacy.id)" >
-                                                <i class="fas fa-heart pr-1 animated"  :class="favClass(pharmacy.id)"></i>
+                                                <i class="fa fa-heart pr-1 animated"  :class="favClass(pharmacy.id)"></i>
                                             </a>
                                             <span class="light-green-text text-sm-right">@{{ favorites(pharmacy) }}</span>
                                         </div>
@@ -288,19 +230,19 @@
                                                     </div>
                                                     <ul class="rating mt-1">
                                                         <li v-for="n in 5">
-                                                            <i class="fa fa-star cyan-text" :class="starColor(n, pharmacy.rate.rating)"></i>
+                                                            <i :class="starColor(n, pharmacy.rate.rating)"></i>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <!-- Rating -->
-                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>@{{ pharmacy.en_address }}</p>
+                                            <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>@{{ pharmacy.en_address }}</p>
 
-                                            <p><i class="fas fa-at pr-1 cyan-text">
-                                                </i><span class="light-grey-text ">@{{ pharmacy.email }}</span>
+                                            <p><i class="fa fa-at pr-1 cyan-text">
+                                                </i><span class="light-grey-text">@{{ pharmacy.email }}</span>
                                             </p>
 
-                                            <p><i class="fas fa-home pr-1 cyan-text">
+                                            <p><i class="fa fa-home pr-1 cyan-text">
                                                 </i><span class="light-grey-text">@{{ pharmacy.website }}</span>
                                             </p>
 
@@ -505,14 +447,22 @@
                     this.endpoint = '/api/pharmacies/search';
                     this.fetchPharmacies()
                 }, 500),
+                floor(rate) {
+                    return parseInt(Math.floor(rate));
+                },
+                ceil(rate) {
+                    return parseInt(Math.ceil(rate));
+                },
                 round(rate) {
                     return parseInt(Math.round(rate));
                 },
                 starColor(n, rate) {
-                    if (n <= this.round(rate)) {
-                        return 'blue-text'
+                    if (n <= this.floor(rate)) {
+                        return 'fa fa-star cyan-text'
+                    } else if (n === this.ceil(rate)) {
+                        return 'fa fa-star-half-full cyan-text'
                     } else {
-                        return 'grey-text'
+                        return 'fa fa-star-o cyan-text'
                     }
                 },
                 filterByRate: _.debounce(function () {

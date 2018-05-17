@@ -49,8 +49,8 @@
                                         <div class="divider m-auto"></div>
                                     </div>
                                     <div class="col-md-4 pt-2 pr-0" v-if="user"><h6><span class="badge badge-dark">Rate</span></h6></div>
-                                    <div class="col-md-8 pl-0">
-                                        <div class="br-wrapper br-theme-css-stars" v-if="user">
+                                    <div class="col-md-8 pt-2 pl-0">
+                                        <div class="br-wrapper br-theme-fontawesome-stars" v-if="user">
                                             <select id="example-fontawesome" name="rating" autocomplete="off" style="display: none!important;">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -392,7 +392,7 @@
                         }
                     }
                     $('#example-fontawesome').barrating('show', {
-                        theme: 'css-stars',
+                        theme: 'fontawesome-stars',
                         initialRating: rate,
                         onSelect: function(value, text, event) {
                             if (typeof(event) !== 'undefined') {
@@ -403,9 +403,6 @@
                                     user_id: vm.user.id,
                                     rate: value
                                 })
-                                    .then(function (res) {
-                                        console.log(res.data);
-                                    })
                             } else {
                                 // rating was selected programmatically
                                 // by calling `set` method
@@ -417,14 +414,22 @@
             rateThis() {
                 $('#elegantModalForm').modal('show');
             },
+            floor(rate) {
+                return parseInt(Math.floor(rate));
+            },
+            ceil(rate) {
+                return parseInt(Math.ceil(rate));
+            },
             round(rate) {
                 return parseInt(Math.round(rate));
             },
             starColor(n, rate) {
-                if (n <= this.round(rate)) {
-                    return 'blue-text'
+                if (n <= this.floor(rate)) {
+                    return 'fa fa-star cyan-text'
+                } else if (n === this.ceil(rate)) {
+                    return 'fa fa-star-half-full cyan-text'
                 } else {
-                    return 'grey-text'
+                    return 'fa fa-star-o cyan-text'
                 }
             },
             view() {

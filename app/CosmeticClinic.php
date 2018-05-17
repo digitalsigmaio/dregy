@@ -103,7 +103,7 @@ class CosmeticClinic extends Model
             })
             ->when($rating, function ($query) use ($rating) {
                 return $query->whereHas('rates', function ($query) use ($rating) {
-                   $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id)) between ($rating - 0.5) and ($rating + 0.4)")->groupBy('rateable_id');
+                   $query->select('rateable_id')->havingRaw("ROUND(SUM(rate) / COUNT(rateable_id), 1) >= $rating")->groupBy('rateable_id');
                 });
             })
             ->when($speciality, function ($query) use ($speciality) {
@@ -119,6 +119,19 @@ class CosmeticClinic extends Model
             })
             ->get();
 
+        if($keyword) {
+            $keyword = strtolower($keyword);
+            $data = $data->filter(function ($record) use ($keyword) {
+
+                if(
+                    strpos(strtolower($record->ar_name), $keyword) !== false ||
+                    strpos(strtolower($record->en_name), $keyword) !== false
+                ) {
+                    return true;
+                }
+
+            });
+        }
 
         if($orderBy) {
             if($sort == 'asc') {
@@ -137,6 +150,7 @@ class CosmeticClinic extends Model
         } else {
             $sorted = $data->sortBy('premium.priority');
         }
+
         return self::paginate($sorted, 10, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 

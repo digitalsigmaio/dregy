@@ -80,7 +80,7 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" data-toggle="modal" data-target="#elegantModalForm">
-                                <i class="fas fa-sign-in-alt white-text"></i> Sign In
+                                <i class="fa fa-sign-in white-text"></i> Sign In
                                 <span class="sr-only">Sign In</span>
                             </a>
                         </li>
