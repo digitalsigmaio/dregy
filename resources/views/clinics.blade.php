@@ -252,7 +252,7 @@
                                           </div>
                                           <ul class="rating mt-1">
                                               <li v-for="n in 5">
-                                                  <i class="fa fa-star cyan-text" :class="starColor(n, clinic.rate.rating)"></i>
+                                                  <i :class="starColor(n, clinic.rate.rating)"></i>
                                               </li>
                                           </ul>
                                       </div>

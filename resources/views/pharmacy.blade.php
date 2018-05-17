@@ -47,7 +47,7 @@
                                     </div>
                                     <ul class="rating mt-1 m-auto">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star cyan-text" :class="starColor(n, pharmacy.rate.rating)"></i>
+                                            <i :class="starColor(n, pharmacy.rate.rating)"></i>
                                         </li>
                                     </ul>
                                 </div>

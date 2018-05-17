@@ -38,7 +38,7 @@
                                     </div>
                                     <ul class="rating mt-1 m-auto">
                                         <li v-for="n in 5">
-                                            <i class="fa fa-star cyan-text" :class="starColor(n, clinic.rate.rating)"></i>
+                                            <i :class="starColor(n, clinic.rate.rating)"></i>
                                         </li>
                                     </ul>
                                 </div>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col-md-12 text-center grey-text" v-if="!user">
                                         <a @click.prevent="rateThis()">
-                                            <i class="far fa-star fa-2x pr-2"></i><strong>Rate this</strong>
+                                            <i class="fa fa-star-o fa-2x pr-2"></i><strong>Rate this</strong>
                                         </a>
                                     </div>
 
