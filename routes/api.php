@@ -20,10 +20,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::post('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderCallback');
 
+
+
+
+// User
+
 Route::post('/login', 'Auth\ApiLoginController@login');
 Route::post('/register', 'Auth\ApiRegisterController@register');
-
-
+/* user favorites */
+Route::get('/users/{user}/favorite-hospitals', 'UserController@favoriteHospitals');
+Route::get('/users/{user}/favorite-clinics', 'UserController@favoriteClinics');
+Route::get('/users/{user}/favorite-cosmetic-clinics', 'UserController@favoriteCosmeticClinics');
+Route::get('/users/{user}/favorite-pharmacies', 'UserController@favoritePharmacies');
+Route::get('/users/{user}/favorite-products', 'UserController@favoriteProducts');
+Route::get('/users/{user}/favorite-jobs', 'UserController@favoriteJobs');
 
 // Hospital
 

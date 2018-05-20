@@ -69,7 +69,7 @@
                         <li class="nav-item dropdown ml-3">
                             <a class="nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user white-text"></i> Profile </a>
+                                <i class="fa fa-user white-text"></i> {{ Auth::user()->name }} </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                                 <a class="dropdown-item waves-effect waves-light" href="{{ route('home') }}">My account</a>
                                 <div id="logout">

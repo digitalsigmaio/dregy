@@ -21,7 +21,7 @@
 
                 <div class="md-form pb-3">
                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
-                           v-model="password" required>
+                           v-model="password" @keyup.enter="login" required>
                     <label data-error="" data-success="" for="password">{{ __('Password') }}</label>
                     <div class="form-group row">
                         <div class="form-check col-md-6">

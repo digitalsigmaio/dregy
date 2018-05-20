@@ -312,7 +312,7 @@
             fav(id) {
                 let user = this.user;
                 let hospitals = this.hospitals;
-                let hospital = this.hospital
+                let hospital = this.hospital;
                 let favorites = this.user.favorite_hospitals;
                 if(this.user) {
                     if (this.isFav(id)) {

@@ -225,7 +225,7 @@
                                     </div>
                                 </div>
                                 <!-- Rating -->
-                                <ul class="rating text-left">
+                                <ul class="rating text-left phones">
                                     <li v-for="phone in job.phone" class="text-grey">
                                         <i class="fa fa-phone blue-text"></i> <strong class="teal-text">@{{ phone }}</strong>
                                     </li>

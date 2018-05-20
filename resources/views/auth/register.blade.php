@@ -129,61 +129,80 @@
             <div class="container" id="app">
                 <div class="row">
                     <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
-
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
                         <!--Form with header-->
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card-body">
 
                                 <!--Header-->
                                 <div class="form-header sky-gradient">
-                                    <h3><i class="fa fa-user mt-2 mb-2"></i> {{ __('Login') }}</h3>
+                                    <h3><i class="fa fa-user mt-2 mb-2"></i> {{ __('Register') }}</h3>
                                 </div>
 
                                 <!--Body-->
+                                <div class="md-form">
+                                    <i class="fa fa-user prefix white-text"></i>
+                                    <input type="text" id="orangeForm-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}"
+                                           v-model="name" required autofocus>
+                                    <label for="orangeForm-name">{{ __('Name') }}</label>
+
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+
                                 <div class="md-form">
                                     <i class="fa fa-envelope prefix white-text"></i>
                                     <input type="text" id="orangeForm-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
                                            v-model="email" required autofocus>
                                     <label for="orangeForm-email">{{ __('E-Mail Address') }}</label>
+
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
 
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix white-text"></i>
                                     <input type="password" id="orangeForm-pass" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
-                                           v-model="password" @keyup.enter="login" required>
+                                           v-model="password" required>
                                     <label for="orangeForm-pass">{{ __('Password') }}</label>
+
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
-                                <div class="md-form row">
-                                    <div class="form-check col-md-6">
-                                        <input class="form-check-input" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}id="defaultCheckbox1">
-                                        <label class="form-check-label" for="defaultCheckbox1">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6 text-right pt-3">
-                                        <p class="font-small blue-text d-flex justify-content-end"><a href="{{ route('password.request') }}" class="blue-text ml-1">{{ __('Forgot Your Password?') }}</a></p>
-                                    </div>
+
+                                <div class="md-form">
+                                    <i class="fa fa-lock prefix white-text"></i>
+                                    <input type="password" id="orangeForm-pass" class="form-control" name="password_confirmation"
+                                           v-model="passwordConfirmation" required>
+                                    <label for="orangeForm-pass">{{ __('Confirm Password') }}</label>
                                 </div>
 
                                 <div class="text-center">
-                                    <button class="btn sky-gradient btn-lg" @click.prevent="login">{{ __('Login') }}</button>
+                                    <button class="btn sky-gradient btn-lg" >{{ __('Register') }}</button>
 
-                                    <p class="font-small white-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in with:</p>
+                                    <p class="font-small white-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign up with:</p>
 
                                     <div class="row my-3 d-flex justify-content-center">
                                         <!--Facebook-->
                                         <a class="btn btn-white btn-rounded mr-md-3 z-depth-1a" href="/auth/facebook" target="_blank"><i class="fab fa-facebook-f text-center blue-text"></i></a>
                                     </div>
 
-                                    <hr>
-                                    <div class="inline-ul text-center d-flex justify-content-center">
-                                        <p class="font-small white-text d-flex justify-content-end">Not a member? <a href="{{ route('register') }}" class="blue-text ml-1">{{ __('Register') }}</a></p>
-                                    </div>
                                 </div>
 
                             </div>
                         </div>
                         <!--/Form with header-->
+                        </form>
 
                     </div>
                 </div>
@@ -240,7 +259,8 @@
                 password: '',
                 errors: {},
                 emailError: '',
-                passwordError: ''
+                passwordError: '',
+                passwordConfirmation: '',
             }
         },
         methods: {
