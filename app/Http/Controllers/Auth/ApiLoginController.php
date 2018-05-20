@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class ApiLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -22,25 +22,9 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
-    /**
-     * LoginController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response|void
-     */
+
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -55,14 +39,12 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            $request->session()->regenerate();
 
             $this->clearLoginAttempts($request);
 
-            return response()->json([
-                'user' => Auth::user(),
-                'callback' => $request->url
-            ]);
+            return response()->json(
+                Auth::user()
+            );
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -73,5 +55,12 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
 
 
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::attempt(
+            $this->credentials($request), $request->filled('remember')
+        );
     }
 }

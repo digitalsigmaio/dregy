@@ -20,6 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::post('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderCallback');
 
+Route::post('/login', 'Auth\ApiLoginController@login');
+Route::post('/register', 'Auth\ApiRegisterController@register');
+
 
 
 // Hospital
