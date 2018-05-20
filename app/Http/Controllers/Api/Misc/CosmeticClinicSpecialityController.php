@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Misc;
 
 use App\BeautyCenterSpeciality;
+use App\CosmeticClinicSpeciality;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,7 @@ class CosmeticClinicSpecialityController extends Controller
      */
     public function index()
     {
-        $specialities = BeautyCenterSpeciality::all();
+        $specialities = CosmeticClinicSpeciality::all();
 
         if (count($specialities)) {
             return response()->json([
@@ -52,10 +53,10 @@ class CosmeticClinicSpecialityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\BeautyCenterSpeciality  $beautyCenterSpeciality
+     * @param  \App\CosmeticClinicSpeciality  $cosmeticClinicSpeciality
      * @return \Illuminate\Http\Response
      */
-    public function show(BeautyCenterSpeciality $beautyCenterSpeciality)
+    public function show(CosmeticClinicSpeciality $cosmeticClinicSpeciality)
     {
         //
     }
@@ -63,10 +64,10 @@ class CosmeticClinicSpecialityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BeautyCenterSpeciality  $beautyCenterSpeciality
+     * @param  \App\CosmeticClinicSpeciality  $cosmeticClinicSpeciality
      * @return \Illuminate\Http\Response
      */
-    public function edit(BeautyCenterSpeciality $beautyCenterSpeciality)
+    public function edit(CosmeticClinicSpeciality $cosmeticClinicSpeciality)
     {
         //
     }
@@ -75,10 +76,10 @@ class CosmeticClinicSpecialityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BeautyCenterSpeciality  $beautyCenterSpeciality
+     * @param  \App\CosmeticClinicSpeciality  $cosmeticClinicSpeciality
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BeautyCenterSpeciality $beautyCenterSpeciality)
+    public function update(Request $request, CosmeticClinicSpeciality $cosmeticClinicSpeciality)
     {
         //
     }
@@ -86,10 +87,10 @@ class CosmeticClinicSpecialityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BeautyCenterSpeciality  $beautyCenterSpeciality
+     * @param  \App\CosmeticClinicSpeciality  $cosmeticClinicSpeciality
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BeautyCenterSpeciality $beautyCenterSpeciality)
+    public function destroy(CosmeticClinicSpeciality $cosmeticClinicSpeciality)
     {
         //
     }
