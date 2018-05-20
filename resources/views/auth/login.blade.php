@@ -136,7 +136,7 @@
 
                                 <!--Header-->
                                 <div class="form-header sky-gradient">
-                                    <h3><i class="fa fa-user mt-2 mb-2"></i> Log in:</h3>
+                                    <h3><i class="fa fa-user mt-2 mb-2"></i> Log in</h3>
                                 </div>
 
                                 <!--Body-->

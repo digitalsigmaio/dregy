@@ -73,7 +73,6 @@ class CosmeticClinic extends Model
     public function getFeaturedAttribute()
     {
         return $this->premium ? true : false;
-
     }
 
     public static function fetch($request)
@@ -98,7 +97,7 @@ class CosmeticClinic extends Model
             ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);
             })
-            ->when($city != '', function ($query) use ($city) {
+            ->when($city, function ($query) use ($city) {
                 return $query->where('city_id', $city);
             })
             ->when($rating, function ($query) use ($rating) {
