@@ -30,8 +30,6 @@
                                 </div>
                                 <!--Grid column-->
 
-
-
                                 <!--Grid column-->
                                 <div class="col-md-6 mb-4">
 
@@ -271,8 +269,6 @@
             </div>
         </div>
         <!-- Central Modal Medium Success-->
-
-
 
 
 

@@ -125,4 +125,9 @@ class HomeController extends Controller
         return view('client.newJob', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes']));
     }
 
+    public function jobList()
+    {
+        $jobs = Auth::user()->jobAds;
+        return view('client.jobList', compact('jobs'));
+    }
 }

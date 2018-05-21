@@ -177,3 +177,7 @@ select {
     font-size: .8rem;
     margin-right: 13px;
 }
+
+.invalid-feedback {
+    display: block;
+}

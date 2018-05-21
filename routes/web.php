@@ -22,6 +22,9 @@ Route::middleware('language')->group(function () {
     Route::get('/jobs', 'JobAdController@index')->name('jobs');
     Route::get('/jobs/{jobAd}/{slug}', 'JobAdController@show');
     Route::post('/job-ads', 'JobAdController@store');
+    Route::get('/job-ads/{jobAd}/edit', 'JobAdController@edit');
+    Route::put('/job-ads/{jobAd}/edit', 'JobAdController@update');
+    Route::get('/job-ads/{jobAd}/delete', 'JobAdController@destroy');
 
     Route::get('/products', 'ProductAdController@index')->name('products');
     Route::get('/products/{productAd}/{slug}', 'ProductAdController@show');
@@ -46,21 +49,21 @@ Route::middleware('language')->group(function () {
 
 
 
-
+    // Users
     Route::get('/auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('/auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
-
+    Route::put('/users', 'UserController@update')->name('updateUser');
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/favorites/hospitals', 'HomeController@favoriteHospitals')->name('favoriteHospitals');
-    Route::get('/favorites/clinics', 'HomeController@favoriteClinics')->name('favoriteClinics');
-    Route::get('/favorites/pharmacies', 'HomeController@favoritePharmacies')->name('favoritePharmacies');
-    Route::get('/favorites/cosmetic-clinics', 'HomeController@favoriteCosmeticClinics')->name('favoriteCosmeticClinics');
-    Route::get('/favorites/products', 'HomeController@favoriteProducts')->name('favoriteProducts');
-    Route::get('/favorites/jobs', 'HomeController@favoriteJobs')->name('favoriteJobs');
-
-    Route::get('/new/product', 'HomeController@createProduct')->name('createProduct');
-    Route::get('/new/job', 'HomeController@createJob')->name('createJob');
+    Route::get('/home/favorites/hospitals', 'HomeController@favoriteHospitals')->name('favoriteHospitals');
+    Route::get('/home/favorites/clinics', 'HomeController@favoriteClinics')->name('favoriteClinics');
+    Route::get('/home/favorites/pharmacies', 'HomeController@favoritePharmacies')->name('favoritePharmacies');
+    Route::get('/home/favorites/cosmetic-clinics', 'HomeController@favoriteCosmeticClinics')->name('favoriteCosmeticClinics');
+    Route::get('/home/favorites/products', 'HomeController@favoriteProducts')->name('favoriteProducts');
+    Route::get('/home/favorites/jobs', 'HomeController@favoriteJobs')->name('favoriteJobs');
+    Route::get('/home/jobs', 'HomeController@jobList')->name('jobList');
+    Route::get('/home/new/product', 'HomeController@createProduct')->name('createProduct');
+    Route::get('/home/new/job', 'HomeController@createJob')->name('createJob');
 
     Auth::routes();
     Route::get('/comingsoon', function () {

@@ -117,4 +117,91 @@ class JobAdController extends Controller
 
 
     }
+
+    public function destroy(JobAd $jobAd)
+    {
+        try {
+            $job = Auth::user()->jobAds()->find($jobAd->id);
+            if ($job) {
+                $job->delete();
+                return redirect()->back();
+            } else {
+                return redirect()->back()->withErrors(['Job not found']);
+            }
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function edit(JobAd $jobAd) {
+        if (Auth::user()->jobAds()->find($jobAd->id)) {
+            $categories = JobAdCategory::all();
+            $regions = Region::with('cities')->get();
+            $experienceLevels = JobExperienceLevel::all();
+            $educationLevels = JobEducationLevel::all();
+            $employmentTypes = JobEmploymentType::all();
+
+            return view('client.jobEdit', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes', 'jobAd']));
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function update(Request $request, JobAd $jobAd)
+    {
+        $job = Auth::user()->jobAds()->find($jobAd->id);
+        if ($job) {
+            $request->validate([
+                'title' => 'required | min:3',
+                'salary' => 'required',
+                'description' => 'required | min:20',
+                'jobTypeId' => 'required',
+                'categoryId' => 'required',
+                'experienceLevelId' => 'required',
+                'educationLevelId' => 'required',
+                'employmentTypeId' => 'required',
+                'regionId' => 'required',
+                'cityId' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+            ]);
+            if ($request->hasFile('img')) {
+                $request->validate([
+                    'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                ]);
+                $job->uploadImage($request);
+            }
+            $job->title = $request->title;
+            $job->slug = str_slug($request->title);
+            $job->approved = null;
+            $job->salary = $request->salary;
+            $job->description = $request->description;
+            $job->job_type_id = $request->jobTypeId;
+            $job->job_experience_level_id = $request->experienceLevelId;
+            $job->job_education_level_id = $request->educationLevelId;
+            $job->job_employment_type_id = $request->employmentTypeId;
+            $job->job_ad_category_id = $request->categoryId;
+            $job->region_id = $request->regionId;
+            $job->city_id = $request->cityId;
+            $job->address = $request->address;
+            try {
+                $job->save();
+                if (count($request->phone)) {
+                    foreach ($request->phone as $key => $number) {
+                        $phone = PhoneNumber::find($key);
+                        if ($phone) {
+                            $phone->number = $number;
+                            $phone->save();
+                        }
+                    }
+                }
+                session()->flash('success', 'Job has been update and waiting for review');
+                return redirect()->back();
+            } catch (QueryException $e) {
+                return $e->getMessage();
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
 }
