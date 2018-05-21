@@ -336,7 +336,7 @@
             submitForm() {
                 this.checkForm();
                 if(!this.errors.length){
-                    axios.post('/api/product-ads', {
+                    axios.post('/api/job-ads', {
                         title: this.title,
                         description: this.description,
                         price: this.price,

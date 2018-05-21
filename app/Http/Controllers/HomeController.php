@@ -31,7 +31,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.home');
+        $user = Auth::user();
+        return view('client.profile', compact('user'));
     }
 
     public function favoriteHospitals()

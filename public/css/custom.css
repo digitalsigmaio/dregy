@@ -150,3 +150,30 @@ select {
 .phones {
     min-height: 50px;
 }
+
+.btn-edit {
+    padding: 5px;
+    width: 35px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    padding: 5px;
+    width: 35px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+}
+
+.info-edit {
+    display: none;
+}
+
+.side-nav .collapsible .fas {
+    font-size: .8rem;
+    margin-right: 13px;
+}

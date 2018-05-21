@@ -19,6 +19,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
           integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/bootstrap-stars.css') }}" rel="stylesheet">
     <link href="{{ asset('css/css-stars.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome-stars.css') }}" rel="stylesheet">
@@ -81,7 +82,7 @@
                 <!-- Side navigation links -->
                 <li class="mt-2">
                     <ul id="side-menu" class="collapsible collapsible-accordion">
-                        <li id="menu-item-43620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-43620"><a class="collapsible-header waves-effect arrow-r"><i class="fa fas fa-boxes"></i>My Products<i class="fa fa-angle-down rotate-icon"></i></a>
+                        <li id="menu-item-43620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-43620"><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-boxes"></i>My Products<i class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body" style="display: none;">
                                 <ul class="sub-menu">
                                     <li id="menu-item-44240" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44240"><a class="collapsible-header waves-effect" id="link-menu-item-44240" href="">List</a></li>
