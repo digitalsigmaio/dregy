@@ -40,11 +40,14 @@
                 <div class="text-center mb-3">
                     <button type="button" class="btn blue-gradient btn-block btn-rounded z-depth-1a" @click.prevent="login">{{ __('Login') }}</button>
                 </div>
-                <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in with:</p>
+                <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"><strong>OR</strong></p>
 
                 <div class="row my-3 d-flex justify-content-center">
                     <!--Facebook-->
-                    <a class="btn btn-white btn-rounded mr-md-3 z-depth-1a" href="/auth/facebook" target="_blank"><i class="fab fa-facebook-f text-center blue-text"></i></a>
+
+                    <a class="btn btn-blue btn-rounded mr-md-3 z-depth-1a facebook-login" href="/auth/facebook" target="_blank">
+                        <i class="fa fa-facebook white-text pr-2" style="font-size: 20px;"></i> Continue with <strong>Facebook</strong>
+                    </a>
                 </div>
             </div>
             <!--Footer-->

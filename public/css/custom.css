@@ -84,7 +84,12 @@ select {
     border-bottom: none; }
 
 .modal-dialog .form-elegant .btn .fa {
-    color: #2196f3!important; }
+    /*color: #2196f3!important;*/
+}
+
+.facebook-login {
+    text-transform: none;
+}
 
 .form-elegant .modal-body, .form-elegant .modal-footer {
     font-weight: 400;
@@ -181,3 +186,5 @@ select {
 .invalid-feedback {
     display: block;
 }
+
+
