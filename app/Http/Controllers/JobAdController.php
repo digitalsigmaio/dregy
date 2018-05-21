@@ -188,7 +188,7 @@ class JobAdController extends Controller
                 $job->save();
                 if (count($request->phone)) {
                     foreach ($request->phone as $key => $number) {
-                        $phone = PhoneNumber::find($key);
+                        $phone = $job->phoneNumbers()->find($key);
                         if ($phone) {
                             $phone->number = $number;
                             $phone->save();
