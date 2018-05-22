@@ -140,8 +140,7 @@ class ProductAdController extends Controller
                     $product->phoneNumbers()->save($phone);
                 }
             }
-            session()->flash('success', 'Product has been added and waiting for review');
-            return redirect()->back();
+            return $product;
         } catch (QueryException $e) {
             return $e->getMessage();
         }
