@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobAdResource;
 use App\JobAdCategory;
 use App\JobEducationLevel;
 use App\JobEmploymentType;
@@ -10,6 +11,7 @@ use App\ProductAdCategory;
 use App\Region;
 use App\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -127,7 +129,9 @@ class HomeController extends Controller
 
     public function jobList()
     {
-        $jobs = Auth::user()->jobAds;
+        Resource::withoutWrapping();
+        $jobs = JobAdResource::collection(Auth::user()->jobAds);
+
         return view('client.jobList', compact('jobs'));
     }
 }

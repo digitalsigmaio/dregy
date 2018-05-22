@@ -96,20 +96,57 @@ class ProductAdController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'userId' => 'required',
             'title' => 'required | min:3',
             'price' => 'required',
-            'description' => 'required | min:30',
+            'description' => 'required | min:20',
             'status' => 'required',
             'categoryId' => 'required',
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
+            'phone' => 'required',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        $user = Auth::user();
-        $img = $request->img;
-        $path = $img->hashName('images');
-        dd($path);
+        $product = new ProductAd;
+        $product->user_id = $request->userId;
+        $product->title = $request->title;
+        $product->slug = str_slug($request->title);
+        $product->ref_id = 'pro-'. str_random(6) . '-' . time();
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->status = $request->status;
+        $product->product_ad_category_id = $request->categoryId;
+        $product->region_id = $request->regionId;
+        $product->city_id = $request->cityId;
+        $product->address = $request->address;
+        $product->expires_at = now()->addDays(30);
+        try {
+            $product->uploadImage($request);
+            $product->save();
+            if(count($request->phone) > 2) {
+                for($i=0;$i<count($request->phone);$i++) {
+                    if($i==2) {
+                        break;
+                    }
+                    $phone = new PhoneNumber;
+                    $phone->number = $phone[$i];
+                    $product->phoneNumbers()->save($phone);
+                }
+            } else {
+                foreach($request->phone as $number) {
+                    $phone = new PhoneNumber;
+                    $phone->number = $number;
+                    $product->phoneNumbers()->save($phone);
+                }
+            }
+            session()->flash('success', 'Product has been added and waiting for review');
+            return redirect()->back();
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+
+
 
     }
 }

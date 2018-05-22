@@ -124,8 +124,8 @@
                                     </label>
                                 </div>
 
-
-                                <!--Radio group-->
+                            </div>
+                            <!--Radio group-->
                         </fieldset>
                     </div>
                     <!-- /Filter by rate-->
@@ -145,7 +145,7 @@
                 <div class="col-md-6">
                     <!-- Search -->
                     <div class="md-form form-lg ml-1">
-                        <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="searchByKeyword">
+                        <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="triggerSearch">
                         <label for="keyword">Search</label>
                     </div>
                 </div>
@@ -456,6 +456,12 @@
                 this.endpoint = '/api/hospitals/search';
                 this.fetchHospitals()
             }, 500),
+            triggerSearch() {
+                let len = this.search.keyword.length;
+              if(len >= 3 || len === 0 ) {
+                  this.searchByKeyword();
+              }
+            },
             floor(rate) {
                 return parseInt(Math.floor(rate));
             },
