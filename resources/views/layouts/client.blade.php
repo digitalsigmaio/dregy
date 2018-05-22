@@ -62,9 +62,13 @@
 
                 <!-- Side navigation links -->
                 <li class="mt-5">
+                    <a class="waves-effect arrow-r active" href="{{ route('home') }}"><i class="fas fa-info-circle pr-2"></i>Account info</a>
+                </li>
+
+                <li class="mt-2">
                     <ul id="side-menu" class="collapsible collapsible-accordion">
                         <li id="menu-item-43620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-43620 active">
-                            <a class="collapsible-header waves-effect arrow-r active"><i class="fa fa-th-large"></i>My Favorites<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-th-large"></i>My Favorites<i class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body" style="display: none;">
                                 <ul class="sub-menu">
                                     <li id="menu-item-44240" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44240"><a class="collapsible-header waves-effect" id="link-menu-item-44240" href="{{ route('favoriteHospitals') }}">Hospitals</a></li>
@@ -85,7 +89,7 @@
                         <li id="menu-item-43620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-43620"><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-boxes"></i>My Products<i class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body" style="display: none;">
                                 <ul class="sub-menu">
-                                    <li id="menu-item-44240" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44240"><a class="collapsible-header waves-effect" id="link-menu-item-44240" href="">List</a></li>
+                                    <li id="menu-item-44240" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44240"><a class="collapsible-header waves-effect" id="link-menu-item-44240" href="{{ route('productList') }}">List</a></li>
                                     <li id="menu-item-44241" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44241"><a class="collapsible-header waves-effect" id="link-menu-item-44241" href="{{ route('createProduct') }}">New</a></li>
                                 </ul>
                             </div>

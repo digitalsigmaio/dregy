@@ -118,21 +118,6 @@ class JobAdController extends Controller
 
     }
 
-    public function destroy(JobAd $jobAd)
-    {
-        try {
-            $job = Auth::user()->jobAds()->find($jobAd->id);
-            if ($job) {
-                $job->delete();
-                return redirect()->back();
-            } else {
-                return redirect()->back()->withErrors(['Job not found']);
-            }
-        } catch (QueryException $e) {
-            return $e->getMessage();
-        }
-    }
-
     public function edit(JobAd $jobAd) {
         if (Auth::user()->jobAds()->find($jobAd->id)) {
             $categories = JobAdCategory::all();
@@ -204,4 +189,21 @@ class JobAdController extends Controller
             return redirect()->back();
         }
     }
+
+    public function destroy(JobAd $jobAd)
+    {
+        try {
+            $job = Auth::user()->jobAds()->find($jobAd->id);
+            if ($job) {
+                $job->delete();
+                return redirect()->back();
+            } else {
+                return redirect()->back()->withErrors(['Job not found']);
+            }
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
+
 }

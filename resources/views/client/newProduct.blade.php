@@ -125,7 +125,7 @@
                                                 <input type="file" name="img" @change="uploadImage($event)" required>
                                             </div>
                                             <div class="file-path-wrapper">
-                                                <input class="file-path validate" type="text" placeholder="Upload product image">
+                                                <input class="file-path validate" type="text" v-model="img" placeholder="Upload product image">
                                             </div>
                                         </div>
                                     </div>
@@ -289,6 +289,7 @@
             submitForm() {
                 this.checkForm();
                 if(!this.errors.length){
+
                     axios.post('/api/product-ads', {
                         title: this.title,
                         description: this.description,
@@ -301,14 +302,14 @@
                         categoryId: this.categoryId
                     },{
                         headers: {
-                            'Content-Type': undefined
+                            'Content-Type': 'undefined'
                         }
                     })
                         .then(function (res) {
-                            console.log(res.data)
+
                         })
                 } else {
-                    console.log(this.errors)
+
                 }
             },
             addPhone() {
@@ -325,6 +326,9 @@
                 region = region.shift();
                 this.cityId = 101;
                 this.cities = region.cities
+            },
+            img: function(val) {
+                console.log(val)
             }
         }
     });

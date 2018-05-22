@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\JobAdResource;
+use App\Http\Resources\ProductAdResource;
 use App\JobAdCategory;
 use App\JobEducationLevel;
 use App\JobEmploymentType;
@@ -133,5 +134,13 @@ class HomeController extends Controller
         $jobs = JobAdResource::collection(Auth::user()->jobAds);
 
         return view('client.jobList', compact('jobs'));
+    }
+
+    public function productList()
+    {
+        Resource::withoutWrapping();
+        $products = ProductAdResource::collection(Auth::user()->productAds);
+
+        return view('client.productList', compact('products'));
     }
 }

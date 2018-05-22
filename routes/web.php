@@ -29,6 +29,9 @@ Route::middleware('language')->group(function () {
     Route::get('/products', 'ProductAdController@index')->name('products');
     Route::get('/products/{productAd}/{slug}', 'ProductAdController@show');
     Route::post('/product-ads', 'ProductAdController@store');
+    Route::get('/product-ads/{productAd}/edit', 'ProductAdController@edit');
+    Route::put('/product-ads/{productAd}/edit', 'ProductAdController@update');
+    Route::get('/product-ads/{productAd}/delete', 'ProductAdController@destroy');
 
     // Hospitals
     Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
@@ -62,8 +65,10 @@ Route::middleware('language')->group(function () {
     Route::get('/home/favorites/products', 'HomeController@favoriteProducts')->name('favoriteProducts');
     Route::get('/home/favorites/jobs', 'HomeController@favoriteJobs')->name('favoriteJobs');
     Route::get('/home/jobs', 'HomeController@jobList')->name('jobList');
-    Route::get('/home/new/product', 'HomeController@createProduct')->name('createProduct');
     Route::get('/home/new/job', 'HomeController@createJob')->name('createJob');
+    Route::get('/home/products', 'HomeController@productList')->name('productList');
+    Route::get('/home/new/product', 'HomeController@createProduct')->name('createProduct');
+
 
     Auth::routes();
     Route::get('/comingsoon', function () {

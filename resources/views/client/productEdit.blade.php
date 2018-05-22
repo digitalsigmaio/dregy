@@ -1,19 +1,19 @@
-@extends('client.home')
+@extends('layouts.client')
 
-@section('userContent')
+@section('content')
+
 
 
     <div class="container">
-        <form action="/job-ads/{{$jobAd->id}}/edit" method="post" enctype="multipart/form-data">
+        <form action="/product-ads/{{ $productAd->id }}/edit" method="post" enctype="multipart/form-data">
             <!--Section: Inputs-->
             @csrf
-            @method('PUT')
             <section class="section card mb-5">
 
                 <div class="card-body">
 
                     <!--Section heading-->
-                    <h1 class="text-center my-5 h1">Edit Job</h1>
+                    <h1 class="text-center my-5 h1">Edit Product</h1>
 
                     <div class="container">
 
@@ -30,13 +30,15 @@
                             </div>
                             <!--Grid column-->
 
+
+
                             <!--Grid column-->
                             <div class="col-md-6 mb-4">
 
                                 <div class="md-form">
                                     <i class="fas fa-tag prefix"></i>
-                                    <input type="text" name="salary" id="salary" class="form-control" v-model="salary" maxlength="5" required>
-                                    <label for="salary" class="">Salary</label>
+                                    <input type="text" name="price" id="price" class="form-control" maxlength="6" v-model="price" required>
+                                    <label for="price" class="">Price</label>
                                 </div>
 
                             </div>
@@ -45,25 +47,7 @@
 
                         <div class="row">
                             <!--Grid column-->
-                            <div class="col-md-6 mb-4">
-                                <fieldset class="form-check mb-4 text-center" id="status">
-                                    <div class="row pt-4">
-                                        <div class="form-group col-md-6">
-                                            <input class="form-check-input" name="jobTypeId" type="radio" id="employer" value="1" v-model="jobTypeId" checked="checked">
-                                            <label class="form-check-label" for="employer">Employer</label>
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <input class="form-check-input" name="jobTypeId" type="radio" id="jobSeeker" value="2" v-model="jobTypeId">
-                                            <label class="form-check-label" for="jobSeeker">Job Seeker</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <!--Grid column-->
-
-                            <!--Grid column-->
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-12 mb-4">
 
                                 <!--Basic textarea-->
                                 <div class="md-form">
@@ -74,7 +58,6 @@
 
                             </div>
                             <!--Grid column-->
-
                         </div>
 
                         <div class="row">
@@ -128,65 +111,7 @@
                                         <option :value="category.id" v-for="category in categories">@{{ category.en_name }}</option>
                                     </select>
                                 </div>
-                            </div>
-                            <!--Grid column-->
 
-                            <!--Grid column-->
-                            <div class="col-md-6 mb-4">
-                                <div class="form-group">
-                                    <label for="experienceLevel"></label>
-                                    <select class="form-control custom-select-lg" name="experienceLevelId" v-model="experienceLevelId" id="experienceLevel" required>
-                                        <option value="101" selected disabled>Experience Level</option>
-                                        <option :value="experienceLevel.id" v-for="experienceLevel in experienceLevels">@{{ experienceLevel.en_name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--Grid column-->
-
-                            <!--Grid column-->
-                            <div class="col-md-6 mb-4">
-                                <div class="form-group">
-                                    <label for="educationLevel"></label>
-                                    <select class="form-control custom-select-lg" name="educationLevelId" v-model="educationLevelId" id="educationLevel" required>
-                                        <option value="101" selected disabled>Education Level</option>
-                                        <option :value="educationLevel.id" v-for="educationLevel in educationLevels">@{{ educationLevel.en_name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--Grid column-->
-
-                            <!--Grid column-->
-                            <div class="col-md-6 mb-4">
-                                <div class="form-group">
-                                    <label for="employmentType"></label>
-                                    <select class="form-control custom-select-lg" name="employmentTypeId" v-model="employmentTypeId" id="employmentType" required>
-                                        <option value="101" selected disabled>Employment Type</option>
-                                        <option :value="employmentType.id" v-for="employmentType in employmentTypes">@{{ employmentType.en_name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--Grid column-->
-
-
-
-                        </div>
-
-                        <div class="row">
-
-
-
-                            <!--Grid column-->
-                            <div class="col-md-6 mb-4">
-                                @foreach($jobAd->phoneNumbers as $phone)
-                                    <div class="phone-input ml-2 mb-2">
-                                        <div class="md-form input-group pl-0 mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
-                                            </div>
-                                            <input type="tel" class="form-control py-0" maxlength="15" name="phone[{{$phone->id}}]" placeholder="Phone" value="{{$phone->number}}" aria-describedby="basic-addon1" required>
-                                        </div>
-                                    </div>
-                                @endforeach
                             </div>
                             <!--Grid column-->
 
@@ -197,19 +122,55 @@
                                     <div class="file-field">
                                         <div class="btn btn-primary btn-sm float-left waves-effect waves-light">
                                             <span>Choose file</span>
-                                            <input type="file" name="img" @change="uploadImage($event)">
+                                            <input type="file" name="img" @change="uploadImage($event)" required>
                                         </div>
                                         <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="Upload job image">
+                                            <input class="file-path validate" type="text" placeholder="Upload product image">
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                             <!--Grid column-->
+
+                        </div>
+
+                        <div class="row">
+
+
+
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                @foreach($productAd->phoneNumbers as $phone)
+                                    <div class="phone-input ml-2 mb-2">
+                                        <div class="md-form input-group pl-0 mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="tel" class="form-control py-0" name="phone[{{ $phone->id }}]" placeholder="Phone" maxlength="15" value="{{$phone->number}}"  aria-describedby="basic-addon1" required>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                             <!--Grid column-->
 
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-4">
+                                <fieldset class="form-check mb-4 text-center" id="status">
+                                    <div class="row pt-4">
+                                        <div class="form-group col-md-3 col-md-offset-3">
+                                            <input class="form-check-input" name="status" type="radio" id="new" value="1" v-model="status" checked="checked">
+                                            <label class="form-check-label" for="new">New</label>
+                                        </div>
 
+                                        <div class="form-group col-md-3">
+                                            <input class="form-check-input" name="status" type="radio" id="used" value="2" v-model="status">
+                                            <label class="form-check-label" for="used">Used</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <!--Grid column-->
                         </div>
 
                         <div class="row">
@@ -273,6 +234,8 @@
 
 
 
+
+
 @endsection
 
 @push('scripts')
@@ -283,22 +246,16 @@
             return {
                 regions: {!! $regions !!},
                 categories: {!! $categories !!},
-                experienceLevels: {!! $experienceLevels !!},
-                educationLevels: {!! $educationLevels !!},
-                employmentTypes: {!! $employmentTypes !!},
                 cities: null,
                 errors: [],
-                title: '{!! $jobAd->title !!}',
-                description: '{!! $jobAd->description !!}',
-                salary: '{!! $jobAd->salary !!}',
-                categoryId: {!! $jobAd->job_ad_category_id !!},
-                jobTypeId: {!! $jobAd->job_type_id !!},
-                experienceLevelId: {!! $jobAd->job_experience_level_id !!},
-                educationLevelId: {!! $jobAd->job_education_level_id !!},
-                employmentTypeId: {!! $jobAd->job_employment_type_id !!},
-                regionId: {!! $jobAd->region_id !!},
-                cityId: {!! $jobAd->city_id !!},
-                address: '{!! $jobAd->address !!}',
+                title: '{!! $productAd->title !!}',
+                description: '{!! $productAd->description !!}',
+                price: {!! $productAd->price !!},
+                categoryId: {!! $productAd->product_ad_category_id !!},
+                status: {!! $productAd->status !!},
+                regionId: {!! $productAd->region_id !!},
+                cityId: {!! $productAd->city_id !!},
+                address: '{!! $productAd->address !!}',
                 img: null
             }
         },
@@ -333,7 +290,7 @@
             submitForm() {
                 this.checkForm();
                 if(!this.errors.length){
-                    axios.post('/api/job-ads', {
+                    axios.post('/api/product-ads', {
                         title: this.title,
                         description: this.description,
                         price: this.price,
@@ -357,7 +314,7 @@
             },
             addPhone() {
                 $('.phone-input').append("<div class='md-form input-group pl-0 second-phone'><div class='input-group-prepend'><span class='input-group-text' id='basic-addon2'><i class='fas fa-phone'></i></span></div>" +
-                    "<input type='tel' class='form-control py-0' maxlength='15' name='phone[]' placeholder='Phone' aria-describedby='basic-addon2'>" +
+                    "<input type='tel' class='form-control py-0' name='phone[]' placeholder='Phone' aria-describedby='basic-addon2'>" +
                     "<div class='input-group-append' ><a><span class='input-group-text badge-danger remove-phone'><i class='fas fa-times'></i></span></a></div></div>");
                 $('.btn-add-phone').prop('disabled', true);
             },

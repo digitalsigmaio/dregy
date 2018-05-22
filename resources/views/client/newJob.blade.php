@@ -348,10 +348,10 @@
                         }
                     })
                         .then(function (res) {
-                            console.log(res.data)
+
                         })
                 } else {
-                    console.log(this.errors)
+
                 }
             },
             addPhone() {
