@@ -141,7 +141,7 @@ class ProductAdController extends Controller
                     $product->phoneNumbers()->save($phone);
                 }
             }
-            return response()->json($product);
+            return $product;
         } catch (QueryException $e) {
             return response()->json([
                 'error' => $e->getMessage()
