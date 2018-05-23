@@ -24,10 +24,14 @@ trait ImageUploader
      * @param \Illuminate\Http\Request  $request
      * @return void
      * */
-    public function uploadImage(Request $request)
+    public function uploadImage(Request $request, $encode = false)
     {
+        if ($encode) {
+            $img = base64_decode($request->img);
+        } else {
+            $img = $request->img;
+        }
 
-        $img = $request->img;
         $filename = $img->hashName();
         $path = $img->move(public_path($this->imagePath), $filename);
         ImageOptimizer::optimize($path);

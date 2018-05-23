@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\ProductAdCollection;
 use App\Http\Resources\ProductAdResource;
+use App\PhoneNumber;
 use App\ProductAd;
 use App\View;
 use Illuminate\Database\QueryException;
@@ -106,7 +107,7 @@ class ProductAdController extends Controller
             'cityId' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'img' => 'required'
         ]);
         $product = new ProductAd;
         $product->user_id = $request->userId;
@@ -122,9 +123,9 @@ class ProductAdController extends Controller
         $product->address = $request->address;
         $product->expires_at = now()->addDays(30);
         try {
-            $product->uploadImage($request);
+            $product->uploadImage($request, true);
             $product->save();
-            if(count($request->phone) > 2) {
+            if(count((array) $request->phone) > 2) {
                 for($i=0;$i<count($request->phone);$i++) {
                     if($i==2) {
                         break;
@@ -134,13 +135,13 @@ class ProductAdController extends Controller
                     $product->phoneNumbers()->save($phone);
                 }
             } else {
-                foreach($request->phone as $number) {
-                    $phone = new PhoneNumber;
+                foreach((array) $request->phone as $number) {
+                    $phone = new PhoneNumber();
                     $phone->number = $number;
                     $product->phoneNumbers()->save($phone);
                 }
             }
-            return response()->json($product);
+            return $product;
         } catch (QueryException $e) {
             return $e->getMessage();
         }
