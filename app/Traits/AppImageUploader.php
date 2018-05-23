@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\File;
 
 trait AppImageUploader
 {
-	private $allowedMimeTypes = ['image/jpeg','image/png'];
-
-
     /*
      * Upload image and save it on server with unique name
      *
