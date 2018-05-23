@@ -107,7 +107,7 @@ class ProductAdController extends Controller
             'cityId' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            
+
         ]);
         $product = new ProductAd;
         $product->user_id = $request->userId;
@@ -141,9 +141,11 @@ class ProductAdController extends Controller
                     $product->phoneNumbers()->save($phone);
                 }
             }
-            return $product;
+            return response()->json($product);
         } catch (QueryException $e) {
-            return $e->getMessage();
+            return response()->json([
+                'error' => $e->getMessage()
+                ]);
         }
 
 
