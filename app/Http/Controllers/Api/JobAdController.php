@@ -6,6 +6,7 @@ use App\Http\Resources\JobAdCollection;
 use App\Http\Resources\JobAdResource;
 use App\JobAd;
 use App\JobAdCategory;
+use App\PhoneNumber;
 use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
