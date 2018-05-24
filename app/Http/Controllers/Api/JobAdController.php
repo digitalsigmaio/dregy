@@ -120,7 +120,7 @@ class JobAdController extends Controller
             'img' => 'required'
         ]);
         $job = new JobAd;
-        $job->user_id = Auth::user()->id;
+        $job->user_id = $request->userId;
         $job->title = $request->title;
         $job->slug = str_slug($request->title);
         $job->ref_id = 'job-'. str_random(6) . '-' . time();
