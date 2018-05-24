@@ -24,20 +24,16 @@ trait AppImageUploader
     public function appUploadImage($image)
     {
 
-        try {
-            $img = base64_decode($image->file);
-            $imgName = uuid('img_') . '.jpg';
 
-            File::put(public_path($this->imagePath) . '/' . $imgName, $img);
+        $img = base64_decode($image->file);
+        $imgName = uuid('img_') . '.jpg';
+
+        File::put(public_path($this->imagePath) . '/' . $imgName, $img);
 
 
-            $uri = '/' . $this->imagePath . '/' . $imgName;
-            $this->img = $uri;
-        } catch (FileException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ]);
-        }
+        $uri = '/' . $this->imagePath . '/' . $imgName;
+        $this->img = $uri;
+
 
     }
 }

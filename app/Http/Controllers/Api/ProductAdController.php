@@ -123,7 +123,9 @@ class ProductAdController extends Controller
         $product->address = $request->address;
         $product->expires_at = now()->addDays(30);
 
-        $product->AppUploadImage($request->img);
+        if($request->has('img')) {
+            $product->AppUploadImage($request->img);
+        }
         $product->save();
         if(count((array) $request->phone) > 2) {
             for($i=0;$i<count($request->phone);$i++) {
