@@ -26,8 +26,8 @@ trait AppImageUploader
 
 
         $img = base64_decode($image->file);
-
-        $array = explode(',', $img);
+        return response()->json($img);
+        /*$array = explode(',', $img);
         $ext = str_replace('data:image/', '', $array[0]);
         $imgName = uuid('img_') . '.' . $ext;
         $decoded = base64_decode($array[1]);
@@ -38,7 +38,7 @@ trait AppImageUploader
 
 
         $uri = '/' . $this->imagePath . '/' . $imgName;
-        $this->img = $uri;
+        $this->img = $uri;*/
 
 
     }
