@@ -117,7 +117,7 @@ class JobAdController extends Controller
             'cityId' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'img' => 'required'
         ]);
         $job = new JobAd;
         $job->user_id = Auth::user()->id;
@@ -135,29 +135,28 @@ class JobAdController extends Controller
         $job->city_id = $request->cityId;
         $job->address = $request->address;
         $job->expires_at = now()->addDays(30);
-        try {
-            $job->uploadImage($request);
-            $job->save();
-            if(count($request->phone) > 2) {
-                for($i=0;$i<count($request->phone);$i++) {
-                    if($i==2) {
-                        break;
-                    }
-                    $phone = new PhoneNumber;
-                    $phone->number = $phone[$i];
-                    $job->phoneNumbers()->save($phone);
-                }
-            } else {
-                foreach($request->phone as $number) {
-                    $phone = new PhoneNumber;
-                    $phone->number = $number;
-                    $job->phoneNumbers()->save($phone);
-                }
-            }
-            return $job;
-        } catch (QueryException $e) {
-            return $e->getMessage();
+
+        if($request->has('img')) {
+            $job->appUploadImage($request);
         }
+        $job->save();
+        if(count($request->phone) > 2) {
+            for($i=0;$i<count($request->phone);$i++) {
+                if($i==2) {
+                    break;
+                }
+                $phone = new PhoneNumber;
+                $phone->number = $phone[$i];
+                $job->phoneNumbers()->save($phone);
+            }
+        } else {
+            foreach($request->phone as $number) {
+                $phone = new PhoneNumber;
+                $phone->number = $number;
+                $job->phoneNumbers()->save($phone);
+            }
+        }
+        return response()->json($job, 201);
 
 
 

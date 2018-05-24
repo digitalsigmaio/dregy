@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\AppImageUploader;
 use App\Traits\ImageUploader;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Zend\Diactoros\Request;
 
 class JobAd extends Model
 {
-    use SoftDeletes, CollectionPagination, ImageUploader;
+    use SoftDeletes, CollectionPagination, ImageUploader, AppImageUploader;
 
     private $imagePath = 'img/jobs';
 

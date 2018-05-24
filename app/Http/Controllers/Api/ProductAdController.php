@@ -107,7 +107,7 @@ class ProductAdController extends Controller
             'cityId' => 'required',
             'address' => 'required',
             'phone' => 'required',
-
+            'img' => 'required'
         ]);
         $product = new ProductAd;
         $product->user_id = $request->userId;
