@@ -122,32 +122,26 @@ class ProductAdController extends Controller
         $product->city_id = $request->cityId;
         $product->address = $request->address;
         $product->expires_at = now()->addDays(30);
-        try {
-            $product->AppUploadImage($request->img);
-            $product->save();
-            if(count((array) $request->phone) > 2) {
-                for($i=0;$i<count($request->phone);$i++) {
-                    if($i==2) {
-                        break;
-                    }
-                    $phone = new PhoneNumber;
-                    $phone->number = $phone[$i];
-                    $product->phoneNumbers()->save($phone);
-                }
-            } else {
-                foreach((array) $request->phone as $number) {
-                    $phone = new PhoneNumber();
-                    $phone->number = $number;
-                    $product->phoneNumbers()->save($phone);
-                }
-            }
-            return $product;
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-                ]);
-        }
 
+        $product->AppUploadImage($request->img);
+        $product->save();
+        if(count((array) $request->phone) > 2) {
+            for($i=0;$i<count($request->phone);$i++) {
+                if($i==2) {
+                    break;
+                }
+                $phone = new PhoneNumber;
+                $phone->number = $phone[$i];
+                $product->phoneNumbers()->save($phone);
+            }
+        } else {
+            foreach((array) $request->phone as $number) {
+                $phone = new PhoneNumber();
+                $phone->number = $number;
+                $product->phoneNumbers()->save($phone);
+            }
+        }
+        return $product;
 
 
     }
