@@ -144,6 +144,6 @@ class ProductAdController extends Controller
             }
         }
         return response()->json($product);
-        
+
     }
 }
