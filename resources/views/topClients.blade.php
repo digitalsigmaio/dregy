@@ -292,11 +292,22 @@
             round(rate) {
                 return parseInt(Math.round(rate));
             },
+            floor(rate) {
+                return parseInt(Math.floor(rate));
+            },
+            ceil(rate) {
+                return parseInt(Math.ceil(rate));
+            },
+            round(rate) {
+                return parseInt(Math.round(rate));
+            },
             starColor(n, rate) {
-                if (n <= this.round(rate))  {
-                    return 'blue-text'
+                if (n <= this.floor(rate)) {
+                    return 'fa fa-star cyan-text'
+                } else if (n === this.ceil(rate)) {
+                    return 'fa fa-star-half-full cyan-text'
                 } else {
-                    return 'grey-text'
+                    return 'fa fa-star-o cyan-text'
                 }
             },
             fetchData() {

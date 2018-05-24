@@ -1,4 +1,4 @@
-<footer class="page-footer text-center text-md-left stylish-color-dark pt-0">
+<footer class="page-footer text-center text-md-left stylish-color-dark pt-0 mt-0">
 
     <div style="background-color: #4285f4;">
         <div class="container">

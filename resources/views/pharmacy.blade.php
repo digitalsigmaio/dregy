@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-md-12 text-center grey-text" v-if="!user">
                                         <a @click.prevent="rateThis()">
-                                            <i class="fa fa-star fa-2x pr-2"></i><strong>Rate this</strong>
+                                            <i class="fa fa-star-o fa-2x pr-2"></i><strong>Rate this</strong>
                                         </a>
                                     </div>
 
