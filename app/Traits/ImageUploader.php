@@ -24,10 +24,8 @@ trait ImageUploader
      * @param \Illuminate\Http\Request  $request
      * @return void
      * */
-    public function uploadImage(Request $request)
+    public function uploadImage($img)
     {
-
-        $img = $request->img;
         $filename = $img->hashName();
         $path = $img->move(public_path($this->imagePath), $filename);
         ImageOptimizer::optimize($path);
