@@ -9,7 +9,6 @@
 namespace App\Traits;
 
 
-use GuzzleHttp\Exception\ServerException;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -25,14 +24,10 @@ trait AppImageUploader
     public function appUploadImage($image)
     {
 
-        try {
-            $img = base64_decode($image->file);
-            return response()->json($img);
-        } catch (ServerException $e) {
-            return response()->json($e->getMessage());
-        }
 
-        /*$array = explode(',', $img);
+        $img = base64_decode($image->file);
+
+        $array = explode(',', $img);
         $ext = str_replace('data:image/', '', $array[0]);
         $imgName = uuid('img_') . '.' . $ext;
         $decoded = base64_decode($array[1]);
@@ -43,7 +38,7 @@ trait AppImageUploader
 
 
         $uri = '/' . $this->imagePath . '/' . $imgName;
-        $this->img = $uri;*/
+        $this->img = $uri;
 
 
     }
