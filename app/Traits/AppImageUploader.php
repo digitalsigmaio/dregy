@@ -27,8 +27,14 @@ trait AppImageUploader
 
         $img = base64_decode($image->file);
         $imgName = uuid('img_') . '.jpg';
+        try {
+            File::put(public_path($this->imagePath) . '/' . $imgName, $img);
+        } catch (FileException $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
 
-        File::put(public_path($this->imagePath) . '/' . $imgName, $img);
 
 
         $uri = '/' . $this->imagePath . '/' . $imgName;
