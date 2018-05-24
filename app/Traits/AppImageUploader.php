@@ -9,9 +9,8 @@
 namespace App\Traits;
 
 
-use Illuminate\Support\Facades\File;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
+use Illuminate\Http\Request;
 
 trait AppImageUploader
 {
@@ -21,15 +20,15 @@ trait AppImageUploader
      * @param \Illuminate\Http\Request  $request
      * @return void
      * */
-    public function appUploadImage($image)
+    public function appUploadImage(Request $request)
     {
 
+        $image = (object) $request->img;
+        $file = $image->file;
 
-        $img = base64_decode($image->file);
-
-        $array = explode(',', $img);
-        $ext = str_replace('data:image/', '', $array[0]);
-        $imgName = uuid('img_') . '.' . $ext;
+        $array = explode(',', $file);
+        $ext = str_replace(['data:image/', ';base64'], '', $array[0]);
+        $imgName = str_random(10) . '_' . time() . '.' . $ext;
         $decoded = base64_decode($array[1]);
         $ifp= fopen(public_path($this->imagePath) . '/' .$imgName, 'wb');
         fwrite($ifp, $decoded);
