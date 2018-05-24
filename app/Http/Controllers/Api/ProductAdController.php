@@ -143,7 +143,7 @@ class ProductAdController extends Controller
                 $product->phoneNumbers()->save($phone);
             }
         }
-        return response()->json($product);
+        return response()->json($product, 201);
 
     }
 }
