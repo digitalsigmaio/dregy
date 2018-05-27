@@ -25,7 +25,7 @@ class ProductAdController extends Controller
             'views',
             'premium'
         ])
-            ->paginate(4);
+            ->orderBy('updated_at', 'desc')->paginate(4);
 
         return new ProductAdCollection($productAds);
     }

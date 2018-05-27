@@ -7,8 +7,8 @@
             <!--Card-->
             <div class="card card-cascade narrower card-ecommerce">
                 <!--Card image-->
-                <div class="view overlay">
-                    <img :src="product.img" class="card-img-top" :alt="product.title">
+                <div class="view overlay product-img" :style="backgroundImg(product.img)">
+
                     <a :href="'/products/' + product.id + '/' + product.slug">
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -17,7 +17,7 @@
                 <!--Card content-->
                 <div class="card-body text-center">
                     <!--Category & Title-->
-                    <a href="" class="grey-text">
+                    <a class="grey-text">
                         <h5>@{{ product.category.en_name }}</h5>
                     </a>
                     <h4 class="card-title" :title="product.title">
@@ -26,23 +26,34 @@
                         </strong>
                     </h4>
 
-                    <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == '1', 'badge-warning' : product.status == '2' }">@{{ product.status == '1' ? 'New' : 'Used' }}</span>
+                    <div class="row my-2">
+                        <div class="col-md-6 pr-0 pt-1">
+                                        <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == '1', 'badge-warning' : product.status == '2' }">
+                                    @{{ product.status == '1' ? 'New' : 'Used' }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" class="h3-responsive mr-2 float-left">
+                                <i class="fas fa-heart pr-1 animated"  :class="favClass(product.id)"></i>
+                            </a>
+                        </div>
+                    </div>
 
                     <!--Description-->
                     <p class="card-text">
                         @{{ product.description }}
                     </p>
                     <!--Card footer-->
-                    <div class="card-footer">
-                            <span class="float-left font-weight-bold">
-                              <strong>@{{ product.price }} L.E</strong>
-                            </span>
-                        <span class="float-right">
-                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" >
-                                      <i class="fas fa-heart pr-1 animated"  :class="favClass(product.id)"></i>
-                                  </a>
-                                  <span class="light-green-text text-sm-right">@{{ product.favorites.count }}</span>
-                        </span>
+                    <div class="card-footer pb-0 pl-0">
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <strong>@{{ product.price }} L.E</strong>
+                            </div>
+                            <div class="col-md-6 text-center pr-0">
+                                            <span class="small">
+                                                @{{ product.created_at }}
+                                            </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--Card content-->
@@ -51,6 +62,7 @@
 
         </div>
         <!--Grid column-->
+
 
     </div>
     <!--Grid row-->
@@ -124,6 +136,9 @@
             }
         },
         methods: {
+            backgroundImg(src) {
+                return "background-image: url('" + src + "')";
+            },
             fetchProducts() {
                 let vm = this;
                 axios.get(vm.endpoint)

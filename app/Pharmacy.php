@@ -145,6 +145,6 @@ class Pharmacy extends Model
             $sorted = $data->sortBy('premium.priority');
         }
 
-        return self::paginate($sorted, 10, null, ['path'=> $request->url(), 'query' => $request->query()]);
+        return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 }

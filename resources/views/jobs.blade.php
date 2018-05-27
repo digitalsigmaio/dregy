@@ -385,9 +385,7 @@
         },
         methods: {
             backgroundImg(src) {
-                let style =  "background-image: url('" + src + "')";
-                console.log(style);
-                return style
+                return "background-image: url('" + src + "')";
             },
             fetchJobs(){
                 let vm = this;
