@@ -2,7 +2,7 @@
 
 @section('userContent')
     <div id="productList">
-        <h2 class="blue-grey-text">products</h2>
+        <h2 class="blue-grey-text">My Products</h2>
         <section class="mt-5">
             @if($products->count())
                 <div class="col-md-8 card">
@@ -13,6 +13,8 @@
                             <tr>
                                 <th width="50px">#</th>
                                 <th>Title</th>
+                                <th>Views</th>
+                                <th>Favorites</th>
                                 <th width="100px">Actions</th>
                             </tr>
                             </thead>
@@ -22,6 +24,8 @@
                                 <tr>
                                     <th scope="row">{{ ++$index }}</th>
                                     <td>{{ $product->title }}</td>
+                                    <td>{{ $product->views ? $product->views->count : '0' }}</td>
+                                    <td>{{ $product->favorites ? $product->favorites->count : '0    '}}</td>
                                     <td>
                                         <a class="blue-text pr-2" data-toggle="tooltip" data-placement="top" title="View" @click.prevent="show({{$product->id}})"><i class="fa fa-user"></i></a>
                                         <a class="teal-text pr-2" data-toggle="tooltip" data-placement="top" title="Edit" href="/product-ads/{{ $product->id }}/edit"><i class="fa fa-pencil"></i></a>

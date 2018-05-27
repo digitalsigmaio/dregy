@@ -2,7 +2,7 @@
 
 @section('userContent')
 <div id="jobList">
-    <h2 class="blue-grey-text">Jobs</h2>
+    <h2 class="blue-grey-text">My Jobs</h2>
     <section class="mt-5">
         @if($jobs->count())
             <div class="col-md-8 card">
@@ -13,6 +13,8 @@
                         <tr>
                             <th width="50px">#</th>
                             <th>Title</th>
+                            <th>Views</th>
+                            <th>Favorites</th>
                             <th width="100px">Actions</th>
                         </tr>
                         </thead>
@@ -22,6 +24,8 @@
                             <tr>
                                 <th scope="row">{{ ++$index }}</th>
                                 <td>{{ $job->title }}</td>
+                                <td>{{ $job->views ? $job->views->count : '0' }}</td>
+                                <td>{{ $job->favorites ? $job->favorites->count : '0    '}}</td>
                                 <td>
                                     <a class="blue-text pr-2" data-toggle="tooltip" data-placement="top" title="View" @click.prevent="show({{$job->id}})"><i class="fa fa-user"></i></a>
                                     <a class="teal-text pr-2" data-toggle="tooltip" data-placement="top" title="Edit" href="/job-ads/{{ $job->id }}/edit"><i class="fa fa-pencil"></i></a>
