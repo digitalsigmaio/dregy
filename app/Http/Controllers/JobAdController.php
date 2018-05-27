@@ -90,7 +90,7 @@ class JobAdController extends Controller
         $job->address = $request->address;
         $job->expires_at = now()->addDays(30);
         try {
-            $job->uploadImage($request);
+            $job->uploadImage($request->img);
             $job->save();
             if(count($request->phone) > 2) {
                 for($i=0;$i<count($request->phone);$i++) {
@@ -134,8 +134,7 @@ class JobAdController extends Controller
 
     public function update(Request $request, JobAd $jobAd)
     {
-        $job = Auth::user()->jobAds()->find($jobAd->id);
-        if ($job) {
+        if ($job = Auth::user()->jobAds()->find($jobAd->id)) {
             $request->validate([
                 'title' => 'required | min:3',
                 'salary' => 'required',
@@ -154,7 +153,7 @@ class JobAdController extends Controller
                 $request->validate([
                     'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
                 ]);
-                $job->uploadImage($request);
+                $job->uploadImage($request->img);
             }
             $job->title = $request->title;
             $job->slug = str_slug($request->title);

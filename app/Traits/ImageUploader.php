@@ -8,8 +8,7 @@
 
 namespace App\Traits;
 
-use Illuminate\Http\Request;
-use Intervention\Image\Image;
+use Illuminate\Http\UploadedFile;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 
@@ -24,7 +23,7 @@ trait ImageUploader
      * @param \Illuminate\Http\Request  $request
      * @return void
      * */
-    public function uploadImage($img)
+    public function uploadImage(UploadedFile $img)
     {
         $filename = $img->hashName();
         $path = $img->move(public_path($this->imagePath), $filename);

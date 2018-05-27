@@ -8,6 +8,7 @@
         <form action="/product-ads/{{ $productAd->id }}/edit" method="post" enctype="multipart/form-data">
             <!--Section: Inputs-->
             @csrf
+            @method('PUT')
             <section class="section card mb-5">
 
                 <div class="card-body">
@@ -122,7 +123,7 @@
                                     <div class="file-field">
                                         <div class="btn btn-primary btn-sm float-left waves-effect waves-light">
                                             <span>Choose file</span>
-                                            <input type="file" name="img" @change="uploadImage($event)" required>
+                                            <input type="file" name="img" @change="uploadImage($event)">
                                         </div>
                                         <div class="file-path-wrapper">
                                             <input class="file-path validate" type="text" placeholder="Upload product image">

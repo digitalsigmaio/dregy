@@ -74,7 +74,7 @@ class ProductAdController extends Controller
         $product->address = $request->address;
         $product->expires_at = now()->addDays(30);
         try {
-            $product->uploadImage($request);
+            $product->uploadImage($request->img);
             $product->save();
             if(count($request->phone) > 2) {
                 for($i=0;$i<count($request->phone);$i++) {
@@ -114,67 +114,63 @@ class ProductAdController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, ProductAd $productAd)
     {
-        $request->validate([
-            'title' => 'required | min:3',
-            'price' => 'required',
-            'description' => 'required | min:20',
-            'status' => 'required',
-            'categoryId' => 'required',
-            'regionId' => 'required',
-            'cityId' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-        $product = new ProductAd;
-        $product->user_id = Auth::user()->id;
-        $product->title = $request->title;
-        $product->slug = str_slug($request->title);
-        $product->ref_id = 'pro-'. str_random(6) . '-' . time();
-        $product->price = $request->price;
-        $product->description = $request->description;
-        $product->status = $request->status;
-        $product->product_ad_category_id = $request->categoryId;
-        $product->region_id = $request->regionId;
-        $product->city_id = $request->cityId;
-        $product->address = $request->address;
-        $product->expires_at = now()->addDays(30);
-        try {
-            $product->uploadImage($request);
-            $product->save();
-            if(count($request->phone) > 2) {
-                for($i=0;$i<count($request->phone);$i++) {
-                    if($i==2) {
-                        break;
-                    }
-                    $phone = new PhoneNumber;
-                    $phone->number = $phone[$i];
-                    $product->phoneNumbers()->save($phone);
-                }
-            } else {
-                foreach($request->phone as $number) {
-                    $phone = new PhoneNumber;
-                    $phone->number = $number;
-                    $product->phoneNumbers()->save($phone);
-                }
+        if ($product = Auth::user()->productAds()->find($productAd->id)) {
+            $request->validate([
+                'title' => 'required | min:3',
+                'price' => 'required',
+                'description' => 'required | min:20',
+                'status' => 'required',
+                'categoryId' => 'required',
+                'regionId' => 'required',
+                'cityId' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+            ]);
+
+            if ($request->hasFile('img')) {
+                $request->validate([
+                    'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                ]);
+                $product->uploadImage($request->img);
             }
-            session()->flash('success', 'Product has been added and waiting for review');
-            return redirect()->back();
-        } catch (QueryException $e) {
-            return $e->getMessage();
+
+
+            $product->title = $request->title;
+            $product->slug = str_slug($request->title);
+            $product->price = $request->price;
+            $product->description = $request->description;
+            $product->status = $request->status;
+            $product->product_ad_category_id = $request->categoryId;
+            $product->region_id = $request->regionId;
+            $product->city_id = $request->cityId;
+            $product->address = $request->address;
+            try {
+                $product->save();
+                if (count($request->phone)) {
+                    foreach ($request->phone as $key => $number) {
+                        $phone = $product->phoneNumbers()->find($key);
+                        if ($phone) {
+                            $phone->number = $number;
+                            $phone->save();
+                        }
+                    }
+                }
+                session()->flash('success', 'Product has been updated and waiting for review');
+                return redirect()->back();
+            } catch (QueryException $e) {
+                return $e->getMessage();
+            }
+        } else {
+            return redirect()->back()->withErrors(['Unauthenticated']);
         }
-
-
-
     }
 
     public function destroy(ProductAd $productAd)
     {
         try {
-            $product = Auth::user()->productAds()->find($productAd->id);
-            if ($product) {
+            if ($product = Auth::user()->productAds()->find($productAd->id)) {
                 $product->delete();
                 return redirect()->back();
             } else {

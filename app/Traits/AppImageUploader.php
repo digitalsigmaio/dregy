@@ -22,10 +22,8 @@ trait AppImageUploader
      * */
     public function appUploadImage(Request $request)
     {
-
         $image = (object) $request->img;
         $file = $image->file;
-
         $array = explode(',', $file);
         $ext = str_replace(['data:image/', ';base64'], '', $array[0]);
         $imgName = str_random(10) . '_' . time() . '.' . $ext;
@@ -35,10 +33,8 @@ trait AppImageUploader
         fclose($ifp);
 
 
-
         $uri = '/' . $this->imagePath . '/' . $imgName;
         $this->img = $uri;
-
 
     }
 }
