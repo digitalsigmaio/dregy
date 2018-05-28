@@ -50,14 +50,14 @@ class ProductAdController extends Controller
     {
         $request->validate([
             'title' => 'required | min:3',
-            'price' => 'required',
+            'price' => 'required | numeric',
             'description' => 'required | min:20',
             'status' => 'required',
             'categoryId' => 'required',
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone.*' => 'required | numeric',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $product = new ProductAd;
@@ -119,14 +119,14 @@ class ProductAdController extends Controller
         if ($product = Auth::user()->productAds()->find($productAd->id)) {
             $request->validate([
                 'title' => 'required | min:3',
-                'price' => 'required',
+                'price' => 'required | numeric',
                 'description' => 'required | min:20',
                 'status' => 'required',
                 'categoryId' => 'required',
                 'regionId' => 'required',
                 'cityId' => 'required',
                 'address' => 'required',
-                'phone' => 'required',
+                'phone' => 'required | numeric',
             ]);
 
             if ($request->hasFile('img')) {

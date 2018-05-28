@@ -99,14 +99,14 @@ class ProductAdController extends Controller
         $request->validate([
             'userId' => 'required',
             'title' => 'required | min:3',
-            'price' => 'required',
+            'price' => 'required | numeric',
             'description' => 'required | min:20',
             'status' => 'required',
             'categoryId' => 'required',
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required | numeric',
             'img' => 'required'
         ]);
         $product = new ProductAd;

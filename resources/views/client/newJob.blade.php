@@ -27,6 +27,12 @@
                                         <label for="title" class="">Title</label>
                                     </div>
 
+                                    @if ($errors->has('title'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('title') }}</strong>
+                                        </span>
+                                    @endif
+
                                 </div>
                                 <!--Grid column-->
 
@@ -38,6 +44,12 @@
                                         <input type="text" name="salary" id="salary" class="form-control" v-model="salary" maxlength="5" required>
                                         <label for="salary" class="">Salary</label>
                                     </div>
+
+                                    @if ($errors->has('salary'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('salary') }}</strong>
+                                        </span>
+                                    @endif
 
                                 </div>
                                 <!--Grid column-->
@@ -72,6 +84,12 @@
                                         <label for="description" class="">Description</label>
                                     </div>
 
+                                    @if ($errors->has('description'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('description') }}</strong>
+                                        </span>
+                                    @endif
+
                                 </div>
                                 <!--Grid column-->
 
@@ -88,6 +106,12 @@
                                             <option :value="region.id" v-for="region in regions">@{{ region.en_name }}</option>
                                         </select>
                                     </div>
+
+                                    @if ($errors->has('regionId'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('regionId') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <!--Grid column-->
 
@@ -102,6 +126,12 @@
                                             <option :value="city.id" v-for="city in cities">@{{ city.en_name }}</option>
                                         </select>
                                     </div>
+
+                                    @if ($errors->has('cityId'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('cityId') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <!--Grid column-->
 
@@ -112,6 +142,12 @@
                                         <label for="input-char-counter">Address</label>
                                         <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
                                     </div>
+
+                                    @if ($errors->has('address'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('address') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <!--Grid column-->
 
@@ -128,6 +164,12 @@
                                             <option :value="category.id" v-for="category in categories">@{{ category.en_name }}</option>
                                         </select>
                                     </div>
+
+                                    @if ($errors->has('categoryId'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('categoryId') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <!--Grid column-->
 

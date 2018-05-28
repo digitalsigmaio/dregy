@@ -23,10 +23,15 @@
 
                                     <div class="md-form">
                                         <i class="fas fa-tag prefix"></i>
-                                        <input type="text" name="title" id="title" class="form-control" v-model="title" maxlength="30" required>
+                                        <input type="text" name="title" id="title" class="form-control" maxlength="30" required>
                                         <label for="title" class="">Title</label>
                                     </div>
 
+                                    @if ($errors->has('title'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('title') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <!--Grid column-->
 
@@ -37,9 +42,15 @@
 
                                     <div class="md-form">
                                         <i class="fas fa-tag prefix"></i>
-                                        <input type="text" name="price" id="price" class="form-control" maxlength="6" v-model="price" required>
+                                        <input type="number" name="price" id="price" class="form-control" maxlength="6" required>
                                         <label for="price" class="">Price</label>
                                     </div>
+
+                                    @if ($errors->has('price'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('price') }}</strong>
+                                        </span>
+                                    @endif
 
                                 </div>
                                 <!--Grid column-->
@@ -52,9 +63,15 @@
                                     <!--Basic textarea-->
                                     <div class="md-form">
                                         <i class="fas fa-pencil-alt prefix"></i>
-                                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="3" v-model="description" required></textarea>
+                                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
                                         <label for="description" class="">Description</label>
                                     </div>
+
+                                    @if ($errors->has('description'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('description') }}</strong>
+                                        </span>
+                                    @endif
 
                                 </div>
                                 <!--Grid column-->
@@ -70,6 +87,11 @@
                                             <option value="101" selected disabled>Choose City</option>
                                             <option :value="region.id" v-for="region in regions">@{{ region.en_name }}</option>
                                         </select>
+                                        @if ($errors->has('regionId'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <!--Grid column-->
@@ -84,6 +106,12 @@
                                             <option value="101" selected disabled>Choose Area</option>
                                             <option :value="city.id" v-for="city in cities">@{{ city.en_name }}</option>
                                         </select>
+
+                                        @if ($errors->has('cityId'))
+                                            <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('cityId') }}</strong>
+                                        </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <!--Grid column-->
@@ -91,9 +119,16 @@
                                 <!--Grid column-->
                                 <div class="col-lg-6 col-md-12">
                                     <div class="md-form">
-                                        <input id="input-char-counter" type="text" name="address" maxlength="60" class="form-control" v-model="address" required>
+                                        <input id="input-char-counter" type="text" name="address" maxlength="60" class="form-control"  required>
                                         <label for="input-char-counter">Address</label>
-                                        <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+
+                                        @if ($errors->has('address'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
+
+
                                     </div>
                                 </div>
                                 <!--Grid column-->
@@ -110,6 +145,12 @@
                                             <option value="101" selected disabled>Choose Category</option>
                                             <option :value="category.id" v-for="category in categories">@{{ category.en_name }}</option>
                                         </select>
+
+                                        @if ($errors->has('categoryId'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('categoryId') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -121,13 +162,19 @@
                                     <div class="md-form">
                                         <div class="file-field">
                                             <div class="btn btn-primary btn-sm float-left waves-effect waves-light">
-                                                <span>Choose file</span>
-                                                <input type="file" name="img" @change="uploadImage($event)" required>
+                                                <span>Choose Image</span>
+                                                <input type="file" name="img" required>
                                             </div>
                                             <div class="file-path-wrapper">
-                                                <input class="file-path validate" type="text" v-model="img" placeholder="Upload product image">
+                                                <input class="file-path validate" type="text"  placeholder="Upload product image">
                                             </div>
                                         </div>
+
+                                        @if ($errors->has('img'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('img') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -147,6 +194,12 @@
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
                                             </div>
                                             <input type="tel" class="form-control py-0" name="phone[]" placeholder="Phone" maxlength="15" aria-describedby="basic-addon1" required>
+
+                                            @if ($errors->has('phone.*'))
+                                                <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('phone.*') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-success btn-sm btn-add-phone" @click.prevent="addPhone"><span class="fas fa-plus-plus"></span> Add Phone</button>
@@ -187,15 +240,7 @@
                 </section>
                 <!--Section: Inputs-->
             </form>
-            <div class="row">
-                @if($errors->any())
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
+
         </div>
 
 
@@ -243,75 +288,18 @@
         el: '#app',
         data() {
             return {
-                regions: {!! $regions !!},
-                categories: {!! $categories !!},
+                regions: {!! $regions !!} ,
+                categories: {!! $categories !!} ,
                 cities: null,
                 errors: [],
-                title: null,
-                description: null,
-                price: null,
                 categoryId: 101,
                 status: 1,
                 regionId: 101,
                 cityId: 101,
-                address: null,
-                img: null
+
             }
         },
         methods: {
-            uploadImage(event) {
-                this.img = event.target.files[0]
-            },
-            checkForm() {
-                this.errors = [];
-                if(!this.title) {
-                    this.errors.push("Title Required")
-                }
-                if(!this.description) {
-                    this.errors.push("Description Required")
-                }
-                if(!this.price) {
-                    this.errors.push("Price Required")
-                }
-                if(!this.address) {
-                    this.errors.push("Address Required")
-                }
-                if(!this.img) {
-                    this.errors.push("Image Required")
-                }
-                if(!this.regionId) {
-                    this.errors.push("City Required")
-                }
-                if(!this.cityId) {
-                    this.errors.push("Area Required")
-                }
-            },
-            submitForm() {
-                this.checkForm();
-                if(!this.errors.length){
-
-                    axios.post('/api/product-ads', {
-                        title: this.title,
-                        description: this.description,
-                        price: this.price,
-                        regionId: this.regionId,
-                        cityId: this.cityId,
-                        address: this.address,
-                        img: this.img,
-                        status: this.status,
-                        categoryId: this.categoryId
-                    },{
-                        headers: {
-                            'Content-Type': 'undefined'
-                        }
-                    })
-                        .then(function (res) {
-
-                        })
-                } else {
-
-                }
-            },
             addPhone() {
                 $('.phone-input').append("<div class='md-form input-group pl-0 second-phone'><div class='input-group-prepend'><span class='input-group-text' id='basic-addon2'><i class='fas fa-phone'></i></span></div>" +
                     "<input type='tel' class='form-control py-0' name='phone[]' placeholder='Phone' aria-describedby='basic-addon2'>" +
@@ -327,9 +315,6 @@
                 this.cityId = 101;
                 this.cities = region.cities
             },
-            img: function(val) {
-                console.log(val)
-            }
         }
     });
     $(document.body).on('click', '.remove-phone' ,function(){

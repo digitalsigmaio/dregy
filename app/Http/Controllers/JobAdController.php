@@ -60,7 +60,7 @@ class JobAdController extends Controller
     {
         $request->validate([
             'title' => 'required | min:3',
-            'salary' => 'required',
+            'salary' => 'required | numeric',
             'description' => 'required | min:20',
             'jobTypeId' => 'required',
             'categoryId' => 'required',
@@ -70,7 +70,7 @@ class JobAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required | numeric',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $job = new JobAd;
@@ -137,7 +137,7 @@ class JobAdController extends Controller
         if ($job = Auth::user()->jobAds()->find($jobAd->id)) {
             $request->validate([
                 'title' => 'required | min:3',
-                'salary' => 'required',
+                'salary' => 'required | numeric',
                 'description' => 'required | min:20',
                 'jobTypeId' => 'required',
                 'categoryId' => 'required',
@@ -147,7 +147,7 @@ class JobAdController extends Controller
                 'regionId' => 'required',
                 'cityId' => 'required',
                 'address' => 'required',
-                'phone' => 'required',
+                'phone' => 'required | numeric',
             ]);
             if ($request->hasFile('img')) {
                 $request->validate([

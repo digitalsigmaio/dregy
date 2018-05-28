@@ -104,6 +104,13 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'img' => [
+            'uploaded'             => 'The image failed to upload.',
+            'image'                => 'The uploaded file must be an image.',
+        ],
+        'phone.*' => [
+            'numeric'   => 'The phone must be a number.'
+        ]
     ],
 
     /*

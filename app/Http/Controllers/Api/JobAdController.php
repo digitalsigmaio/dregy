@@ -107,7 +107,7 @@ class JobAdController extends Controller
     {
         $request->validate([
             'title' => 'required | min:3',
-            'salary' => 'required',
+            'salary' => 'required | numeric',
             'description' => 'required | min:20',
             'jobTypeId' => 'required',
             'categoryId' => 'required',
@@ -117,7 +117,7 @@ class JobAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required | numeric',
             'img' => 'required'
         ]);
         $job = new JobAd;
