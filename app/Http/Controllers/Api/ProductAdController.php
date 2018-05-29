@@ -6,6 +6,7 @@ use App\Http\Resources\ProductAdCollection;
 use App\Http\Resources\ProductAdResource;
 use App\PhoneNumber;
 use App\ProductAd;
+use App\User;
 use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -48,33 +49,44 @@ class ProductAdController extends Controller
 
     public function fav(ProductAd $productAd, $id)
     {
-        try {
+        if(User::find($id)) {
+            try {
+                $productAd->favorites()->firstOrCreate(['user_id' => $id]);
 
-            $productAd->favorites()->firstOrCreate(['user_id' => $id]);
-
+                return response()->json([
+                    'message' => 'ProductAd has been saved to favorites'
+                ], 201);
+            } catch (QueryException $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], 500);
+            }
+        } else {
             return response()->json([
-                'message' => 'ProductAd has been saved to favorites'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ]);
+               'error' =>  'User not found'
+            ], 400);
         }
     }
 
     public function unfav(ProductAd $productAd, $id)
     {
-        try {
+        if (User::find($id)) {
+            try {
 
-            $productAd->favorites()->whereUserId($id)->delete();
+                $productAd->favorites()->whereUserId($id)->delete();
 
+                return response()->json([
+                    'message' => 'ProductAd has been removed from favorites'
+                ], 201);
+            } catch (QueryException $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], 403);
+            }
+        } else {
             return response()->json([
-                'message' => 'ProductAd has been removed from favorites'
-            ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 403);
+                'error' =>  'User not found'
+            ], 400);
         }
     }
 
