@@ -58,7 +58,7 @@ class ProductAdController extends Controller
         } catch (QueryException $e) {
             return response()->json([
                 'error' => $e->getMessage()
-            ], 403);
+            ]);
         }
     }
 

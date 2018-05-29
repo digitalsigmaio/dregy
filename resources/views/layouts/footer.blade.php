@@ -1,6 +1,6 @@
 <footer class="page-footer text-center text-md-left stylish-color-dark pt-0 mb-0">
 
-    <div style="background-color: #4285f4;">
+    <div class="blue-gradient">
         <div class="container">
             <!--Grid row-->
             <div class="row py-4 d-flex align-items-center h5">

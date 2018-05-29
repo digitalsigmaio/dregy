@@ -29,6 +29,7 @@ class RedirectIfAuthenticated
             return redirect($redirect);
         }
 
+
         return $next($request);
     }
 }

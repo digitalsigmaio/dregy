@@ -14,15 +14,15 @@
             <div class="modal-body mx-4">
                 <!--Body-->
                 <div class="md-form mb-5">
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} validate" name="email" value="{{ old('email') }}"
+                    <input id="modalEmail" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} validate" name="email" value="{{ old('email') }}"
                            v-model="email" required autofocus>
-                    <label data-error="" data-success="" for="email">{{ __('E-Mail Address') }}</label>
+                    <label data-error="" data-success="" for="modalEmail">{{ __('E-Mail Address') }}</label>
                 </div>
 
                 <div class="md-form pb-3">
-                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
+                    <input id="modalPassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
                            v-model="password" @keyup.enter="login" required>
-                    <label data-error="" data-success="" for="password">{{ __('Password') }}</label>
+                    <label data-error="" data-success="" for="modalPassword">{{ __('Password') }}</label>
                     <div class="form-group row">
                         <div class="form-check col-md-6">
                             <input class="form-check-input" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}id="defaultCheckbox1">

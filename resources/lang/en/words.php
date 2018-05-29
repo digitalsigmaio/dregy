@@ -7,5 +7,6 @@
  */
 return [
     'user' => 'User',
-    'dir' => 'ltr'
+    'dir' => 'ltr',
+    'E-Mail Address' => 'البريد الألكتروني'
 ];
