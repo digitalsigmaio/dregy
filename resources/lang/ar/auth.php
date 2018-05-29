@@ -15,9 +15,9 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'email-address' => 'Email Address',
-    'password' => 'Password',
-    'login' => 'Login',
-    'remember-me' => 'Remember Me',
-    'forgot-password' => 'Forgot your password?'
+    'email-address' => 'البريد الألكتروني',
+    'password' => 'كلمة السر',
+    'login' => 'تسجيل دخول',
+    'remember-me' => 'تذكرني',
+    'forgot-password' => 'نسيت كلمة السر؟'
 ];

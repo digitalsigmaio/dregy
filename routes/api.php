@@ -35,6 +35,8 @@ Route::get('/users/{user}/favorite-pharmacies', 'UserController@favoritePharmaci
 Route::get('/users/{user}/favorite-products', 'UserController@favoriteProducts');
 Route::get('/users/{user}/favorite-jobs', 'UserController@favoriteJobs');
 
+Route::post('/users/{user}/favorites', 'Api\UserController@favorites');
+
 // Hospital
 
 Route::get('/hospitals', 'Api\HospitalController@index');
