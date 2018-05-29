@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        Blade::if('lang', function ($lang) {
+        Blade::if('checklang', function ($lang) {
             return App::isLocale($lang);
         });
     }

@@ -81,11 +81,11 @@
                                 </div>
                             </li>
                         @endguest
-                            @lang('en')
+                            @checklang('en')
                             <li><a class="nav-link" href="{{ route('lang', 'ar') }}">عربي</a></li>
                             @else
                             <li><a class="nav-link" href="{{ route('lang', 'en') }}">English</a></li>
-                            @endlang
+                            @endchecklang
                     </ul>
                 </div>
             </div>
