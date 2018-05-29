@@ -140,34 +140,37 @@
                                 </div>
 
                                 <!--Body-->
-                                <div class="md-form">
-                                    <i class="fa fa-envelope prefix white-text"></i>
-                                    <input type="text" id="orangeForm-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
-                                           v-model="email" required autofocus>
-                                    <label for="orangeForm-email">{{ __('E-Mail Address') }}</label>
-                                </div>
-
-                                <div class="md-form">
-                                    <i class="fa fa-lock prefix white-text"></i>
-                                    <input type="password" id="orangeForm-pass" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
-                                           v-model="password" @keyup.enter="login" required>
-                                    <label for="orangeForm-pass">{{ __('Password') }}</label>
-                                </div>
-                                <div class="md-form row">
-                                    <div class="form-check col-md-6">
-                                        <input class="form-check-input" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}id="defaultCheckbox1">
-                                        <label class="form-check-label" for="defaultCheckbox1">
-                                            {{ __('Remember Me') }}
-                                        </label>
+                                <form action="{{ route('admin.login') }}" method="post">
+                                    @csrf
+                                    <div class="md-form">
+                                        <i class="fa fa-envelope prefix white-text"></i>
+                                        <input type="text" id="orangeForm-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
+                                               v-model="email" required autofocus>
+                                        <label for="orangeForm-email">{{ __('E-Mail Address') }}</label>
                                     </div>
-                                    <div class="col-md-6 text-right pt-3">
-                                        <p class="font-small blue-text d-flex justify-content-end"><a href="{{ route('admin.password.request') }}" class="blue-text ml-1">{{ __('Forgot Your Password?') }}</a></p>
-                                    </div>
-                                </div>
 
-                                <div class="text-center">
-                                    <button class="btn sky-gradient btn-lg" @click.prevent="login">{{ __('Login') }}</button>
-                                </div>
+                                    <div class="md-form">
+                                        <i class="fa fa-lock prefix white-text"></i>
+                                        <input type="password" id="orangeForm-pass" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
+                                               v-model="password" @keyup.enter="login" required>
+                                        <label for="orangeForm-pass">{{ __('Password') }}</label>
+                                    </div>
+                                    <div class="md-form row">
+                                        <div class="form-check col-md-6">
+                                            <input class="form-check-input" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}id="defaultCheckbox1">
+                                            <label class="form-check-label" for="defaultCheckbox1">
+                                                {{ __('Remember Me') }}
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 text-right pt-3">
+                                            <p class="font-small blue-text d-flex justify-content-end"><a href="{{ route('admin.password.request') }}" class="blue-text ml-1">{{ __('Forgot Your Password?') }}</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button class="btn sky-gradient btn-lg" type="submit">{{ __('Login') }}</button>
+                                    </div>
+                                </form>
 
                             </div>
                         </div>
