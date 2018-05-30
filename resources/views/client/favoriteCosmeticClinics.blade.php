@@ -43,12 +43,6 @@
 
 <script>
 
-    $('.dismiss-favorite').on('click', function () {
-        let parent = $(this).parent();
-        parent.addClass('animated zoomOut');
-    });
-
-
     const app = new Vue({
        el: '#app',
         data() {
@@ -59,26 +53,19 @@
         },
         methods: {
            removeFavorite(id) {
+               let div = $('#favorite' + id);
+               div.addClass('animated zoomOut');
                let user = this.user;
                let favorites = this.user.favorite_cosmetic_clinics;
-               let cosmetics = this.cosmetics;
                for(let i = 0; i < favorites.length; i++ ){
                    if(favorites[i].favourable_id === id) {
 
                        favorites.splice(i, 1);
                    }
                }
-
-               for(let i = 0; i < cosmetics.length; i++ ){
-                   if(cosmetics[i].id === id) {
-
-                       cosmetics.splice(i, 1);
-                   }
-               }
-
                axios.delete('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
                    .then(function (res) {
-                        $('#favorite' + id).remove()
+                        div.remove()
                    })
            }
         }

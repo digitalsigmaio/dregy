@@ -42,10 +42,6 @@
 @push('scripts')
 
 <script>
-    $('.dismiss-favorite').on('click', function () {
-        let parent = $(this).parent();
-        parent.addClass('animated zoomOut');
-    });
 
     const app = new Vue({
        el: '#app',
@@ -57,9 +53,11 @@
         },
         methods: {
            removeFavorite(id) {
+               let div = $('#favorite' + id);
+               div.addClass('animated zoomOut');
                let user = this.user;
                let favorites = this.user.favorite_job_ads;
-               let jobs = this.jobs;
+
                for(let i = 0; i < favorites.length; i++ ){
                    if(favorites[i].favourable_id === id) {
 
@@ -67,20 +65,15 @@
                    }
                }
 
-               for(let i = 0; i < jobs.length; i++ ){
-                   if(jobs[i].id === id) {
-
-                       jobs.splice(i, 1);
-                   }
-               }
 
                axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav')
                    .then(function (res) {
-                        $('#favorite' + id).remove()
+                        div.remove()
                    })
            }
         }
     });
+
 </script>
 
 @endpush
