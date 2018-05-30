@@ -8,6 +8,16 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    private static function favoritesArray($favorites)
+    {
+        $array = [];
+        foreach($favorites as $favorite) {
+            $array[] = $favorite->favourable;
+        }
+
+        return $array;
+    }
+
     public function favorites(User $user, Request $request)
     {
         $request->validate([
@@ -38,5 +48,59 @@ class UserController extends Controller
                 return null;
                 break;
         }
+    }
+
+    public function favoriteHospitals(User $user)
+    {
+        $favorites = $user->favoriteHospitals;
+
+        $hospitals = self::favoritesArray($favorites);
+
+        return response()->json($hospitals);
+    }
+
+    public function favoriteClinics(User $user)
+    {
+        $favorites = $user->favoriteClinics;
+
+        $clinics = self::favoritesArray($favorites);
+
+        return response()->json($clinics);
+    }
+
+    public function favoriteCosmeticClinics(User $user)
+    {
+        $favorites = $user->favoriteCosmeticClinics;
+
+        $cosmetics = self::favoritesArray($favorites);
+
+        return response()->json($cosmetics);
+    }
+
+    public function favoritePharmacies(User $user)
+    {
+        $favorites = $user->favoritePharmacies;
+
+        $pharmacies = self::favoritesArray($favorites);
+
+        return response()->json($pharmacies);
+    }
+
+    public function favoriteProducts(User $user)
+    {
+        $favorites = $user->favoriteProductAds;
+
+        $products = self::favoritesArray($favorites);
+
+        return response()->json($products);
+    }
+
+    public function favoriteJobs(User $user)
+    {
+        $favorites = $user->favoriteJobAds;
+
+        $jobs = self::favoritesArray($favorites);
+
+        return response()->json($jobs);
     }
 }

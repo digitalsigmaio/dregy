@@ -27,13 +27,21 @@ Route::post('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderC
 
 Route::post('/login', 'Auth\ApiLoginController@login');
 Route::post('/register', 'Auth\ApiRegisterController@register');
-/* user favorites */
+/* user favorites ids */
 Route::get('/users/{user}/favorite-hospitals', 'UserController@favoriteHospitals');
 Route::get('/users/{user}/favorite-clinics', 'UserController@favoriteClinics');
 Route::get('/users/{user}/favorite-cosmetic-clinics', 'UserController@favoriteCosmeticClinics');
 Route::get('/users/{user}/favorite-pharmacies', 'UserController@favoritePharmacies');
 Route::get('/users/{user}/favorite-products', 'UserController@favoriteProducts');
 Route::get('/users/{user}/favorite-jobs', 'UserController@favoriteJobs');
+
+/* user favorites objects */
+Route::get('/account/{user}/favorite-hospitals', 'Api\UserController@favoriteHospitals');
+Route::get('/account/{user}/favorite-clinics', 'Api\UserController@favoriteClinics');
+Route::get('/account/{user}/favorite-cosmetic-clinics', 'Api\UserController@favoriteCosmeticClinics');
+Route::get('/account/{user}/favorite-pharmacies', 'Api\UserController@favoritePharmacies');
+Route::get('/account/{user}/favorite-products', 'Api\UserController@favoriteProducts');
+Route::get('/account/{user}/favorite-jobs', 'Api\UserController@favoriteJobs');
 
 Route::post('/users/{user}/favorites', 'Api\UserController@favorites');
 
