@@ -35,7 +35,7 @@
            </div>
 
        </div>
-       <div class="row mt-4  grey lighten-1 z-depth-1 p-5" v-else>
+       <div class="row mt-4  rgba-grey-light z-depth-1 p-5" v-else>
            <div class="col-md-12 text-center  white-text p-5">
                <h1>Nothing in Favorites</h1>
            </div>

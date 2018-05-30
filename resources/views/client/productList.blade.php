@@ -39,10 +39,12 @@
                     </div>
                 </div>
             @else
-                <div class="row p-3 rgba-grey-light">
-                    <h1 class="white-text m-auto">You have no product listed yet</h1>
+                <div class="row p-5 rgba-grey-light z-depth-1">
+                    <div class="container p-5 text-center white-text">
+                        <h1>You have no product listed yet</h1>
+                    </div>
                 </div>
-        @endif
+            @endif
 
         <!-- Modal: modalQuickView -->
             <div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-labelledby="productDetails" aria-hidden="true" v-if="product">
