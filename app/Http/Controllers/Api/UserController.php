@@ -16,12 +16,12 @@ class UserController extends Controller
 {
     private static function favoritesCollection($favorites)
     {
-        $array = [];
+        $collection = collect();
         foreach($favorites as $favorite) {
-            $array[] = $favorite->favourable;
+            $collection->push($favorite->favourable);
         }
 
-        return collect($array);
+        return $collection;
     }
 
     public function favorites(User $user, Request $request)
