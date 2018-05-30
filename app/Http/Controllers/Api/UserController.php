@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\ProductAdCollection;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -90,7 +91,7 @@ class UserController extends Controller
     {
         $favorites = $user->favoriteProductAds;
 
-        $products = self::favoritesArray($favorites);
+        $products = new ProductAdCollection(self::favoritesArray($favorites));
 
         return response()->json($products);
     }

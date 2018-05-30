@@ -1,5 +1,9 @@
 @extends('client.home')
 
+@section('title')
+    Favorite Cosmetic Clinics
+@endsection
+
 @section('userContent')
     <div class="container" v-cloak>
         <div class="row pb-5">
