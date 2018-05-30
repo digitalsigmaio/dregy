@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\ClinicCollection;
+use App\Http\Resources\CosmeticClinicCollection;
+use App\Http\Resources\HospitalCollection;
+use App\Http\Resources\JobAdCollection;
+use App\Http\Resources\PharmacyCollection;
 use App\Http\Resources\ProductAdCollection;
 use App\User;
 use Illuminate\Http\Request;
@@ -9,7 +14,7 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    private static function favoritesArray($favorites)
+    private static function favoritesCollection($favorites)
     {
         $array = [];
         foreach($favorites as $favorite) {
@@ -53,55 +58,44 @@ class UserController extends Controller
 
     public function favoriteHospitals(User $user)
     {
-        $favorites = $user->favoriteHospitals;
+        $hospitals = self::favoritesCollection($user->favoriteHospitals);
 
-        $hospitals = self::favoritesArray($favorites);
-
-        return response()->json($hospitals);
+        return new HospitalCollection($hospitals);
     }
 
     public function favoriteClinics(User $user)
     {
-        $favorites = $user->favoriteClinics;
 
-        $clinics = self::favoritesArray($favorites);
+        $clinics = self::favoritesCollection($user->favoriteClinics);
 
-        return response()->json($clinics);
+        return new ClinicCollection($clinics);
     }
 
     public function favoriteCosmeticClinics(User $user)
     {
-        $favorites = $user->favoriteCosmeticClinics;
+        $cosmetics = self::favoritesCollection($user->favoriteCosmeticClinics);
 
-        $cosmetics = self::favoritesArray($favorites);
-
-        return response()->json($cosmetics);
+        return new CosmeticClinicCollection($cosmetics);
     }
 
     public function favoritePharmacies(User $user)
     {
-        $favorites = $user->favoritePharmacies;
+        $pharmacies = self::favoritesCollection($user->favoritePharmacies);
 
-        $pharmacies = self::favoritesArray($favorites);
-
-        return response()->json($pharmacies);
+        return new PharmacyCollection($pharmacies);
     }
 
     public function favoriteProducts(User $user)
     {
-        $favorites = $user->favoriteProductAds;
+        $products = self::favoritesCollection($user->favoriteProductAds);
 
-        $products = new ProductAdCollection(self::favoritesArray($favorites));
-
-        return response()->json($products);
+        return new ProductAdCollection($products);
     }
 
     public function favoriteJobs(User $user)
     {
-        $favorites = $user->favoriteJobAds;
+        $jobs = self::favoritesCollection($user->favoriteJobAds);
 
-        $jobs = self::favoritesArray($favorites);
-
-        return response()->json($jobs);
+        return new JobAdCollection($jobs);
     }
 }
