@@ -16,7 +16,7 @@ class UserController extends Controller
             $array[] = $favorite->favourable;
         }
 
-        return $array;
+        return collect($array);
     }
 
     public function favorites(User $user, Request $request)
