@@ -82,6 +82,7 @@ Route::middleware('language')->group(function () {
 
 // Admin Login
     Route::prefix('admin')->group(function () {
+        Route::get('/', function () { return redirect()->route('admin.dashboard'); });
         Route::get('/home', 'AdminController@index')->name('admin.dashboard');
         Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
         Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
