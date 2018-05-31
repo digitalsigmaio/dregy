@@ -139,6 +139,7 @@ class ProductAdController extends Controller
 
             $product->title = $request->title;
             $product->slug = str_slug($request->title);
+            $product->approved = null;
             $product->price = $request->price;
             $product->description = $request->description;
             $product->status = $request->status;

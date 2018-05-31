@@ -29,6 +29,7 @@ class ProductAdResource extends JsonResource
             'city' => $this->city,
             'address' => $this->address,
             'img' => $this->img,
+            'status' => $this->status,
             'premium' => $this->featured,
             'phone' => $this->phoneNumbers->pluck('number'),
             'favorites' => $this->favorites,

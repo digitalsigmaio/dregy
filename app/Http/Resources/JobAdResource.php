@@ -29,6 +29,7 @@ class JobAdResource extends JsonResource
             'education_level' => $this->educationLevel,
             'region' => $this->region,
             'city' => $this->city,
+            'status' => $this->status,
             'address' => $this->address,
             'img' => $this->img,
             'premium' => $this->featured,

@@ -7,5 +7,8 @@
  */
 return [
     'user' => 'مستخدم',
-    'dir' => 'rtl'
+    'dir' => 'rtl',
+    'approved' => 'موافق عليه',
+    'rejected' => 'مرفوض',
+    'pending' => 'معلق'
 ];

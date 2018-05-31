@@ -8,5 +8,7 @@
 return [
     'user' => 'User',
     'dir' => 'ltr',
-    'E-Mail Address' => 'البريد الألكتروني'
+    'approved' => 'Approved',
+    'rejected' => 'Rejected',
+    'pending' => 'Pending'
 ];

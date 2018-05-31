@@ -15,6 +15,10 @@ class JobAd extends Model
 
     private $imagePath = 'img/jobs';
 
+    protected $appends = [
+        'status'
+    ];
+
 
     public function region()
     {
@@ -85,6 +89,25 @@ class JobAd extends Model
         return $this->premium ? true : false;
     }
 
+    public function getStatusAttribute()
+    {
+        $val = $this->approved;
+        switch (true) {
+            case ($val === null):
+                return __('words.pending');
+                break;
+            case ($val === 0):
+                return __('words.rejected');
+                break;
+            case ($val === 1):
+                return __('words.approved');
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
+
     public static function fetch($request)
     {
         $region = $request->region;
@@ -111,6 +134,7 @@ class JobAd extends Model
             'views',
             'premium'
         ])
+            ->whereApproved(1)
             ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);
             })
