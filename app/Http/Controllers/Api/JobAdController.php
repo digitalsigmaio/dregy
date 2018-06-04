@@ -118,7 +118,7 @@ class JobAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone' => 'required | numeric',
+            'phone.*' => 'required | numeric',
             'img' => 'required'
         ]);
         $job = new JobAd;
