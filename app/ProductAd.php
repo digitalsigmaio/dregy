@@ -99,6 +99,7 @@ class ProductAd extends Model
         $data = self::with([
             'region',
             'city',
+            'user',
             'favorites',
             'phoneNumbers',
             'category',
