@@ -42,6 +42,8 @@ Route::get('/account/{user}/favorite-cosmetic-clinics', 'Api\UserController@favo
 Route::get('/account/{user}/favorite-pharmacies', 'Api\UserController@favoritePharmacies');
 Route::get('/account/{user}/favorite-products', 'Api\UserController@favoriteProducts');
 Route::get('/account/{user}/favorite-jobs', 'Api\UserController@favoriteJobs');
+Route::get('/account/{user}/job-list', 'Api\UserController@jobList');
+Route::get('/account/{user}/product-list', 'Api\UserController@productList');
 
 Route::post('/users/{user}/favorites', 'Api\UserController@favorites');
 Route::post('/users/{user}/ratings', 'Api\UserController@ratings');

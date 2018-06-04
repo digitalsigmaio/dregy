@@ -6,11 +6,14 @@ use App\Http\Resources\ClinicCollection;
 use App\Http\Resources\CosmeticClinicCollection;
 use App\Http\Resources\HospitalCollection;
 use App\Http\Resources\JobAdCollection;
+use App\Http\Resources\JobAdResource;
 use App\Http\Resources\PharmacyCollection;
 use App\Http\Resources\ProductAdCollection;
+use App\Http\Resources\ProductAdResource;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\Resource;
 
 class UserController extends Controller
 {
@@ -123,5 +126,21 @@ class UserController extends Controller
         $jobs = self::favoritesCollection($user->favoriteJobAds);
 
         return new JobAdCollection($jobs);
+    }
+
+    public function jobList(User $user)
+    {
+        Resource::withoutWrapping();
+        $jobs = JobAdResource::collection($user->jobAds);
+
+        return $jobs;
+    }
+
+    public function productList(User $user)
+    {
+        Resource::withoutWrapping();
+        $products = ProductAdResource::collection($user->productAds);
+
+        return $products;
     }
 }
