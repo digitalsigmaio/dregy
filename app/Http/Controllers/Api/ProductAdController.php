@@ -158,6 +158,19 @@ class ProductAdController extends Controller
             }
         }
         return response()->json($product, 201);
+    }
 
+    public function destroy(User $user, ProductAd $productAd)
+    {
+        try {
+            if ($product = $user->productAds()->find($productAd->id)) {
+                $product->delete();
+                return redirect()->back();
+            } else {
+                return redirect()->back()->withErrors(['Product not found']);
+            }
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
     }
 }

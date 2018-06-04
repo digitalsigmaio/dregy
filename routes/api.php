@@ -100,6 +100,7 @@ Route::post('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@fav');
 Route::delete('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@unfav');
 Route::post('/job-ads/{jobAd}/view', 'Api\JobAdController@view');
 Route::post('/job-ads/search', 'Api\JobAdController@search');
+Route::delete('/users/{user}/job-ads/{jobAd}', 'Api\JobAdController@destroy');
 
 
 
@@ -112,6 +113,7 @@ Route::post('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@
 Route::delete('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@unfav');
 Route::post('/product-ads/{productAd}/view', 'Api\ProductAdController@view');
 Route::post('/product-ads/search', 'Api\ProductAdController@search');
+Route::delete('/users/{user}/product-ads/{productAd}', 'Api\ProductAdController@destroy');
 
 
 // Misc

@@ -7,6 +7,7 @@ use App\Http\Resources\JobAdResource;
 use App\JobAd;
 use App\JobAdCategory;
 use App\PhoneNumber;
+use App\User;
 use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -158,8 +159,20 @@ class JobAdController extends Controller
             }
         }
         return response()->json($job, 201);
+    }
 
-
-
+    public function destroy(User $user, JobAd $jobAd)
+    {
+        try {
+            $job = $user->jobAds()->find($jobAd->id);
+            if ($job) {
+                $job->delete();
+                return redirect()->back();
+            } else {
+                return redirect()->back()->withErrors(['Job not found']);
+            }
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
     }
 }
