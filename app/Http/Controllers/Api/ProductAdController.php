@@ -120,7 +120,7 @@ class ProductAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone' => 'required | numeric',
+            'phone.*' => 'required | numeric',
             'img' => 'required'
         ]);
         $product = new ProductAd;
@@ -141,21 +141,26 @@ class ProductAdController extends Controller
             $product->appUploadImage($request);
         }
         $product->save();
-        if(count((array) $request->phone) > 2) {
-            for($i=0;$i<count($request->phone);$i++) {
-                if($i==2) {
-                    break;
+
+        if (count($request->phone)) {
+            if(count($request->phone) > 2) {
+                for($i=0;$i<count($request->phone);$i++) {
+                    if($i==2) {
+                        break;
+                    }
+                    $phone = new PhoneNumber;
+                    $phone->number = $phone[$i];
+                    $product->phoneNumbers()->save($phone);
                 }
-                $phone = new PhoneNumber;
-                $phone->number = $phone[$i];
-                $product->phoneNumbers()->save($phone);
+            } else {
+                foreach($request->phone as $number) {
+                    $phone = new PhoneNumber;
+                    $phone->number = $number;
+                    $product->phoneNumbers()->save($phone);
+                }
             }
         } else {
-            foreach((array) $request->phone as $number) {
-                $phone = new PhoneNumber();
-                $phone->number = $number;
-                $product->phoneNumbers()->save($phone);
-            }
+            return response()->json('phone can not be empty');
         }
         return response()->json($product, 201);
     }

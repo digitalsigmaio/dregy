@@ -142,22 +142,27 @@ class JobAdController extends Controller
             $job->appUploadImage($request);
         }
         $job->save();
-        if(count($request->phone) > 2) {
-            for($i=0;$i<count($request->phone);$i++) {
-                if($i==2) {
-                    break;
+        if (count($request->phone)) {
+            if(count($request->phone) > 2) {
+                for($i=0;$i<count($request->phone);$i++) {
+                    if($i==2) {
+                        break;
+                    }
+                    $phone = new PhoneNumber;
+                    $phone->number = $phone[$i];
+                    $job->phoneNumbers()->save($phone);
                 }
-                $phone = new PhoneNumber;
-                $phone->number = $phone[$i];
-                $job->phoneNumbers()->save($phone);
+            } else {
+                foreach($request->phone as $number) {
+                    $phone = new PhoneNumber;
+                    $phone->number = $number;
+                    $job->phoneNumbers()->save($phone);
+                }
             }
         } else {
-            foreach($request->phone as $number) {
-                $phone = new PhoneNumber;
-                $phone->number = $number;
-                $job->phoneNumbers()->save($phone);
-            }
+            return response()->json('phone can not be empty');
         }
+
         return response()->json($job, 201);
     }
 

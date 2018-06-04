@@ -126,7 +126,7 @@ class ProductAdController extends Controller
                 'regionId' => 'required',
                 'cityId' => 'required',
                 'address' => 'required',
-                'phone' => 'required | numeric',
+                'phone.*' => 'required | numeric',
             ]);
 
             if ($request->hasFile('img')) {
