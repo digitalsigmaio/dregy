@@ -133,7 +133,7 @@ Route::get('/jobTypes', 'Api\Misc\JobTypeController@index');
 Route::get('/jobExperienceLevels', 'Api\Misc\JobExperienceLevelController@index');
 
 Route::get('/job-filters', 'Api\JobFilterController@index');
-Route::get('/job-filters-test', 'Api\JobFilterController@test');
+Route::get('/product-filters', 'Api\ProductFilterController@index');
 
 Route::get('/top-clients', 'MainPageController@topClients');
 Route::get('/job-list', 'MainPageController@jobList');
