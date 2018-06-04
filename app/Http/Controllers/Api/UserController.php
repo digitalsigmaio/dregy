@@ -24,6 +24,32 @@ class UserController extends Controller
         return $collection;
     }
 
+    public function ratings(User $user, Request $request)
+    {
+        $request->validate([
+            'category' => 'required'
+        ]);
+
+        switch ($request->category) {
+            case 'hospital':
+                return $user->rateForHospitals;
+                break;
+            case 'pharmacy':
+                return $user->rateForPharmacies;
+                break;
+            case 'clinic':
+                return $user->rateForClinics;
+                break;
+
+            case 'cosmetic':
+                return $user->rateForCosmeticClinics;
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
+
     public function favorites(User $user, Request $request)
     {
         $request->validate([
