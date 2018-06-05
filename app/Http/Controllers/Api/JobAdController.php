@@ -172,9 +172,10 @@ class JobAdController extends Controller
             $job = $user->jobAds()->find($jobAd->id);
             if ($job) {
                 $job->delete();
-                return redirect()->back();
+
+                return response()->json('Job has been deleted');
             } else {
-                return redirect()->back()->withErrors(['Job not found']);
+                return response()->json('Job was not found');
             }
         } catch (QueryException $e) {
             return $e->getMessage();

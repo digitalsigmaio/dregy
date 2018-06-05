@@ -170,9 +170,9 @@ class ProductAdController extends Controller
         try {
             if ($product = $user->productAds()->find($productAd->id)) {
                 $product->delete();
-                return redirect()->back();
+                return response()->json('Product has been deleted');
             } else {
-                return redirect()->back()->withErrors(['Product not found']);
+                return response()->json('Product wan not found');
             }
         } catch (QueryException $e) {
             return $e->getMessage();
