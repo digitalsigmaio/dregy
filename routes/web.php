@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/manson', function() {
+    return view('test');
+});
 
 Route::middleware('language')->group(function () {
     Route::get('/lang/{locale}', 'LanguageController@switch')->name('lang');
