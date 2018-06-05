@@ -132,6 +132,9 @@
             }
         },
         methods: {
+            backgroundImg(src) {
+                return "background-image: url('" + src + "')";
+            },
             fetchJobs() {
                 let vm = this;
                 axios.get('/api/job-list')

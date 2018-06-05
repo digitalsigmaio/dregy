@@ -15,7 +15,7 @@ class ProductAd extends Model
     private $imagePath = 'img/products';
 
     protected $appends = [
-        'status'
+        'evaluation'
     ];
 
     public function region()
@@ -67,7 +67,7 @@ class ProductAd extends Model
         return $this->premium ? true : false;
     }
 
-    public function getStatusAttribute()
+    public function getEvaluationAttribute()
     {
         $val = $this->approved;
         switch (true) {
