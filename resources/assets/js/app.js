@@ -16,9 +16,9 @@ window.Vue = require('vue');
  */
 
 
-/*
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+/*
 Vue.component('top-clients', require('./components/TopClients.vue'));
 Vue.component('main-jobs', require('./components/MainJobs.vue'));
 Vue.component('last-products', require('./components/LastProducts.vue'));
@@ -43,9 +43,9 @@ Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue')
 );
-
+ */
 const app = new Vue({
     el: '#app'
 
 });
-*/
+
