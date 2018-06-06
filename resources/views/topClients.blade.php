@@ -326,9 +326,9 @@
             },
             // language transformers
             transformer(property, attribute) {
-                let prefix = '{!!  \App::getLocale() !!}';
+
                 let key;
-                switch (prefix) {
+                switch ('{!!  \App::getLocale() !!}') {
                     case 'ar':
                          key = 'ar_' + attribute;
                         return property[key];
