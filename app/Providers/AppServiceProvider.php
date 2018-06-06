@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
                 return App::isLocale($lang);
             }
 
-            return app()->getLocale() == $lang;
+            return App::getLocale() == $lang;
         });
     }
 

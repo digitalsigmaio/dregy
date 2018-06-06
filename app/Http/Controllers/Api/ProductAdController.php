@@ -206,6 +206,10 @@ class ProductAdController extends Controller
                         if ($phone) {
                             $phone->number = $number;
                             $phone->save();
+                        } else {
+                            $phone = new PhoneNumber;
+                            $phone->number = $number;
+                            $product->phoneNumbers()->save($phone);
                         }
                     }
                 }

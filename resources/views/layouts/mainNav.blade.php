@@ -65,6 +65,19 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    @checklang('en')
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('lang', 'ar') }}">
+                            <i class="fa fa-language white-text pl-1"></i> عربي
+                        </a>
+                    </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('lang', 'en') }}">
+                                <i class="fa fa-language white-text pl-1"></i> English
+                            </a>
+                        </li>
+                        @endchecklang
                     @if(Auth::user())
                         <li class="nav-item dropdown ml-3">
                             <a class="nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"

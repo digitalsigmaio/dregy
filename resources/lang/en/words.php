@@ -10,5 +10,7 @@ return [
     'dir' => 'ltr',
     'approved' => 'Approved',
     'rejected' => 'Rejected',
-    'pending' => 'Pending'
+    'pending' => 'Pending',
+    'home' => 'Home',
+    ''
 ];
