@@ -178,7 +178,7 @@ class ProductAdController extends Controller
             'address' => 'required',
             'phone.*' => 'required | numeric',
         ]);
-        $user = User::find($request->user->id);
+        $user = User::find($request->userId);
         if ($product = $user->productAds()->find($productAd->id)) {
             if($request->has('img') && $request->img != 'null') {
                 $request->validate([

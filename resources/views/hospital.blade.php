@@ -23,7 +23,13 @@
                     </div>
                     <div class="col-lg-5 mr-3 text-center text-md-left">
                         <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-3 ml-xl-0 ml-4">
-                            <strong>@{{ hospital.en_name }}</strong>
+                            <strong>
+                                @checklang('en')
+                                    @{{ hospital.en_name }}
+                                @else
+                                    @{{ hospital.ar_name }}
+                                @endchecklang
+                            </strong>
                         </h2>
                         <div class="row">
                             <div class="col-md-6" v-if="hospital.premium">
