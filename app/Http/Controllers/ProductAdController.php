@@ -106,7 +106,7 @@ class ProductAdController extends Controller
         if (Auth::user()->productAds()->find($productAd->id)) {
             $categories = ProductAdCategory::all();
             $regions = Region::with('cities')->get();
-
+            $productAd->load('phoneNumbers');
 
             return view('client.productEdit', compact(['categories', 'regions','productAd']));
         } else {
@@ -150,11 +150,20 @@ class ProductAdController extends Controller
             try {
                 $product->save();
                 if (count($request->phone)) {
-                    foreach ($request->phone as $key => $number) {
-                        $phone = $product->phoneNumbers()->find($key);
-                        if ($phone) {
-                            $phone->number = $number;
-                            $phone->save();
+                    $i = 0;
+                    if($i < 2) {
+
+                        foreach ($request->phone as $key => $number) {
+                            $phone = $product->phoneNumbers()->find($key);
+                            if ($phone) {
+                                $phone->number = $number;
+                                $phone->save();
+                            } else {
+                                $phone = new PhoneNumber;
+                                $phone->number = $number;
+                                $product->phoneNumbers()->save($phone);
+                            }
+                            $i++;
                         }
                     }
                 }

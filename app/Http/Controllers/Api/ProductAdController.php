@@ -201,15 +201,19 @@ class ProductAdController extends Controller
             try {
                 $product->save();
                 if (count($request->phone)) {
-                    foreach ($request->phone as $key => $number) {
-                        $phone = $product->phoneNumbers()->find($key);
-                        if ($phone) {
-                            $phone->number = $number;
-                            $phone->save();
-                        } else {
-                            $phone = new PhoneNumber;
-                            $phone->number = $number;
-                            $product->phoneNumbers()->save($phone);
+                    $i = 0;
+                    if($i < 2) {
+                        foreach ($request->phone as $key => $number) {
+                            $phone = $product->phoneNumbers()->find($key);
+                            if ($phone) {
+                                $phone->number = $number;
+                                $phone->save();
+                            } else {
+                                $phone = new PhoneNumber;
+                                $phone->number = $number;
+                                $product->phoneNumbers()->save($phone);
+                            }
+                            $i++;
                         }
                     }
                 }

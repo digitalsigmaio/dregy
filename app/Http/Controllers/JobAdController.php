@@ -125,6 +125,7 @@ class JobAdController extends Controller
             $experienceLevels = JobExperienceLevel::all();
             $educationLevels = JobEducationLevel::all();
             $employmentTypes = JobEmploymentType::all();
+            $jobAd->load('phoneNumbers');
 
             return view('client.jobEdit', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes', 'jobAd']));
         } else {

@@ -138,20 +138,23 @@
 
                         <div class="row">
 
-
-
                             <!--Grid column-->
                             <div class="col-md-6 mb-4">
-                                @foreach($productAd->phoneNumbers as $phone)
-                                    <div class="phone-input ml-2 mb-2">
-                                        <div class="md-form input-group pl-0 mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                <ul class="phone-input list-unstyled">
+                                    @foreach($productAd->phoneNumbers as $phone)
+                                        <li class="ml-2 mb-2">
+                                            <div class="md-form input-group pl-0 mb-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <input type="tel" class="form-control py-0" name="phone[{{ $phone->id }}]" placeholder="Phone" maxlength="15" value="{{$phone->number}}"  aria-describedby="basic-addon1" required>
                                             </div>
-                                            <input type="tel" class="form-control py-0" name="phone[{{ $phone->id }}]" placeholder="Phone" maxlength="15" value="{{$phone->number}}"  aria-describedby="basic-addon1" required>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                @if(count($productAd->phoneNumbers) <= 1)
+                                        <button type="button" class="btn btn-success btn-sm btn-add-phone" @click.prevent="addPhone"><span class="fas fa-plus-plus"></span> Add Phone</button>
+                                @endif
                             </div>
                             <!--Grid column-->
 
@@ -172,6 +175,7 @@
                                 </fieldset>
                             </div>
                             <!--Grid column-->
+
                         </div>
 
                         <div class="row">
@@ -314,10 +318,13 @@
                 }
             },
             addPhone() {
-                $('.phone-input').append("<div class='md-form input-group pl-0 second-phone'><div class='input-group-prepend'><span class='input-group-text' id='basic-addon2'><i class='fas fa-phone'></i></span></div>" +
+                $('.phone-input').append("<li class='ml-2 mb-2 second-phone'><div class='md-form input-group pl-0'><div class='input-group-prepend'><span class='input-group-text' id='basic-addon2'><i class='fas fa-phone'></i></span></div>" +
                     "<input type='tel' class='form-control py-0' name='phone[]' placeholder='Phone' aria-describedby='basic-addon2'>" +
-                    "<div class='input-group-append' ><a><span class='input-group-text badge-danger remove-phone'><i class='fas fa-times'></i></span></a></div></div>");
-                $('.btn-add-phone').prop('disabled', true);
+                    "<div class='input-group-append' ><a><span class='input-group-text badge-danger remove-phone'><i class='fas fa-times'></i></span></a></div></div></li>");
+
+                if ($('.phone-input li').length >= 2) {
+                    $('.btn-add-phone').prop('disabled', true);
+                }
             },
         },
         watch: {
