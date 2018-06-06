@@ -24,17 +24,21 @@ trait AppImageUploader
     {
         $image = (object) $request->img;
         $file = $image->file;
-        $array = explode(',', $file);
-        $ext = str_replace(['data:image/', ';base64'], '', $array[0]);
-        $imgName = str_random(10) . '_' . time() . '.' . $ext;
-        $decoded = base64_decode($array[1]);
-        $ifp= fopen(public_path($this->imagePath) . '/' .$imgName, 'wb');
-        fwrite($ifp, $decoded);
-        fclose($ifp);
+        if(strpos($file, 'base64') !== false) {
+            $array = explode(',', $file);
+            $ext = str_replace(['data:image/', ';base64'], '', $array[0]);
+            $imgName = str_random(10) . '_' . time() . '.' . $ext;
+            $decoded = base64_decode($array[1]);
+            $ifp= fopen(public_path($this->imagePath) . '/' .$imgName, 'wb');
+            fwrite($ifp, $decoded);
+            fclose($ifp);
 
 
-        $uri = '/' . $this->imagePath . '/' . $imgName;
-        $this->img = $uri;
+            $uri = '/' . $this->imagePath . '/' . $imgName;
+            $this->img = $uri;
+        } else {
+            return null;
+        }
 
     }
 }

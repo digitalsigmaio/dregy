@@ -180,7 +180,7 @@ class ProductAdController extends Controller
         ]);
         $user = User::find($request->userId);
         if ($product = $user->productAds()->find($productAd->id)) {
-            if($request->has('img') && $request->img != 'null') {
+            if($request->has('img')) {
                 $request->validate([
                     'img' => 'required'
                 ]);
