@@ -209,7 +209,7 @@ class ProductAdController extends Controller
                         }
                     }
                 }
-                return response()->json(['Product has been updated and waiting for review']);
+                return response()->json(['message' => 'Product has been updated and waiting for review']);
             } catch (QueryException $e) {
                 return $e->getMessage();
             }
