@@ -10,5 +10,14 @@ return [
     'dir' => 'rtl',
     'approved' => 'موافق عليه',
     'rejected' => 'مرفوض',
-    'pending' => 'معلق'
+    'pending' => 'تحت المراجعة',
+    'home' => 'الرئيسية',
+    'hospitals' => 'مستشفيات',
+    'clinics' => 'عيادات',
+    'pharmacies' => 'صيدليات',
+    'cosmetics' => 'مراكز تجميل',
+    'products' => 'منتجات',
+    'jobs' => 'وظائف',
+    'contact' => 'تواصل معنا',
+    'login' => 'تسجيل دخول'
 ];

@@ -18,5 +18,6 @@ return [
     'cosmetics' => 'Cosmetic Clinics',
     'products' => 'Products',
     'jobs' => 'Jobs',
-    'contact' => 'Contact'
+    'contact' => 'Contact us',
+    'login' => 'Sign In'
 ];

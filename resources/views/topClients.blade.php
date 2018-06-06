@@ -7,16 +7,16 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified sky-gradient mx-0" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active white-text font-weight-bold" data-toggle="tab" href="#hospitals" role="tab">Hospitals</a>
+                <a class="nav-link active white-text font-weight-bold" data-toggle="tab" href="#hospitals" role="tab">{{ __('words.hospitals') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#pharmacies" role="tab">Pharmacies</a>
+                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#pharmacies" role="tab">{{ __('words.pharmacies') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#clinics" role="tab">Clinics</a>
+                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#clinics" role="tab">{{ __('words.clinics') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#cosmetics" role="tab">Cosmetics</a>
+                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#cosmetics" role="tab">{{ __('words.cosmetics') }}</a>
             </li>
         </ul>
         <!-- Tab panels -->
@@ -48,7 +48,7 @@
 
                                 <h5 class="card-title mb-1 text-truncate">
                                     <strong>
-                                        <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">@{{ hospital.en_name }}</a>
+                                        <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">@{{ name(hospital) }}</a>
                                     </strong>
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">Featured</span>
@@ -111,7 +111,7 @@
 
                                 <h5 class="card-title mb-1">
                                     <strong>
-                                        <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ pharmacy.en_name }}</a>
+                                        <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ name(pharmacy) }}</a>
                                     </strong>
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium">Featured</span>
@@ -172,7 +172,7 @@
 
                                 <h5 class="card-title mb-1">
                                     <strong>
-                                        <a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">@{{ clinic.en_name }}</a>
+                                        <a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">@{{ name(clinic) }}</a>
                                     </strong>
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium">Featured</span>
@@ -234,7 +234,7 @@
 
                                 <h5 class="card-title mb-1">
                                     <strong>
-                                        <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">@{{ cosmetic.en_name }}</a>
+                                        <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">@{{ name(cosmetic) }}</a>
                                     </strong>
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium">Featured</span>
@@ -323,6 +323,33 @@
                     .catch(function (response) {
                         console.log(response)
                     });
+            },
+            // language transformers
+            transformer(property, attribute) {
+                let prefix = '{!!  \App::getLocale() !!}';
+                let key;
+                switch (prefix) {
+                    case 'ar':
+                         key = 'ar_' + attribute;
+                        return property[key];
+                        break;
+                    case 'en':
+                         key = 'en_' + attribute;
+                        return property[key];
+                        break;
+                    default:
+                        return null;
+                        break;
+                }
+            },
+            name(property){
+                return this.transformer(property, 'name')
+            },
+            address(property) {
+                return this.transformer(property, 'address')
+            },
+            note(property) {
+                return this.transformer(property, 'note')
             }
         },
         mounted() {

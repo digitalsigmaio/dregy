@@ -6,7 +6,7 @@
         <div class="container">
 
             <!-- Navbar brand -->
-            <a class="font-weight-bold white-text mr-4" href="{{ route('main') }}">Home</a>
+            <a class="font-weight-bold white-text mr-4" href="{{ route('main') }}">{{ __('words.home') }}</a>
 
             <!-- Collapse button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"
@@ -21,27 +21,27 @@
                 <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('hospitals') }}">Hospitals</a>
+                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('hospitals') }}">{{ __('words.hospitals') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('clinics') }}">Clinics</a>
+                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('clinics') }}">{{ __('words.clinics') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('pharmacies') }}">Pharmacies</a>
+                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('pharmacies') }}">{{ __('words.pharmacies') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('cosmetics') }}">Cosmetic Clinics</a>
+                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('cosmetics') }}">{{ __('words.cosmetics') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('products') }}">Products</a>
+                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('products') }}">{{ __('words.products') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('jobs') }}">Jobs</a>
+                        <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('jobs') }}">{{ __('words.jobs') }}</a>
                     </li>
 
 
@@ -61,7 +61,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('contact') }}" target="_blank">
-                            <i class="fa fa-envelope white-text"></i> Contact
+                            <i class="fa fa-envelope white-text"></i> {{ __('words.contact') }}
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -93,7 +93,7 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" data-toggle="modal" data-target="#elegantModalForm">
-                                <i class="fa fa-sign-in white-text"></i> Sign In
+                                <i class="fa fa-sign-in white-text"></i> {{ __('words.login') }}
                                 <span class="sr-only">Sign In</span>
                             </a>
                         </li>
