@@ -12,5 +12,11 @@ return [
     'rejected' => 'Rejected',
     'pending' => 'Pending',
     'home' => 'Home',
-    ''
+    'hospitals' => 'Hospitals',
+    'clinics' => 'Clinics',
+    'pharmacies' => 'Pharmacies',
+    'cosmetics' => 'Cosmetic Clinics',
+    'products' => 'Products',
+    'jobs' => 'Jobs',
+    'contact' => 'Contact'
 ];

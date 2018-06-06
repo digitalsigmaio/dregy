@@ -139,7 +139,15 @@ class UserController extends Controller
     public function productList(User $user)
     {
         Resource::withoutWrapping();
-        $products = ProductAdResource::collection($user->productAds);
+        $products = $user->productAds->load(
+            'region',
+            'city',
+            'user',
+            'favorites',
+            'phoneNumbers',
+            'category',
+            'views',
+            'premium');
 
         return $products;
     }
