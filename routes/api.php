@@ -109,7 +109,7 @@ Route::delete('/users/{user}/job-ads/{jobAd}', 'Api\JobAdController@destroy');
 Route::get('/product-ads', 'Api\ProductAdController@index');
 Route::get('/product-ads/{productAd}', 'Api\ProductAdController@show');
 Route::post('/product-ads', 'Api\ProductAdController@store');
-Route::get('/product-ads/{productAd}', 'Api\ProductAdController@update');
+Route::put('/product-ads/{productAd}', 'Api\ProductAdController@update');
 Route::post('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@fav');
 Route::delete('/product-ads/{productAd}/users/{id}/fav', 'Api\ProductAdController@unfav');
 Route::post('/product-ads/{productAd}/view', 'Api\ProductAdController@view');
