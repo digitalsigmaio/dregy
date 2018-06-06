@@ -11,7 +11,6 @@ use App\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class ProductAdController extends Controller
 {
@@ -163,6 +162,60 @@ class ProductAdController extends Controller
             return response()->json('phone can not be empty');
         }
         return response()->json($product, 201);
+    }
+
+    public function update(Request $request, ProductAd $productAd)
+    {
+        $request->validate([
+            'userId' => 'required',
+            'title' => 'required | min:3',
+            'price' => 'required | numeric',
+            'description' => 'required | min:20',
+            'status' => 'required',
+            'categoryId' => 'required',
+            'regionId' => 'required',
+            'cityId' => 'required',
+            'address' => 'required',
+            'phone.*' => 'required | numeric',
+        ]);
+        $user = User::find($request->user->id);
+        if ($product = $user->productAds()->find($productAd->id)) {
+            if($request->has('img') && $request->img != 'null') {
+                $request->validate([
+                    'img' => 'required'
+                ]);
+                $product->appUploadImage($request);
+            }
+
+
+            $product->title = $request->title;
+            $product->slug = str_slug($request->title);
+            $product->approved = null;
+            $product->price = $request->price;
+            $product->description = $request->description;
+            $product->status = $request->status;
+            $product->product_ad_category_id = $request->categoryId;
+            $product->region_id = $request->regionId;
+            $product->city_id = $request->cityId;
+            $product->address = $request->address;
+            try {
+                $product->save();
+                if (count($request->phone)) {
+                    foreach ($request->phone as $key => $number) {
+                        $phone = $product->phoneNumbers()->find($key);
+                        if ($phone) {
+                            $phone->number = $number;
+                            $phone->save();
+                        }
+                    }
+                }
+                return response()->json('Product has been updated and waiting for review');
+            } catch (QueryException $e) {
+                return $e->getMessage();
+            }
+        } else {
+            return response()->json('Unauthenticated');
+        }
     }
 
     public function destroy(User $user, ProductAd $productAd)
