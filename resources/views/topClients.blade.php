@@ -51,7 +51,7 @@
                                         <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">@{{ name(hospital) }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">{{ __('words.featured') }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -63,7 +63,7 @@
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
                                         <span class="float-left">
-                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ hospital.views.count }}</strong>
+                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="{{ __('words.views') }}"></i><strong class="small grey-text">@{{ hospital.views.count }}</strong>
                                         </span>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                         <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">@{{ name(pharmacy) }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium">{{ __('words.featured') }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -126,7 +126,7 @@
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
                                             <span class="float-left">
-                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ pharmacy.views.count }}</strong>
+                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="{{ __('words.views') }}"></i><strong class="small grey-text">@{{ pharmacy.views.count }}</strong>
                                             </span>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                         <a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">@{{ name(clinic) }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium">{{ __('words.featured') }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -187,7 +187,7 @@
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
                                             <span class="float-left">
-                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ clinic.views.count }}</strong>
+                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="{{ __('words.views') }}"></i><strong class="small grey-text">@{{ clinic.views.count }}</strong>
                                             </span>
                                     </div>
                                 </div>
@@ -237,7 +237,7 @@
                                         <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">@{{ name(cosmetic) }}</a>
                                     </strong>
                                 </h5>
-                                <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium">Featured</span>
+                                <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium">{{ __('words.featured') }}</span>
                                 <!-- Rating -->
                                 <ul class="rating">
                                     <li v-for="n in 5">
@@ -249,7 +249,7 @@
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
                                         <span class="float-left">
-                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="views"></i><strong class="small grey-text">@{{ cosmetic.views.count }}</strong>
+                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" title="{{ __('words.views') }}"></i><strong class="small grey-text">@{{ cosmetic.views.count }}</strong>
                                         </span>
                                     </div>
                                 </div>

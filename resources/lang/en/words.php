@@ -17,7 +17,20 @@ return [
     'pharmacies' => 'Pharmacies',
     'cosmetics' => 'Cosmetic Clinics',
     'products' => 'Products',
-    'jobs' => 'Jobs',
     'contact' => 'Contact us',
-    'login' => 'Sign In'
+    'login' => 'Sign In',
+    'views' => 'Views',
+    'featured' => 'Featured',
+    'job' => [
+        'title' => 'Job',
+        'new' => 'New Job',
+        'popular' => 'Popular Job',
+        'random' => 'Random Job'
+    ],
+    'jobs' => [
+        'title' => 'Jobs',
+        'new' => 'New Jobs',
+        'popular' => 'Popular Jobs',
+        'random' => 'Random Jobs'
+    ]
 ];

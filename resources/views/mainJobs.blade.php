@@ -3,7 +3,7 @@
     <div class="col-lg-4 col-md-12 col-12 pt-5">
         <hr>
         <h5 class="text-center font-weight-bold dark-grey-text">
-            <strong>New Jobs</strong>
+            <strong>{{ __('words.jobs.new') }}</strong>
         </h5>
         <hr class="mb-5">
         <!-- First row -->
@@ -23,12 +23,12 @@
 
                 <!-- Category -->
                 <h6 class="h6-responsive font-weight-bold grey-text">
-                    <strong>@{{ job.category.en_name }}</strong>
+                    <strong>@{{ name(job.category) }}</strong>
                 </h6>
 
                 <!-- Address -->
                 <h6 class="h6-responsive font-weight-bold grey-text">
-                    <strong>@{{ job.region.en_name }}, @{{ job.city.en_name }}</strong>
+                    <strong>@{{ name(job.region) }}, @{{ name(job.city) }}</strong>
                 </h6>
 
             </div>
@@ -43,7 +43,7 @@
     <div class="col-lg-4 col-md-12 col-12 pt-5">
         <hr>
         <h5 class="text-center font-weight-bold dark-grey-text">
-            <strong>Hot Jobs</strong>
+            <strong>{{ __('words.jobs.popular') }}</strong>
         </h5>
         <hr class="mb-5">
         <!-- First row -->
@@ -63,12 +63,12 @@
 
                 <!-- Category -->
                 <h6 class="h6-responsive font-weight-bold grey-text">
-                    <strong>@{{ job.category.en_name }}</strong>
+                    <strong>@{{ name(job.category) }}</strong>
                 </h6>
 
                 <!-- Address -->
                 <h6 class="h6-responsive font-weight-bold grey-text">
-                    <strong>@{{ job.region.en_name }}, @{{ job.city.en_name }}</strong>
+                    <strong>@{{ name(job.region) }}, @{{ name(job.city) }}</strong>
                 </h6>
 
             </div>
@@ -83,7 +83,7 @@
     <div class="col-lg-4 col-md-12 col-12 pt-5">
         <hr>
         <h5 class="text-center font-weight-bold dark-grey-text">
-            <strong>Random Jobs</strong>
+            <strong>{{ __('words.jobs.random') }}</strong>
         </h5>
         <hr class="mb-5">
         <!-- First row -->
@@ -103,12 +103,12 @@
 
                 <!-- Category -->
                 <h6 class="h6-responsive font-weight-bold grey-text">
-                    <strong>@{{ job.category.en_name }}</strong>
+                    <strong>@{{ name(job.category) }}</strong>
                 </h6>
 
                 <!-- Address -->
                 <h6 class="h6-responsive font-weight-bold grey-text">
-                    <strong>@{{ job.region.en_name }}, @{{ job.city.en_name }}</strong>
+                    <strong>@{{ name(job.region) }}, @{{ name(job.city) }}</strong>
                 </h6>
 
             </div>
@@ -147,6 +147,33 @@
                     .catch(function (response) {
                         console.log(response)
                     });
+            },
+            // language transformers
+            transformer(property, attribute) {
+
+                let key;
+                switch ('{!!  \App::getLocale() !!}') {
+                    case 'ar':
+                        key = 'ar_' + attribute;
+                        return property[key];
+                        break;
+                    case 'en':
+                        key = 'en_' + attribute;
+                        return property[key];
+                        break;
+                    default:
+                        return null;
+                        break;
+                }
+            },
+            name(property){
+                return this.transformer(property, 'name')
+            },
+            address(property) {
+                return this.transformer(property, 'address')
+            },
+            note(property) {
+                return this.transformer(property, 'note')
             }
         },
         mounted() {
