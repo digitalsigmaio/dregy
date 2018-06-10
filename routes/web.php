@@ -83,7 +83,7 @@ Route::middleware('language')->group(function () {
 
 
 
-// Admin Login
+// admin Login
     Route::prefix('admin')->group(function () {
         Route::get('/', function () { return redirect()->route('admin.dashboard'); });
         Route::get('/home', 'AdminController@index')->name('admin.dashboard');

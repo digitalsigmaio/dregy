@@ -13367,13 +13367,13 @@ window.disk_usage_tree =
             },
             {
                 "value": 168,
-                "name": "Admin.framework",
-                "path": "PrivateFrameworks/Admin.framework",
+                "name": "admin.framework",
+                "path": "PrivateFrameworks/admin.framework",
                 "children": [
                     {
                         "value": 160,
                         "name": "Versions",
-                        "path": "PrivateFrameworks/Admin.framework/Versions"
+                        "path": "PrivateFrameworks/admin.framework/Versions"
                     }
                 ]
             },

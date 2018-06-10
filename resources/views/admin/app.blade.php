@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/ico" />
 
-    <title>@yield('title', 'Doctor Egypt Admin Area')</title>
+    <title>@yield('title', 'admin')</title>
 
     <!-- Bootstrap -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
