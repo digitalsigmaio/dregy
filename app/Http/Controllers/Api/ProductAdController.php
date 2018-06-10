@@ -198,6 +198,7 @@ class ProductAdController extends Controller
             $product->region_id = $request->regionId;
             $product->city_id = $request->cityId;
             $product->address = $request->address;
+
             try {
                 $product->save();
                 if (count($request->phone)) {
@@ -222,7 +223,7 @@ class ProductAdController extends Controller
                 return $e->getMessage();
             }
         } else {
-            return response()->json(['Unauthenticated']);
+            return response()->json(['error' => 'Unauthenticated'], 401);
         }
     }
 

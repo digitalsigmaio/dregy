@@ -96,6 +96,7 @@ Route::post('/pharmacies/search', 'Api\PharmacyController@search');
 Route::get('/job-ads', 'Api\JobAdController@index');
 Route::get('/job-ads/{jobAd}', 'Api\JobAdController@show');
 Route::post('/job-ads', 'Api\JobAdController@store');
+Route::put('/job-ads/{jobAd}', 'Api\JobAdController@update');
 Route::post('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@fav');
 Route::delete('/job-ads/{jobAd}/users/{id}/fav', 'Api\JobAdController@unfav');
 Route::post('/job-ads/{jobAd}/view', 'Api\JobAdController@view');

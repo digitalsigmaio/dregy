@@ -166,6 +166,77 @@ class JobAdController extends Controller
         return response()->json($job, 201);
     }
 
+    public function update(Request $request, JobAd $jobAd)
+    {
+        $request->validate([
+            'userId' => 'required',
+            'title' => 'required | min:3',
+            'salary' => 'required | numeric',
+            'description' => 'required | min:20',
+            'jobTypeId' => 'required',
+            'categoryId' => 'required',
+            'experienceLevelId' => 'required',
+            'educationLevelId' => 'required',
+            'employmentTypeId' => 'required',
+            'regionId' => 'required',
+            'cityId' => 'required',
+            'address' => 'required',
+            'phone.*' => 'required | numeric',
+        ]);
+
+        $user = User::find($request->userId);
+
+        if ($job = $user->jobAds()->find($jobAd->id)) {
+            if($request->has('img')) {
+                $request->validate([
+                    'img' => 'required'
+                ]);
+                $job->appUploadImage($request);
+            }
+
+            $job->user_id = $request->userId;
+            $job->title = $request->title;
+            $job->slug = str_slug($request->title);
+            $job->salary = $request->salary;
+            $job->description = $request->description;
+            $job->job_type_id = $request->jobTypeId;
+            $job->job_experience_level_id = $request->experienceLevelId;
+            $job->job_education_level_id = $request->educationLevelId;
+            $job->job_employment_type_id = $request->employmentTypeId;
+            $job->job_ad_category_id = $request->categoryId;
+            $job->region_id = $request->regionId;
+            $job->city_id = $request->cityId;
+            $job->address = $request->address;
+
+            try {
+                $job->save();
+                if (count($request->phone)) {
+                    $i = 0;
+                    if($i < 2) {
+                        foreach ($request->phone as $key => $number) {
+                            $phone = $job->phoneNumbers()->find($key);
+                            if ($phone) {
+                                $phone->number = $number;
+                                $phone->save();
+                            } else {
+                                $phone = new PhoneNumber;
+                                $phone->number = $number;
+                                $job->phoneNumbers()->save($phone);
+                            }
+                            $i++;
+                        }
+                    }
+                }
+                return response()->json(['message' => 'Job has been updated and waiting for review']);
+            } catch (QueryException $e) {
+                return $e->getMessage();
+            }
+
+        } else {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+    }
+
     public function destroy(User $user, JobAd $jobAd)
     {
         try {
