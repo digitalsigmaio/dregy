@@ -181,7 +181,7 @@ class JobAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone.*' => 'required | numeric',
+            'phone.number' => 'required | numeric',
         ]);
 
         $user = User::find($request->userId);
