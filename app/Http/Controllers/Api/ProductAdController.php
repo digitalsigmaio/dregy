@@ -204,6 +204,7 @@ class ProductAdController extends Controller
                     $i = 0;
                     if($i < 2) {
                         foreach ($request->phone as $phoneNumber) {
+                            $phoneNumber = (object)  $phoneNumber;
                             $phone = $product->phoneNumbers()->find($phoneNumber->id);
                             if ($phone) {
                                 $phone->number = $phoneNumber->number;
