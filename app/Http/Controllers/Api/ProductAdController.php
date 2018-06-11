@@ -204,14 +204,14 @@ class ProductAdController extends Controller
                 if (count($request->phone)) {
                     $i = 0;
                     if($i < 2) {
-                        foreach ($request->phone as $key => $number) {
-                            $phone = $product->phoneNumbers()->find($key);
+                        foreach ($request->phone as $phoneNumber) {
+                            $phone = $product->phoneNumbers()->find($phoneNumber->id);
                             if ($phone) {
-                                $phone->number = $number;
+                                $phone->number = $phoneNumber->number;
                                 $phone->save();
                             } else {
                                 $phone = new PhoneNumber;
-                                $phone->number = $number;
+                                $phone->number = $phoneNumber->number;
                                 $product->phoneNumbers()->save($phone);
                             }
                             $i++;
