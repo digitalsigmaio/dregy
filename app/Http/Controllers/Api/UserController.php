@@ -130,15 +130,27 @@ class UserController extends Controller
 
     public function jobList(User $user)
     {
-        Resource::withoutWrapping();
-        $jobs = JobAdResource::collection($user->jobAds);
+
+        $jobs = $user->jobAds->load(
+            'region',
+            'city',
+            'favorites',
+            'phoneNumbers',
+            'category',
+            'experienceLevel',
+            'employmentType',
+            'type',
+            'educationLevel',
+            'views',
+            'premium'
+        );
 
         return $jobs;
     }
 
     public function productList(User $user)
     {
-        Resource::withoutWrapping();
+
         $products = $user->productAds->load(
             'region',
             'city',
