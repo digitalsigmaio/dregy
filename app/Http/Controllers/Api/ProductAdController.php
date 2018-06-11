@@ -176,7 +176,7 @@ class ProductAdController extends Controller
             'regionId' => 'required',
             'cityId' => 'required',
             'address' => 'required',
-            'phone.number' => 'required | numeric',
+            'phone[].number' => 'required | numeric',
         ]);
         $user = User::find($request->userId);
         if ($product = $user->productAds()->find($productAd->id)) {
