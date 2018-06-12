@@ -11,6 +11,7 @@ use App\Http\Resources\PharmacyCollection;
 use App\Http\Resources\ProductAdCollection;
 use App\Http\Resources\ProductAdResource;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\Resource;
@@ -162,5 +163,39 @@ class UserController extends Controller
             'premium');
 
         return $products;
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'userId' => 'required'
+        ]);
+
+        $user = User::find($request->userId);
+        if( !empty($request->newPassword) ) {
+            $request->validate([
+                'oldPassword' => 'required',
+                'newPassword' => 'required|confirmed|string|min:6'
+            ]);
+            if ( !empty($request->oldPassword) ) {
+                if(Hash::check($request->oldPassword, $user->password)) {
+                    $user->password = Hash::make($request->newPassword);
+                } else {
+                    return response()->json(['error' => 'Invalid old password'], 422);
+                }
+            }
+        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        try {
+            $user->save();
+
+            return response()->json(['success', 'Account has been updated'], 201);
+        } catch (QueryException $e) {
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
+        }
     }
 }
