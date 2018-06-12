@@ -73,6 +73,14 @@
                                 @endif
                             </li>
 
+                            <li><label for="passwordConfirmation"><strong>Confirm Password:</strong></label> <input type="password" name="password_confirmation" id="passwordConfirmation" class="form-control">
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                                @endif
+                            </li>
+
                         </ul>
                         <button class="btn btn-primary btn-sm" type="submit">Submit</button>
                     </form>
