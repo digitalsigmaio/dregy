@@ -18,6 +18,14 @@
     <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="{{ asset('vendors/google-code-prettify/bin/prettify.min.css') }}" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="{{ asset('vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="{{ asset('vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
+    <!-- starrr -->
+    <link href="{{ asset('vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
     <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
@@ -64,14 +72,10 @@
                                         <li><a href="index3.html">Dashboard3</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-hospital-o"></i> Hospitals <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="form.html">General Form</a></li>
-                                        <li><a href="form_advanced.html">Advanced Components</a></li>
-                                        <li><a href="form_validation.html">Form Validation</a></li>
-                                        <li><a href="form_wizards.html">Form Wizard</a></li>
-                                        <li><a href="form_upload.html">Form Upload</a></li>
-                                        <li><a href="form_buttons.html">Form Buttons</a></li>
+                                        <li><a href="{{ route('newHospital') }}">New Hospital</a></li>
+                                        <li><a href="form_advanced.html">Hospitals List</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -158,8 +162,13 @@
     <script src="{{ asset('vendors/flot.curvedlines/curvedLines.js') }}"></script>
     <!-- DateJS -->
     <script src="{{ asset('vendors/DateJS/build/date.js') }}"></script>
+    <!-- Switchery -->
+    <script src="{{ asset('vendors/switchery/dist/switchery.min.js') }}"></script>
     <!-- JQVMap -->
     <script src="{{ asset('vendors/jqvmap/dist/jquery.vmap.js') }}"></script>
+    <script src="{{ asset('vendors/jquery.tagsinput/src/jquery.tagsinput.js') }}"></script>
+    <!-- jQuery Tags Input -->
+
     <script src="{{ asset('vendors/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script>
     <!-- bootstrap-daterangepicker -->

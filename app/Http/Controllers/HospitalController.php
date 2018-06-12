@@ -7,6 +7,7 @@ use App\HospitalSpeciality;
 use App\Http\Resources\HospitalResource;
 use App\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HospitalController extends Controller
 {
@@ -34,5 +35,11 @@ class HospitalController extends Controller
         $hospital = json_encode($hospital);
 
         return view('hospital', compact(['hospital', 'relatedHospitalsChunks']));
+    }
+
+    public function create()
+    {
+        $admin = Auth('admin')->user();
+        return view('admin.newHospital', compact('admin'));
     }
 }

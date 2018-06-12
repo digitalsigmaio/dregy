@@ -27,6 +27,8 @@ Route::post('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderC
 
 Route::post('/login', 'Auth\ApiLoginController@login');
 Route::post('/register', 'Auth\ApiRegisterController@register');
+Route::put('/users', 'Api\UserController@update');
+
 /* user favorites ids */
 Route::get('/users/{user}/favorite-hospitals', 'UserController@favoriteHospitals');
 Route::get('/users/{user}/favorite-clinics', 'UserController@favoriteClinics');

@@ -39,6 +39,7 @@ Route::middleware('language')->group(function () {
     // Hospitals
     Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
     Route::get('/hospitals/{hospital}/{slug}', 'HospitalController@show');
+    Route::get('/admin/hospitals/new', 'HospitalController@create')->name('newHospital');
 
     // Clinics
     Route::get('/clinics', 'ClinicController@index')->name('clinics');
