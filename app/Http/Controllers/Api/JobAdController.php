@@ -215,7 +215,7 @@ class JobAdController extends Controller
                         foreach ($request->phone as $phoneNumber) {
                             $phoneNumber = (object)  $phoneNumber;
 
-                            if ($phoneNumber->id != null) {
+                            if ($phoneNumber->id != 'null') {
                                 $phone = $job->phoneNumbers()->find($phoneNumber->id);
                                 $phone->number = $phoneNumber->number;
                                 $phone->save();
