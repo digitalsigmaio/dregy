@@ -29,6 +29,7 @@ Route::middleware('language')->group(function () {
     Route::put('/job-ads/{jobAd}/edit', 'JobAdController@update');
     Route::get('/job-ads/{jobAd}/delete', 'JobAdController@destroy');
 
+    // Product Ads
     Route::get('/products', 'ProductAdController@index')->name('products');
     Route::get('/products/{productAd}/{slug}', 'ProductAdController@show');
     Route::post('/product-ads', 'ProductAdController@store');

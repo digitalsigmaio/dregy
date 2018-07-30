@@ -49,6 +49,8 @@ Route::get('/account/{user}/product-list', 'Api\UserController@productList');
 
 Route::post('/users/{user}/favorites', 'Api\UserController@favorites');
 Route::post('/users/{user}/ratings', 'Api\UserController@ratings');
+
+
 // Hospital
 
 Route::get('/hospitals', 'Api\HospitalController@index');
