@@ -39,7 +39,7 @@ class LoginController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response|void
+     * @return mixed
      */
     public function login(Request $request)
     {

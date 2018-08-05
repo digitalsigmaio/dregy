@@ -81,8 +81,9 @@ class Hospital extends Model
         $region = $request->region;
         $city = $request->city;
         $speciality = $request->speciality;
-        $keyword = trim($request->keyword);
         $rating = $request->rate;
+
+        $keyword = trim($request->keyword);
         $orderBy = $request->orderBy;
         $sort = $request->sort;
 
@@ -116,14 +117,12 @@ class Hospital extends Model
         if($keyword) {
             $keyword = strtolower($keyword);
             $data = $data->filter(function ($record) use ($keyword) {
-
                 if(
                     strpos(strtolower($record->ar_name), $keyword) !== false ||
                     strpos(strtolower($record->en_name), $keyword) !== false
                 ) {
                     return true;
                 }
-
             });
         }
 

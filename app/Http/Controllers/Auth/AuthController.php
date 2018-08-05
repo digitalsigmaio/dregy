@@ -45,11 +45,12 @@ class AuthController extends Controller
      * If the user exists, log them in. Otherwise, create a new user then log them in. After that
      * redirect them to the authenticated users homepage.
      * @param Request $request
+     * @param string $provider
      * @return object
      */
-    public function appHandleProviderCallback(Request $request)
+    public function appHandleProviderCallback(Request $request, string $provider)
     {
-        $authUser = $this->findOrCreateUser($request, 'facebook');
+        $authUser = $this->findOrCreateUser($request, $provider);
         Auth::login($authUser, true);
         return $authUser;
     }
@@ -57,8 +58,8 @@ class AuthController extends Controller
     /**
      * If a user has registered before using social auth, return the user
      * else, create a new user object.
-     * @param  $user Socialite user object
-     * @param $provider Social auth provider
+     * @param  Request $request
+     * @param string $provider
      * @return  User
      */
     public function findOrCreateUser($request, $provider)
