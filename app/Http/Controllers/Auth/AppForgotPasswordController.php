@@ -39,8 +39,8 @@ class AppForgotPasswordController extends Controller
             : $this->sendResetLinkFailedResponse($request, $response);*/
 
         return $response == Password::RESET_LINK_SENT
-            ? true
-            : false;
+            ? response()->json(['message' => 'Password reset has been sent to your email.'], 200)
+            : response()->json(['message' => 'There is no account associated with this email'], 404);
 
     }
 
