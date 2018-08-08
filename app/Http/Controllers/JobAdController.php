@@ -108,10 +108,10 @@ class JobAdController extends Controller
                     $job->phoneNumbers()->save($phone);
                 }
             }
-            session()->flash('success', 'Job has been added and waiting for review');
-            return redirect()->back();
-        } catch (QueryException $e) {
-            return $e->getMessage();
+            //session()->flash('success', 'Job has been added and waiting for review');
+            return response()->json(['message'=> 'Job has been added and waiting for review' ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
 
 

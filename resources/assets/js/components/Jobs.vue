@@ -1,5 +1,5 @@
 <template>
-    <div class="row pt-4">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
         <div class="col-md-2">
@@ -189,21 +189,37 @@
                         <div class="card card-ecommerce">
 
                             <!--Card image-->
-                            <div class="view overlay">
-                                <img :src="job.img " class="img-fluid" alt="">
-                                <a :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
-                                    <div class="mask rgba-white-slight"></div>
+                            <div class="view overlay job-img" :style="backgroundImg(job.img)">
+
+                                <a :href="'/jobs/' + job.id + '/' + job.slug" >
+                                    <div class="mask rgba-white-slight">
+                                    </div>
                                 </a>
                             </div>
                             <!--Card image-->
 
                             <!--Card content-->
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <!--Category & Title-->
 
-                                <h5 class="card-title mb-1"><strong><a :href="'/u/'+ job.user_id + '/jobs/' + job.slug" class="dark-grey-text">{{ job.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">{{ job.type.en_name }}</span>
+                                <h5 class="card-title" :title="job.title">
+                                    <strong>
+                                        <a :href="'/jobs/' + job.id + '/' + job.slug">{{ job.title }}</a>
+                                    </strong>
+                                </h5>
+                                <div class="row my-2">
+                                    <div class="col-md-6 pt-1">
+                                        <span class="badge p-2 float-right" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                    {{ job.type.en_name }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(job.id)" @click.prevent="fav(job.id)" class="h3-responsive mr-2">
+                                            <i class="fas fa-heart pr-1 animated"  :class="favClass(job.id)"></i>
+                                        </a>
+                                    </div>
+                                </div>
                                 <!-- Rating -->
-                                <ul class="rating">
+                                <ul class="rating text-left phones">
                                     <li v-for="phone in job.phone" class="text-grey">
                                         <i class="fa fa-phone blue-text"></i> <strong class="teal-text">{{ phone }}</strong>
                                     </li>
@@ -213,15 +229,13 @@
 
 
                                 <!--Card footer-->
-                                <div class="card-footer pb-0">
+                                <div class="card-footer pb-0 px-0">
                                     <div class="row">
-                                        <div class="col-md-7">
-                                            <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">{{ job.salary }} L.E</strong></p>
+                                        <div class="col-md-7 text-left">
+                                            <i class="far fa-circle cyan-text pr-2"></i><strong>{{ job.salary }} L.E</strong>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="footer-address">
-                                                {{ job.created_at }}
-                                            </div>
+                                        <div class="col-md-5 text-center pr-0">
+                                            <span class="small">{{ job.created_at }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -331,11 +345,9 @@
 
     </div>
 </template>
-
-
 <script>
-    export default {
-        props: ['filters'],
+    export default{
+        props: ['filters', 'user'],
         data () {
             return {
                 endpoint: '/api/job-ads/search',
@@ -362,6 +374,9 @@
             }
         },
         methods: {
+            backgroundImg(src) {
+                return "background-image: url('" + src + "')";
+            },
             fetchJobs(){
                 let vm = this;
                 $('.jobAds').hide();
@@ -370,18 +385,12 @@
                     .then(function (response) {
                         $('.fetching').hide();
                         $('.jobAds').show();
-                        if (typeof response.data.data !== 'undefined') {
-                            let data = response.data;
-                            vm.jobs = data.data;
-                            vm.links = data.links;
-                            vm.pagination = data.meta;
-                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                        } else if(typeof response.status !== 'undefined') {
-                            vm.jobs = null;
-                            console.log(response.data.message)
-                        }
-
-                });
+                        let data = response.data;
+                        vm.jobs = data.data;
+                        vm.links = data.links;
+                        vm.pagination = data.meta;
+                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                    });
             },
             changeEndpoint(page) {
                 let url = this.pagination.path + '?page=' + page;
@@ -422,7 +431,85 @@
                 this.endpoint = '/api/job-ads/search';
                 this.fetchJobs()
 
-            }, 500)
+            }, 500),
+            isFav(id) {
+                if(this.auth_user){
+                    let favorites = this.user.favorite_job_ads;
+                    if(favorites.length) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+                                return true
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+                    return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    let user = this.user;
+                    let jobs = this.jobs;
+                    let favorites = this.user.favorite_job_ads;
+                    if (this.isFav(id)) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < jobs.length; i++ ){
+                            if(jobs[i].id === id) {
+
+                                if(jobs[i].favorites !== null) {
+                                    jobs[i].favorites.count--
+                                }
+                            }
+                        }
+                        axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < jobs.length; i++ ){
+                            if(jobs[i].id === id) {
+                                if(jobs[i].favorites !== null) {
+                                    jobs[i].favorites.count++
+                                } else {
+                                    jobs[i].favorites = { count: 1 };
+                                }
+                            }
+                        }
+                        axios.post('/api/job-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
+
         },
         mounted() {
             this.fetchJobs();
@@ -433,7 +520,9 @@
                 this.search.region = val;
                 let region = this.filters.regions.filter(function (region) { return region.id === val });
                 this.region = region.shift();
-                this.regionName = this.region.en_name;
+                if(this.region) {
+                    this.regionName = this.region.en_name;
+                }
                 this.cityName = 'Choose Area';
                 this.endpoint = '/api/job-ads/search';
                 this.fetchJobs();
@@ -441,10 +530,12 @@
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
-                this.cityName = city.en_name;
+                if(city) {
+                    this.cityName = city.en_name;
+                }
                 this.endpoint = '/api/job-ads/search';
                 this.fetchJobs();
             },
         }
-    }
+    };
 </script>

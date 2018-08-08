@@ -1,5 +1,5 @@
 <template>
-    <div class="row pt-4">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
         <div class="col-lg-3">
@@ -52,14 +52,14 @@
                             </div>
 
                             <div class="form-group mb-1">
-                                <input name="status" type="radio" id="statusNew" value="new"
-                                       @click="fetchFilter('status', 'new')">
+                                <input name="status" type="radio" id="statusNew" value="true"
+                                       @click="fetchFilter('status', '1')">
                                 <label for="statusNew" class="dark-grey-text">New</label>
                             </div>
 
                             <div class="form-group mb-1">
-                                <input name="status" type="radio" id="statusUsed" value="used"
-                                       @click="fetchFilter('status', 'used')">
+                                <input name="status" type="radio" id="statusUsed" value="false"
+                                       @click="fetchFilter('status', '2')">
                                 <label for="statusUsed" class="dark-grey-text">Used</label>
                             </div>
                             <!--Radio group-->
@@ -122,48 +122,60 @@
                 <div class="row" style="min-height: 100vh">
                     <!--Grid column-->
                     <div class="col-lg-4 col-md-6 mb-4" v-for="product in products">
-                                        <!--Card-->
-                                        <div class="card card-cascade narrower card-ecommerce">
-                                            <!--Card image-->
-                                            <div class="view overlay">
-                                                <img :src="product.img" class="card-img-top" alt="sample photo">
-                                                <a>
-                                                    <div class="mask rgba-white-slight"></div>
-                                                </a>
-                                                </div>
-                                                <!--Card image-->
-                                                <!--Card content-->
-                                                <div class="card-body text-center">
-                                                    <!--Category & Title-->
-                                                    <a href="" class="grey-text">
-                                                        <h5>{{ product.category.en_name }}</h5>
-                                                    </a>
-                                                    <h4 class="card-title">
-                                                        <strong>
-                                                            <a href="">{{ product.title }}</a>
-                                                        </strong>
-                                                    </h4>
+                        <!--Card-->
+                        <div class="card card-cascade narrower card-ecommerce">
+                            <!--Card image-->
+                            <div class="view overlay product-img" :style="backgroundImg(product.img)">
 
-                                                    <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == 'new', 'badge-warning' : product.status == 'used' }">{{ product.status.toUpperCase() }}</span>
+                                <a :href="'/products/' + product.id + '/' + product.slug">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Card image-->
+                            <!--Card content-->
+                            <div class="card-body text-center">
+                                <!--Category & Title-->
+                                <a class="grey-text">
+                                    <h5>{{ product.category.en_name }}</h5>
+                                </a>
+                                <h4 class="card-title" :title="product.title">
+                                    <strong>
+                                        <a :href="'/products/' + product.id + '/' + product.slug">{{ product.title }}</a>
+                                    </strong>
+                                </h4>
 
-                                                    <!--Description-->
-                                                    <p class="card-text">
-                                                        {{ product.description }}
-                                                    </p>
-                                                    <!--Card footer-->
-                                                    <div class="card-footer">
-                                                    <span class="float-left font-weight-bold">
-                                                      <strong>{{ product.price }} L.E</strong>
-                                                    </span>
-                                                    <span class="float-right">
-                                                      <a data-toggle="tooltip" data-placement="top" title="Added to Favorite" class="light-green-text">
-                                                        <i class="fa fa-heart ml-3 pr-1 grey-text"></i> {{ product.favorites.count }}
-                                                      </a>
-                                                    </span>
-                                                    </div>
-                                                </div>
-                                                <!--Card content-->
-                                            </div>
+                                <div class="row my-2">
+                                    <div class="col-md-6 pr-0 pt-1">
+                                        <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == '1', 'badge-warning' : product.status == '2' }">
+                                    {{ product.status == '1' ? 'New' : 'Used' }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" class="h3-responsive mr-2 float-left">
+                                            <i class="fas fa-heart pr-1 animated"  :class="favClass(product.id)"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!--Description-->
+                                <p class="card-text">
+                                    {{ product.description }}
+                                </p>
+                                <!--Card footer-->
+                                <div class="card-footer pb-0 pl-0">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">
+                                            <strong>{{ product.price }} L.E</strong>
+                                        </div>
+                                        <div class="col-md-6 text-center pr-0">
+                                            <span class="small">
+                                                {{ product.created_at }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Card content-->
+                        </div>
                         <!--Card-->
 
                     </div>
@@ -266,11 +278,9 @@
     </div>
 </template>
 
-
 <script>
-
-    export default {
-        props: ['filters'],
+    export default{
+       props: ['user', 'filters', 'auth_user'],
         data () {
             return {
                 endpoint: '/api/product-ads/search',
@@ -293,6 +303,9 @@
             }
         },
         methods: {
+           backgroundImg(src) {
+               return "background-image: url('" + src + "')";
+           },
             fetchProducts(){
                 let vm = this;
                 $('.productAds').hide();
@@ -301,17 +314,11 @@
                     .then(function (response) {
                         $('.fetching').hide();
                         $('.productAds').show();
-                        if (typeof response.data.data !== 'undefined') {
-                            let data = response.data;
-                            vm.products = data.data;
-                            vm.links = data.links;
-                            vm.pagination = data.meta;
-                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                        } else if(typeof response.status !== 'undefined') {
-                            vm.products = null;
-                            console.log(response.data.message)
-                        }
-
+                        let data = response.data;
+                        vm.products = data.data;
+                        vm.links = data.links;
+                        vm.pagination = data.meta;
+                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                     });
             },
             changeEndpoint(page) {
@@ -352,7 +359,87 @@
             searchByKeyword: _.debounce(function () {
                 this.endpoint = '/api/product-ads/search';
                 this.fetchProducts()
-            }, 500)
+            }, 500),
+
+            isFav(id) {
+                if(this.auth_user){
+                let favorites = this.user.favorite_product_ads;
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
+                    }
+                } else {
+                    return false;
+                }
+                }
+                return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    let user = this.user;
+                    let products = this.products;
+                    let favorites = this.user.favorite_product_ads;
+                    if (this.isFav(id)) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count--
+                                } else {
+                                    products[i].favorites.count = 0;
+                                }
+                            }
+                        }
+                        axios.delete('/api/product-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count++
+                                } else {
+                                    products[i].favorites = { count: 1 };
+                                }
+                            }
+                        }
+                        axios.post('/api/product-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
 
         },
         mounted() {
@@ -364,7 +451,9 @@
                 this.search.region = val;
                 let region = this.filters.regions.filter(function (region) { return region.id === val });
                 this.region = region.shift();
-                this.regionName = this.region.en_name;
+                if(this.region) {
+                    this.regionName = this.region.en_name;
+                }
                 this.cityName = 'Choose Area';
                 this.endpoint = '/api/product-ads/search';
                 this.fetchProducts();
@@ -372,10 +461,12 @@
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
-                this.cityName = city.en_name;
+                if(city) {
+                    this.cityName = city.en_name;
+                }
                 this.endpoint = '/api/product-ads/search';
                 this.fetchProducts();
             },
         }
-    }
+    };
 </script>
