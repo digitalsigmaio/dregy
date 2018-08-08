@@ -13885,38 +13885,6 @@ __webpack_require__(13);
 
 window.Vue = __webpack_require__(38);
 
-var propertyTransformer = {
-    methods: {
-        // language transformers
-        transformer: function transformer(property, attribute) {
-
-            var key = void 0;
-            switch ('{!!  \App::getLocale() !!}') {
-                case 'ar':
-                    key = 'ar_' + attribute;
-                    return property[key];
-                    break;
-                case 'en':
-                    key = 'en_' + attribute;
-                    return property[key];
-                    break;
-                default:
-                    return null;
-                    break;
-            }
-        },
-        name: function name(property) {
-            return this.transformer(property, 'name');
-        },
-        address: function address(property) {
-            return this.transformer(property, 'address');
-        },
-        note: function note(property) {
-            return this.transformer(property, 'note');
-        }
-    }
-};
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
