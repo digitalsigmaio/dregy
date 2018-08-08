@@ -279,7 +279,7 @@ export default {
       }
     },
     isFav(id) {
-      if (auth_user) {
+      if (this.auth_user) {
         let favorites = this.user.favorite_cosmetic_clinics;
         if (favorites.length) {
           for (let i = 0; i < favorites.length; i++) {

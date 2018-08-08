@@ -57236,7 +57236,7 @@ var render = function() {
                   "h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-3 ml-xl-0 ml-4"
               },
               [
-                _vm.lang == _vm.en
+                _vm.lang == "en"
                   ? _c("strong", [
                       _vm._v(
                         "\n                                " +
@@ -59831,7 +59831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     isFav: function isFav(id) {
-      if (auth_user) {
+      if (this.auth_user) {
         var favorites = this.user.favorite_cosmetic_clinics;
         if (favorites.length) {
           for (var i = 0; i < favorites.length; i++) {
@@ -61085,7 +61085,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['filters', 'user'],
+    props: ['filters', 'user', 'auth_user'],
     data: function data() {
         return {
             endpoint: '/api/job-ads/search',
@@ -64405,7 +64405,23 @@ var render = function() {
                             attrs: { src: pharmacy.img, alt: "" }
                           }),
                           _vm._v(" "),
-                          _vm._m(8, true)
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "/pharmacies/" +
+                                  pharmacy.id +
+                                  "/" +
+                                  pharmacy.slug
+                              }
+                            },
+                            [
+                              _c("div", {
+                                staticClass: "mask rgba-white-slight"
+                              })
+                            ]
+                          )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body col-md-6" }, [
@@ -64422,7 +64438,13 @@ var render = function() {
                                     "a",
                                     {
                                       staticClass: "dark-grey-text",
-                                      attrs: { href: "" }
+                                      attrs: {
+                                        href:
+                                          "/pharmacies/" +
+                                          pharmacy.id +
+                                          "/" +
+                                          pharmacy.slug
+                                      }
                                     },
                                     [_vm._v(_vm._s(pharmacy.en_name))]
                                   )
@@ -64660,10 +64682,10 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.pharmacies == null
-        ? _c("section", { staticClass: "section pt-4 pharmacies" }, [_vm._m(9)])
+        ? _c("section", { staticClass: "section pt-4 pharmacies" }, [_vm._m(8)])
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(10)
+      _vm._m(9)
     ])
   ])
 }
@@ -64781,12 +64803,6 @@ var staticRenderFns = [
         _c("li", [_c("i", { staticClass: "fa fa-star grey-text" })])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [_c("div", { staticClass: "mask rgba-white-slight" })])
   },
   function() {
     var _vm = this

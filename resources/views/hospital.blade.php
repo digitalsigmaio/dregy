@@ -11,7 +11,7 @@
     :hospitals = "{{ $relatedHospitalsChunks }}" 
     :hospital = "{{ $hospital }}" 
     :auth_user = "{{ json_encode(Auth::check())}}" 
-    :lang = "{{session()->get('local')}}" >
+    :lang = "{{ json_encode(session()->get('locale')) }}" >
 </hospital-component>
 
 @endsection

@@ -244,7 +244,7 @@
                                 <!--Card image-->
                                 <div class="view overlay col-md-6">
                                     <img :src="pharmacy.img" class="img-fluid" alt="">
-                                    <a>
+                                    <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
                                 </div>
@@ -257,7 +257,7 @@
                                    <div class="row">
 
                                            <div class="col-md-9">
-                                               <h5 class="card-title mb-1"><i class="fas fa-heartbeat amber-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ pharmacy.en_name }}</a></strong></h5>
+                                               <h5 class="card-title mb-1"><i class="fas fa-heartbeat amber-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">{{ pharmacy.en_name }}</a></strong></h5>
                                            </div>
                                            <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
                                            </i><span class="light-green-text text-sm-right">{{ pharmacy.favorites.count }}</span>
@@ -590,7 +590,7 @@
                     } else {
                         $('#elegantModalForm').modal('show');
                     }
-                }
+                },
             },
             mounted() {
                 this.fetchPharmacies()

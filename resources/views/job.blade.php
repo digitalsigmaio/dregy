@@ -10,6 +10,7 @@
     :user = "{{ Auth::check() ? Auth::user()->load(['favoriteJobAds']) : 'null' }}"
     :jobs = "{{ $relatedJobsChunks }}" 
     :job = "{{ $jobAd }}" 
-    :auth_user = "{{ Auth::check() }}"
+    :auth_user = "{{ json_encode(Auth::check()) }}">
+</job-component>
 
 @endsection

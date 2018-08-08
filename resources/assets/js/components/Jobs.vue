@@ -347,7 +347,7 @@
 </template>
 <script>
     export default{
-        props: ['filters', 'user'],
+        props: ['filters', 'user', 'auth_user'],
         data () {
             return {
                 endpoint: '/api/job-ads/search',

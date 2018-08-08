@@ -433,7 +433,7 @@
                         }
                         axios.post('/api/product-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
-
+                                
                             })
                     }
                 } else {

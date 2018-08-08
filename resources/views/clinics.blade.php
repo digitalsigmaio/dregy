@@ -9,7 +9,7 @@
   <clinics-component
     :filters = "{{ $filters->toJson() }}"
     :user = "{{ Auth::check() ? Auth::user()->load(['favoriteProductAds']) : 'null' }}"
-    :auth_user = "{{Auth::check()}}">
+    :auth_user = "{{ json_encode(Auth::check()) }}">
   </clinics-component>
 
 @endsection

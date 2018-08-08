@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-lg-5 mr-3 text-center text-md-left">
                         <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-3 ml-xl-0 ml-4">
-                            <strong v-if="lang == en">
+                            <strong v-if="lang == 'en'">
                                     {{ hospital.en_name }}
                             </strong>
                             <strong v-else>
