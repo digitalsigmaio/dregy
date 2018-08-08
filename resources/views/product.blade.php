@@ -10,7 +10,7 @@
     :user = "{{ Auth::check() ? Auth::user()->load(['favoriteProductAds']) : 'null' }}"
     :products = "{{ $relatedProductsChunks }}"
     :product = "{{ $productAd }}"
-    :auth_user = "{{ Auth::check()->toJson() }}">
+    :auth_user = "'{{ Auth::check() }}'">
 </product-component>
 
 @endsection
