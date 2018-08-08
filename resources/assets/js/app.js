@@ -45,10 +45,42 @@ Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue')
 );
+*/
+
+//Layout Components
+Vue.component('clinics-component', require('./components/Clinics.vue'));
+Vue.component('clinic-component', require('./components/Clinic.vue'));
+Vue.component('hospitals-component', require('./components/Hospitals.vue'));
+Vue.component('hospital-component', require('./components/Hospital.vue'));
+Vue.component('cosmetics-component', require('./components/Cosmetics.vue'));
+Vue.component('cosmetic-component', require('./components/Cosmetic.vue'));
+Vue.component('jobs-component', require('./components/Jobs.vue'));
+Vue.component('job-component', require('./components/Job.vue'));
+Vue.component('pharmacies-component', require('./components/Pharmacies.vue'));
+Vue.component('pharmacy-component', require('./components/Pharmacy.vue'));
+Vue.component('products-component', require('./components/Products.vue'));
+Vue.component('product-component', require('./components/Product.vue'));
+Vue.component('lastproducts-component', require('./components/LastProducts.vue'));
+Vue.component('mainjobs-component', require('./components/MainJobs.vue'));
+Vue.component('topclients-component', require('./components/TopClients.vue'));
+
+
+//Client Components
+Vue.component('favorite-clinics', require('./components/FavoriteClinics.vue'));
+Vue.component('favorite-cosmetic-clinics', require('./components/FavoriteCosmeticClinics.vue'));
+Vue.component('favorite-hospitals', require('./components/FavoriteHospitals.vue'));
+Vue.component('favorite-jobs', require('./components/FavoriteJobs.vue'));
+Vue.component('favorite-pharmacies', require('./components/FavoritePharmacies.vue'));
+Vue.component('favorite-products', require('./components/FavoriteProducts.vue'));
+
+
+//Vue.component('job-edit', require('./components/JobEdit.vue'));
+Vue.component('job-list', require('./components/JobList.vue'));
+//Vue.component('new-job', require('./components/NewJob.vue'));
 
 const app = new Vue({
     el: '#app'
 
 });
- */
+
 

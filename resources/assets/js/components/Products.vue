@@ -1,8 +1,8 @@
 <template>
-    <div class="row pt-4">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
-        <div class="col-md-2">
+        <div class="col-lg-3">
 
             <div class="">
                 <!-- Grid row -->
@@ -13,8 +13,8 @@
                         <div class="divider"></div>
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('updated_at', 'desc')"><a>Newest</a></p>
                         <p class="dark-grey-text mb-1" @click="FilterOrderBy('updated_at', 'asc')"><a>Oldest</a></p>
-                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('salary', 'asc')"><a>Salary: low to high</a></p>
-                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('salary', 'desc')"><a>Salary: high to low</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('price', 'asc')"><a>Price: low to high</a></p>
+                        <p class="dark-grey-text mb-1" @click="FilterOrderBy('price', 'desc')"><a>Price: high to low</a></p>
                     </div>
 
                     <!-- Filter by category-->
@@ -39,93 +39,34 @@
                     </div>
                     <!-- /Filter by category-->
 
-                    <!-- Filter by experience level-->
+                    <!-- Filter by status -->
                     <div class="col-md-6 col-lg-12 mb-4">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Experience Level</strong></h5>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Status</strong></h5>
                         <div class="divider"></div>
 
-                        <fieldset id="experienceLevel">
+                        <fieldset id="status">
                             <!--Radio group-->
                             <div class="form-group mb-1">
-                                <input name="experienceLevel" type="radio" id="experienceLevel0">
-                                <label for="experienceLevel0" class="dark-grey-text" @click="flush('experienceLevel')">All</label>
+                                <input name="status" type="radio" id="status0">
+                                <label for="status0" class="dark-grey-text" @click="flush('status')">All</label>
                             </div>
 
-                            <div class="form-group mb-1" v-for="experienceLevel in filters.expLevels">
-                                <input name="experienceLevel" type="radio" :id="'experienceLevel' + experienceLevel.id" :value="experienceLevel.id"
-                                       @click="fetchFilter('experienceLevel', experienceLevel.id)">
-                                <label :for="'experienceLevel' + experienceLevel.id" class="dark-grey-text">{{ experienceLevel.en_name }}</label>
+                            <div class="form-group mb-1">
+                                <input name="status" type="radio" id="statusNew" value="true"
+                                       @click="fetchFilter('status', '1')">
+                                <label for="statusNew" class="dark-grey-text">New</label>
+                            </div>
+
+                            <div class="form-group mb-1">
+                                <input name="status" type="radio" id="statusUsed" value="false"
+                                       @click="fetchFilter('status', '2')">
+                                <label for="statusUsed" class="dark-grey-text">Used</label>
                             </div>
                             <!--Radio group-->
                         </fieldset>
                     </div>
-                    <!-- /Filter by experience level-->
+                    <!-- /Filter by status -->
 
-                    <!-- Filter by employment type-->
-                    <div class="col-md-6 col-lg-12 mb-4">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Employment Type</strong></h5>
-                        <div class="divider"></div>
-
-                        <fieldset id="employmentType">
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="employmentType" type="radio" id="employmentType0">
-                                <label for="employmentType0" class="dark-grey-text" @click="flush('employmentType')">All</label>
-                            </div>
-
-                            <div class="form-group mb-1" v-for="employmentType in filters.empTypes">
-                                <input name="employmentType" type="radio" :id="'employmentType' + employmentType.id" :value="employmentType.id"
-                                       @click="fetchFilter('employmentType', employmentType.id)">
-                                <label :for="'employmentType' + employmentType.id" class="dark-grey-text">{{ employmentType.en_name }}</label>
-                            </div>
-                            <!--Radio group-->
-                        </fieldset>
-                    </div>
-                    <!-- /Filter by employment type-->
-
-                    <!-- Filter by job ad type-->
-                    <div class="col-md-6 col-lg-12 mb-4">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Ad Type</strong></h5>
-                        <div class="divider"></div>
-
-                        <fieldset id="type">
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="type" type="radio" id="type0">
-                                <label for="type0" class="dark-grey-text" @click="flush('type')">All</label>
-                            </div>
-
-                            <div class="form-group mb-1" v-for="type in filters.types">
-                                <input name="type" type="radio" :id="'type' + type.id" :value="type.id"
-                                       @click="fetchFilter('type', type.id)">
-                                <label :for="'type' + type.id" class="dark-grey-text">{{ type.en_name }}</label>
-                            </div>
-                            <!--Radio group-->
-                        </fieldset>
-                    </div>
-                    <!-- /Filter by job ad type-->
-
-                    <!-- Filter by education level-->
-                    <div class="col-md-6 col-lg-12 mb-4">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Education Level</strong></h5>
-                        <div class="divider"></div>
-
-                        <fieldset id="educationLevel">
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="educationLevel" type="radio" id="educationLevel0">
-                                <label for="educationLevel0" class="dark-grey-text" @click="flush('educationLevel')">All</label>
-                            </div>
-
-                            <div class="form-group mb-1" v-for="educationLevel in filters.eduLevels">
-                                <input name="educationLevel" type="radio" :id="'educationLevel' + educationLevel.id" :value="educationLevel.id"
-                                       @click="fetchFilter('educationLevel', educationLevel.id)">
-                                <label :for="'educationLevel' + educationLevel.id" class="dark-grey-text">{{ educationLevel.en_name }}</label>
-                            </div>
-                            <!--Radio group-->
-                        </fieldset>
-                    </div>
-                    <!-- /Filter by education level-->
                 </div>
                 <!-- /Grid row -->
 
@@ -135,8 +76,8 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9" id="jobs">
-            <!-- Search Area -->
+        <div class="col-lg-9" id="products">
+
             <div class="row mb-0">
                 <div class="col-md-6">
                     <!-- Search -->
@@ -146,8 +87,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /.Search Area -->
-
             <!-- Address Area -->
             <div class="row mb-0">
                 <!--Dropdown primary-->
@@ -176,59 +115,66 @@
             </div>
             <!-- /.Address Area -->
 
-            <!-- Job Ads Grid -->
-            <section class="section pt-4 jobAds" v-if="jobs != null">
+            <!-- Product Ads Grid -->
+            <section class="section pt-4 productAds" v-if="products != null">
 
                 <!-- Grid row -->
                 <div class="row" style="min-height: 100vh">
-
                     <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 mb-4" v-for="job in jobs">
-
+                    <div class="col-lg-4 col-md-6 mb-4" v-for="product in products">
                         <!--Card-->
-                        <div class="card card-ecommerce">
-
+                        <div class="card card-cascade narrower card-ecommerce">
                             <!--Card image-->
-                            <div class="view overlay">
-                                <img :src="job.img " class="img-fluid" alt="">
-                                <a :href="'/u/'+ job.user_id + '/jobs/' + job.slug">
+                            <div class="view overlay product-img" :style="backgroundImg(product.img)">
+
+                                <a :href="'/products/' + product.id + '/' + product.slug">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
                             <!--Card image-->
-
                             <!--Card content-->
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <!--Category & Title-->
+                                <a class="grey-text">
+                                    <h5>{{ product.category.en_name }}</h5>
+                                </a>
+                                <h4 class="card-title" :title="product.title">
+                                    <strong>
+                                        <a :href="'/products/' + product.id + '/' + product.slug">{{ product.title }}</a>
+                                    </strong>
+                                </h4>
 
-                                <h5 class="card-title mb-1"><strong><a :href="'/u/'+ job.user_id + '/jobs/' + job.slug" class="dark-grey-text">{{ job.title }}</a></strong></h5><span class="badge mb-2 p-2" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">{{ job.type.en_name }}</span>
-                                <!-- Rating -->
-                                <ul class="rating">
-                                    <li v-for="phone in job.phone" class="text-grey">
-                                        <i class="fa fa-phone blue-text"></i> <strong class="teal-text">{{ phone }}</strong>
-                                    </li>
-
-                                </ul>
-
-
-
-                                <!--Card footer-->
-                                <div class="card-footer pb-0">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <p><i class="fa fa-bullseye pink-text"></i><strong class="p-2">{{ job.salary }} L.E</strong></p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="footer-address">
-                                                {{ job.created_at }}
-                                            </div>
-                                        </div>
+                                <div class="row my-2">
+                                    <div class="col-md-6 pr-0 pt-1">
+                                        <span class="badge mb-2 p-2" :class="{ 'badge-success': product.status == '1', 'badge-warning' : product.status == '2' }">
+                                    {{ product.status == '1' ? 'New' : 'Used' }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" class="h3-responsive mr-2 float-left">
+                                            <i class="fas fa-heart pr-1 animated"  :class="favClass(product.id)"></i>
+                                        </a>
                                     </div>
                                 </div>
 
+                                <!--Description-->
+                                <p class="card-text">
+                                    {{ product.description }}
+                                </p>
+                                <!--Card footer-->
+                                <div class="card-footer pb-0 pl-0">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">
+                                            <strong>{{ product.price }} L.E</strong>
+                                        </div>
+                                        <div class="col-md-6 text-center pr-0">
+                                            <span class="small">
+                                                {{ product.created_at }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!--Card content-->
-
                         </div>
                         <!--Card-->
 
@@ -293,13 +239,13 @@
                 </div>
                 <!--Grid row-->
             </section>
-            <!-- /.Job Ads Grid -->
+            <!-- /.Product Ads Grid -->
 
             <!-- Nothing Found -->
-            <section class="section pt-4" v-if="jobs == null">
+            <section class="section pt-4" v-if="products == null">
                 <div class="row">
                     <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                        No job found
+                        No product found
                     </div>
                 </div>
             </section>
@@ -332,25 +278,20 @@
     </div>
 </template>
 
-
 <script>
-    export default {
-        props: ['filters'],
+    export default{
+       props: ['user', 'filters', 'auth_user'],
         data () {
             return {
-                endpoint: '/api/job-ads/search',
-                jobs: {},
+                endpoint: '/api/product-ads/search',
+                products: {},
                 links: {},
                 pagination: {},
                 search: {
                     region: '',
                     city: '',
                     keyword: '',
-                    category: '',
-                    experienceLevel: '',
-                    employmentType: '',
-                    type: '',
-                    educationLevel: '',
+                    status: '',
                     orderBy: '',
                     sort: ''
                 },
@@ -362,44 +303,41 @@
             }
         },
         methods: {
-            fetchJobs(){
+           backgroundImg(src) {
+               return "background-image: url('" + src + "')";
+           },
+            fetchProducts(){
                 let vm = this;
-                $('.jobAds').hide();
+                $('.productAds').hide();
                 $('.fetching').show();
                 axios.post(vm.endpoint, vm.search)
                     .then(function (response) {
                         $('.fetching').hide();
-                        $('.jobAds').show();
-                        if (typeof response.data.data !== 'undefined') {
-                            let data = response.data;
-                            vm.jobs = data.data;
-                            vm.links = data.links;
-                            vm.pagination = data.meta;
-                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                        } else if(typeof response.status !== 'undefined') {
-                            vm.jobs = null;
-                            console.log(response.data.message)
-                        }
-
-                });
+                        $('.productAds').show();
+                        let data = response.data;
+                        vm.products = data.data;
+                        vm.links = data.links;
+                        vm.pagination = data.meta;
+                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                    });
             },
             changeEndpoint(page) {
                 let url = this.pagination.path + '?page=' + page;
-                let jobDiv = document.getElementById('jobs');
-                jobDiv.scrollIntoView();
+                let productDiv = document.getElementById('products');
+                productDiv.scrollIntoView();
                 this.endpoint = url;
 
-                return this.fetchJobs();
+                return this.fetchProducts();
             },
             navigate(url){
                 this.endpoint = url;
-                return this.fetchJobs();
+                return this.fetchProducts();
             },
             fetchFilter($key, $value){
                 let vm = this;
                 vm.search[$key] = $value;
-                vm.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                vm.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
             flush($filter){
                 if ($filter === 'region') {
@@ -415,17 +353,97 @@
                 let vm = this;
                 this.search.orderBy = $order;
                 this.search.sort = $sort;
-                vm.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                vm.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
             searchByKeyword: _.debounce(function () {
-                this.endpoint = '/api/job-ads/search';
-                this.fetchJobs()
+                this.endpoint = '/api/product-ads/search';
+                this.fetchProducts()
+            }, 500),
 
-            }, 500)
+            isFav(id) {
+                if(this.auth_user){
+                let favorites = this.user.favorite_product_ads;
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true
+                        }
+                    }
+                } else {
+                    return false;
+                }
+                }
+                return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    let user = this.user;
+                    let products = this.products;
+                    let favorites = this.user.favorite_product_ads;
+                    if (this.isFav(id)) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count--
+                                } else {
+                                    products[i].favorites.count = 0;
+                                }
+                            }
+                        }
+                        axios.delete('/api/product-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < products.length; i++ ){
+                            if(products[i].id === id) {
+                                if(products[i].favorites !== null) {
+                                    products[i].favorites.count++
+                                } else {
+                                    products[i].favorites = { count: 1 };
+                                }
+                            }
+                        }
+                        axios.post('/api/product-ads/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+                                
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
+
         },
         mounted() {
-            this.fetchJobs();
+            this.fetchProducts();
         },
         watch: {
             regionId: function (val) {
@@ -433,18 +451,22 @@
                 this.search.region = val;
                 let region = this.filters.regions.filter(function (region) { return region.id === val });
                 this.region = region.shift();
-                this.regionName = this.region.en_name;
+                if(this.region) {
+                    this.regionName = this.region.en_name;
+                }
                 this.cityName = 'Choose Area';
-                this.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                this.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
-                this.cityName = city.en_name;
-                this.endpoint = '/api/job-ads/search';
-                this.fetchJobs();
+                if(city) {
+                    this.cityName = city.en_name;
+                }
+                this.endpoint = '/api/product-ads/search';
+                this.fetchProducts();
             },
         }
-    }
+    };
 </script>

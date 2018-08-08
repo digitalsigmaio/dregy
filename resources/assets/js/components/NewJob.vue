@@ -1,13 +1,8 @@
-@extends('layouts.client')
-
-@section('content')
-
-
-
+<template>
+<div>
         <div class="container">
-            <form action="/job-ads" method="post" enctype="multipart/form-data">
+            <form action="" method="" enctype="multipart/form-data">
                 <!--Section: Inputs-->
-                @csrf
                 <section class="section card mb-5">
 
                     <div class="card-body">
@@ -27,11 +22,11 @@
                                         <label for="title" class="">Title</label>
                                     </div>
 
-                                    @if ($errors->has('title'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('title') }}</strong>
+                                    
+                                        <span v-if="errors.title" class="invalid-feedback">
+                                            <strong>{{ errors.title }}</strong>
                                         </span>
-                                    @endif
+                                    
 
                                 </div>
                                 <!--Grid column-->
@@ -45,11 +40,11 @@
                                         <label for="salary" class="">Salary</label>
                                     </div>
 
-                                    @if ($errors->has('salary'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('salary') }}</strong>
+                                    
+                                        <span v-if="errors.salary" class="invalid-feedback">
+                                            <strong>{{ errors.salary }}</strong>
                                         </span>
-                                    @endif
+                                    
 
                                 </div>
                                 <!--Grid column-->
@@ -84,11 +79,11 @@
                                         <label for="description" class="">Description</label>
                                     </div>
 
-                                    @if ($errors->has('description'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('description') }}</strong>
+                                    
+                                        <span v-if="errors.description" class="invalid-feedback">
+                                            <strong>{{ errors.description }}</strong>
                                         </span>
-                                    @endif
+                                    
 
                                 </div>
                                 <!--Grid column-->
@@ -103,15 +98,15 @@
                                         <label for="city"></label>
                                         <select class="form-control custom-select-lg" name="regionId" v-model="regionId" id="city" required>
                                             <option value="101" selected disabled>Choose City</option>
-                                            <option :value="region.id" v-for="region in regions">@{{ region.en_name }}</option>
+                                            <option :value="region.id" v-for="region in regions">{{ region.en_name }}</option>
                                         </select>
                                     </div>
 
-                                    @if ($errors->has('regionId'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('regionId') }}</strong>
+                                    
+                                        <span v-if="errors.regionId" class="invalid-feedback">
+                                            <strong>{{ errors.regionId }}</strong>
                                         </span>
-                                    @endif
+                                    
                                 </div>
                                 <!--Grid column-->
 
@@ -123,15 +118,15 @@
                                         <label for="area"></label>
                                         <select class="form-control custom-select-lg" name="cityId" v-model="cityId" id="area" required>
                                             <option value="101" selected disabled>Choose Area</option>
-                                            <option :value="city.id" v-for="city in cities">@{{ city.en_name }}</option>
+                                            <option :value="city.id" v-for="city in cities">{{ city.en_name }}</option>
                                         </select>
                                     </div>
 
-                                    @if ($errors->has('cityId'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('cityId') }}</strong>
+                                    
+                                        <span v-if="errors.cityId" class="invalid-feedback">
+                                            <strong>{{ errors.cityId }}</strong>
                                         </span>
-                                    @endif
+                                    
                                 </div>
                                 <!--Grid column-->
 
@@ -143,11 +138,11 @@
                                         <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
                                     </div>
 
-                                    @if ($errors->has('address'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('address') }}</strong>
+                                    
+                                        <span v-if="errors.address" class="invalid-feedback">
+                                            <strong>{{ errors.address }}</strong>
                                         </span>
-                                    @endif
+                                    
                                 </div>
                                 <!--Grid column-->
 
@@ -161,15 +156,15 @@
                                         <label for="category"></label>
                                         <select class="form-control custom-select-lg" name="categoryId" v-model="categoryId" id="category" required>
                                             <option value="101" selected disabled>Choose Category</option>
-                                            <option :value="category.id" v-for="category in categories">@{{ category.en_name }}</option>
+                                            <option :value="category.id" v-for="category in categories">{{ category.en_name }}</option>
                                         </select>
                                     </div>
 
-                                    @if ($errors->has('categoryId'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('categoryId') }}</strong>
+                                    
+                                        <span v-if="errors.categoryId" class="invalid-feedback">
+                                            <strong>{{ errors.categoryId }}</strong>
                                         </span>
-                                    @endif
+                                    
                                 </div>
                                 <!--Grid column-->
 
@@ -179,7 +174,7 @@
                                         <label for="experienceLevel"></label>
                                         <select class="form-control custom-select-lg" name="experienceLevelId" v-model="experienceLevelId" id="experienceLevel" required>
                                             <option value="101" selected disabled>Experience Level</option>
-                                            <option :value="experienceLevel.id" v-for="experienceLevel in experienceLevels">@{{ experienceLevel.en_name }}</option>
+                                            <option :value="experienceLevel.id" v-for="experienceLevel in experienceLevels">{{ experienceLevel.en_name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -191,7 +186,7 @@
                                         <label for="educationLevel"></label>
                                         <select class="form-control custom-select-lg" name="educationLevelId" v-model="educationLevelId" id="educationLevel" required>
                                             <option value="101" selected disabled>Education Level</option>
-                                            <option :value="educationLevel.id" v-for="educationLevel in educationLevels">@{{ educationLevel.en_name }}</option>
+                                            <option :value="educationLevel.id" v-for="educationLevel in educationLevels">{{ educationLevel.en_name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -203,7 +198,7 @@
                                         <label for="employmentType"></label>
                                         <select class="form-control custom-select-lg" name="employmentTypeId" v-model="employmentTypeId" id="employmentType" required>
                                             <option value="101" selected disabled>Employment Type</option>
-                                            <option :value="employmentType.id" v-for="employmentType in employmentTypes">@{{ employmentType.en_name }}</option>
+                                            <option :value="employmentType.id" v-for="employmentType in employmentTypes">{{ employmentType.en_name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -256,7 +251,7 @@
                             <div class="row">
                                 <div class="col-md-12 mb-4">
                                     <div class="waves-input-wrapper waves-effect waves-light float-right mt-2">
-                                        <input type="submit" value="Add Job" class="btn btn-primary">
+                                        <input type="submit" value="Add Job" @click.prevent="post()" class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>
@@ -269,13 +264,11 @@
                 <!--Section: Inputs-->
             </form>
             <div class="row">
-                @if($errors->any())
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                
+                    <ul v-if="errors">
+                            <li v-for="error in errors">{{ error }}</li>
                     </ul>
-                @endif
+                
             </div>
         </div>
 
@@ -299,9 +292,7 @@
                     <div class="modal-body">
                         <div class="text-center">
                             <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
-                            <p>@if(session('success'))
-                                {{ session()->get('success') }}
-                                @endif.</p>
+                            <p>{{message}}</p>
                         </div>
                     </div>
 
@@ -313,20 +304,41 @@
         <!-- Central Modal Medium Success-->
 
 
+        <!-- Central Modal Medium Error -->
+        <div class="modal fade" id="sideModalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-error" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="heading lead">Error</p>
 
-@endsection
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
 
-@push('scripts')
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                            <p>{{message}}</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Central Modal Medium Error-->
+</div>
+</template>
 <script>
-    const app = new Vue({
-        el: '#app',
+    export default{
+        props:['regions', 'categories', 'experienceLevels', 'educationLevels', 'employmentTypes'],
         data() {
             return {
-                regions: {!! $regions !!},
-                categories: {!! $categories !!},
-                experienceLevels: {!! $experienceLevels !!},
-                educationLevels: {!! $educationLevels !!},
-                employmentTypes: {!! $employmentTypes !!},
                 cities: null,
                 errors: [],
                 title: null,
@@ -340,7 +352,8 @@
                 regionId: 101,
                 cityId: 101,
                 address: null,
-                img: null
+                img: null,
+                message: ""
             }
         },
         methods: {
@@ -402,6 +415,33 @@
                         "<div class='input-group-append' ><a><span class='input-group-text badge-danger remove-phone'><i class='fas fa-times'></i></span></a></div></div>");
                 $('.btn-add-phone').prop('disabled', true);
             },
+            post() {
+                axios
+                .get('/job-ads', {
+                    title : this.title,
+                    salary : this.salary,
+                    description : this.description,
+                    jobTypeId : this.jobTypeId,
+                    categoryId : this.categoryId,
+                    experienceLevelId : this.experienceLevelId,
+                    educationLevelId : this.educationLevelId,
+                    employmentTypeId : this.employmentTypeId,
+                    regionId : this.regionId,
+                    cityId : this.cityId,
+                    address : this.address,
+                    //phone.* : phone[this.phone_id],
+                    img  : this.img,
+                })
+                .the(function (response){
+                    if(response.status == 200){
+                        this.message = response.data;
+                        $('#sideModalSuccess').modal('show');
+                    }else {
+                        this.message = response.data;
+                        $('#sideModalsideModalError').modal('show');
+                    }
+                })
+            },
         },
         watch: {
             regionId: function (val) {
@@ -412,13 +452,11 @@
                 this.cities = region.cities
             }
         }
-    });
+    };
+
     $(document.body).on('click', '.remove-phone' ,function(){
         $(this).closest('.second-phone').remove();
         $('.btn-add-phone').prop('disabled', false);
     });
-    @if(session('success'))
-        $('#sideModalSuccess').modal('show');
-    @endif
+
 </script>
-@endpush

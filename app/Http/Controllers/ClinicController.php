@@ -21,7 +21,7 @@ class ClinicController extends Controller
             'specialities' => $specialities,
             'degrees' => $degrees
         ]);
-
+        //return $filters;
         return view('clinics', compact(['filters']));
     }
 
