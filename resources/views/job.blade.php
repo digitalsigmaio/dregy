@@ -199,7 +199,7 @@
                                         </strong>
                                     </h4>
 
-                                    <span class="badge mb-2 p-2 " :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                    <span class="badge mb-2 p-2 " :class="{ 'blue-gradient': job.type.en_name == 'Job', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
                                         @{{ job.type.en_name }}
                                     </span>
 

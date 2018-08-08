@@ -215,7 +215,7 @@
                                 </h5>
                                 <div class="row my-2">
                                     <div class="col-md-6 pt-1">
-                                        <span class="badge p-2 float-right" :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                        <span class="badge p-2 float-right" :class="{ 'blue-gradient': job.type.en_name == 'Job', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
                                     @{{ job.type.en_name }}</span>
                                     </div>
                                     <div class="col-md-6">
