@@ -9,7 +9,7 @@ $factory->define(App\Clinic::class, function (Faker $faker) {
         'ar_name' => $name = $faker->company,
         'en_name' => $name,
         'slug' => str_slug($name),
-        'degree_id' => rand(1, 8),
+        'degree_id' => rand(1, 4),
         'region_id' => $region = rand(1, 13),
         'city_id' => \App\Region::find($region)->cities()->inRandomOrder()->first()->id,
         'ar_address' => $address = $faker->streetAddress,

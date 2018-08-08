@@ -11,7 +11,7 @@ $factory->define(App\ProductAd::class, function (Faker $faker) {
         'status' => rand(1, 2),
         'price' => $faker->randomNumber(3),
         'ref_id' => '#DEPA' . str_random(6) . time(),
-        'product_ad_category_id' => rand(1, 6),
+        'product_ad_category_id' => rand(1, 3),
         'region_id' => $region = rand(1, 13),
         'city_id' => \App\Region::find($region)->cities()->inRandomOrder()->first()->id,
         'address' => $faker->streetAddress,
