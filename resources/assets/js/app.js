@@ -74,9 +74,9 @@ Vue.component('favorite-pharmacies', require('./components/FavoritePharmacies.vu
 Vue.component('favorite-products', require('./components/FavoriteProducts.vue'));
 
 
-Vue.component('job-edit', require('./components/JobEdit.vue'));
+//Vue.component('job-edit', require('./components/JobEdit.vue'));
 Vue.component('job-list', require('./components/JobList.vue'));
-Vue.component('new-job', require('./components/NewJob.vue'));
+//Vue.component('new-job', require('./components/NewJob.vue'));
 
 const app = new Vue({
     el: '#app'

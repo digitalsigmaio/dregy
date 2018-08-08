@@ -19,13 +19,13 @@
 
                             <tr v-for="(job, index) in jobs">
                                 <th scope="row">{{ index }}</th>
-                                <td>{{job.title}}</td>
+                                <td>{{ job.title }}</td>
                                 <td>{{ job.views ? job.views.count : '0' }}</td>
                                 <td>{{ job.favorites ? $ob.favorites.count : '0    '}}</td>
                                 <td>
                                     <a class="blue-text pr-2" data-toggle="tooltip" data-placement="top" title="View" @click.prevent="show(job.id)"><i class="fa fa-user"></i></a>
-                                    <a class="teal-text pr-2" data-toggle="tooltip" data-placement="top" title="Edit" href="/job-ads/{{ job.id }}/edit"><i class="fa fa-pencil"></i></a>
-                                    <a class="red-text pr-2 delete" data-toggle="tooltip" data-placement="top" title="Remove" href="/job-ads/{{job.id}}/delete"><i class="fa fa-times"></i></a>
+                                    <a class="teal-text pr-2" data-toggle="tooltip" data-placement="top" title="Edit" :href="edit_link"><i class="fa fa-pencil"></i></a>
+                                    <a class="red-text pr-2 delete" data-toggle="tooltip" data-placement="top" title="Remove" :href="delete_link"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                         
@@ -174,6 +174,14 @@
         },
         mounted() {
             this.job = this.jobs[0];
+        },
+        computed: {
+            edit_link() {
+                return '/job-ads/' + this.job.id +'edit';
+            },
+            delete_link() {
+                return '/job-ads/' + this.job.id +'delete';
+            }
         }
     };
     $('.delete').on('click', function () {
