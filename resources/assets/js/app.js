@@ -17,36 +17,6 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-/*
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-Vue.component('top-clients', require('./components/TopClients.vue'));
-Vue.component('main-jobs', require('./components/MainJobs.vue'));
-Vue.component('last-products', require('./components/LastProducts.vue'));
-Vue.component('job-ads-list', require('./components/JobAds.vue'));
-Vue.component('product-ads-list', require('./components/ProductAds.vue'));
-Vue.component('hospitals-list', require('./components/Hospitals.vue'));
-Vue.component('clinics-list', require('./components/Clinics.vue'));
-Vue.component('cosmetics-list', require('./components/CosmeticClinics.vue'));
-Vue.component('pharmacies-list', require('./components/Pharmacies.vue'));
-
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue')
-);
-
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue')
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue')
-);
-*/
-
 //Layout Components
 Vue.component('clinics-component', require('./components/Clinics.vue'));
 Vue.component('clinic-component', require('./components/Clinic.vue'));

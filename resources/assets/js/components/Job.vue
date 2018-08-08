@@ -21,7 +21,7 @@
                         </h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <span class="badge mb-2 p-2 " :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                <span class="badge mb-2 p-2 " :class="{ 'blue-gradient': job.type.en_name == 'Job', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
                                     {{ job.type.en_name }}</span>
                             </div>
                         </div>
@@ -192,12 +192,12 @@
                                         </strong>
                                     </h4>
 
-                                    <span class="badge mb-2 p-2 " :class="{ 'blue-gradient': job.type.en_name == 'Employer', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                    <span class="badge mb-2 p-2 " :class="{ 'blue-gradient': job.type.en_name == 'Job', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
                                         {{ job.type.en_name }}
                                     </span>
 
                                     <!--Description-->
-                                    <p class="card-text">
+                                    <p class="card-text">\
                                         {{ job.description }}
                                     </p>
                                     <!--Card footer-->

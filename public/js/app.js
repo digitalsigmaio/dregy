@@ -14000,35 +14000,6 @@ window.Vue = __webpack_require__(39);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-/*
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-Vue.component('top-clients', require('./components/TopClients.vue'));
-Vue.component('main-jobs', require('./components/MainJobs.vue'));
-Vue.component('last-products', require('./components/LastProducts.vue'));
-Vue.component('job-ads-list', require('./components/JobAds.vue'));
-Vue.component('product-ads-list', require('./components/ProductAds.vue'));
-Vue.component('hospitals-list', require('./components/Hospitals.vue'));
-Vue.component('clinics-list', require('./components/Clinics.vue'));
-Vue.component('cosmetics-list', require('./components/CosmeticClinics.vue'));
-Vue.component('pharmacies-list', require('./components/Pharmacies.vue'));
-
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue')
-);
-
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue')
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue')
-);
-*/
-
 //Layout Components
 Vue.component('clinics-component', __webpack_require__(42));
 Vue.component('clinic-component', __webpack_require__(45));
@@ -14059,7 +14030,7 @@ Vue.component('job-list', __webpack_require__(105));
 //Vue.component('new-job', require('./components/NewJob.vue'));
 
 var app = new Vue({
-    el: '#app'
+  el: '#app'
 
 });
 
@@ -14123,8 +14094,8 @@ window.Pusher = __webpack_require__(38);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     broadcaster: 'pusher',
-    key: "",
-    cluster: "mt1",
+    key: "62933c7ab6061d02e3d9",
+    cluster: "eu",
     encrypted: true
 });
 
@@ -60184,7 +60155,7 @@ var render = function() {
                           attrs: {
                             id: "moreinfo",
                             role: "tabpanel",
-                            "aria-labelledby": "headingThree",
+                            "aria-labelledby": "headingFour",
                             "data-parent": "#accordion"
                           }
                         },
@@ -60223,7 +60194,7 @@ var render = function() {
                               attrs: {
                                 id: "note",
                                 role: "tabpanel",
-                                "aria-labelledby": "headingThree",
+                                "aria-labelledby": "headingFive",
                                 "data-parent": "#accordion"
                               }
                             },
@@ -60573,7 +60544,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFour" }
       },
       [
         _c(
@@ -60608,7 +60579,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFive" }
       },
       [
         _c(
@@ -61858,7 +61829,7 @@ var render = function() {
                             {
                               staticClass: "badge p-2 float-right",
                               class: {
-                                "blue-gradient": job.type.en_name == "Employer",
+                                "blue-gradient": job.type.en_name == "Job",
                                 "aqua-gradient":
                                   job.type.en_name == "Job Seeker"
                               }
@@ -62616,7 +62587,7 @@ var render = function() {
                   {
                     staticClass: "badge mb-2 p-2 ",
                     class: {
-                      "blue-gradient": _vm.job.type.en_name == "Employer",
+                      "blue-gradient": _vm.job.type.en_name == "Job",
                       "aqua-gradient": _vm.job.type.en_name == "Job Seeker"
                     }
                   },
@@ -62936,7 +62907,7 @@ var render = function() {
                           {
                             staticClass: "badge mb-2 p-2 ",
                             class: {
-                              "blue-gradient": job.type.en_name == "Employer",
+                              "blue-gradient": job.type.en_name == "Job",
                               "aqua-gradient": job.type.en_name == "Job Seeker"
                             }
                           },
@@ -62951,7 +62922,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text" }, [
                           _vm._v(
-                            "\n                                    " +
+                            "\\\n                                    " +
                               _vm._s(job.description) +
                               "\n                                "
                           )
