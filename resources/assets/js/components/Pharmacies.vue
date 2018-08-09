@@ -1,5 +1,5 @@
 <template>
-    <div class="row pt-4">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
         <div class="col-md-2">
@@ -395,7 +395,6 @@
     </div>
 </template>
 
-
 <script>
     export default {
             props: ['filters', 'user', 'auth_user'],
@@ -515,12 +514,12 @@
                     this.fetchPharmacies()
                 }, 100),
                 isFav(id) {
-                            if(this.auth_user){
+                    if(this.auth_user){
                     let favorites = this.user.favorite_pharmacies;
                     if(favorites.length) {
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
-                                return true
+                                return true;
                             }
                         }
                     } else {

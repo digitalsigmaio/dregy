@@ -352,7 +352,6 @@
         <!-- /.Content -->
 
     </div>
-
 </template>
 
 <script>
@@ -480,7 +479,7 @@
                 if(favorites.length) {
                     for(let i = 0; i < favorites.length; i++ ){
                         if(favorites[i].favourable_id === id) {
-                            return true
+                            return true;
                         }
                     }
                 } else {
