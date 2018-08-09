@@ -1,304 +1,285 @@
 <template>
-    <!--Grid row-->
-    <div class="row">
+<!--Grid row-->
+<div class="row" id="topClients" v-cloak>
 
-        <!--Grid column-->
-        <div class="col-12">
+    <!--Grid column-->
+    <div class="col-12">
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-justified sky-gradient mx-0" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active white-text font-weight-bold" data-toggle="tab" href="#hospitals" role="tab">Hospitals</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#pharmacies" role="tab">Pharmacies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#clinics" role="tab">Clinics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#cosmetics" role="tab">Cosmetics</a>
-                </li>
-            </ul>
-            <!-- Tab panels -->
-            <div class="tab-content px-0">
-                <!-- Hospitals -->
-                <div class="tab-pane fade in show active " id="hospitals" role="tabpanel">
-                    <br>
-                    <!-- Grid row -->
-                    <div class="row">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justified sky-gradient mx-0" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active white-text font-weight-bold" data-toggle="tab" href="#hospitals" role="tab">{{ words_hospitals }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#pharmacies" role="tab">{{ words_pharmacies }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#clinics" role="tab">{{ words_clinics }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link white-text font-weight-bold" data-toggle="tab" href="#cosmetics" role="tab">{{ words_cosmetics }}</a>
+            </li>
+        </ul>
+        <!-- Tab panels -->
+        <div class="tab-content px-0">
+            <!-- Hospitals -->
+            <div class="tab-pane fade in show active " id="hospitals" role="tabpanel">
+                <br>
+                <!-- Grid row -->
+                <div class="row">
 
-                        <!--Grid column-->
-                        <div class="col-lg-4 col-md-12 mb-4" v-for="hospital in hospitals">
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4" v-for="hospital in hospitals">
 
-                            <!--Card-->
-                            <div class="card card-ecommerce">
+                        <!--Card-->
+                        <div class="card card-ecommerce">
 
-                                <!--Card image-->
-                                <div class="view overlay">
-                                    <img :src="hospital.img" class="img-fluid" alt="sample image">
-                                    <a>
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
-                                <!--Card image-->
+                            <!--Card image-->
+                            <div class="view overlay">
+                                <img :src="hospital.img" class="img-fluid" alt="sample image">
+                                <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Card image-->
 
-                                <!--Card content-->
-                                <div class="card-body">
-                                    <!--Category & Title-->
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Category & Title-->
 
-                                    <h5 class="card-title mb-1 text-truncate">
-                                        <strong>
-                                            <a href="" class="dark-grey-text">{{ hospital.en_name }}</a>
-                                        </strong>
-                                    </h5>
-                                    <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium != null">Featured</span>
-                                    <!-- Rating -->
-                                    <ul class="rating">
-                                        <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, hospital.rate.value)"></i>
-                                        </li>
-                                    </ul>
+                                <h5 class="card-title mb-1 text-truncate">
+                                    <strong>
+                                        <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">{{ name(hospital) }}</a>
+                                    </strong>
+                                </h5>
+                                <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">{{ words_featured }}</span>
+                                <!-- Rating -->
+                                <ul class="rating">
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star" :class="starColor(n, hospital.rate.rating)"></i>
+                                    </li>
+                                </ul>
 
-                                    <!--Card footer-->
-                                    <div class="card-footer pb-0">
-                                        <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>{{ hospital.favorites.count }}</strong>
-                                            </span>
-                                            <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
-                                        </div>
+                                <!--Card footer-->
+                                <div class="card-footer pb-0">
+                                    <div class="row mb-0">
+                                        <span class="float-left">
+                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" :title="words_views"></i><strong class="small grey-text">{{ hospital.views.count }}</strong>
+                                        </span>
                                     </div>
-
                                 </div>
-                                <!--Card content-->
 
                             </div>
-                            <!--Card-->
+                            <!--Card content-->
 
                         </div>
-                        <!--Grid column-->
-
-
-                    </div>
-                    <!--Grid row-->
-                </div>
-                <!-- /.Hospitals -->
-
-                <!-- Pharmacies -->
-                <div class="tab-pane fade" id="pharmacies" role="tabpanel">
-                    <br>
-
-                    <!-- Grid row -->
-                    <div class="row mb-3">
-
-                        <!--Grid column-->
-                        <div class="col-lg-4 col-md-12 mb-4" v-for="pharmacy in pharmacies">
-
-                            <!--Card-->
-                            <div class="card card-ecommerce">
-
-                                <!--Card image-->
-                                <div class="view overlay">
-                                    <img :src="pharmacy.img" class="img-fluid m-auto" alt="sample image">
-                                    <a>
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
-                                <!--Card image-->
-
-                                <!--Card content-->
-                                <div class="card-body">
-                                    <!--Category & Title-->
-
-                                    <h5 class="card-title mb-1">
-                                        <strong>
-                                            <a href="" class="dark-grey-text">{{ pharmacy.en_name }}</a>
-                                        </strong>
-                                    </h5>
-                                    <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium != null">Featured</span>
-                                    <!-- Rating -->
-                                    <ul class="rating">
-                                        <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, pharmacy.rate.value)"></i>
-                                        </li>
-                                    </ul>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer pb-0">
-                                        <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>{{ pharmacy.favorites.count }}</strong>
-                                            </span>
-                                            <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!--Card content-->
-
-                            </div>
-                            <!--Card-->
-
-                        </div>
-                        <!--Grid column-->
+                        <!--Card-->
 
                     </div>
-                    <!--Grid row-->
-                </div>
-                <!-- /.Pharmacies -->
+                    <!--Grid column-->
 
-                <!-- Clinics -->
-                <div class="tab-pane fade" id="clinics" role="tabpanel">
-                    <br>
-                    <!-- Grid row -->
-                    <div class="row">
-
-                        <!--Grid column-->
-                        <div class="col-lg-4 col-md-12 mb-4" v-for="clinic in clinics">
-
-                            <!--Card-->
-                            <div class="card card-ecommerce">
-
-                                <!--Card image-->
-                                <div class="view overlay">
-                                    <img :src="clinic.img" class="img-fluid m-auto" alt="sample image">
-                                    <a>
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
-                                <!--Card image-->
-
-                                <!--Card content-->
-                                <div class="card-body">
-                                    <!--Category & Title-->
-
-                                    <h5 class="card-title mb-1">
-                                        <strong>
-                                            <a href="" class="dark-grey-text">{{ clinic.en_name }}</a>
-                                        </strong>
-                                    </h5>
-                                    <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium != null">Featured</span>
-                                    <!-- Rating -->
-                                    <ul class="rating">
-                                        <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, clinic.rate.value)"></i>
-                                        </li>
-                                    </ul>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer pb-0">
-                                        <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>{{ clinic.favorites.count }}</strong>
-                                            </span>
-                                            <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!--Card content-->
-
-                            </div>
-                            <!--Card-->
-
-                        </div>
-                        <!--Grid column-->
-
-                    </div>
-                    <!--Grid row-->
 
                 </div>
-                <!-- /.Clinics -->
-
-                <!-- Cosmetics -->
-                <div class="tab-pane fade" id="cosmetics" role="tabpanel">
-                    <br>
-                    <!-- Grid row -->
-                    <div class="row">
-
-                        <!--Grid column-->
-                        <div class="col-lg-4 col-md-12 mb-4" v-for="cosmetic in cosmetics">
-
-                            <!--Card-->
-                            <div class="card card-ecommerce">
-
-                                <!--Card image-->
-                                <div class="view overlay">
-                                    <img :src="cosmetic.img" class="img-fluid m-auto" alt="sample image">
-                                    <a>
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
-                                <!--Card image-->
-
-                                <!--Card content-->
-                                <div class="card-body">
-                                    <!--Category & Title-->
-
-                                    <h5 class="card-title mb-1">
-                                        <strong>
-                                            <a href="" class="dark-grey-text">{{ cosmetic.en_name }}</a>
-                                        </strong>
-                                    </h5>
-                                    <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium != null">Featured</span>
-                                    <!-- Rating -->
-                                    <ul class="rating">
-                                        <li v-for="n in 5">
-                                            <i class="fa fa-star" :class="starColor(n, cosmetic.rate.value)"></i>
-                                        </li>
-                                    </ul>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer pb-0">
-                                        <div class="row mb-0">
-                                            <span class="float-left">
-                                                <strong>{{ cosmetic.favorites.count }}</strong>
-                                            </span>
-                                            <span class="float-right">
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Owner">
-                                                    <i class="fa fa-heart ml-3"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!--Card content-->
-
-                            </div>
-                            <!--Card-->
-
-                        </div>
-                        <!--Grid column-->
-
-                    </div>
-                    <!--Grid row-->
-
-                </div>
-                <!-- /.Cosmetics -->
+                <!--Grid row-->
             </div>
+            <!-- /.Hospitals -->
 
+            <!-- Pharmacies -->
+            <div class="tab-pane fade" id="pharmacies" role="tabpanel">
+                <br>
+
+                <!-- Grid row -->
+                <div class="row mb-3">
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4" v-for="pharmacy in pharmacies">
+
+                        <!--Card-->
+                        <div class="card card-ecommerce">
+
+                            <!--Card image-->
+                            <div class="view overlay">
+                                <img :src="pharmacy.img" class="img-fluid m-auto" alt="sample image">
+                                <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Card image-->
+
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Category & Title-->
+
+                                <h5 class="card-title mb-1">
+                                    <strong>
+                                        <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">{{ name(pharmacy) }}</a>
+                                    </strong>
+                                </h5>
+                                <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium">{{ words_featured }}</span>
+                                <!-- Rating -->
+                                <ul class="rating">
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star" :class="starColor(n, pharmacy.rate.rating)"></i>
+                                    </li>
+                                </ul>
+
+                                <!--Card footer-->
+                                <div class="card-footer pb-0">
+                                    <div class="row mb-0">
+                                            <span class="float-left">
+                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" :title="words_views"></i><strong class="small grey-text">{{ pharmacy.views.count }}</strong>
+                                            </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Card content-->
+
+                        </div>
+                        <!--Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+            </div>
+            <!-- /.Pharmacies -->
+
+            <!-- Clinics -->
+            <div class="tab-pane fade" id="clinics" role="tabpanel">
+                <br>
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4" v-for="clinic in clinics">
+
+                        <!--Card-->
+                        <div class="card card-ecommerce">
+
+                            <!--Card image-->
+                            <div class="view overlay">
+                                <img :src="clinic.img" class="img-fluid m-auto" alt="sample image">
+                                <a :href="'/clinics/' + clinic.id + '/' + clinic.slug">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Card image-->
+
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Category & Title-->
+
+                                <h5 class="card-title mb-1">
+                                    <strong>
+                                        <a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">{{ name(clinic) }}</a>
+                                    </strong>
+                                </h5>
+                                <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium">{{ words_featured }}</span>
+                                <!-- Rating -->
+                                <ul class="rating">
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star" :class="starColor(n, clinic.rate.rating)"></i>
+                                    </li>
+                                </ul>
+
+                                <!--Card footer-->
+                                <div class="card-footer pb-0">
+                                    <div class="row mb-0">
+                                            <span class="float-left">
+                                                <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" :title="words_views"></i><strong class="small grey-text">{{ clinic.views.count }}</strong>
+                                            </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Card content-->
+
+                        </div>
+                        <!--Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </div>
+            <!-- /.Clinics -->
+
+            <!-- Cosmetics -->
+            <div class="tab-pane fade" id="cosmetics" role="tabpanel">
+                <br>
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4" v-for="cosmetic in cosmetics">
+
+                        <!--Card-->
+                        <div class="card card-ecommerce">
+
+                            <!--Card image-->
+                            <div class="view overlay">
+                                <img :src="cosmetic.img" class="img-fluid m-auto" alt="sample image">
+                                <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Card image-->
+
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Category & Title-->
+
+                                <h5 class="card-title mb-1">
+                                    <strong>
+                                        <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">{{ name(cosmetic) }}</a>
+                                    </strong>
+                                </h5>
+                                <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium">{{ words_featured }}</span>
+                                <!-- Rating -->
+                                <ul class="rating">
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star" :class="starColor(n, cosmetic.rate.rating)"></i>
+                                    </li>
+                                </ul>
+
+                                <!--Card footer-->
+                                <div class="card-footer pb-0">
+                                    <div class="row mb-0">
+                                        <span class="float-left">
+                                            <i class="fa fa-eye cyan-text pt-1 ml-3 pr-1" :title="words_views"></i><strong class="small grey-text">{{ cosmetic.views.count }}</strong>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Card content-->
+
+                        </div>
+                        <!--Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </div>
+            <!-- /.Cosmetics -->
         </div>
 
     </div>
-    <!--Grid row-->
+
+</div>
+<!--Grid row-->
 </template>
 
 <script>
-    export default {
+    export default{
+        props: ['lang', 'words_featured', 'words_views', 'words_hospitals', 'words_pharmacies', 'words_clinics', 'words_cosmetics'],
         data () {
             return {
                 hospitals: {},
@@ -311,11 +292,22 @@
             round(rate) {
                 return parseInt(Math.round(rate));
             },
+            floor(rate) {
+                return parseInt(Math.floor(rate));
+            },
+            ceil(rate) {
+                return parseInt(Math.ceil(rate));
+            },
+            round(rate) {
+                return parseInt(Math.round(rate));
+            },
             starColor(n, rate) {
-                if (n <= this.round(rate))  {
-                    return 'blue-text'
+                if (n <= this.floor(rate)) {
+                    return 'fa fa-star cyan-text'
+                } else if (n === this.ceil(rate)) {
+                    return 'fa fa-star-half-full cyan-text'
                 } else {
-                    return 'grey-text'
+                    return 'fa fa-star-o cyan-text'
                 }
             },
             fetchData() {
@@ -331,10 +323,38 @@
                     .catch(function (response) {
                         console.log(response)
                     });
+            },
+            // language transformers
+            transformer(property, attribute) {
+
+                let key;
+                switch (this.lang) {
+                    case 'ar':
+                         key = 'ar_' + attribute;
+                        return property[key];
+                        break;
+                    case 'en':
+                         key = 'en_' + attribute;
+                        return property[key];
+                        break;
+                    default:
+                        return null;
+                        break;
+                }
+            },
+            name(property){
+                return this.transformer(property, 'name')
+            },
+            address(property) {
+                return this.transformer(property, 'address')
+            },
+            note(property) {
+                return this.transformer(property, 'note')
             }
         },
         mounted() {
             this.fetchData();
         }
-    }
+    };
 </script>
+<!-- Script -->

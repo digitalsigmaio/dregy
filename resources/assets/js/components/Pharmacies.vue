@@ -1,10 +1,11 @@
 <template>
-    <div class="row pt-4">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
         <div class="col-md-2">
 
             <div class="">
+
                 <!-- Grid row -->
                 <div class="row">
                     <div class="col-md-6 col-lg-12 mb-4">
@@ -52,130 +53,72 @@
 
                             <!--Radio group-->
                             <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating0" value="5" v-model="search.rate" @click="filterByRate">
-                                <label for="rating0" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
-                                <label for="rating1" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating1" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <=4, 'grey-text': n > 4 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
 
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating2" value="3" v-model="search.rate" @click="filterByRate">
-                                <label for="rating2" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating2" value="3" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating2" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <= 3, 'grey-text': n > 3 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating3" value="2" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating3" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <= 2, 'grey-text': n > 2 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating4" value="1" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating4" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <= 1, 'grey-text': n > 1 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+
                             </div>
-
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating3" value="2" v-model="search.rate" @click="filterByRate">
-                                <label for="rating3" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
-
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating4" value="1" v-model="search.rate" @click="filterByRate">
-                                <label for="rating4" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
-
-
-                            <!--Radio group-->
+                                <!--Radio group-->
                         </fieldset>
                     </div>
                     <!-- /Filter by rate-->
@@ -189,7 +132,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-md-10" id="pharmacies">
+        <div class="col-md-10" id="pharmacies" v-cloak>
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -238,13 +181,13 @@
                     <div class="col-md-12 mb-4" v-for="pharmacy in pharmacies" >
 
                         <!--Card-->
-                        <div class="card" :class="{ 'z-depth-2' : mouseOver == pharmacy.id }" v-on:mouseover="mouseOver = pharmacy.id" v-on:mouseleave="mouseOver = null">
+                        <div class="card" :class="{ 'z-depth-2' : mouseOver == pharmacy.id }" @mouseover="mouseOver = pharmacy.id" @mouseleave="mouseOver = null">
 
                             <div class="row">
                                 <!--Card image-->
                                 <div class="view overlay col-md-6">
                                     <img :src="pharmacy.img" class="img-fluid" alt="">
-                                    <a>
+                                    <a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
                                 </div>
@@ -254,33 +197,46 @@
                                 <div class="card-body col-md-6">
                                     <!--Category & Title-->
 
-                                   <div class="row">
+                                    <div class="row">
 
-                                           <div class="col-md-9">
-                                               <h5 class="card-title mb-1"><i class="fas fa-heartbeat amber-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ pharmacy.en_name }}</a></strong></h5>
-                                           </div>
-                                           <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                           </i><span class="light-green-text text-sm-right">{{ pharmacy.favorites.count }}</span>
-                                           </div>
+                                        <div class="col-md-9">
+                                            <h5 class="card-title mb-1"><i class="fa fa-medkit brown-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">{{ pharmacy.en_name }}</a></strong></h5>
+                                        </div>
+                                        <div class="col-md-3 mt-1 text-center">
+                                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(pharmacy.id)" @click.prevent="fav(pharmacy.id)" >
+                                                <i class="fa fa-heart pr-1 animated"  :class="favClass(pharmacy.id)"></i>
+                                            </a>
+                                            <span class="light-green-text text-sm-right">{{ favorites(pharmacy) }}</span>
+                                        </div>
 
-                                   </div>
+                                    </div>
                                     <div class="divider"></div>
                                     <div class="row mt-1">
                                         <div class="col-md-12">
 
-                                            <ul class="rating mt-1">
-                                                <li v-for="n in 5">
-                                                    <i class="fa fa-star cyan-text" :class="starColor(n, pharmacy.rate.value)"></i>
-                                                </li>
-                                            </ul>
+                                            <!-- Cosmetic Clinic Rating -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="m-auto h2-responsive grey-text">
+                                                            {{ pharmacy.rate.rating }}
+                                                        </div>
+                                                    </div>
+                                                    <ul class="rating mt-1">
+                                                        <li v-for="n in 5">
+                                                            <i :class="starColor(n, pharmacy.rate.rating)"></i>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                             <!-- Rating -->
-                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ pharmacy.en_address }}</p>
+                                            <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>{{ pharmacy.en_address }}</p>
 
-                                            <p><i class="fas fa-at pr-1 cyan-text">
-                                            </i><span class="light-grey-text ">{{ pharmacy.email }}</span>
+                                            <p><i class="fa fa-at pr-1 cyan-text">
+                                            </i><span class="light-grey-text">{{ pharmacy.email }}</span>
                                             </p>
 
-                                            <p><i class="fas fa-home pr-1 cyan-text">
+                                            <p><i class="fa fa-home pr-1 cyan-text">
                                             </i><span class="light-grey-text">{{ pharmacy.website }}</span>
                                             </p>
 
@@ -383,8 +339,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </section>
             <!-- /PreLoader -->
@@ -395,135 +349,229 @@
     </div>
 </template>
 
-
 <script>
-
     export default {
-        props: ['filters'],
-        data () {
-            return {
-                pharmacies: {},
-                endpoint: '/api/pharmacies/search',
-                isFav: false,
-                links: {},
-                pagination: {},
-                search: {
-                    region: '',
-                    city: '',
+            props: ['filters', 'user', 'auth_user'],
+            data() {
+                return {
                     pharmacies: {},
-                    keyword: '',
-                    fullDay: false,
-                    delivery: false,
-                    orderBy: '',
-                    sort: '',
-                    rate: ''
+                    endpoint: '/api/pharmacies/search',
+                    links: {},
+                    pagination: {},
+                    search: {
+                        region: '',
+                        city: '',
+                        keyword: '',
+                        fullDay: false,
+                        delivery: false,
+                        orderBy: '',
+                        sort: '',
+                        rate: ''
+                    },
+                    regionId:null,
+                    region: null,
+                    regionName: 'Choose City',
+                    cityId: null,
+                    cityName: 'Choose Area',
+                    mouseOver: false,
+                }
+            },
+            methods: {
+                favorites(val) {
+                    if(val.favorites !== null) {
+                        return val.favorites.count;
+                    } else {
+                        return 0;
+                    }
                 },
-                regionId:null,
-                region: null,
-                regionName: 'Choose City',
-                cityId: null,
-                cityName: 'Choose Area',
-                mouseOver: false
-            }
-        },
-        methods: {
-            fetchPharmacies(){
-                let vm = this;
-                $('.pharmacies').hide();
-                $('.fetching').show();
-                axios.post(vm.endpoint, vm.search)
-                    .then(function (response) {
-                        $('.fetching').hide();
-                        $('.pharmacies').show();
-                        let data = response.data;
-                        vm.pharmacies = data.data;
-                        vm.links = data.links;
-                        vm.pagination = data.meta;
-                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                    })
-                    .catch((e) => {
-                        console.log(e.response);
-                    });
-            },
-            changeEndpoint(page) {
-                let url = this.pagination.path + '?page=' + page;
-                let pharmacyDiv = document.getElementById('pharmacies');
-                pharmacyDiv.scrollIntoView();
-                this.endpoint = url;
+                fetchPharmacies(){
+                    let vm = this;
+                    $('.pharmacies').hide();
+                    $('.fetching').show();
+                    axios.post(vm.endpoint, vm.search)
+                        .then(function (response) {
+                            $('.fetching').hide();
+                            $('.pharmacies').show();
+                            let data = response.data;
+                            vm.pharmacies = data.data;
+                            vm.links = data.links;
+                            vm.pagination = data.meta;
+                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                        })
+                        .catch((e) => {
+                            console.log(e.response);
+                        });
+                },
+                changeEndpoint(page) {
+                    let url = this.pagination.path + '?page=' + page;
+                    let pharmacyDiv = document.getElementById('pharmacies');
+                    pharmacyDiv.scrollIntoView();
+                    this.endpoint = url;
 
-                return this.fetchPharmacies();
+                    return this.fetchPharmacies();
+                },
+                navigate(url){
+                    this.endpoint = url;
+                    return this.fetchPharmacies();
+                },
+                fetchFilter($key, $value){
+                    let vm = this;
+                    vm.search[$key] = $value;
+                    vm.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies();
+                },
+                flush(filter){
+                    if (filter === 'region') {
+                        this.regionName = 'Choose City';
+                        this.regionId = '';
+                    } else if(filter === 'city') {
+                        this.cityName = 'Choose Area';
+                        this.cityId = '';
+                    }
+                    this.fetchFilter(filter, '')
+                },
+                FilterOrderBy(order, sort) {
+                    let vm = this;
+                    this.search.orderBy = order;
+                    this.search.sort = sort;
+                    vm.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies();
+                },
+                searchByKeyword: _.debounce(function () {
+                    this.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies()
+                }, 500),
+                floor(rate) {
+                    return parseInt(Math.floor(rate));
+                },
+                ceil(rate) {
+                    return parseInt(Math.ceil(rate));
+                },
+                round(rate) {
+                    return parseInt(Math.round(rate));
+                },
+                starColor(n, rate) {
+                    if (n <= this.floor(rate)) {
+                        return 'fa fa-star cyan-text'
+                    } else if (n === this.ceil(rate)) {
+                        return 'fa fa-star-half-full cyan-text'
+                    } else {
+                        return 'fa fa-star-o cyan-text'
+                    }
+                },
+                filterByRate: _.debounce(function () {
+                    this.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies()
+                }, 100),
+                filterByFeature: _.debounce(function () {
+                    this.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies()
+                }, 100),
+                isFav(id) {
+                if(this.auth_user) {
+                    let favorites = this.user.favorite_pharmacies;
+                    if (favorites.length) {
+                        for (let i = 0; i < favorites.length; i++) {
+                            if (favorites[i].favourable_id === id) {
+                                return true
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+                return false;
+                },
+                favClass(id) {
+                    let fav = this.isFav(id);
+                    return {
+                        'grey-text pulse': !fav,
+                        'pink-text bounceIn': fav
+                    }
+                },
+                originalTitle(id) {
+                    if(this.isFav(id)) {
+                        return 'Remove from Favorites'
+                    } else {
+                        return 'Add to Favorites'
+                    }
+                },
+                fav(id) {
+                    if(this.user) {
+                        let user = this.user;
+                        let pharmacies = this.pharmacies;
+                        let favorites = this.user.favorite_pharmacies;
+                        if (this.isFav(id)) {
+                            for(let i = 0; i < favorites.length; i++ ){
+                                if(favorites[i].favourable_id === id) {
+
+                                    favorites.splice(i, 1);
+                                }
+                            }
+
+                            for(let i = 0; i < pharmacies.length; i++ ){
+                                if(pharmacies[i].id === id) {
+
+                                    if(pharmacies[i].favorites !== null) {
+                                        pharmacies[i].favorites.count--
+                                    }
+                                }
+                            }
+                            axios.delete('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
+                                .then(function (res) {
+
+                                })
+                        } else {
+                            favorites.push({
+                                favourable_id: id,
+                                user_id: user.id
+                            });
+                            for(let i = 0; i < pharmacies.length; i++ ){
+                                if(pharmacies[i].id === id) {
+                                    if(pharmacies[i].favorites !== null) {
+                                        pharmacies[i].favorites.count++
+                                    } else {
+                                        pharmacies[i].favorites = { count: 1 };
+                                    }
+                                }
+                            }
+                            axios.post('/api/pharmacies/' + id + '/users/' + user.id + '/fav')
+                                .then(function (res) {
+
+                                })
+                        }
+                    } else {
+                        $('#elegantModalForm').modal('show');
+                    }
+                }
             },
-            navigate(url){
-                this.endpoint = url;
-                return this.fetchPharmacies();
+            mounted() {
+                this.fetchPharmacies()
             },
-            fetchFilter($key, $value){
-                let vm = this;
-                vm.search[$key] = $value;
-                vm.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies();
-            },
-            flush($filter){
-                if ($filter === 'region') {
-                    this.regionName = 'Choose City';
-                    this.regionId = '';
-                } else if($filter === 'city') {
+            watch: {
+                regionId: function (val) {
+                    this.search.city = '';
+                    this.search.region = val;
+
+                    let region = this.filters.regions.filter(function (region) { return region.id === val });
+                    this.region = region.shift();
+                    if(this.region) {
+                        this.regionName = this.region.en_name;
+                    }
                     this.cityName = 'Choose Area';
-                    this.cityId = '';
-                }
-                this.fetchFilter($filter, '')
-            },
-            FilterOrderBy($order, $sort) {
-                let vm = this;
-                this.search.orderBy = $order;
-                this.search.sort = $sort;
-                vm.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies();
-            },
-            searchByKeyword: _.debounce(function () {
-                this.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies()
-            }, 500),
-            round(rate) {
-                return parseInt(Math.round(rate));
-            },
-            starColor(n, rate) {
-                if (n <= this.round(rate)) {
-                    return 'blue-text'
-                } else {
-                    return 'grey-text'
-                }
-            },
-            filterByRate: _.debounce(function () {
-                this.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies()
-            }, 100),
-            filterByFeature: _.debounce(function () {
-                this.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies()
-            }, 100),
-        },
-        mounted() {
-            this.fetchPharmacies()
-        },
-        watch: {
-            regionId: function (val) {
-                this.search.city = '';
-                this.search.region = val;
-                let region = this.filters.regions.filter(function (region) { return region.id === val });
-                this.region = region.shift();
-                this.regionName = this.region.en_name;
-                this.cityName = 'Choose Area';
-                this.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies();
-            },
-            cityId: function (val) {
-                this.search.city = val;
-                let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
-                this.cityName = city.en_name;
-                this.endpoint = '/api/pharmacies/search';
-                this.fetchPharmacies();
-            },
-        }
-    }
+                    this.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies();
+                },
+                cityId: function (val) {
+                    this.search.city = val;
+
+                    let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
+                    if(city) {
+                        this.cityName = city.en_name;
+                    }
+                    this.endpoint = '/api/pharmacies/search';
+                    this.fetchPharmacies();
+                },
+            }
+        };
 </script>

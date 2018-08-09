@@ -7,6 +7,8 @@
          <div class="">
             <!-- Grid row -->
             <div class="row">
+
+                <!-- Order By-->
                <div class="col-md-6 col-lg-12 mb-4">
                   <!-- Panel -->
                   <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h5>
@@ -16,13 +18,14 @@
                   <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'asc')"><a>Rate: low to high</a></p>
                   <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'desc')"><a>Rate: high to low</a></p>
                </div>
+                <!-- /Order By-->
 
-               <!-- Filter by speciality -->
+               <!-- Filter by category-->
                <div class="col-md-6 col-lg-12 mb-4">
                   <h5 class="font-weight-bold dark-grey-text"><strong>Speciality</strong></h5>
                   <div class="divider"></div>
 
-                  <fieldset id="speciality">
+                  <fieldset id="category">
                      <!--Radio group-->
                      <div class="form-group mb-1">
                         <input name="speciality" type="radio" id="speciality0">
@@ -37,29 +40,7 @@
                      <!--Radio group-->
                   </fieldset>
                </div>
-               <!-- /Filter by speciality -->
-
-               <!-- Filter by degree -->
-               <div class="col-md-6 col-lg-12 mb-4">
-                  <h5 class="font-weight-bold dark-grey-text"><strong>Degree</strong></h5>
-                  <div class="divider"></div>
-
-                  <fieldset id="degree">
-                     <!--Radio group-->
-                     <div class="form-group mb-1">
-                        <input name="degree" type="radio" id="degree0">
-                        <label for="degree0" class="dark-grey-text" @click="flush('degree')">All</label>
-                     </div>
-
-                     <div class="form-group mb-1" v-for="degree in filters.degrees">
-                        <input name="degree" type="radio" :id="'degree' + degree.id" :value="degree.id"
-                               @click="fetchFilter('degree', degree.id)">
-                        <label :for="'degree' + degree.id" class="dark-grey-text">{{ degree.en_name }}</label>
-                     </div>
-                     <!--Radio group-->
-                  </fieldset>
-               </div>
-               <!-- /Filter by degree -->
+               <!-- /Filter by category-->
 
                 <!-- Filter by rate -->
                 <div class="col-md-6 col-lg-12 mb-4">
@@ -138,13 +119,12 @@
                                     </ul>
                                 </label>
                             </div>
-
-
-                            <!--Radio group-->
-                        </div>    
+                        </div>
+                        <!--Radio group-->
                     </fieldset>
                 </div>
                 <!-- /Filter by rate-->
+
             </div>
             <!-- /Grid row -->
 
@@ -154,7 +134,7 @@
       <!-- /.Sidebar -->
 
       <!-- Content -->
-      <div class="col-md-10" id="clinics">
+      <div class="col-md-10" id="cosmetics">
 
          <div class="row mb-0">
             <div class="col-md-6">
@@ -193,23 +173,23 @@
          </div>
          <!-- /.Address Area -->
 
-         <!-- Hospitals Grid -->
-         <section class="section pt-4 clinics" v-if="clinics != null">
+         <!-- Cosmetics Grid -->
+         <section class="section pt-4 cosmetics" v-if="cosmetics != null">
 
             <!-- Grid row -->
             <div class="row" style="min-height: 100vh">
 
                <!--Grid column-->
-               <div class="col-md-12 mb-4" v-for="clinic in clinics" >
+               <div class="col-md-12 mb-4" v-for="cosmetic in cosmetics" >
 
                   <!--Card-->
-                  <div class="card" :class="{ 'z-depth-2' : mouseOver == clinic.id }" @mouseover="mouseOver = clinic.id" @mouseleave="mouseOver = null">
+                  <div class="card" :class="{ 'z-depth-2' : mouseOver == cosmetic.id }" @mouseover="mouseOver = cosmetic.id" @mouseleave="mouseOver = null">
 
                      <div class="row">
                         <!--Card image-->
                         <div class="view overlay col-md-6">
-                           <img :src="clinic.img" class="img-fluid" alt="">
-                           <a :href="'/clinics/' + clinic.id + '/' + clinic.slug">
+                           <img :src="cosmetic.img" class="img-fluid" alt="">
+                           <a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug">
                               <div class="mask rgba-white-slight"></div>
                            </a>
                         </div>
@@ -222,50 +202,47 @@
                            <div class="row">
 
                               <div class="col-md-9">
-                                 <h5 class="card-title mb-1"><i class="fa fa-user-md blue-text fa-2x pr-2"></i> <strong><a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">{{ clinic.en_name }}</a></strong></h5>
+                                 <h5 class="card-title mb-1"><i class="fas fa-hand-holding-heart indigo-text fa-2x pr-2"></i> <strong><a :href="'/cosmetic-clinics/' + cosmetic.id + '/' + cosmetic.slug" class="dark-grey-text">{{ cosmetic.en_name }}</a></strong></h5>
                               </div>
-                               <div class="col-md-3 mt-1 text-center">
-                                   <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(clinic.id)" @click.prevent="fav(clinic.id)" >
-                                       <i class="fa fa-heart pr-1 animated"  :class="favClass(clinic.id)"></i>
-                                   </a>
-                                   <span class="light-green-text text-sm-right">{{ favorites(clinic) }}</span>
-                               </div>
-
+                              <div class="col-md-3 mt-1 text-center">
+                                  <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(cosmetic.id)" @click.prevent="fav(cosmetic.id)" >
+                                      <i class="fa fa-heart pr-1 animated"  :class="favClass(cosmetic.id)"></i>
+                                  </a>
+                                  <span class="light-green-text text-sm-right">{{ cosmetic.favorites.count }}</span>
+                              </div>
                            </div>
                            <div class="divider"></div>
 
                            <div class="row mt-1">
-                              <div class="col-md-12">
-                                  <!-- Clinic Rating -->
-                                  <div class="row">
-                                      <div class="col-md-6">
-                                          <div class="col-md-12">
-                                              <div class="m-auto h2-responsive grey-text">
-                                                  {{ clinic.rate.rating }}
-                                              </div>
-                                          </div>
-                                          <ul class="rating mt-1">
-                                              <li v-for="n in 5">
-                                                  <i :class="starColor(n, clinic.rate.rating)"></i>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
+                               <div class="col-md-12">
+                                   <!-- Cosmetic Clinic Rating -->
+                                   <div class="row">
+                                       <div class="col-md-6">
+                                           <div class="col-md-12">
+                                               <div class="m-auto h2-responsive grey-text">
+                                                   {{ cosmetic.rate.rating }}
+                                               </div>
+                                           </div>
+                                           <ul class="rating mt-1">
+                                               <li v-for="n in 5">
+                                                   <i :class="starColor(n, cosmetic.rate.rating)"></i>
+                                               </li>
+                                           </ul>
+                                       </div>
+                                   </div>
 
+                                   <!-- Address -->
+                                   <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>{{ cosmetic.en_address }}</p>
 
-                                 <!-- Address -->
-                                 <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>{{ clinic.en_address }}</p>
+                                   <p><i class="fa fa-at pr-1 cyan-text">
+                                       </i><span class="light-grey-text ">{{ cosmetic.email }}</span>
+                                   </p>
 
-                                 <p><i class="fa fa-at pr-1 cyan-text">
-                                    </i><span class="light-grey-text ">{{ clinic.email }}</span>
-                                 </p>
+                                   <p><i class="fa fa-home pr-1 cyan-text"></i><span class="light-grey-text">{{ cosmetic.website }}</span>
+                                   </p>
+                               </div>
 
-                                 <p><i class="fa fa-home pr-1 cyan-text">
-                                    </i><span class="light-grey-text">{{ clinic.website }}</span>
-                                 </p>
-
-                              </div>
-                           </div>
+                          </div>
 
 
                         </div>
@@ -336,13 +313,13 @@
             </div>
             <!--Grid row-->
          </section>
-         <!-- /.Hospitals Grid -->
+         <!-- /.Cosmetics Grid -->
 
          <!-- Nothing Found -->
-         <section class="section pt-4 clinics" v-if="clinics == null">
+         <section class="section pt-4 clinics" v-if="cosmetics == null">
             <div class="row">
                <div class="col-12 text-center text-muted" style="font-size: 72px; font-family: Raleway">
-                  No clinic found
+                  No cosmetic clinic found
                </div>
             </div>
          </section>
@@ -376,225 +353,215 @@
 </template>
 
 <script>
-export default {
-  props: ["filters", "user", "auth_user"],
-  data() {
-    return {
-      endpoint: "/api/clinics/search",
-      clinics: {},
-      links: {},
-      pagination: {},
-      search: {
-        region: "",
-        city: "",
-        keyword: "",
-        speciality: "",
-        degree: "",
-        orderBy: "",
-        sort: "",
-        rate: ""
-      },
-      regionId: null,
-      region: null,
-      regionName: "Choose City",
-      cityId: null,
-      cityName: "Choose Area",
-      mouseOver: false
-    };
-  },
-  methods: {
-    favorites(val) {
-      if (val.favorites !== null) {
-        return val.favorites.count;
-      } else {
-        return 0;
-      }
-    },
-    fetchClinics() {
-      let vm = this;
-      $(".clinics").hide();
-      $(".fetching").show();
-      axios
-        .post(vm.endpoint, vm.search)
-        .then(function(response) {
-          $(".fetching").hide();
-          $(".clinics").show();
-          let data = response.data;
-          vm.clinics = data.data;
-          vm.links = data.links;
-          vm.pagination = data.meta;
-          vm.endpoint = data.meta.path + "?page=" + vm.pagination.current_page;
-        })
-        .catch(response => {
-          console.log(response);
-        });
-    },
-    changeEndpoint(page) {
-      let url = this.pagination.path + "?page=" + page;
-      let clinicDiv = document.getElementById("clinics");
-      clinicDiv.scrollIntoView();
-      this.endpoint = url;
+   export default{
+       props:['filters', 'user', 'auth_user'],
+       data () {
+           return {
+               endpoint: '/api/cosmetic-clinics/search',
+               cosmetics: {},
+               links: {},
+               pagination: {},
+               search: {
+                   region: '',
+                   city: '',
+                   keyword: '',
+                   speciality: '',
+                   orderBy: '',
+                   sort: '',
+                   rate: ''
+               },
+               regionId:null,
+               region: null,
+               regionName: 'Choose City',
+               cityId: null,
+               cityName: 'Choose Area',
+               mouseOver: false,
+           }
+       },
+       methods: {
+           fetchCosmetics(){
+               let vm = this;
+               $('.cosmetics').hide();
+               $('.fetching').show();
+               axios.post(vm.endpoint, vm.search)
+                   .then(function (response) {
+                       $('.fetching').hide();
+                       $('.cosmetics').show();
+                        let data = response.data;
+                        vm.cosmetics = data.data;
+                        vm.links = data.links;
+                        vm.pagination = data.meta;
+                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
+                   })
+                   .catch((response) => {
+                       console.log(response);
+                   });
+           },
+           changeEndpoint(page) {
+               let url = this.pagination.path + '?page=' + page;
+               let cosmeticDiv = document.getElementById('cosmetics');
+               cosmeticDiv.scrollIntoView();
+               this.endpoint = url;
 
-      return this.fetchClinics();
-    },
-    navigate(url) {
-      this.endpoint = url;
-      return this.fetchClinics();
-    },
-    fetchFilter($key, $value) {
-      let vm = this;
-      vm.search[$key] = $value;
-      vm.endpoint = "/api/clinics/search";
-      this.fetchClinics();
-    },
-    flush($filter) {
-      if ($filter === "region") {
-        this.regionName = "Choose City";
-        this.regionId = "";
-      } else if ($filter === "city") {
-        this.cityName = "Choose Area";
-        this.cityId = "";
-      }
-      this.fetchFilter($filter, "");
-    },
-    FilterOrderBy($order, $sort) {
-      let vm = this;
-      this.search.orderBy = $order;
-      this.search.sort = $sort;
-      vm.endpoint = "/api/clinics/search";
-      this.fetchClinics();
-    },
-    searchByKeyword: _.debounce(function() {
-      this.endpoint = "/api/clinics/search";
-      this.fetchClinics();
-    }, 500),
-    floor(rate) {
-      return parseInt(Math.floor(rate));
-    },
-    ceil(rate) {
-      return parseInt(Math.ceil(rate));
-    },
-    round(rate) {
-      return parseInt(Math.round(rate));
-    },
-    starColor(n, rate) {
-      if (n <= this.floor(rate)) {
-        return "fa fa-star cyan-text";
-      } else if (n === this.ceil(rate)) {
-        return "fa fa-star-half-full cyan-text";
-      } else {
-        return "fa fa-star-o cyan-text";
-      }
-    },
-    filterByRate: _.debounce(function() {
-      this.endpoint = "/api/clinics/search";
-      this.fetchClinics();
-    }, 100),
-    isFav(id) {
-      if (this.auth_user) {
-        let favorites = this.user.favorite_clinics;
-        if (favorites.length) {
-          for (let i = 0; i < favorites.length; i++) {
-            if (favorites[i].favourable_id === id) {
-              return true;
-            }
-          }
-        } else {
-          return false;
-        }
-      }
-      return false;
-    },
-    favClass(id) {
-      let fav = this.isFav(id);
-      return {
-        "grey-text pulse": !fav,
-        "pink-text bounceIn": fav
-      };
-    },
-    originalTitle(id) {
-      if (this.isFav(id)) {
-        return "Remove from Favorites";
-      } else {
-        return "Add to Favorites";
-      }
-    },
-    fav(id) {
-      if (this.user) {
-        let user = this.user;
-        let clinics = this.clinics;
-        let favorites = this.user.favorite_clinics;
-        if (this.isFav(id)) {
-          for (let i = 0; i < favorites.length; i++) {
-            if (favorites[i].favourable_id === id) {
-              favorites.splice(i, 1);
-            }
-          }
+               return this.fetchCosmetics();
+           },
+           navigate(url){
+               this.endpoint = url;
+               return this.fetchCosmetics();
+           },
+           fetchFilter($key, $value){
+               let vm = this;
+               vm.search[$key] = $value;
+               vm.endpoint = '/api/cosmetic-clinics/search';
+               this.fetchCosmetics();
+           },
+           flush($filter){
+               if ($filter === 'region') {
+                   this.regionName = 'Choose City';
+                   this.regionId = '';
+               } else if($filter === 'city') {
+                   this.cityName = 'Choose Area';
+                   this.cityId = '';
+               }
+               this.fetchFilter($filter, '')
+           },
+           FilterOrderBy($order, $sort) {
+               let vm = this;
+               this.search.orderBy = $order;
+               this.search.sort = $sort;
+               vm.endpoint = '/api/cosmetic-clinics/search';
+               this.fetchCosmetics();
+           },
+           searchByKeyword: _.debounce(function () {
+               this.endpoint = '/api/cosmetic-clinics/search';
+               this.fetchCosmetics()
+           }, 500),
+           floor(rate) {
+               return parseInt(Math.floor(rate));
+           },
+           ceil(rate) {
+               return parseInt(Math.ceil(rate));
+           },
+           round(rate) {
+               return parseInt(Math.round(rate));
+           },
+           starColor(n, rate) {
+               if (n <= this.floor(rate)) {
+                   return 'fa fa-star cyan-text'
+               } else if (n === this.ceil(rate)) {
+                   return 'fa fa-star-half-full cyan-text'
+               } else {
+                   return 'fa fa-star-o cyan-text'
+               }
+           },
+           filterByRate: _.debounce(function () {
+               this.endpoint = '/api/cosmetic-clinics/search';
+               this.fetchCosmetics()
+           }, 100),
+           isFav(id) {
+                       if(this.auth_user){
+               let favorites = this.user.favorite_cosmetic_clinics;
+               if(favorites.length) {
+                   for(let i = 0; i < favorites.length; i++ ){
+                       if(favorites[i].favourable_id === id) {
+                           return true
+                       }
+                   }
+               } else {
+                   return false;
+               }
+               }
+                   return false;
+           },
+           favClass(id) {
+               let fav = this.isFav(id);
+               return {
+                   'grey-text pulse': !fav,
+                   'pink-text bounceIn': fav
+               }
+           },
+           originalTitle(id) {
+               if(this.isFav(id)) {
+                   return 'Remove from Favorites'
+               } else {
+                   return 'Add to Favorites'
+               }
+           },
+           fav(id) {
+               if(this.user) {
+                   let user = this.user;
+                   let cosmetics = this.cosmetics;
+                   let favorites = this.user.favorite_cosmetic_clinics;
+                   if (this.isFav(id)) {
+                       for(let i = 0; i < favorites.length; i++ ){
+                           if(favorites[i].favourable_id === id) {
 
-          for (let i = 0; i < clinics.length; i++) {
-            if (clinics[i].id === id) {
-              if (clinics[i].favorites !== null) {
-                clinics[i].favorites.count--;
-              }
-            }
-          }
-          axios
-            .delete("/api/clinics/" + id + "/users/" + user.id + "/fav")
-            .then(function(res) {});
-        } else {
-          favorites.push({
-            favourable_id: id,
-            user_id: user.id
-          });
-          for (let i = 0; i < clinics.length; i++) {
-            if (clinics[i].id === id) {
-              if (clinics[i].favorites !== null) {
-                clinics[i].favorites.count++;
-              } else {
-                clinics[i].favorites = { count: 1 };
-              }
-            }
-          }
-          axios
-            .post("/api/clinics/" + id + "/users/" + user.id + "/fav")
-            .then(function(res) {});
-        }
-      } else {
-        $("#elegantModalForm").modal("show");
-      }
-    }
-  },
-  mounted() {
-    this.fetchClinics();
-  },
-  watch: {
-    regionId: function(val) {
-      this.search.city = "";
-      this.search.region = val;
-      let region = this.filters.regions.filter(function(region) {
-        return region.id === val;
-      });
-      this.region = region.shift();
-      if (this.region) {
-        this.regionName = this.region.en_name;
-      }
-      this.cityName = "Choose Area";
-      this.endpoint = "/api/clinics/search";
-      this.fetchClinics();
-    },
-    cityId: function(val) {
-      this.search.city = val;
-      let city = this.region.cities
-        .filter(function(city) {
-          return city.id === val;
-        })
-        .shift();
-      if (city) {
-        this.cityName = city.en_name;
-      }
-      this.endpoint = "/api/clinics/search";
-      this.fetchClinics();
-    }
-  }
-};
+                               favorites.splice(i, 1);
+                           }
+                       }
+
+                       for(let i = 0; i < cosmetics.length; i++ ){
+                           if(cosmetics[i].id === id) {
+
+                               if(cosmetics[i].favorites !== null) {
+                                   cosmetics[i].favorites.count--
+                               }
+                           }
+                       }
+                       axios.delete('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
+                           .then(function (res) {
+
+                           })
+                   } else {
+                       favorites.push({
+                           favourable_id: id,
+                           user_id: user.id
+                       });
+                       for(let i = 0; i < cosmetics.length; i++ ){
+                           if(cosmetics[i].id === id) {
+                               if(cosmetics[i].favorites !== null) {
+                                   cosmetics[i].favorites.count++
+                               } else {
+                                   cosmetics[i].favorites = { count: 1 };
+                               }
+                           }
+                       }
+                       axios.post('/api/cosmetic-clinics/' + id + '/users/' + user.id + '/fav')
+                           .then(function (res) {
+
+                           })
+                   }
+               } else {
+                   $('#elegantModalForm').modal('show');
+               }
+           }
+       },
+       mounted() {
+           this.fetchCosmetics();
+
+       },
+       watch: {
+           regionId: function (val) {
+               this.search.city = '';
+               this.search.region = val;
+               let region = this.filters.regions.filter(function (region) { return region.id === val });
+               this.region = region.shift();
+               if(this.region) {
+                   this.regionName = this.region.en_name;
+               }
+               this.cityName = 'Choose Area';
+               this.endpoint = '/api/cosmetic-clinics/search';
+               this.fetchCosmetics();
+           },
+           cityId: function (val) {
+               this.search.city = val;
+               let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
+               if(city) {
+                   this.cityName = city.en_name;
+               }
+               this.endpoint = '/api/cosmetic-clinics/search';
+               this.fetchCosmetics();
+           },
+       }
+   }
 </script>

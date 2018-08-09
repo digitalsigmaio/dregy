@@ -1,5 +1,5 @@
 <template>
-    <div class="row pt-4">
+    <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
         <div class="col-md-2">
@@ -53,129 +53,71 @@
 
                             <!--Radio group-->
                             <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating0" value="5" v-model="search.rate" @click="filterByRate">
-                                <label for="rating0" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
-                                <label for="rating1" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating1" value="4" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating1" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <=4, 'grey-text': n > 4 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
 
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating2" value="3" v-model="search.rate" @click="filterByRate">
-                                <label for="rating2" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating2" value="3" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating2" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <= 3, 'grey-text': n > 3 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating3" value="2" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating3" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <= 2, 'grey-text': n > 2 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+
+                                <!--Radio group-->
+                                <div class="form-group mb-1">
+                                    <input name="rating" type="radio" id="rating4" value="1" v-model="search.rate" @click="filterByRate">
+                                    <label for="rating4" class="hidden">
+                                        <!-- Rating -->
+                                        <ul class="rating inline-ul">
+                                            <li v-for="n in 5">
+                                                <i class="fa fa-star" :class="{ 'blue-text': n <= 1, 'grey-text': n > 1 }"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-plus small"></i>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+
                             </div>
-
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating3" value="2" v-model="search.rate" @click="filterByRate">
-                                <label for="rating3" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
-
-                            <!--Radio group-->
-                            <div class="form-group mb-1">
-                                <input name="rating" type="radio" id="rating4" value="1" v-model="search.rate" @click="filterByRate">
-                                <label for="rating4" class="hidden">
-                                    <!-- Rating -->
-                                    <ul class="rating inline-ul">
-                                        <li>
-                                            <i class="fa fa-star blue-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star grey-text"></i>
-                                        </li>
-                                    </ul>
-                                </label>
-                            </div>
-
-
                             <!--Radio group-->
                         </fieldset>
                     </div>
@@ -196,7 +138,7 @@
                 <div class="col-md-6">
                     <!-- Search -->
                     <div class="md-form form-lg ml-1">
-                        <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="searchByKeyword">
+                        <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="triggerSearch">
                         <label for="keyword">Search</label>
                     </div>
                 </div>
@@ -239,13 +181,13 @@
                     <div class="col-md-12 mb-4" v-for="hospital in hospitals" >
 
                         <!--Card-->
-                        <div class="card" :class="{ 'z-depth-2' : mouseOver == hospital.id }" v-on:mouseover="mouseOver = hospital.id" v-on:mouseleave="mouseOver = null">
+                        <div class="card" :class="{ 'z-depth-2' : mouseOver == hospital.id }" @mouseover="mouseOver = hospital.id" @mouseleave="mouseOver = null">
 
                             <div class="row">
                                 <!--Card image-->
                                 <div class="view overlay col-md-6">
                                     <img :src="hospital.img" class="img-fluid" alt="">
-                                    <a>
+                                    <a :href="'/hospitals/' + hospital.id + '/' + hospital.slug">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
                                 </div>
@@ -255,34 +197,50 @@
                                 <div class="card-body col-md-6">
                                     <!--Category & Title-->
 
-                                   <div class="row">
+                                    <div class="row">
 
-                                           <div class="col-md-9">
-                                               <h5 class="card-title mb-1"><i class="fas fa-hospital red-text fa-2x pr-1 pb-1"></i> <strong><a href="" class="dark-grey-text">{{ hospital.en_name }}</a></strong></h5>
-                                           </div>
-                                           <div class="col-md-3 mt-1 text-center"><i class="fas fa-heart pr-1"  :class="{ 'pink-text': isFav, 'grey-text' : !isFav }">
-                                           </i><span class="light-green-text text-sm-right">{{ hospital.favorites.count }}</span>
-                                           </div>
+                                        <div class="col-md-9">
+                                            <h5 class="card-title mb-1"><i class="fas fa-hospital-o red-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/hospitals/' + hospital.id + '/' + hospital.slug" class="dark-grey-text">{{ hospital.en_name }}</a></strong></h5>
+                                        </div>
+                                        <div class="col-md-3 mt-1 text-center">
+                                            <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(hospital.id)" @click.prevent="fav(hospital.id)" >
+                                                <i class="fa fa-heart pr-1 animated"  :class="favClass(hospital.id)"></i>
+                                            </a>
+                                            <span class="light-green-text text-sm-right">{{ favorites(hospital) }}</span>
+                                        </div>
 
-                                   </div>
+                                    </div>
                                     <div class="divider"></div>
                                     <div class="row mt-1">
                                         <div class="col-md-12">
 
-                                            <ul class="rating mt-1">
-                                                <li v-for="n in 5">
-                                                    <i class="fa fa-star cyan-text" :class="starColor(n, hospital.rate.value)"></i>
-                                                </li>
-                                            </ul>
-                                            <!-- Rating -->
-                                            <p class="about"><i class="fa fa-map-marker-alt cyan-text pr-1"></i>{{ hospital.en_address }}</p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="m-auto h2-responsive grey-text">
+                                                            {{ hospital.rate.rating }}
+                                                        </div>
+                                                    </div>
+                                                    <ul class="rating mt-1">
+                                                        <li v-for="n in 5">
+                                                            <i :class="starColor(n, hospital.rate.rating)"></i>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6 m-auto">
+                                                    <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">Featured</span>
+                                                </div>
+                                            </div>
 
-                                            <p><i class="fas fa-at pr-1 cyan-text">
-                                            </i><span class="light-grey-text ">{{ hospital.email }}</span>
+                                            <!-- Rating -->
+                                            <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>{{ hospital.en_address }}</p>
+
+                                            <p><i class="fa fa-at pr-1 cyan-text">
+                                                </i><span class="light-grey-text ">{{ hospital.email }}</span>
                                             </p>
 
-                                            <p><i class="fas fa-home pr-1 cyan-text">
-                                            </i><span class="light-grey-text">{{ hospital.website }}</span>
+                                            <p><i class="fa fa-home pr-1 cyan-text">
+                                                </i><span class="light-grey-text">{{ hospital.website }}</span>
                                             </p>
 
                                         </div>
@@ -396,15 +354,13 @@
     </div>
 </template>
 
-
 <script>
-
-    export default {
-        props: ['filters', 'hospitals'],
+    export default{
+        props: ['filters', 'user', 'auth_user'],
         data () {
             return {
+                hospitals: {},
                 endpoint: '/api/hospitals/search',
-                isFav: false,
                 links: {},
                 pagination: {},
                 search: {
@@ -421,10 +377,17 @@
                 regionName: 'Choose City',
                 cityId: null,
                 cityName: 'Choose Area',
-                mouseOver: false
+                mouseOver: false,
             }
         },
         methods: {
+            favorites(val) {
+                if(val.favorites !== null) {
+                    return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
             fetchHospitals(){
                 let vm = this;
                 $('.hospitals').hide();
@@ -433,20 +396,14 @@
                     .then(function (response) {
                         $('.fetching').hide();
                         $('.hospitals').show();
-                        if (typeof response.data.data !== 'undefined') {
-                            let data = response.data;
-                            vm.hospitals = data.data;
-                            vm.links = data.links;
-                            vm.pagination = data.meta;
-                            vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                        } else if (typeof response.status !== 'undefined') {
-                            vm.hospitals = null;
-                            console.log(response.data.message)
-                        }
-
+                        let data = response.data;
+                        vm.hospitals = data.data;
+                        vm.links = data.links;
+                        vm.pagination = data.meta;
+                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                     })
-                    .catch((response) => {
-                        console.log(response);
+                    .catch((e) => {
+                        console.log(e.response);
                     });
             },
             changeEndpoint(page) {
@@ -488,20 +445,111 @@
                 this.endpoint = '/api/hospitals/search';
                 this.fetchHospitals()
             }, 500),
+            triggerSearch() {
+                let len = this.search.keyword.length;
+              if(len >= 3 || len === 0 ) {
+                  this.searchByKeyword();
+              }
+            },
+            floor(rate) {
+                return parseInt(Math.floor(rate));
+            },
+            ceil(rate) {
+                return parseInt(Math.ceil(rate));
+            },
             round(rate) {
                 return parseInt(Math.round(rate));
             },
             starColor(n, rate) {
-                if (n <= this.round(rate)) {
-                    return 'blue-text'
+                if (n <= this.floor(rate)) {
+                    return 'fa fa-star cyan-text'
+                } else if (n === this.ceil(rate)) {
+                    return 'fa fa-star-half-full cyan-text'
                 } else {
-                    return 'grey-text'
+                    return 'fa fa-star-o cyan-text'
                 }
             },
             filterByRate: _.debounce(function () {
                 this.endpoint = '/api/hospitals/search';
                 this.fetchHospitals()
             }, 100),
+            isFav(id) {
+                        if(this.auth_user){
+                let favorites = this.user.favorite_hospitals;
+                if(favorites.length) {
+                    for(let i = 0; i < favorites.length; i++ ){
+                        if(favorites[i].favourable_id === id) {
+                            return true;
+                        }
+                    }
+                } else {
+                    return false;
+                }
+                }
+                    return false;
+            },
+            favClass(id) {
+                let fav = this.isFav(id);
+                return {
+                    'grey-text pulse': !fav,
+                    'pink-text bounceIn': fav
+                }
+            },
+            originalTitle(id) {
+                if(this.isFav(id)) {
+                    return 'Remove from Favorites'
+                } else {
+                    return 'Add to Favorites'
+                }
+            },
+            fav(id) {
+                if(this.user) {
+                    let user = this.user;
+                    let hospitals = this.hospitals;
+                    let favorites = this.user.favorite_hospitals;
+                    if (this.isFav(id)) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+
+                                favorites.splice(i, 1);
+                            }
+                        }
+
+                        for(let i = 0; i < hospitals.length; i++ ){
+                            if(hospitals[i].id === id) {
+
+                                if(hospitals[i].favorites !== null) {
+                                    hospitals[i].favorites.count--
+                                }
+                            }
+                        }
+                        axios.delete('/api/hospitals/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    } else {
+                        favorites.push({
+                            favourable_id: id,
+                            user_id: user.id
+                        });
+                        for(let i = 0; i < hospitals.length; i++ ){
+                            if(hospitals[i].id === id) {
+                                if(hospitals[i].favorites !== null) {
+                                    hospitals[i].favorites.count++
+                                } else {
+                                    hospitals[i].favorites = { count: 1 };
+                                }
+                            }
+                        }
+                        axios.post('/api/hospitals/' + id + '/users/' + user.id + '/fav')
+                            .then(function (res) {
+
+                            })
+                    }
+                } else {
+                    $('#elegantModalForm').modal('show');
+                }
+            }
         },
         mounted() {
             this.fetchHospitals();
@@ -510,20 +558,25 @@
             regionId: function (val) {
                 this.search.city = '';
                 this.search.region = val;
+
                 let region = this.filters.regions.filter(function (region) { return region.id === val });
                 this.region = region.shift();
-                this.regionName = this.region.en_name;
+                if(this.region) {
+                    this.regionName = this.region.en_name;
+                }
                 this.cityName = 'Choose Area';
                 this.endpoint = '/api/hospitals/search';
-                this.fetchHospitals();
+                this.fetchPharmacies();
             },
             cityId: function (val) {
                 this.search.city = val;
                 let city = this.region.cities.filter(function (city) { return city.id === val }).shift();
-                this.cityName = city.en_name;
+                if(city) {
+                    this.cityName = city.en_name;
+                }
                 this.endpoint = '/api/hospitals/search';
                 this.fetchHospitals();
             },
         }
-    }
+    };
 </script>
