@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="card card-ecommerce">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingFour">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#moreinfo" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             More Info
@@ -111,7 +111,7 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="moreinfo" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="moreinfo" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
 
                                         <p v-if="hospital.website"><i class="fa fa-home pr-2 blue-text"></i>{{ hospital.website }}</p>
@@ -126,7 +126,7 @@
 
 
                                 <div class="card card-ecommerce" v-if="hospital.en_note">
-                                    <div class="card-header pl-0" role="tab" id="headingThree">
+                                    <div class="card-header pl-0" role="tab" id="headingFive">
                                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#note" aria-expanded="false" aria-controls="collapseThree">
                                             <h5 class="mb-0">
                                                 Note
@@ -134,7 +134,7 @@
                                             </h5>
                                         </a>
                                     </div>
-                                    <div id="note" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div id="note" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
                                         <div class="dark-grey-text pl-0">
 
                                             <p>{{ hospital.en_note }}</p>

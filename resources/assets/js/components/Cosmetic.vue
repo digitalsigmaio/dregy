@@ -314,8 +314,12 @@ export default {
         let cosmetics = this.cosmetics;
         let favorites = this.user.favorite_cosmetic_clinics;
         if (this.isFav(id)) {
+
           for (let i = 0; i < favorites.length; i++) {
+
             if (favorites[i].favourable_id === id) {
+                console.log(favorites[i].favourable_id);
+                console.log(id);
               favorites.splice(i, 1);
             }
           }
@@ -432,6 +436,9 @@ export default {
   mounted() {
     this.rate();
     this.view();
-  }
+  },
+    watch: {
+
+    }
 };
 </script>
