@@ -40,9 +40,10 @@
 <script>
 
     export default{
-       props:['user', 'jobs'],
+       props:['user_object', 'jobs'],
         data() {
            return {
+               user: this.user_object
            }
         },
         methods: {

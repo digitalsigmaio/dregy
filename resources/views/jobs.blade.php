@@ -6,7 +6,7 @@
 
 @section('content')
     <jobs-component 
-        :user = "{{Auth::check() ? Auth::user()->load(['favoriteJobAds']) : 'null'}}"
+        :user_object = "{{Auth::check() ? Auth::user()->load(['favoriteJobAds']) : 'null'}}"
         :filters = "{{ $filters->toJson() }}"
         :auth_user = "{{ json_encode(Auth::check()) }}" >
     </jobs-component>

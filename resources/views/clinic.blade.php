@@ -6,9 +6,9 @@
 
 @section('content')
 <clinic-component
-    :user = "{{ Auth::check() ? Auth::user()->load(['favoriteClinics', 'rateForClinics']) : 'null' }}" 
-    :clinics = "{{ $relatedClinicsChunks }}" 
-    :clinic = "{{ $clinic}}" 
+    :user_object = "{{ Auth::check() ? Auth::user()->load(['favoriteClinics', 'rateForClinics']) : 'null' }}"
+    :clinics= "{{ $relatedClinicsChunks }}"
+    :clinic_object = "{{ $clinic}}"
     :auth_user = "{{ json_encode(Auth::check()) }}">
 </clinic-component>
 @endsection

@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="card card-ecommerce">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingFour">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#phone" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             Phone
@@ -79,7 +79,7 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
                                         <p v-for="phone in job.phone"><i class="fa fa-phone pr-2 blue-text"></i>{{ phone }}</p>
                                     </div>
@@ -197,7 +197,7 @@
                                     </span>
 
                                     <!--Description-->
-                                    <p class="card-text">\
+                                    <p class="card-text">
                                         {{ job.description }}
                                     </p>
                                     <!--Card footer-->
@@ -233,9 +233,11 @@
 </template>
 <script>
     export default{
-        props:['user', 'jobs', 'job', 'auth_user'],
+        props:['user_object', 'jobs', 'job_object', 'auth_user'],
         data () {
             return {
+                user: this.user_object,
+                job: this.job_object
             }
         },
         methods: {
@@ -279,7 +281,6 @@
                 if(this.user) {
                     let user = this.user;
                     let job = this.job;
-                    let jobs = this.jobs;
                     let favorites = this.user.favorite_job_ads;
 
                     if (this.isFav(id)) {
@@ -290,14 +291,10 @@
                             }
                         }
 
-                        for(let i = 0; i < jobs.length; i++ ){
-                            if(jobs[i].id === id) {
-
-                                if(jobs[i].favorites !== null) {
-                                    jobs[i].favorites.count--
-                                }
-                            }
+                        if(job.favorites !== null) {
+                            job.favorites.count--;
                         }
+
                         axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 
@@ -307,15 +304,15 @@
                             favourable_id: id,
                             user_id: user.id
                         });
-                        for(let i = 0; i < jobs.length; i++ ){
-                            if(jobs[i].id === id) {
-                                if(jobs[i].favorites !== null) {
-                                    jobs[i].favorites.count++
-                                } else {
-                                    jobs[i].favorites = { count: 1 };
-                                }
+
+                        if(job.id === id) {
+                            if(job.favorites !== null) {
+                                job.favorites.count++;
+                            } else {
+                                job.favorites = { count: 1 };
                             }
                         }
+
                         axios.post('/api/job-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
 

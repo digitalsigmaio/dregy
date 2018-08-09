@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="card card-ecommerce">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingFour">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#phone" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             Phone
@@ -91,14 +91,14 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
                                         <p v-for="phone in clinic.phone"><i class="fa fa-phone pr-2 blue-text"></i>{{ phone }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card card-ecommerce">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingFive">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#moreinfo" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             More Info
@@ -106,7 +106,7 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="moreinfo" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="moreinfo" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
 
                                         <p v-if="clinic.website"><i class="fa fa-home pr-2 blue-text"></i>{{ clinic.website }}</p>
@@ -121,7 +121,7 @@
                             </div>
 
                             <div class="card card-ecommerce" v-if="clinic.en_note">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingSix">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#note" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             Note
@@ -129,7 +129,7 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="note" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="note" class="collapse" role="tabpanel" aria-labelledby="headingSix" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
 
                                         <p>{{ clinic.en_note }}</p>
@@ -228,7 +228,7 @@
                                         <!--Card footer-->
                                         <div class="card-footer">
                                             <span class="float-right light-green-text">
-                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(clinics.id)"></i> {{ favorites(clinic) }}
+                                                <i class="fa fa-heart ml-3 pr-1" :class="favClass(clinic.id)"></i> {{ favorites(clinic) }}
                                             </span>
                                         </div>
                                     </div>
@@ -255,9 +255,11 @@
 </template>
 <script>
     export default{
-        props:['user', 'clinics', 'clinic', 'auth_user'],
+        props:['user_object', 'clinics', 'clinic_object', 'auth_user'],
         data () {
             return {
+                user: this.user_object,
+                clinic: this.clinic_object,
             }
         },
         methods: {
@@ -301,21 +303,12 @@
                 if(this.user) {
                     let user = this.user;
                     let clinic = this.clinic;
-                    let clinics = this.clinics;
                     let favorites = this.user.favorite_clinics;
                     if (this.isFav(id)) {
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
                                 favorites.splice(i, 1);
-                            }
-                        }
-
-                        for(let i = 0; i < clinics.length; i++ ){
-                            if(clinics[i].id === id) {
-                                if(clinics[i].favorites !== null) {
-                                    clinics[i].favorites.count--
-                                }
                             }
                         }
 
@@ -333,15 +326,6 @@
                             favourable_id: id,
                             user_id: user.id
                         });
-                        for(let i = 0; i < clinics.length; i++ ){
-                            if(clinics[i].id === id) {
-                                if(clinics[i].favorites !== null) {
-                                    clinics[i].favorites.count++
-                                } else {
-                                    clinics[i].favorites = { count: 1 };
-                                }
-                            }
-                        }
 
                         if(clinic.id === id) {
                             if(clinic.favorites !== null) {

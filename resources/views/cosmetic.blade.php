@@ -7,9 +7,9 @@
 @section('content')
 
 <cosmetic-component
-    :user = "{{ Auth::check() ? Auth::user()->load(['favoriteCosmeticClinics', 'rateForCosmeticClinics']) : 'null' }}"
+    :user_object = "{{ Auth::check() ? Auth::user()->load(['favoriteCosmeticClinics', 'rateForCosmeticClinics']) : 'null' }}"
     :cosmetics = "{{$relatedCosmeticClinicsChunks}}"
-    :cosmetic = "{{$cosmetic}}"
+    :cosmetic_object = "{{$cosmetic}}"
     :auth_user = "{{ json_encode(Auth::check()) }}" >
 </cosmetic-component>
 

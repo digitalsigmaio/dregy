@@ -258,10 +258,11 @@
 </template>
 <script>
     export default {
-       props: ['user', 'hospitals', 'hospital','auth_user', 'lang'],
+       props: ['user_object', 'hospitals', 'hospital_object','auth_user', 'lang'],
         data () {
             return {
-                
+                user: this.user_object,
+                hospital: this.hospital_object
             }
         },
         methods: {
@@ -303,7 +304,6 @@
             },
             fav(id) {
                 let user = this.user;
-                let hospitals = this.hospitals;
                 let hospital = this.hospital;
                 let favorites = this.user.favorite_hospitals;
                 if(this.user) {
@@ -313,15 +313,6 @@
                             if(favorites[i].favourable_id === id) {
 
                                 favorites.splice(i, 1);
-                            }
-                        }
-
-                        for(let i = 0; i < hospitals.length; i++ ){
-                            if(hospitals[i].id === id) {
-
-                                if(hospitals[i].favorites !== null) {
-                                    hospitals[i].favorites.count--
-                                }
                             }
                         }
 
@@ -342,15 +333,6 @@
                             favourable_id: id,
                             user_id: user.id
                         });
-                        for(let i = 0; i < hospitals.length; i++ ){
-                            if(hospitals[i].id === id) {
-                                if(hospitals[i].favorites !== null) {
-                                    hospitals[i].favorites.count++
-                                } else {
-                                    hospitals[i].favorites = { count: 1 };
-                                }
-                            }
-                        }
 
                         if(hospital.id === id) {
                             if(hospital.favorites !== null) {

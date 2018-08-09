@@ -265,10 +265,13 @@
 </template>
 <script>
 export default {
-  props: ["user", "cosmetic", "cosmetics", "auth_user"],
+  props: ["user_object", "cosmetic_object", "cosmetics", "auth_user"],
 
   data() {
-    return {};
+    return {
+        user: this.user_object,
+        cosmetic: this.cosmetic_object
+    };
   },
   methods: {
     favorites(val) {
@@ -311,29 +314,18 @@ export default {
       if (this.user) {
         let user = this.user;
         let cosmetic = this.cosmetic;
-        let cosmetics = this.cosmetics;
         let favorites = this.user.favorite_cosmetic_clinics;
         if (this.isFav(id)) {
 
           for (let i = 0; i < favorites.length; i++) {
-
             if (favorites[i].favourable_id === id) {
-                console.log(favorites[i].favourable_id);
-                console.log(id);
               favorites.splice(i, 1);
-            }
-          }
 
-          for (let i = 0; i < cosmetics.length; i++) {
-            if (cosmetics[i].id === id) {
-              if (cosmetics[i].favorites !== null) {
-                cosmetics[i].favorites.count--;
-              }
             }
           }
 
           if (cosmetic.favorites !== null) {
-            cosmetic.favorites.count--;
+              cosmetic.favorites.count--;
           }
           axios
             .delete(
@@ -345,15 +337,6 @@ export default {
             favourable_id: id,
             user_id: user.id
           });
-          for (let i = 0; i < cosmetics.length; i++) {
-            if (cosmetics[i].id === id) {
-              if (cosmetics[i].favorites !== null) {
-                cosmetics[i].favorites.count++;
-              } else {
-                cosmetics[i].favorites = { count: 1 };
-              }
-            }
-          }
 
           if (cosmetic.id === id) {
             if (cosmetic.favorites !== null) {

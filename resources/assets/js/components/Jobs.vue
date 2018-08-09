@@ -347,9 +347,10 @@
 </template>
 <script>
     export default{
-        props: ['filters', 'user', 'auth_user'],
+        props: ['filters', 'user_object', 'auth_user'],
         data () {
             return {
+                user: this.user_object,
                 endpoint: '/api/job-ads/search',
                 jobs: {},
                 links: {},

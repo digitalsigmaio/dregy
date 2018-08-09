@@ -39,9 +39,10 @@
 
 <script>
     export default{
-       props:['user', 'products'],
+       props:['user_object', 'products'],
         data() {
            return {
+               user: this.user_object
            }
         },
         methods: {

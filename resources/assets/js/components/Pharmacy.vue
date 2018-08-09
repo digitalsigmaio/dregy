@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                             <div class="card card-ecommerce">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingFour">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#phone" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             Phone
@@ -102,14 +102,14 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
                                         <p v-for="phone in pharmacy.phone"><i class="fa fa-phone pr-2 blue-text"></i>{{ phone }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card card-ecommerce">
-                                <div class="card-header pl-0" role="tab" id="headingThree">
+                                <div class="card-header pl-0" role="tab" id="headingFive">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#moreinfo" aria-expanded="false" aria-controls="collapseThree">
                                         <h5 class="mb-0">
                                             More Info
@@ -117,7 +117,7 @@
                                         </h5>
                                     </a>
                                 </div>
-                                <div id="moreinfo" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div id="moreinfo" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
                                     <div class="dark-grey-text pl-0">
 
                                         <p v-if="pharmacy.website"><i class="fa fa-home pr-2 blue-text"></i>{{ pharmacy.website }}</p>
@@ -275,10 +275,11 @@
 </template>
 <script>
     export default{
-        props: ['user', 'pharmacies', 'pharmacy', 'auth_user'],
+        props: ['user_object', 'pharmacies', 'pharmacy_object', 'auth_user'],
         data () {
             return {
-                
+                user: this.user_object,
+                pharmacy: this.pharmacy_object
             }
         },
         methods: {
@@ -321,22 +322,13 @@
             fav(id) {
                 if(this.user) {
                     let user = this.user;
-                    let pharmacy = this.pharmacy
-                    let pharmacies = this.pharmacies;
+                    let pharmacy = this.pharmacy;
                     let favorites = this.user.favorite_pharmacies;
                     if (this.isFav(id)) {
                         for(let i = 0; i < favorites.length; i++ ){
                             if(favorites[i].favourable_id === id) {
 
                                 favorites.splice(i, 1);
-                            }
-                        }
-
-                        for(let i = 0; i < pharmacies.length; i++ ){
-                            if(pharmacies[i].id === id) {
-                                if(pharmacies[i].favorites !== null) {
-                                    pharmacies[i].favorites.count--
-                                }
                             }
                         }
 
@@ -354,15 +346,6 @@
                             favourable_id: id,
                             user_id: user.id
                         });
-                        for(let i = 0; i < pharmacies.length; i++ ){
-                            if(pharmacies[i].id === id) {
-                                if(pharmacies[i].favorites !== null) {
-                                    pharmacies[i].favorites.count++
-                                } else {
-                                    pharmacies[i].favorites = { count: 1 };
-                                }
-                            }
-                        }
 
                         if(pharmacy.id === id) {
                             if(pharmacy.favorites !== null) {

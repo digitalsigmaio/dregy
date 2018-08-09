@@ -280,9 +280,10 @@
 
 <script>
     export default{
-       props: ['user', 'filters', 'auth_user'],
+       props: ['user_object', 'filters', 'auth_user'],
         data () {
             return {
+                user: this.user_object,
                 endpoint: '/api/product-ads/search',
                 products: {},
                 links: {},
@@ -364,15 +365,15 @@
             isFav(id) {
                 if(this.auth_user){
                 let favorites = this.user.favorite_product_ads;
-                if(favorites.length) {
-                    for(let i = 0; i < favorites.length; i++ ){
-                        if(favorites[i].favourable_id === id) {
-                            return true
+                    if(favorites.length) {
+                        for(let i = 0; i < favorites.length; i++ ){
+                            if(favorites[i].favourable_id === id) {
+                                return true;
+                            }
                         }
+                    } else {
+                        return false;
                     }
-                } else {
-                    return false;
-                }
                 }
                 return false;
             },

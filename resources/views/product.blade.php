@@ -7,9 +7,9 @@
 @section('content')
 
 <product-component
-    :user = "{{ Auth::check() ? Auth::user()->load(['favoriteProductAds']) : 'null' }}"
+    :user_object = "{{ Auth::check() ? Auth::user()->load(['favoriteProductAds']) : 'null' }}"
     :products = "{{ $relatedProductsChunks }}"
-    :product = "{{ $productAd }}"
+    :product_object = "{{ $productAd }}"
     :auth_user = "'{{ Auth::check() }}'">
 </product-component>
 

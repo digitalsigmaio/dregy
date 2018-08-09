@@ -214,17 +214,17 @@
 </template>
 <script>
     export default{
-        props: ['user', 'products', 'product', 'auth_user'],
+        props: ['user_object', 'products', 'product_object', 'auth_user'],
         data () {
             return {
-               
+                user: this.user_object,
+                product: this.product_object
             }
         },
         methods: {
             backgroundImg(src) {
-                let style =  "background-image: url('" + src + "')";
-                console.log(style);
-                return style
+                return "background-image: url('" + src + "')";
+
             },
             favorites(val) {
                 if(val.favorites !== null) {
@@ -265,7 +265,6 @@
             fav(id) {
                 if(this.user) {
                     let user = this.user;
-                    let products = this.products;
                     let product = this.product;
                     let favorites = this.user.favorite_product_ads;
                     if (this.isFav(id)) {
@@ -276,17 +275,8 @@
                             }
                         }
 
-                        for(let i = 0; i < products.length; i++ ){
-                            if(products[i].id === id) {
-
-                                if(products[i].favorites !== null) {
-                                    products[i].favorites.count--
-                                }
-                            }
-                        }
-
                         if(product.favorites !== null) {
-                            product.favorites.count--
+                            product.favorites.count--;
                         }
                         axios.delete('/api/product-ads/' + id + '/users/' + user.id + '/fav')
                             .then(function (res) {
@@ -297,19 +287,11 @@
                             favourable_id: id,
                             user_id: user.id
                         });
-                        for(let i = 0; i < products.length; i++ ){
-                            if(products[i].id === id) {
-                                if(products[i].favorites !== null) {
-                                    products[i].favorites.count++
-                                } else {
-                                    products[i].favorites = { count: 1 };
-                                }
-                            }
-                        }
+
 
                         if(product.id === id) {
                             if(product.favorites !== null) {
-                                product.favorites.count++
+                                product.favorites.count++;
                             } else {
                                 product.favorites = { count: 1 };
                             }

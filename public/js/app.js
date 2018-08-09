@@ -49455,9 +49455,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'clinics', 'clinic', 'auth_user'],
+    props: ['user_object', 'clinics', 'clinic_object', 'auth_user'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object,
+            clinic: this.clinic_object
+        };
     },
 
     methods: {
@@ -49501,21 +49504,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.user) {
                 var user = this.user;
                 var clinic = this.clinic;
-                var clinics = this.clinics;
                 var favorites = this.user.favorite_clinics;
                 if (this.isFav(id)) {
                     for (var i = 0; i < favorites.length; i++) {
                         if (favorites[i].favourable_id === id) {
 
                             favorites.splice(i, 1);
-                        }
-                    }
-
-                    for (var _i = 0; _i < clinics.length; _i++) {
-                        if (clinics[_i].id === id) {
-                            if (clinics[_i].favorites !== null) {
-                                clinics[_i].favorites.count--;
-                            }
                         }
                     }
 
@@ -49530,15 +49524,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         favourable_id: id,
                         user_id: user.id
                     });
-                    for (var _i2 = 0; _i2 < clinics.length; _i2++) {
-                        if (clinics[_i2].id === id) {
-                            if (clinics[_i2].favorites !== null) {
-                                clinics[_i2].favorites.count++;
-                            } else {
-                                clinics[_i2].favorites = { count: 1 };
-                            }
-                        }
-                    }
 
                     if (clinic.id === id) {
                         if (clinic.favorites !== null) {
@@ -49785,7 +49770,7 @@ var render = function() {
                       attrs: {
                         id: "phone",
                         role: "tabpanel",
-                        "aria-labelledby": "headingThree",
+                        "aria-labelledby": "headingFour",
                         "data-parent": "#accordion"
                       }
                     },
@@ -49816,7 +49801,7 @@ var render = function() {
                       attrs: {
                         id: "moreinfo",
                         role: "tabpanel",
-                        "aria-labelledby": "headingThree",
+                        "aria-labelledby": "headingFive",
                         "data-parent": "#accordion"
                       }
                     },
@@ -49855,7 +49840,7 @@ var render = function() {
                           attrs: {
                             id: "note",
                             role: "tabpanel",
-                            "aria-labelledby": "headingThree",
+                            "aria-labelledby": "headingSix",
                             "data-parent": "#accordion"
                           }
                         },
@@ -50048,7 +50033,7 @@ var render = function() {
                               [
                                 _c("i", {
                                   staticClass: "fa fa-heart ml-3 pr-1",
-                                  class: _vm.favClass(_vm.clinics.id)
+                                  class: _vm.favClass(clinic.id)
                                 }),
                                 _vm._v(
                                   " " +
@@ -50157,7 +50142,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFour" }
       },
       [
         _c(
@@ -50192,7 +50177,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFive" }
       },
       [
         _c(
@@ -50227,7 +50212,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingSix" }
       },
       [
         _c(
@@ -52238,9 +52223,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'hospitals', 'hospital', 'auth_user', 'lang'],
+    props: ['user_object', 'hospitals', 'hospital_object', 'auth_user', 'lang'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object,
+            hospital: this.hospital_object
+        };
     },
 
     methods: {
@@ -52282,7 +52270,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         fav: function fav(id) {
             var user = this.user;
-            var hospitals = this.hospitals;
             var hospital = this.hospital;
             var favorites = this.user.favorite_hospitals;
             if (this.user) {
@@ -52292,15 +52279,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         if (favorites[i].favourable_id === id) {
 
                             favorites.splice(i, 1);
-                        }
-                    }
-
-                    for (var _i = 0; _i < hospitals.length; _i++) {
-                        if (hospitals[_i].id === id) {
-
-                            if (hospitals[_i].favorites !== null) {
-                                hospitals[_i].favorites.count--;
-                            }
                         }
                     }
 
@@ -52317,15 +52295,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         favourable_id: id,
                         user_id: user.id
                     });
-                    for (var _i2 = 0; _i2 < hospitals.length; _i2++) {
-                        if (hospitals[_i2].id === id) {
-                            if (hospitals[_i2].favorites !== null) {
-                                hospitals[_i2].favorites.count++;
-                            } else {
-                                hospitals[_i2].favorites = { count: 1 };
-                            }
-                        }
-                    }
 
                     if (hospital.id === id) {
                         if (hospital.favorites !== null) {
@@ -55011,10 +54980,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["user", "cosmetic", "cosmetics", "auth_user"],
+  props: ["user_object", "cosmetic_object", "cosmetics", "auth_user"],
 
   data: function data() {
-    return {};
+    return {
+      user: this.user_object,
+      cosmetic: this.cosmetic_object
+    };
   },
 
   methods: {
@@ -55058,24 +55030,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.user) {
         var user = this.user;
         var cosmetic = this.cosmetic;
-        var cosmetics = this.cosmetics;
         var favorites = this.user.favorite_cosmetic_clinics;
         if (this.isFav(id)) {
 
           for (var i = 0; i < favorites.length; i++) {
-
             if (favorites[i].favourable_id === id) {
-              console.log(favorites[i].favourable_id);
-              console.log(id);
               favorites.splice(i, 1);
-            }
-          }
-
-          for (var _i = 0; _i < cosmetics.length; _i++) {
-            if (cosmetics[_i].id === id) {
-              if (cosmetics[_i].favorites !== null) {
-                cosmetics[_i].favorites.count--;
-              }
             }
           }
 
@@ -55088,15 +55048,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             favourable_id: id,
             user_id: user.id
           });
-          for (var _i2 = 0; _i2 < cosmetics.length; _i2++) {
-            if (cosmetics[_i2].id === id) {
-              if (cosmetics[_i2].favorites !== null) {
-                cosmetics[_i2].favorites.count++;
-              } else {
-                cosmetics[_i2].favorites = { count: 1 };
-              }
-            }
-          }
 
           if (cosmetic.id === id) {
             if (cosmetic.favorites !== null) {
@@ -56286,9 +56237,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['filters', 'user', 'auth_user'],
+    props: ['filters', 'user_object', 'auth_user'],
     data: function data() {
         return {
+            user: this.user_object,
             endpoint: '/api/job-ads/search',
             jobs: {},
             links: {},
@@ -57687,9 +57639,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'jobs', 'job', 'auth_user'],
+    props: ['user_object', 'jobs', 'job_object', 'auth_user'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object,
+            job: this.job_object
+        };
     },
 
     methods: {
@@ -57733,7 +57688,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.user) {
                 var user = this.user;
                 var job = this.job;
-                var jobs = this.jobs;
                 var favorites = this.user.favorite_job_ads;
 
                 if (this.isFav(id)) {
@@ -57744,29 +57698,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                     }
 
-                    for (var _i = 0; _i < jobs.length; _i++) {
-                        if (jobs[_i].id === id) {
-
-                            if (jobs[_i].favorites !== null) {
-                                jobs[_i].favorites.count--;
-                            }
-                        }
+                    if (job.favorites !== null) {
+                        job.favorites.count--;
                     }
+
                     axios.delete('/api/job-ads/' + id + '/users/' + user.id + '/fav').then(function (res) {});
                 } else {
                     favorites.push({
                         favourable_id: id,
                         user_id: user.id
                     });
-                    for (var _i2 = 0; _i2 < jobs.length; _i2++) {
-                        if (jobs[_i2].id === id) {
-                            if (jobs[_i2].favorites !== null) {
-                                jobs[_i2].favorites.count++;
-                            } else {
-                                jobs[_i2].favorites = { count: 1 };
-                            }
+
+                    if (job.id === id) {
+                        if (job.favorites !== null) {
+                            job.favorites.count++;
+                        } else {
+                            job.favorites = { count: 1 };
                         }
                     }
+
                     axios.post('/api/job-ads/' + id + '/users/' + user.id + '/fav').then(function (res) {});
                 }
             } else {
@@ -57926,7 +57876,7 @@ var render = function() {
                       attrs: {
                         id: "phone",
                         role: "tabpanel",
-                        "aria-labelledby": "headingThree",
+                        "aria-labelledby": "headingFour",
                         "data-parent": "#accordion"
                       }
                     },
@@ -58152,7 +58102,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text" }, [
                           _vm._v(
-                            "\\\n                                    " +
+                            "\n                                    " +
                               _vm._s(job.description) +
                               "\n                                "
                           )
@@ -58289,7 +58239,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFour" }
       },
       [
         _c(
@@ -60384,9 +60334,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'pharmacies', 'pharmacy', 'auth_user'],
+    props: ['user_object', 'pharmacies', 'pharmacy_object', 'auth_user'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object,
+            pharmacy: this.pharmacy_object
+        };
     },
 
     methods: {
@@ -60430,21 +60383,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.user) {
                 var user = this.user;
                 var pharmacy = this.pharmacy;
-                var pharmacies = this.pharmacies;
                 var favorites = this.user.favorite_pharmacies;
                 if (this.isFav(id)) {
                     for (var i = 0; i < favorites.length; i++) {
                         if (favorites[i].favourable_id === id) {
 
                             favorites.splice(i, 1);
-                        }
-                    }
-
-                    for (var _i = 0; _i < pharmacies.length; _i++) {
-                        if (pharmacies[_i].id === id) {
-                            if (pharmacies[_i].favorites !== null) {
-                                pharmacies[_i].favorites.count--;
-                            }
                         }
                     }
 
@@ -60459,15 +60403,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         favourable_id: id,
                         user_id: user.id
                     });
-                    for (var _i2 = 0; _i2 < pharmacies.length; _i2++) {
-                        if (pharmacies[_i2].id === id) {
-                            if (pharmacies[_i2].favorites !== null) {
-                                pharmacies[_i2].favorites.count++;
-                            } else {
-                                pharmacies[_i2].favorites = { count: 1 };
-                            }
-                        }
-                    }
 
                     if (pharmacy.id === id) {
                         if (pharmacy.favorites !== null) {
@@ -60748,7 +60683,7 @@ var render = function() {
                       attrs: {
                         id: "phone",
                         role: "tabpanel",
-                        "aria-labelledby": "headingThree",
+                        "aria-labelledby": "headingFour",
                         "data-parent": "#accordion"
                       }
                     },
@@ -60779,7 +60714,7 @@ var render = function() {
                       attrs: {
                         id: "moreinfo",
                         role: "tabpanel",
-                        "aria-labelledby": "headingThree",
+                        "aria-labelledby": "headingFive",
                         "data-parent": "#accordion"
                       }
                     },
@@ -61158,7 +61093,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFour" }
       },
       [
         _c(
@@ -61193,7 +61128,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "card-header pl-0",
-        attrs: { role: "tab", id: "headingThree" }
+        attrs: { role: "tab", id: "headingFive" }
       },
       [
         _c(
@@ -61646,9 +61581,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'filters', 'auth_user'],
+    props: ['user_object', 'filters', 'auth_user'],
     data: function data() {
         return {
+            user: this.user_object,
             endpoint: '/api/product-ads/search',
             products: {},
             links: {},
@@ -62850,16 +62786,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'products', 'product', 'auth_user'],
+    props: ['user_object', 'products', 'product_object', 'auth_user'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object,
+            product: this.product_object
+        };
     },
 
     methods: {
         backgroundImg: function backgroundImg(src) {
-            var style = "background-image: url('" + src + "')";
-            console.log(style);
-            return style;
+            return "background-image: url('" + src + "')";
         },
         favorites: function favorites(val) {
             if (val.favorites !== null) {
@@ -62900,7 +62837,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fav: function fav(id) {
             if (this.user) {
                 var user = this.user;
-                var products = this.products;
                 var product = this.product;
                 var favorites = this.user.favorite_product_ads;
                 if (this.isFav(id)) {
@@ -62908,15 +62844,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         if (favorites[i].favourable_id === id) {
 
                             favorites.splice(i, 1);
-                        }
-                    }
-
-                    for (var _i = 0; _i < products.length; _i++) {
-                        if (products[_i].id === id) {
-
-                            if (products[_i].favorites !== null) {
-                                products[_i].favorites.count--;
-                            }
                         }
                     }
 
@@ -62929,15 +62856,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         favourable_id: id,
                         user_id: user.id
                     });
-                    for (var _i2 = 0; _i2 < products.length; _i2++) {
-                        if (products[_i2].id === id) {
-                            if (products[_i2].favorites !== null) {
-                                products[_i2].favorites.count++;
-                            } else {
-                                products[_i2].favorites = { count: 1 };
-                            }
-                        }
-                    }
 
                     if (product.id === id) {
                         if (product.favorites !== null) {
@@ -65519,9 +65437,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'clinics'],
+    props: ['user_object', 'clinics'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object
+        };
     },
 
     methods: {
@@ -65744,9 +65664,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'cosmetics'],
+    props: ['user_object', 'cosmetics'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object
+        };
     },
 
     methods: {
@@ -65975,9 +65897,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'hospitals'],
+    props: ['user_object', 'hospitals'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object
+        };
     },
 
     methods: {
@@ -66207,9 +66131,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'jobs'],
+    props: ['user_object', 'jobs'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object
+        };
     },
 
     methods: {
@@ -66435,9 +66361,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'pharmacies'],
+    props: ['user_object', 'pharmacies'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object
+        };
     },
 
     methods: {
@@ -66667,9 +66595,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'products'],
+    props: ['user_object', 'products'],
     data: function data() {
-        return {};
+        return {
+            user: this.user_object
+        };
     },
 
     methods: {

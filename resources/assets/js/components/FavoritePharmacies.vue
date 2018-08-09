@@ -40,9 +40,10 @@
 
 <script>
     export default{
-       props: ['user', 'pharmacies'],
+       props: ['user_object', 'pharmacies'],
         data() {
            return {
+               user: this.user_object
            }
         },
         methods: {

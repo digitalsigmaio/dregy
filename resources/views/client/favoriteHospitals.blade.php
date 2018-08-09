@@ -6,7 +6,7 @@
 
 @section('userContent')
     <favorite-hospitals
-    :user = "{{ json_encode($user) }}"
+    :user_object = "{{ json_encode($user) }}"
     :hospitals = "{{ $hospitals }}">
     </favorite-hospitals>
 @endsection
