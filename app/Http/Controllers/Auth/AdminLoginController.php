@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -47,6 +48,8 @@ class AdminLoginController extends Controller
     public function login(Request $request)
     {
         if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->filled('remember'))) {
+            //$admin = Admin::find(Auth('admin')->user()->id);
+            Auth('admin')->user()->loggedIn();
             return redirect()->intended(route('admin.dashboard'));
         } else {
             return redirect()->back();

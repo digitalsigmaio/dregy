@@ -3,13 +3,14 @@
 namespace App;
 
 use App\Notifications\AdminResetPasswordNotification;
+use App\Traits\AdminLogger;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, AdminLogger;
 
     /**
      * @var string

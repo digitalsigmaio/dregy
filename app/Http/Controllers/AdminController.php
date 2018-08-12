@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return mixed
+     * AdminController constructor.
      */
     public function __construct()
     {

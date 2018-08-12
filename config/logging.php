@@ -76,6 +76,11 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+        'adminloggedin' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/admin/login.log'),
+            'level' => 'info',
+        ]
     ],
 
 ];
