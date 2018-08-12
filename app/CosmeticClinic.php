@@ -134,17 +134,9 @@ class CosmeticClinic extends Model
 
         if($orderBy) {
             if($sort == 'asc') {
-                if ($orderBy == 'rate') {
-                    $sorted = $data->sortBy('rates.rating');
-                } else {
-                    $sorted = $data->sortBy('updated_at');
-                }
+                $sorted = $data->sortBy('rates.rating');
             } else {
-                if ($orderBy == 'rate') {
-                    $sorted = $data->sortByDesc('rates.rating');
-                } else {
-                    $sorted = $data->sortByDesc('updated_at');
-                }
+                $sorted = $data->sortByDesc('rates.rating');
             }
         } else {
             $sorted = $data->sortBy('premium.priority');
