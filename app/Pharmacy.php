@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\CollectionPagination;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Request;
 
 class Pharmacy extends Model
 {
@@ -75,7 +76,7 @@ class Pharmacy extends Model
         return $this->premium ? true : false;
     }
 
-    public static function fetch($request)
+    public static function fetch(Request $request)
     {
         $region = $request->region;
         $city = $request->city;
@@ -129,17 +130,9 @@ class Pharmacy extends Model
 
         if($orderBy) {
             if($sort == 'asc') {
-                if ($orderBy == 'rate') {
-                    $sorted = $data->sortBy('rates.rating');
-                } else {
-                    $sorted = $data->sortBy('updated_at');
-                }
+                $sorted = $data->sortBy('rates.rating');
             } else {
-                if ($orderBy == 'rate') {
-                    $sorted = $data->sortByDesc('rates.rating');
-                } else {
-                    $sorted = $data->sortByDesc('updated_at');
-                }
+                $sorted = $data->sortByDesc('rates.rating');
             }
         } else {
             $sorted = $data->sortBy('premium.priority');
