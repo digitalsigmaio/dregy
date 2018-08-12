@@ -5,7 +5,7 @@ namespace App;
 use App\Traits\CollectionPagination;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class Clinic extends Model
 {

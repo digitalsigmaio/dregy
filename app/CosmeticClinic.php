@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\CollectionPagination;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class CosmeticClinic extends Model
 {
@@ -75,7 +76,7 @@ class CosmeticClinic extends Model
         return $this->premium ? true : false;
     }
 
-    public static function fetch($request)
+    public static function fetch(Request $request)
     {
         $region = $request->region;
         $city = $request->city;
