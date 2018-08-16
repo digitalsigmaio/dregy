@@ -92,4 +92,15 @@ class HospitalController extends Controller
             return null;
         }
     }
+
+    public function destroy(Hospital $hospital)
+    {
+        if ($hospital->delete()){
+            return response()->json('Job has been deleted');
+        } 
+        else {
+            return response()->json('Job was not found');
+        }
+        
+    }
 }

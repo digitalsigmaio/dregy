@@ -182,9 +182,9 @@
 
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix white-text"></i>
-                                    <input type="password" id="orangeForm-pass" class="form-control" name="password_confirmation"
+                                    <input type="password" id="orangeForm-pass_confirmed" class="form-control" name="password_confirmation"
                                            v-model="passwordConfirmation" required>
-                                    <label for="orangeForm-pass">{{ __('Confirm Password') }}</label>
+                                    <label for="orangeForm-pass_confirmed">{{ __('Confirm Password') }}</label>
                                 </div>
 
                                 <div class="text-center">

@@ -47,8 +47,22 @@ Vue.component('favorite-products', require('./components/FavoriteProducts.vue'))
 Vue.component('job-list', require('./components/JobList.vue'));
 //Vue.component('new-job', require('./components/NewJob.vue'));
 
+//Admin Components
+Vue.component('user-info', require('./components/UserInfo.vue'));
+Vue.component('create-user', require('./components/CreateUser.vue'));
+Vue.component('list-accounts', require('./components/ListAccounts.vue'));
+Vue.component('phone-numbers', require('./components/PhoneNumbers.vue'));
+Vue.component('phone-input', require('./components/PhoneInput.vue'));
+
+
+Vue.component('modal', require('./components/Modal.vue'));
+Vue.component('region-city', require('./components/RegionCity.vue'));
+Vue.component('premium-check', require('./components/PremiumCheck.vue'));
+
+
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 
 });
 

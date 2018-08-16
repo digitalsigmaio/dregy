@@ -40,19 +40,32 @@ Route::middleware('language')->group(function () {
     // Hospitals
     Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
     Route::get('/hospitals/{hospital}/{slug}', 'HospitalController@show');
+    Route::get('/admin/hospitals/list', 'HospitalController@list')->name('listHospital');
     Route::get('/admin/hospitals/new', 'HospitalController@create')->name('newHospital');
+    Route::post('/admin/hospitals/new', 'HospitalController@store')->name('storeHospital');
 
     // Clinics
     Route::get('/clinics', 'ClinicController@index')->name('clinics');
     Route::get('/clinics/{clinic}/{slug}', 'ClinicController@show');
+    Route::get('/admin/clinic/list', 'ClinicController@list')->name('listClinic');
+    Route::get('/admin/clinics/new', 'ClinicController@create')->name('newClinic');
+    Route::post('/admin/clinics/new', 'ClinicController@store')->name('storeClinic');
+
 
     // Cosmetic Clinics
     Route::get('/cosmetic-clinics', 'CosmeticClinicController@index')->name('cosmetics');
     Route::get('/cosmetic-clinics/{cosmeticClinic}/{slug}', 'CosmeticClinicController@show');
+    Route::get('/admin/cosmetic/list', 'CosmeticClinicController@list')->name('listCosmeticClinic');
+    Route::get('/admin/cosmetic-clinics/new', 'CosmeticClinicController@create')->name('newCosmeticClinic');
+    Route::post('/admin/cosmetic-clinics/new', 'CosmeticClinicController@store')->name('storeCosmeticClinic');
+
 
     // Pharmacies
     Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
     Route::get('/pharmacies/{pharmacy}/{slug}', 'PharmacyController@show');
+    Route::get('/admin/pharmacies/list', 'PharmacyController@list')->name('listPharmacy');
+    Route::get('/admin/pharmacies/new', 'PharmacyController@create')->name('newPharmacy');
+    Route::post('/admin/pharmacies/new', 'PharmacyController@store')->name('storePharmacy');
 
 
 
@@ -98,5 +111,13 @@ Route::middleware('language')->group(function () {
         Route::POST('password/reset',           'Auth\AdminResetPasswordController@reset');
         Route::GET('password/reset',            'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
         Route::GET('password/reset/{token}',    'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+
+        Route::get('/users/info', 'AdminUserController@index')->name('admin.user.info');
+        //Route::post('/users/info', 'AdminUserController@index')->name('admin.user.info'); Replaced by API POST
+        Route::get('/users/create', 'AdminUserController@show')->name('admin.user.create');
+        //Route::post('/users/create', 'AdminUserController@store'); Replaced by API POST
+        Route::get('/users/edit/{ref_id}', 'AdminUserController@edit')->name('admin.user.edit');
+        //Route::put('/users/update/{user}', 'AdminUserController@update')->name('admin.user.update'); [HOLD ON USAGE]
+        Route::delete('/users/delete/{ref_id}', 'AdminUserController@destroy')->name('admin.user.delete');
     });
 });

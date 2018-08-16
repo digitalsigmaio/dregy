@@ -63,6 +63,8 @@ Route::post('/hospitals/{hospital}/view', 'Api\HospitalController@view');
 Route::post('/hospitals/search', 'Api\HospitalController@search');
 
 
+
+
 // Cosmetic Clinic
 
 Route::get('/cosmetic-clinics', 'Api\CosmeticClinicController@index');
@@ -144,3 +146,15 @@ Route::get('/product-filters', 'Api\ProductFilterController@index');
 
 Route::get('/top-clients', 'MainPageController@topClients');
 Route::get('/job-list', 'MainPageController@jobList');
+
+
+//Admin Related Routes
+
+Route::post('/users/info', 'Api\UserController@userinfo');
+Route::get('/users/create', 'Api\UserController@userinfo');
+Route::delete('/hospitals/hospital/{hospital}', 'Api\HospitalController@destroy');
+Route::delete('/clinics/clinic/{clinic}', 'Api\ClinicController@destroy');
+Route::delete('/cosmetic-clinics/cosmetic-clinic/{cosmeticClinic}', 'Api\CosmeticClinicController@destroy');
+Route::delete('/pharmacies/pharmacy/{pharmacy}', 'Api\PharmacyController@destroy');
+
+
