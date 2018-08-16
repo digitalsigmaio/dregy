@@ -47896,8 +47896,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filters", "user", "auth_user"],
@@ -48132,32 +48130,6 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "divider" }),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "desc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Newest")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "asc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Oldest")])]
-            ),
             _vm._v(" "),
             _c(
               "p",
@@ -50712,8 +50684,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['filters', 'user', 'auth_user'],
@@ -50963,32 +50933,6 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "divider" }),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "desc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Newest")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "asc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Oldest")])]
-            ),
             _vm._v(" "),
             _c(
               "p",
@@ -53503,8 +53447,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['filters', 'user', 'auth_user'],
@@ -53740,32 +53682,6 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "divider" }),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "desc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Newest")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "asc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Oldest")])]
-            ),
             _vm._v(" "),
             _c(
               "p",
@@ -58800,8 +58716,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['filters', 'user', 'auth_user'],
@@ -59051,32 +58965,6 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "divider" }),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "desc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Newest")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "dark-grey-text mb-1",
-                on: {
-                  click: function($event) {
-                    _vm.FilterOrderBy("updated_at", "asc")
-                  }
-                }
-              },
-              [_c("a", [_vm._v("Oldest")])]
-            ),
             _vm._v(" "),
             _c(
               "p",
