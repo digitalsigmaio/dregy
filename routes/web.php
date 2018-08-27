@@ -43,6 +43,8 @@ Route::middleware('language')->group(function () {
     Route::get('/admin/hospitals/list', 'HospitalController@list')->name('listHospital');
     Route::get('/admin/hospitals/new', 'HospitalController@create')->name('newHospital');
     Route::post('/admin/hospitals/new', 'HospitalController@store')->name('storeHospital');
+    Route::get('/admin/hospitals/edit/{hospital}', 'HospitalController@edit')->name('editHospital');
+    Route::patch('/admin/hospitals/edit', 'HospitalController@update')->name('updateHospital');
 
     // Clinics
     Route::get('/clinics', 'ClinicController@index')->name('clinics');
@@ -50,6 +52,8 @@ Route::middleware('language')->group(function () {
     Route::get('/admin/clinic/list', 'ClinicController@list')->name('listClinic');
     Route::get('/admin/clinics/new', 'ClinicController@create')->name('newClinic');
     Route::post('/admin/clinics/new', 'ClinicController@store')->name('storeClinic');
+    Route::get('/admin/clinics/edit/{clinic}', 'ClinicController@edit')->name('editClinic');
+    Route::patch('/admin/clinics/edit', 'ClinicController@update')->name('updateClinic');
 
 
     // Cosmetic Clinics
@@ -58,6 +62,8 @@ Route::middleware('language')->group(function () {
     Route::get('/admin/cosmetic/list', 'CosmeticClinicController@list')->name('listCosmeticClinic');
     Route::get('/admin/cosmetic-clinics/new', 'CosmeticClinicController@create')->name('newCosmeticClinic');
     Route::post('/admin/cosmetic-clinics/new', 'CosmeticClinicController@store')->name('storeCosmeticClinic');
+    Route::get('/admin/cosmetic-clinics/edit/{cosmeticClinic}', 'CosmeticClinicController@edit')->name('editCosmeticClinic');
+    Route::patch('/admin/cosmetic-clinics/edit', 'CosmeticClinicController@update')->name('updateCosmeticClinic');
 
 
     // Pharmacies
@@ -66,6 +72,8 @@ Route::middleware('language')->group(function () {
     Route::get('/admin/pharmacies/list', 'PharmacyController@list')->name('listPharmacy');
     Route::get('/admin/pharmacies/new', 'PharmacyController@create')->name('newPharmacy');
     Route::post('/admin/pharmacies/new', 'PharmacyController@store')->name('storePharmacy');
+    Route::get('/admin/pharmacies/edit/{pharmacy}', 'PharmacyController@edit')->name('editPharmacy');
+    Route::patch('/admin/pharmacies/edit', 'PharmacyController@update')->name('updatePharmacy');
 
 
 

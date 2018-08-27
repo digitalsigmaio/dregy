@@ -34,7 +34,7 @@ class Pharmacy extends Model
         'website',
         'email',
         'slug',
-        'full_time'
+        'full_time',
     ];
 
     public function region()
@@ -114,7 +114,8 @@ class Pharmacy extends Model
             'views',
             'favorites',
             'phoneNumbers',
-            'premium'
+            'premium',
+            'user',
         ])
             ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);

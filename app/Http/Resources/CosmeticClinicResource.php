@@ -35,7 +35,8 @@ class CosmeticClinicResource extends JsonResource
             'favorites' => $this->favorites ? $this->favorites : [ 'count' => 0],
             'views' => $this->views,
             'specialities' => $this->specialities,
-            'created_at' => $this->created_at->toFormattedDateString()
+            'created_at' => $this->created_at->toFormattedDateString(),
+            'user' => $this->user,
         ];
     }
 

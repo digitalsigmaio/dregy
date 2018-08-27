@@ -38,6 +38,10 @@ export default{
             this.cities = region.cities;
             citiesShow =  true;
         },
+        selected()
+        {
+            return "selected";
+        }
     },
     watch: {
         region(val) {
@@ -48,6 +52,7 @@ export default{
                 this.cities = region[0].cities
             }
         }
-    }
+    },
+
 }
 </script>

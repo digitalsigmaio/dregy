@@ -8,39 +8,39 @@
 
                     <!--Header-->
                     <div class="form-header sky-gradient">
-                        <h3><i class="fa fa-user mt-2 mb-2"></i>Create A New User</h3>
+                        <h3>Create A New User</h3>
                     </div>
 
                     <!--Body-->
-                    <div class="md-form">
+                    <div class="md-form mt-5mb-5">
                         <i class="fa fa-user prefix white-text"></i>
+                        <label for="orangeForm-name">User Name</label>
                         <input type="text" id="orangeForm-name" class="form-control" v-model="user.name"
                             required autofocus>
-                        <label for="orangeForm-name">User Name</label>
                         <span class="invalid-feedback">
                             <strong></strong>
                         </span>
                     </div>
 
-                    <div class="md-form">
+                    <div class="md-form mt-5 mb-5">
                         <i class="fa fa-envelope prefix white-text"></i>
+                        <label for="orangeForm-email">Email</label>
                         <input type="text" id="orangeForm-email" class="form-control"  v-model="user.email"
                             required autofocus>
-                        <label for="orangeForm-email">Email</label>
                         <span class="invalid-feedback">
                             <strong></strong>
                         </span>
                     </div>
 
-                        <div class="md-form">
+                        <div class="md-form mt-5">
                             <i class="fa fa-lock prefix white-text"></i>
-                            <input type="text" id="orangeForm-pass" class="form-control" v-model="user.password" required>
                             <label for="orangeForm-pass">Password</label>
-                            <button type="reset" @click.prevent="genpassword" >Generate</button>
+                            <input type="password" id="orangeForm-pass" class="form-control" v-model="user.password" disabled required>
+                            <button class="form-control btn btn-primary" type="reset" @click.prevent="genpassword" >Generate Password</button>
                         </div>
 
-                    <div class="md-form">
-                        <input @click.prevent="create()" type="submit" class="form-control">
+                    <div class="md-form mt-5">
+                        <input @click.prevent="create()" type="submit" class="form-control btn-info">
                     </div>
 
                 </div>

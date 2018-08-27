@@ -1,0 +1,19 @@
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mt-5{
+    margin-top: 5px;
+}
+
+td{
+    font-size: 1.2em;
+}
+
+th{
+    font-size: 1.6em;
+}
+
+text-center{
+    text-align:center;
+}

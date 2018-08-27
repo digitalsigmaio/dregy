@@ -126,7 +126,8 @@ class Clinic extends Model
             'favorites',
             'phoneNumbers',
             'views',
-            'premium'
+            'premium',
+            'user'
         ])
             ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);

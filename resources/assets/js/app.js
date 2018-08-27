@@ -52,6 +52,7 @@ Vue.component('user-info', require('./components/UserInfo.vue'));
 Vue.component('create-user', require('./components/CreateUser.vue'));
 Vue.component('list-accounts', require('./components/ListAccounts.vue'));
 Vue.component('phone-numbers', require('./components/PhoneNumbers.vue'));
+Vue.component('phone-edit', require('./components/PhoneEdit.vue'));
 Vue.component('phone-input', require('./components/PhoneInput.vue'));
 
 

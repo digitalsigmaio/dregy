@@ -108,11 +108,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">@Email</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input type="email" class="form-control" name="email" required>
                                 </div>
                             </div>
+                            <phone-numbers></phone-numbers>
                             <!-- Image input -->
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Image</label>

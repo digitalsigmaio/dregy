@@ -2,34 +2,17 @@
     <div class="container">
         <modal v-show="isModalVisible" @close="closeModal" :url="deleteUrl" :title="title"/>
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h2>{{account_name}}</h2>
                     </div>
                     <div class="card-body">
-                        <table style="width:100%">
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th> 
-                                <th>Phone Numeber</th>
-                            </tr>
-                            <tr>
-                                <td>Jill</td>
-                                <td>Smith</td> 
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td> 
-                                <td>94</td>
-                            </tr>
-                        </table>
-
+                        
                         <!-- Search -->
                         <div class="md-form form-lg ml-1">
-                            <input type="text" id="keyword" class="form-control form-control-lg" v-model="search.keyword" @keyup="searchByKeyword">
-                            <label for="keyword">Search</label>
+                            <input type="text" id="keyword" class="form-control form-control-lg" placeholder="Search" v-model="search.keyword" @keyup="searchByKeyword">
+                            <label for="keyword"></b></label>
                         </div>
 
                         <!-- Account Grid -->
@@ -54,19 +37,38 @@
                         </section>
 
                         <section class="accounts" id="accounts">
-                            <div v-for="(account, index) in accounts">
-                                {{ account.en_name }}<br>
-                                {{ account.email }}<br>
-                                {{ account.en_address }}<br>
-                                <button @click="showModal(account.id)">Delete</button>
-                                <br>
-                            </div>
-                            <!--Pagination -->
-                            <nav class="mb-4">
-                                <ul class="pagination pagination-circle pg-blue mb-0">
+                            <table class="table table-hover">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Website</th>
+                                        <th>Region</th>
+                                        <th>Owner [Ref-id]</th>
+                                        <th class="text-center">Premium</th> 
+                                        <th class="text-center">Edit</th>
+                                        <th class="text-center">#</th>
+                                    </tr>
+                                    <tr v-for="(account, index) in accounts">
+                                        <td>{{ account.en_name }}</td>
+                                        <td>{{ account.email }}</td>
+                                        <td>{{ account.website }}</td>
+                                        <td>{{ account.region.en_name }}</td>
+                                        <td>{{ account.user.name+"   ["+account.user.ref_id+"]" }}</td>
+                                        <td class="text-center">{{ premiumCheck(account.premium) }}</td>
+                                        <td class="text-center"><button class="btn btn-secondary btn-sm"><a :href="edit_url + account.id">Edit</a></button></td> 
+                                        <td class="text-center"><button class="btn btn-danger btn-sm" @click="showModal(account.id)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
+                            <!--Pagination -->
+                            <nav class="mb-12 col-md-offset-5">
+                                <ul class="pagination pagination-circle pg-blue">
                                     <!--First-->
-                                    <li class="page-item clearfix d-none d-md-block">
+                                    <li class="page-item d-none d-md-block">
                                         <a class="page-link waves-effect waves-effect"
                                         :class="{ disabled: endpoint == links.first || endpoint == pagination.path }"
                                         @click.prevent="changeEndpoint(1)">First</a>
@@ -99,7 +101,7 @@
                                     </li>
 
                                     <!--First-->
-                                    <li class="page-item clearfix d-none d-md-block">
+                                    <li class="page-item d-none d-md-block">
                                         <a class="page-link waves-effect waves-effect"
                                         :class="{ disabled: endpoint == links.last }"
                                         @click.prevent="changeEndpoint(pagination.last_page)">Last</a>
@@ -120,7 +122,7 @@
 
 <script>
 export default {
-    props: ['account_url', 'account_name', 'delete_url'],
+    props: ['account_url', 'account_name', 'delete_url', 'edit_url'],
     data () {
         return {
             endpoint: this.account_url,
@@ -133,7 +135,7 @@ export default {
                 keyword: '',
             },
             isModalVisible: false,
-            title:"Are you Sure You want to Delete this User?",
+            title:"Are you Sure You want to Delete this account?",
             account_id:null,
         }
     },
@@ -194,7 +196,15 @@ export default {
         closeModal() {
             this.isModalVisible = false;
         },
-        
+        premiumCheck(status)
+        {
+            if(status === true)
+            {
+                return "Yes";
+            }else{
+                return "No";
+            }
+        },
         
     },
     mounted() {
@@ -206,7 +216,7 @@ export default {
     computed: {
         deleteUrl(){
             return this.delete_url + this.account_id;
-        }
+        },
     }
 }
 </script>

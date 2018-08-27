@@ -39,6 +39,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/admin_custom.css') }}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -47,7 +48,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Doctor Egypt</span></a>
+                        <a href="{{ route('admin.dashboard')}}" class="site_title"><i class="fa fa-paw"></i> <span>Doctor Egypt</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -55,8 +56,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>{{ $admin->name }}</h2>
+                            <h2><span>Welcome,</span> {{ $admin->name }}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -166,7 +166,7 @@
     <!-- jQuery -->
     <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
-    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"--></script>
     <!-- FastClick -->
     <script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->
