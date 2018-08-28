@@ -5,15 +5,36 @@ namespace App;
 use App\Traits\CollectionPagination;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\ImageUploader;
 use Illuminate\Http\Request;
 
 class Pharmacy extends Model
 {
-    use SoftDeletes, CollectionPagination;
+    use SoftDeletes, CollectionPagination, ImageUploader;
 
     protected $casts = [
         'delivery' => 'boolean',
         'full_time' => 'boolean'
+    ];
+
+    private $imagePath = 'img/pharmacies';
+
+    protected $fillable = [
+        'admin_id',
+        'ar_name',
+        'en_name',
+        'region_id',
+        'city_id',
+        'ar_address',
+        'en_address',
+        'ar_note',
+        'en_note',
+        'ar_work_times' ,
+        'en_work_times',
+        'website',
+        'email',
+        'slug',
+        'full_time',
     ];
 
     public function region()
@@ -93,7 +114,8 @@ class Pharmacy extends Model
             'views',
             'favorites',
             'phoneNumbers',
-            'premium'
+            'premium',
+            'user',
         ])
             ->when($region, function ($query) use ($region) {
                 return $query->where('region_id', $region);

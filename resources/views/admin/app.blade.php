@@ -10,6 +10,9 @@
 
     <title>@yield('title', 'admin')</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Bootstrap -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -36,6 +39,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/admin_custom.css') }}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -44,7 +48,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Doctor Egypt</span></a>
+                        <a href="{{ route('admin.dashboard')}}" class="site_title"><i class="fa fa-paw"></i> <span>Doctor Egypt</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -52,8 +56,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>{{ $admin->name }}</h2>
+                            <h2><span>Welcome,</span> {{ $admin->name }}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -72,10 +75,34 @@
                                         <li><a href="index3.html">Dashboard3</a></li>
                                     </ul>
                                 </li>
+                                <li><a><i class="fa fa-user"></i> Users <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('admin.user.info') }}">Info</a></li>
+                                        <li><a href="{{ route('admin.user.create') }}">New User</a></li>
+                                    </ul>
+                                </li>
                                 <li><a><i class="fa fa-hospital-o"></i> Hospitals <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('newHospital') }}">New Hospital</a></li>
-                                        <li><a href="form_advanced.html">Hospitals List</a></li>
+                                        <li><a href="{{ route('listHospital') }}">Hospitals List</a></li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-user-md"></i> Clinics <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('newClinic') }}">New Clinic</a></li>
+                                        <li><a href="{{ route('listClinic') }}">Clinics List</a></li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fas fa-hand-holding-heart"></i> Cosmetic Clinics <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('newCosmeticClinic') }}">New Cosmetic</a></li>
+                                        <li><a href="{{ route('listCosmeticClinic') }}">Cosmetics List</a></li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-medkit"></i> Pharmacies <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('newPharmacy') }}">New Pharmacy</a></li>
+                                        <li><a href="{{ route('listPharmacy') }}">Pharmacies List</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -127,9 +154,10 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-
-                @yield('content')
-
+                <div id="app">
+                
+                    @yield('content')
+                </div>
             </div>
             <!-- /page content -->
 
@@ -144,10 +172,13 @@
 
         </div>
     </div>
+    <!-- App -->
+    <script src=" {{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/mdb.min.js')}}"></script>
     <!-- jQuery -->
     <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
-    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"--></script>
     <!-- FastClick -->
     <script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->

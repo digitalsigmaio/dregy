@@ -91,4 +91,14 @@ class PharmacyController extends Controller
         }
 
     }
+
+    public function destroy(Pharmacy $pharmacy)
+    {
+        if($pharmacy->delete())
+        {
+            return response()->json('Pharmacy Successfully Deleted');
+        }else{
+            return response()->json('Pharmacy Not Found');
+        }
+    }
 }

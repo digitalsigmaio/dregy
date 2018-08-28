@@ -47,7 +47,6 @@ class ApiRegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-
         return $this->registered($request, $user)
             ?: $user;
     }

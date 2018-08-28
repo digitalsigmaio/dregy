@@ -36,6 +36,7 @@ class ClinicResource extends JsonResource
             'specialities' => $this->specialities,
             'degree_id' => $this->degree_id,
             'created_at' => $this->created_at->toFormattedDateString(),
+            'user' => $this->user,
         ];
     }
 }

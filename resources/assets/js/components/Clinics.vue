@@ -239,12 +239,12 @@
                                       <div class="col-md-6">
                                           <div class="col-md-12">
                                               <div class="m-auto h2-responsive grey-text">
-                                                  {{ clinic.rate.rating }}
+                                                  {{ rating(clinic.rate) }}
                                               </div>
                                           </div>
                                           <ul class="rating mt-1">
                                               <li v-for="n in 5">
-                                                  <i :class="starColor(n, clinic.rate.rating)"></i>
+                                                  <i :class="starColor(n, rating(clinic.rate))"></i>
                                               </li>
                                           </ul>
                                       </div>
@@ -503,6 +503,7 @@ export default {
       }
       return false;
     },
+    
     favClass(id) {
       let fav = this.isFav(id);
       return {

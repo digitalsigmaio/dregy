@@ -218,12 +218,12 @@
                                        <div class="col-md-6">
                                            <div class="col-md-12">
                                                <div class="m-auto h2-responsive grey-text">
-                                                   {{ cosmetic.rate.rating }}
+                                                   {{ rating(cosmetic.rate)}}
                                                </div>
                                            </div>
                                            <ul class="rating mt-1">
                                                <li v-for="n in 5">
-                                                   <i :class="starColor(n, cosmetic.rate.rating)"></i>
+                                                   <i :class="starColor(n, rating(cosmetic.rate))"></i>
                                                </li>
                                            </ul>
                                        </div>
@@ -471,6 +471,13 @@
                }
                    return false;
            },
+           rating(val) {
+                if(val !== null) {
+                    return val.rating;
+                } else {
+                    return 0;
+                }
+            },
            favClass(id) {
                let fav = this.isFav(id);
                return {

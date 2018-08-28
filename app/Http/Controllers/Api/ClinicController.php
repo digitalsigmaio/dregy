@@ -91,4 +91,15 @@ class ClinicController extends Controller
             return null;
         }
     }
+
+    public function destroy(Clinic $clinic)
+    {
+        if ($clinic->delete()){
+            return response()->json('Clinic has been deleted');
+        } 
+        else {
+            return response()->json('Clinic was not found');
+        }
+        
+    }
 }

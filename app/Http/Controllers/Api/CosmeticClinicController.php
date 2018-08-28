@@ -93,4 +93,16 @@ class CosmeticClinicController extends Controller
             return null;
         }
     }
+
+    public function destroy(CosmeticClinic $cosmeticClinic)
+    {
+        if ($cosmeticClinic->delete()){
+            return response()->json('Cosmetic Clinic has been deleted');
+        } 
+        else {
+            return response()->json('Cosmetic Clinic was not found');
+        }
+        
+    }
+
 }

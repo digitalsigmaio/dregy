@@ -11,6 +11,7 @@ use App\Http\Resources\PharmacyCollection;
 use App\Http\Resources\ProductAdCollection;
 use App\Http\Resources\ProductAdResource;
 use App\User;
+use App\Http\Resources\UserResource;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -196,6 +197,37 @@ class UserController extends Controller
             return response()->json(['success', 'Account has been updated'], 201);
         } catch (QueryException $e) {
             return response()->json(['error' => $e->getMessage()], $e->getCode());
+        }
+    }
+
+    /*
+    * Return $user filtered by the admin search form
+    *
+    */
+    public function userinfo(Request $request)
+    {
+        //dd($request);
+        
+        $request->validate([
+            'select_option' => 'required',
+            'filter_value' => 'required'
+        ]);
+       
+        $userRelations = ['hospitals', 'clinics', 'pharmacies',
+                        'beautyCenters', 'productAds', 'favorites',
+                        'favoriteHospitals', 'favoriteClinics', 'favoriteCosmeticClinics',
+                        'favoritePharmacies', 'favoriteProductAds', 'favoriteJobAds',
+                        'views', 'rates', 'rateForHospitals', 'rateForClinics', 
+                        'rateForPharmacies', 'rateForCosmeticClinics', 'deviceTokens'];
+        
+        
+        $user = User::with($userRelations)->where($request->select_option, $request->filter_value)->first();
+        
+        //return response($user);
+        if($user){
+            return new UserResource($user);
+        }else{
+            return response()->json(['data' => 'User Not Found']);
         }
     }
 }

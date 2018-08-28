@@ -216,12 +216,12 @@
                                                 <div class="col-md-6">
                                                     <div class="col-md-12">
                                                         <div class="m-auto h2-responsive grey-text">
-                                                            {{ hospital.rate.rating }}
+                                                            {{ rating(hospital.rate) }}
                                                         </div>
                                                     </div>
                                                     <ul class="rating mt-1">
                                                         <li v-for="n in 5">
-                                                            <i :class="starColor(n, hospital.rate.rating)"></i>
+                                                            <i :class="starColor(n, rating(hospital.rate))"></i>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -382,6 +382,13 @@
             favorites(val) {
                 if(val.favorites !== null) {
                     return val.favorites.count;
+                } else {
+                    return 0;
+                }
+            },
+            rating(val) {
+                if(val !== null) {
+                    return val.rating;
                 } else {
                     return 0;
                 }
