@@ -14,7 +14,6 @@
                   <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'asc')"><a>Rate: low to high</a></p>
                   <p class="dark-grey-text mb-1" @click="FilterOrderBy('rate', 'desc')"><a>Rate: high to low</a></p>
                </div>
-
                <!-- Filter by speciality -->
                <div class="col-md-6 col-lg-12 mb-4">
                   <h5 class="font-weight-bold dark-grey-text"><strong>Speciality</strong></h5>

@@ -2081,7 +2081,7 @@ window.obama_budget_2012 = [
                     14000,
                     57.1428571428571
                 ],
-                "name": "Federal Mine Safety and Health Review Commission",
+                "name": "Federal Mine Safety and Health review Commission",
                 "id": "leaf-432",
                 "discretion": "discretionary"
             },
@@ -2151,7 +2151,7 @@ window.obama_budget_2012 = [
                     12000,
                     8.33333333333333
                 ],
-                "name": "Occupational Safety and Health Review Commission",
+                "name": "Occupational Safety and Health review Commission",
                 "id": "leaf-458",
                 "discretion": "discretionary"
             },
@@ -2331,7 +2331,7 @@ window.obama_budget_2012 = [
                     4000,
                     -25
                 ],
-                "name": "Nuclear Waste Technical Review Board",
+                "name": "Nuclear Waste Technical review Board",
                 "id": "leaf-457",
                 "discretion": "discretionary"
             },

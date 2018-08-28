@@ -62,6 +62,11 @@ class ProductAd extends Model
         return $this->morphOne(Offer::class, 'offerable');
     }
 
+    public function scopePending($query)
+    {
+        return $query->where('approved', null)->orderBy('created_at', 'asc');
+    }
+
     public function getFeaturedAttribute()
     {
         return $this->premium ? true : false;
