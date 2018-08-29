@@ -55,7 +55,7 @@
 
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
-                        <div class="profile_info">
+                        <div class="profile_info" style="width:100%">
                             <h2><span>Welcome,</span> {{ $admin->name }}</h2>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                         <li><a href="{{ route('listClinic') }}">Clinics List</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fas fa-hand-holding-heart"></i> Cosmetic Clinics <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-heartbeat"></i> Cosmetic Clinic <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('newCosmeticClinic') }}">New Cosmetic</a></li>
                                         <li><a href="{{ route('listCosmeticClinic') }}">Cosmetics List</a></li>

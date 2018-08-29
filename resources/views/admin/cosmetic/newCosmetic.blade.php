@@ -26,10 +26,10 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h2>New Pharmacy</h2>
+                        <h2>New Cosmetic Clinic</h2>
                     </div>
                     <div class="card-body">
-                    <form class="form-horizontal form-label-left" action="{{ route('storePharmacy') }}" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal form-label-left" action="{{ route('storeCosmeticClinic') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">User Reference</label>
@@ -39,21 +39,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Cosmetic Clinic Arabic Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic Name</label>
                                 <div  class="col-md-9 col-sm-9 col-xs-12">
-                                    <input style="text-align:right" type="text" class="form-control" name="ar_name" required>
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" name="ar_name" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Cosmetic Clinic English Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">English Name</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input type="text" class="form-control" name="en_name" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic English address</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic address</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input style="text-align:right" type="text" class="form-control" name="ar_address" required>
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" name="ar_address" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -63,14 +63,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic Note <span class="required"></span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">Arabic Note</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <textarea style="text-align:right" class="form-control" rows="3" name="ar_note"></textarea>
+                                    <textarea dir="rtl" style="text-align:right" class="form-control" rows="3" name="ar_note"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">English Note <span class="required"></span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">English Note</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <textarea class="form-control" rows="3" name="en_note"></textarea>
@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arbic Work Times</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name="ar_work_times">
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" name="ar_work_times">
                                 </div>
                             </div>
                             <div class="form-group">

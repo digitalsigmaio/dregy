@@ -4,8 +4,7 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">Region</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
             <select v-model="region" name="region_id" class="form-control">
-                <option selected disabled>Choose Region</option>
-                <option v-for="region in regions" :value="region.id">{{region.en_name}}</option>
+                <option v-for="region in regions" :selected="region.id == current_region" :value="region.id">{{region.en_name}}</option>
                 
             </select>
         </div>
@@ -14,7 +13,6 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
             <select name="city_id" v-model="city" class="form-control">
-                <option selected="selected" disabled>Choose City</option>
                 <option v-for="city in cities" :value="city.id">{{city.en_name}}</option>
             </select>
         </div>
@@ -23,7 +21,7 @@
 </template>
 <script>
 export default{
-    props:['regions'],
+    props:['regions', 'current_region', 'current_city'],
     data() {
         return{
             citiesShow: false,
@@ -31,6 +29,10 @@ export default{
             region:null,
             city: null
         }
+    },
+    created(){
+        this.region = this.current_region;
+        this.city = this.current_city;
     },
 
     methods: {
@@ -41,7 +43,7 @@ export default{
         selected()
         {
             return "selected";
-        }
+        },
     },
     watch: {
         region(val) {
@@ -53,9 +55,6 @@ export default{
             }
         }
     },
-    created(){
-        this.region = "Choose Region";
-    }
 
 }
 </script>

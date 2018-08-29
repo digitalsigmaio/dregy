@@ -56,9 +56,12 @@ Vue.component('phone-edit', require('./components/PhoneEdit.vue'));
 Vue.component('phone-input', require('./components/PhoneInput.vue'));
 
 
+//MISC
 Vue.component('modal', require('./components/Modal.vue'));
 Vue.component('region-city', require('./components/RegionCity.vue'));
+Vue.component('edit-region-city', require('./components/EditRegionCity.vue'));
 Vue.component('premium-check', require('./components/PremiumCheck.vue'));
+Vue.component('premium-edit', require('./components/PremiumEdit.vue'));
 
 
 

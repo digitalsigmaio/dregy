@@ -14286,7 +14286,7 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(141);
+module.exports = __webpack_require__(144);
 
 
 /***/ }),
@@ -14346,9 +14346,12 @@ Vue.component('phone-numbers', __webpack_require__(118));
 Vue.component('phone-edit', __webpack_require__(121));
 Vue.component('phone-input', __webpack_require__(124));
 
+//MISC
 Vue.component('modal', __webpack_require__(130));
 Vue.component('region-city', __webpack_require__(135));
-Vue.component('premium-check', __webpack_require__(138));
+Vue.component('edit-region-city', __webpack_require__(138));
+Vue.component('premium-check', __webpack_require__(141));
+Vue.component('premium-edit', __webpack_require__(148));
 
 var app = new Vue({
   el: '#app'
@@ -70111,8 +70114,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.cities = region[0].cities;
             }
         }
+    },
+    created: function created() {
+        this.region = "Choose Region";
     }
-
 });
 
 /***/ }),
@@ -70271,6 +70276,240 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources\\assets\\js\\components\\EditRegionCity.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fec0b240", Component.options)
+  } else {
+    hotAPI.reload("data-v-fec0b240", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 139 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['regions', 'current_region', 'current_city'],
+    data: function data() {
+        return {
+            citiesShow: false,
+            cities: null,
+            region: null,
+            city: null
+        };
+    },
+    created: function created() {
+        this.region = this.current_region;
+        this.city = this.current_city;
+    },
+
+
+    methods: {
+        getCities: function getCities(region) {
+            this.cities = region.cities;
+            citiesShow = true;
+        },
+        selected: function selected() {
+            return "selected";
+        }
+    },
+    watch: {
+        region: function region(val) {
+            if (val !== null) {
+                var region = this.regions.filter(function (region) {
+                    return region.id == val;
+                });
+                this.cities = region[0].cities;
+            }
+        }
+    }
+
+});
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "control-label col-md-3 col-sm-3 col-xs-12" },
+        [_vm._v("Region")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-9 col-sm-9 col-xs-12" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.region,
+                expression: "region"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "region_id" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.region = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(_vm.regions, function(region) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  selected: region.id == _vm.current_region,
+                  value: region.id
+                }
+              },
+              [_vm._v(_vm._s(region.en_name))]
+            )
+          })
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.cities
+      ? _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "control-label col-md-3 col-sm-3 col-xs-12" },
+            [_vm._v("City")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-9 col-sm-9 col-xs-12" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.city,
+                    expression: "city"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "city_id" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.city = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.cities, function(city) {
+                return _c("option", { domProps: { value: city.id } }, [
+                  _vm._v(_vm._s(city.en_name))
+                ])
+              })
+            )
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-fec0b240", module.exports)
+  }
+}
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(142)
+/* template */
+var __vue_template__ = __webpack_require__(143)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources\\assets\\js\\components\\PremiumCheck.vue"
 
 /* hot reload */
@@ -70293,7 +70532,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 139 */
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70342,17 +70581,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: [],
+    props: ['premium', 'status'],
     data: function data() {
         return {
             premiumShow: false,
             picked: null
         };
+    },
+
+    methods: {
+        checkStatus: function checkStatus() {
+            if (this.status) {
+                return "true";
+            } else {
+                return "false";
+            }
+        }
     }
+
 });
 
 /***/ }),
-/* 140 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -70377,13 +70627,7 @@ var render = function() {
               expression: "premiumShow"
             }
           ],
-          attrs: {
-            type: "radio",
-            id: "one",
-            value: "false",
-            checked: "",
-            name: "premium"
-          },
+          attrs: { type: "radio", id: "one", value: "false", name: "premium" },
           domProps: { checked: _vm._q(_vm.premiumShow, "false") },
           on: {
             change: function($event) {
@@ -70487,10 +70731,288 @@ if (false) {
 }
 
 /***/ }),
-/* 141 */
+/* 144 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(149)
+/* template */
+var __vue_template__ = __webpack_require__(150)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\PremiumEdit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a3202da", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a3202da", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 149 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['premium', 'status'],
+    data: function data() {
+        return {
+            premiumShow: null,
+            picked: null,
+            priorities: [1, 2, 3],
+            selected: null,
+            expires_at: null
+        };
+    },
+
+    methods: {
+        checkStatus: function checkStatus() {
+            if (this.status) {
+                return "true";
+            } else {
+                return "false";
+            }
+        }
+    },
+    created: function created() {
+        this.premiumShow = this.status.toString();
+        this.selected = this.premium.priority;
+        this.expires_at = this.premium.expires_at.split(" ")[0];
+    }
+});
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "col-md-3 col-sm-3 col-xs-12 control-label" },
+        [_vm._v("Premium\r\n        ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-9 col-sm-9 col-xs-12" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.premiumShow,
+              expression: "premiumShow"
+            }
+          ],
+          attrs: { type: "radio", id: "one", value: "false", name: "premium" },
+          domProps: { checked: _vm._q(_vm.premiumShow, "false") },
+          on: {
+            change: function($event) {
+              _vm.premiumShow = "false"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "one" } }, [_vm._v("No")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.premiumShow,
+              expression: "premiumShow"
+            }
+          ],
+          attrs: { type: "radio", id: "two", value: "true", name: "premium" },
+          domProps: { checked: _vm._q(_vm.premiumShow, "true") },
+          on: {
+            change: function($event) {
+              _vm.premiumShow = "true"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "two" } }, [_vm._v("Yes")]),
+        _vm._v(" "),
+        _c("br")
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.premiumShow === "true"
+      ? _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            {
+              staticClass: "control-label col-md-3 col-sm-3 col-xs-12",
+              attrs: { for: "priority" }
+            },
+            [_vm._v("\r\n                Priority\r\n            ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-12" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selected,
+                    expression: "selected"
+                  }
+                ],
+                attrs: { name: "priority" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selected = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.priorities, function(n) {
+                return _c("option", [_vm._v(_vm._s(n))])
+              })
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "control-label col-md-3 col-sm-3 col-xs-12",
+              attrs: { for: "expires_at" }
+            },
+            [_vm._v("\r\n                Expires At\r\n            ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-12" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.expires_at,
+                  expression: "expires_at"
+                }
+              ],
+              attrs: { id: "expires_at", type: "date", name: "expires_at" },
+              domProps: { value: _vm.expires_at },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.expires_at = $event.target.value
+                }
+              }
+            })
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a3202da", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
