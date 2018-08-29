@@ -18,6 +18,10 @@ class ProductAd extends Model
         'evaluation'
     ];
 
+    protected $fillable = [
+        'admin_id'
+    ];
+
     public function region()
     {
         return $this->belongsTo(Region::class);
@@ -64,7 +68,10 @@ class ProductAd extends Model
 
     public function scopePending($query)
     {
-        return $query->where('approved', null)->orderBy('created_at', 'asc');
+        return $query
+            ->where('approved', null)
+            ->where('admin_id', null)
+            ->orderBy('created_at', 'asc');
     }
 
     public function getFeaturedAttribute()

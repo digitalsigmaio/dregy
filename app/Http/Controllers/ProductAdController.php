@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReviewProduct;
 use App\Http\Resources\ProductAdResource;
 use App\PhoneNumber;
 use App\ProductAd;
@@ -27,6 +28,19 @@ class ProductAdController extends Controller
         ]);
 
         return view('products', compact(['filters']));
+    }
+
+    public function pendingProducts()
+    {
+        $admin = Auth('admin')->user();
+        $products = ProductAdResource::collection(ProductAd::pending()->get());
+        return view('admin.products.pending-products', compact(['products', 'admin']));
+    }
+
+    public function productReview(ProductAd $productAd)
+    {
+        $adminId = Auth::guard('admin')->user()->id;
+        broadcast(new ReviewProduct($productAd, $adminId));
     }
 
     public function show(ProductAd $productAd, $slug){

@@ -70,7 +70,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="index.html">Pending Products</a></li>
+                                        <li><a href="{{ route('admin.products.review') }}">Pending Products</a></li>
                                         <li><a href="index2.html">Pending Jobs</a></li>
                                     </ul>
                                 </li>
@@ -122,13 +122,15 @@
                             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                         </div>
 
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right" style="margin-right: 30px">
+
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     {{ $admin->name }}
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
+
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
@@ -144,6 +146,11 @@
                                 </ul>
 
                             </li>
+                            @if($admin->productsOnHold)
+                            <li>
+                                <a href="#" class="btn btn-warning white-text" style="margin-top: 12px; padding: 2px 10px; color: white!important;">Products on hold <span class="badge">{{ $admin->productsOnHold }}</span></a>
+                            </li>
+                            @endif
 
                         </ul>
                     </nav>
@@ -154,7 +161,6 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 <div id="app">
-                
                     @yield('content')
                 </div>
             </div>

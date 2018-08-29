@@ -61,7 +61,7 @@ class Admin extends Authenticatable
         return $this->hasMany(CosmeticClinic::class);
     }
 
-    public function productADReviews()
+    public function productAdReviews()
     {
         return $this->hasMany(ProductAd::class);
     }
@@ -69,5 +69,10 @@ class Admin extends Authenticatable
     public function jobAdReviews()
     {
         return $this->hasMany(JobAd::class);
+    }
+
+    public function getProductsOnHoldAttribute()
+    {
+        return $this->productAdReviews()->where('approved', null)->get()->count();
     }
 }

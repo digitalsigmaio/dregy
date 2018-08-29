@@ -19,6 +19,7 @@ class ProductAdResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'user_name'  => $this->user->name,
+            'user_email' => $this->user->email,
             'title' => $this->title,
             'description' => $this->description,
             'evaluation' => $this->evaluation,

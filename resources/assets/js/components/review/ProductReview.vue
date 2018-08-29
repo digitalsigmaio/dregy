@@ -2,7 +2,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Product List <small>view</small></h2>
+                <h2>Product List <small>review</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -12,7 +12,7 @@
 
             <div class="x_content">
 
-                <p>Pick a product for review</p>
+                <p>Pending products for review</p>
 
                 <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action">
@@ -27,9 +27,11 @@
                         </thead>
 
                         <tbody>
-                        <tr class="even pointer" v-for="product in products">
-                            <td class=" ">{{ product.en_name }}</td>
-                            <td class=" " :href="">{{ product.user.name }}</td>
+                        <tr class="even pointer" :class="'product-' + product.id" v-for="product in products">
+                            <td class="">{{ product.title }}</td>
+                            <td class="">{{ product.user_email }}</td>
+                            <td class="">{{ product.created_at }}</td>
+                            <td class=""><a :href="'/admin/pending-products/' + product.id" class="btn btn-info" :class="'product-' + product.id + '-btn'">{{ status(product.id) }}</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -42,16 +44,45 @@
 </template>
 <script>
     export default {
-        props: ['productList'],
+        props: ['productlist'],
         data() {
             return {
-
+                products: this.productlist,
+                reviewing: []
             }
         },
         computed: {
-            products() {
-                return this.productList;
+        },
+        methods: {
+            underReview(id) {
+                this.reviewing.push(id);
+                let productDiv = '.product-' + id;
+                let div = $(productDiv);
+                div.addClass('warning');
+                let button = $(productDiv + '-btn');
+                button.addClass('btn-warning disabled');
+            },
+            logIndex(id) {
+                let index = this.products.filter(function(product) {
+                    return product.id === id;
+                });
+                let product = this.products.indexOf(index[0]);
+                this.products.splice(product, 1)
+            },
+            status(id) {
+                if(this.reviewing.includes(id)) {
+                    return 'Under review'
+                } else {
+                    return 'Review'
+                }
             }
+        },
+        mounted() {
+        Echo.private(`review-product`)
+            .listen('ReviewProduct', (e) => {
+                console.log(e.product_id);
+                this.underReview(e.product_id);
+            });
         }
     }
 </script>

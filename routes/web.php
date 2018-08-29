@@ -40,40 +40,23 @@ Route::middleware('language')->group(function () {
     // Hospitals
     Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
     Route::get('/hospitals/{hospital}/{slug}', 'HospitalController@show');
-    Route::get('/admin/hospitals/list', 'HospitalController@list')->name('listHospital');
-    Route::get('/admin/hospitals/new', 'HospitalController@create')->name('newHospital');
-    Route::post('/admin/hospitals/new', 'HospitalController@store')->name('storeHospital');
-    Route::get('/admin/hospitals/edit/{hospital}', 'HospitalController@edit')->name('editHospital');
-    Route::patch('/admin/hospitals/edit', 'HospitalController@update')->name('updateHospital');
+
 
     // Clinics
     Route::get('/clinics', 'ClinicController@index')->name('clinics');
     Route::get('/clinics/{clinic}/{slug}', 'ClinicController@show');
-    Route::get('/admin/clinic/list', 'ClinicController@list')->name('listClinic');
-    Route::get('/admin/clinics/new', 'ClinicController@create')->name('newClinic');
-    Route::post('/admin/clinics/new', 'ClinicController@store')->name('storeClinic');
-    Route::get('/admin/clinics/edit/{clinic}', 'ClinicController@edit')->name('editClinic');
-    Route::patch('/admin/clinics/edit', 'ClinicController@update')->name('updateClinic');
+
 
 
     // Cosmetic Clinics
     Route::get('/cosmetic-clinics', 'CosmeticClinicController@index')->name('cosmetics');
     Route::get('/cosmetic-clinics/{cosmeticClinic}/{slug}', 'CosmeticClinicController@show');
-    Route::get('/admin/cosmetic/list', 'CosmeticClinicController@list')->name('listCosmeticClinic');
-    Route::get('/admin/cosmetic-clinics/new', 'CosmeticClinicController@create')->name('newCosmeticClinic');
-    Route::post('/admin/cosmetic-clinics/new', 'CosmeticClinicController@store')->name('storeCosmeticClinic');
-    Route::get('/admin/cosmetic-clinics/edit/{cosmeticClinic}', 'CosmeticClinicController@edit')->name('editCosmeticClinic');
-    Route::patch('/admin/cosmetic-clinics/edit', 'CosmeticClinicController@update')->name('updateCosmeticClinic');
+
 
 
     // Pharmacies
     Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
     Route::get('/pharmacies/{pharmacy}/{slug}', 'PharmacyController@show');
-    Route::get('/admin/pharmacies/list', 'PharmacyController@list')->name('listPharmacy');
-    Route::get('/admin/pharmacies/new', 'PharmacyController@create')->name('newPharmacy');
-    Route::post('/admin/pharmacies/new', 'PharmacyController@store')->name('storePharmacy');
-    Route::get('/admin/pharmacies/edit/{pharmacy}', 'PharmacyController@edit')->name('editPharmacy');
-    Route::patch('/admin/pharmacies/edit', 'PharmacyController@update')->name('updatePharmacy');
 
 
 
@@ -107,13 +90,38 @@ Route::middleware('language')->group(function () {
 
 
 // admin Login
-    Route::prefix('admin')->group(function () {
-        Route::get('/', function () { return redirect()->route('admin.dashboard'); });
+    Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/home', 'AdminController@index')->name('admin.dashboard');
-        Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-        Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
         Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
         Route::view('/apiToken', 'dev.apiTokens')->name('create-token');
+
+        // Hospitals
+        Route::get('/hospitals/list', 'HospitalController@list')->name('listHospital');
+        Route::get('/hospitals/new', 'HospitalController@create')->name('newHospital');
+        Route::post('/hospitals/new', 'HospitalController@store')->name('storeHospital');
+        Route::get('/hospitals/edit/{hospital}', 'HospitalController@edit')->name('editHospital');
+        Route::patch('/hospitals/edit', 'HospitalController@update')->name('updateHospital');
+
+        // Clinics
+        Route::get('/clinic/list', 'ClinicController@list')->name('listClinic');
+        Route::get('/clinics/new', 'ClinicController@create')->name('newClinic');
+        Route::post('/clinics/new', 'ClinicController@store')->name('storeClinic');
+        Route::get('/clinics/edit/{clinic}', 'ClinicController@edit')->name('editClinic');
+        Route::patch('/clinics/edit', 'ClinicController@update')->name('updateClinic');
+
+        // Cosmetic
+        Route::get('/cosmetic/list', 'CosmeticClinicController@list')->name('listCosmeticClinic');
+        Route::get('/cosmetic-clinics/new', 'CosmeticClinicController@create')->name('newCosmeticClinic');
+        Route::post('/cosmetic-clinics/new', 'CosmeticClinicController@store')->name('storeCosmeticClinic');
+        Route::get('/cosmetic-clinics/edit/{cosmeticClinic}', 'CosmeticClinicController@edit')->name('editCosmeticClinic');
+        Route::patch('/cosmetic-clinics/edit', 'CosmeticClinicController@update')->name('updateCosmeticClinic');
+
+        // Pharmacy
+        Route::get('/pharmacies/list', 'PharmacyController@list')->name('listPharmacy');
+        Route::get('/pharmacies/new', 'PharmacyController@create')->name('newPharmacy');
+        Route::post('/pharmacies/new', 'PharmacyController@store')->name('storePharmacy');
+        Route::get('/pharmacies/edit/{pharmacy}', 'PharmacyController@edit')->name('editPharmacy');
+        Route::patch('/pharmacies/edit', 'PharmacyController@update')->name('updatePharmacy');
 
         Route::POST('password/email',           'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
         Route::POST('password/reset',           'Auth\AdminResetPasswordController@reset');
@@ -127,5 +135,14 @@ Route::middleware('language')->group(function () {
         Route::get('/users/edit/{ref_id}', 'AdminUserController@edit')->name('admin.user.edit');
         //Route::put('/users/update/{user}', 'AdminUserController@update')->name('admin.user.update'); [HOLD ON USAGE]
         Route::delete('/users/delete/{ref_id}', 'AdminUserController@destroy')->name('admin.user.delete');
-    });
+        Route::get('/pending-products', 'ProductAdController@pendingProducts')->name('admin.products.review');
+        Route::get('/pending-products/{productAd}', 'ProductAdController@productReview');
+
+        });
 });
+
+// Admin login
+
+Route::get('/admin/', function () { return redirect()->route('admin.dashboard'); });
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
