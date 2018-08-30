@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="container">
-        
-            @if($errors->any())
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                @if($errors->any())
             <div class="row">
             <ul>
             @foreach($errors->all() as $error)
@@ -16,14 +17,8 @@
             @if (Session::has('message'))
             <div class="alert alert-success">
                 {{ Session::get('message') }}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             @endif
-        
-        <div class="row justify-content-center">
-            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h2>New Pharmacy</h2>

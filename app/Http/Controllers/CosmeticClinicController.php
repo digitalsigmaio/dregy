@@ -81,7 +81,8 @@ class CosmeticClinicController extends Controller
             'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'ref_id' => 'required',
-            'speciality_id'=> 'required'
+            'speciality_id'=> 'required',
+            'phones*' => "required",
         ]);
 
         $user = User::where('ref_id', $request->ref_id)->first();
@@ -132,7 +133,7 @@ class CosmeticClinicController extends Controller
             session()->flash('message', 'Cosmetic Successfully Created');
             return redirect()->back();
         }else {
-            session()->flash('message', 'Invalid User');
+            session()->flash('message', 'Invalid User Reference');
             return redirect()->back();
         }
     }

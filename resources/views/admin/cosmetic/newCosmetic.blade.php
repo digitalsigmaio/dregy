@@ -2,28 +2,23 @@
 
 @section('content')
     <div class="container">
-        
-            @if($errors->any())
-            <div class="row">
-            <ul>
-            @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
-            @endforeach
-            </ul>
-            </div>
-            @endif
-
-            @if (Session::has('message'))
-            <div class="alert alert-success">
-                {{ Session::get('message') }}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endif
-        
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @if($errors->any())
+                <div class="row">
+                <ul>
+                @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+                </ul>
+                </div>
+                @endif
+
+                @if (Session::has('message'))
+                <div class="alert alert-success">
+                    {{ Session::get('message') }}
+                </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h2>New Cosmetic Clinic</h2>

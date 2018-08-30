@@ -67971,6 +67971,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -67979,9 +68005,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       formStatus: true,
       select_option: "",
       filter_value: "",
-      result: "",
+      result: null,
       isModalVisible: false,
-      title: "Are you Sure You want to Delete this user?"
+      title: "Are you Sure You want to Delete this user?",
+      hospitalStatus: false,
+      pharmacyStatus: false,
+      clinicStatus: false,
+      cosmeticStatus: false
     };
   },
 
@@ -68004,6 +68034,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     closeModal: function closeModal() {
       this.isModalVisible = false;
+    },
+    hospitalShow: function hospitalShow() {
+      this.hospitalStatus = !this.hospitalStatus;
+    },
+    pharmacyShow: function pharmacyShow() {
+      this.pharmacyStatus = !this.pharmacyStatus;
+    },
+    clinicShow: function clinicShow() {
+      this.clinicStatus = !this.clinicStatus;
+    },
+    cosmeticShow: function cosmeticShow() {
+      this.cosmticStatus = !this.cosmticStatus;
     }
   },
 
@@ -68030,210 +68072,342 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("modal", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isModalVisible,
-            expression: "isModalVisible"
-          }
-        ],
-        attrs: { url: _vm.delete_url, title: _vm.title },
-        on: { close: _vm.closeModal }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _vm.formStatus
-            ? _c("div", { staticClass: "card" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("form", { staticClass: "col-md-8" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.select_option,
-                              expression: "select_option"
-                            }
-                          ],
-                          staticClass: "mb-5 mt-5",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.select_option = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", disabled: "", selected: "" }
-                            },
-                            [_vm._v("Choose your Search option")]
-                          ),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "email" } }, [
-                            _vm._v("E-mail")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "ref_id" } }, [
-                            _vm._v("Reference Id")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-10" }, [
+        _vm.formStatus
+          ? _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("form", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "select",
+                      {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.filter_value,
-                            expression: "filter_value"
+                            value: _vm.select_option,
+                            expression: "select_option"
                           }
                         ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "form1" },
-                        domProps: { value: _vm.filter_value },
+                        staticClass: "mb-5 mt-5",
                         on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.filter_value = $event.target.value
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.select_option = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
                           }
                         }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-block my-4",
-                          attrs: { type: "submit" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.getUser()
-                            }
-                          }
-                        },
-                        [_vm._v("Search")]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            : _c("div", { staticClass: "card" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("table", { staticClass: "table table-hover" }, [
-                    _c("thead"),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("th", [_vm._v("Name")]),
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [_vm._v("Choose your Search option")]
+                        ),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Email")]),
+                        _c("option", { attrs: { value: "email" } }, [
+                          _vm._v("E-mail")
+                        ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.email))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Register Provider")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.provider))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Ref_Id")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.ref_id))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Since")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.created_at))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Total Views")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.views.length))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Hospitals")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.hospitals.length))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Pharmacies")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.pharmacies.length))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Clinics")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.result.clinics.length))])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("th", [_vm._v("Cosmetic Clinics")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(_vm.result.beauty_centers.length))
+                        _c("option", { attrs: { value: "ref_id" } }, [
+                          _vm._v("Reference Id")
                         ])
-                      ])
-                    ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.filter_value,
+                          expression: "filter_value"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "form1" },
+                      domProps: { value: _vm.filter_value },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.filter_value = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-info btn-block my-4",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.getUser()
+                          }
+                        }
+                      },
+                      [_vm._v("Search")]
+                    )
                   ])
-                ]),
-                _vm._v(" "),
-                _c("ul", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-block my-2 mt-5",
-                      on: { click: _vm.showModal }
-                    },
-                    [_vm._v("Delete")]
-                  )
                 ])
               ])
-        ])
+            ])
+          : _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.result
+                  ? _c(
+                      "table",
+                      { staticClass: "table table-hover user-table" },
+                      [
+                        _c("modal", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.isModalVisible,
+                              expression: "isModalVisible"
+                            }
+                          ],
+                          attrs: { url: _vm.delete_url, title: _vm.title },
+                          on: { close: _vm.closeModal }
+                        }),
+                        _vm._v(" "),
+                        _c("thead"),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          [
+                            _c("tr", [
+                              _c("th", [_vm._v("Name")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.result.name))]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [_vm._v("Email")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.result.email))]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [_vm._v("Register Provider")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.result.provider))]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [_vm._v("Ref_Id")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.result.ref_id))]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [_vm._v("Since")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.result.created_at))]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [_vm._v("Total Views")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm.result.views.length))
+                              ]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.hospitalShow($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Hospitals")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm.result.hospitals.length))
+                              ]),
+                              _vm._v(" "),
+                              _c("td")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.result.hospitals, function(hospital) {
+                              return _vm.hospitalStatus
+                                ? _c("tr", [
+                                    _c("td", [_vm._v(_vm._s(hospital.name))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(hospital.email))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(hospital.website))])
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.pharmacyShow($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Pharmacies")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm.result.pharmacies.length))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.result.pharmacies, function(pharmacy) {
+                              return _vm.pharmacyStatus
+                                ? _c("tr", [
+                                    _c("td", [
+                                      _vm._v(_vm._s(pharmacy.en_name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(pharmacy.email))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(pharmacy.website))])
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.clinicShow($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Clinics")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm.result.clinics.length))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.result.clinics, function(clinic) {
+                              return _vm.clinicStatus
+                                ? _c("tr", [
+                                    _c("td", [_vm._v(_vm._s(clinic.en_name))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(clinic.email))])
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("th", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.cosmeticShow($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cosmetic Clinics")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm.result.beauty_centers.length))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.result.beauty_centers, function(
+                              cosmetic
+                            ) {
+                              return _vm.cosmeticStatus
+                                ? _c("tr", [
+                                    _c("td", [
+                                      _vm._v(_vm._s(cosmetic.en_name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(cosmetic.email))])
+                                  ])
+                                : _vm._e()
+                            })
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("ul", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-block my-2 mt-5",
+                    on: { click: _vm.showModal }
+                  },
+                  [_vm._v("Delete")]
+                )
+              ])
+            ])
       ])
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -68374,6 +68548,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -68385,7 +68567,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 password_confirmation: ""
             },
 
-            result: "",
+            result: null,
             resultshow: true
         };
     },
@@ -68585,7 +68767,25 @@ var render = function() {
         staticClass: "col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5",
         attrs: { else: "" }
       },
-      [_vm._v("\n            " + _vm._s(_vm.result) + "\n        ")]
+      [
+        _vm.result
+          ? _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header mb-5" }, [
+                _c("h1", [_c("b", [_vm._v(_vm._s(_vm.user.name))])])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body col-md-offset-2" }, [
+                _c("label", { attrs: { for: "ref" } }, [
+                  _vm._v("Reference Id")
+                ]),
+                _vm._v(" "),
+                _c("h3", { staticClass: "form-control" }, [
+                  _vm._v(_vm._s(_vm.result))
+                ])
+              ])
+            ])
+          : _vm._e()
+      ]
     )
   ])
 }
@@ -69320,7 +69520,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: [],
     data: function data() {
         return {
-            inputArray: 0
+            inputArray: 1
         };
     },
 
@@ -69509,7 +69709,7 @@ var render = function() {
         [_vm._v("+")]
       ),
       _vm._v(" "),
-      _vm.phonesArray.length > 0
+      _vm.phonesArray.length > 1
         ? _c(
             "button",
             {
@@ -69702,7 +69902,7 @@ var render = function() {
     _c("div", { staticClass: "col-md-8 ml-2" }, [
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", name: "phones[]" },
+        attrs: { type: "text", name: "phones[]", required: "" },
         domProps: { value: _vm.number }
       })
     ])
@@ -70082,7 +70282,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['regions'],
@@ -70107,7 +70306,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     watch: {
         region: function region(val) {
-            if (val !== null) {
+            if (val !== null && val !== "Choose Region") {
                 var region = this.regions.filter(function (region) {
                     return region.id == val;
                 });
@@ -70167,14 +70366,16 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { selected: "", disabled: "" } }, [
+            _c("option", { attrs: { disabled: "" } }, [
               _vm._v("Choose Region")
             ]),
             _vm._v(" "),
             _vm._l(_vm.regions, function(region) {
-              return _c("option", { domProps: { value: region.id } }, [
-                _vm._v(_vm._s(region.en_name))
-              ])
+              return _c(
+                "option",
+                { key: region.id, domProps: { value: region.id } },
+                [_vm._v(_vm._s(region.en_name))]
+              )
             })
           ],
           2
@@ -70228,9 +70429,11 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _vm._l(_vm.cities, function(city) {
-                  return _c("option", { domProps: { value: city.id } }, [
-                    _vm._v(_vm._s(city.en_name))
-                  ])
+                  return _c(
+                    "option",
+                    { key: city.id, domProps: { value: city.id } },
+                    [_vm._v(_vm._s(city.en_name))]
+                  )
                 })
               ],
               2

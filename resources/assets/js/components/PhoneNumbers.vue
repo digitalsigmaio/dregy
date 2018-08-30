@@ -16,7 +16,7 @@ export default{
     props:[],
     data() {
         return {
-            inputArray:0,
+            inputArray:1,
         }
     },
     methods:{

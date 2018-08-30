@@ -4,9 +4,8 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">Region</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
             <select v-model="region" name="region_id" class="form-control">
-                <option selected disabled>Choose Region</option>
-                <option v-for="region in regions" :value="region.id">{{region.en_name}}</option>
-                
+                <option disabled>Choose Region</option>
+                <option v-for="region in regions" :value="region.id" :key="region.id">{{region.en_name}}</option>
             </select>
         </div>
     </div>
@@ -15,7 +14,7 @@
         <div class="col-md-9 col-sm-9 col-xs-12">
             <select name="city_id" v-model="city" class="form-control">
                 <option selected="selected" disabled>Choose City</option>
-                <option v-for="city in cities" :value="city.id">{{city.en_name}}</option>
+                <option v-for="city in cities" :value="city.id" :key="city.id">{{city.en_name}}</option>
             </select>
         </div>
     </div>
@@ -45,7 +44,7 @@ export default{
     },
     watch: {
         region(val) {
-            if(val !== null) {
+            if(val !== null && val !=="Choose Region") {
                 let region = this.regions.filter(function(region) {
                     return region.id == val
                 })

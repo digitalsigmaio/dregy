@@ -77,6 +77,7 @@ class PharmacyController extends Controller
             'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'ref_id' => 'required',
+            'phones*' => "required",
         ]);
 
         //dd($request->all());
@@ -128,7 +129,7 @@ class PharmacyController extends Controller
             session()->flash('message', 'Pharmacy Successfully Created');
             return redirect()->back();
         } else {
-            session()->flash('message', 'Invalid User Ref');
+            session()->flash('message', 'Invalid User Reference');
             return redirect()->back();
         }
 
