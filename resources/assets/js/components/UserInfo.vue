@@ -1,8 +1,8 @@
 <template>
 <div class="container">
-    <modal v-show="isModalVisible" @close="closeModal" :url="delete_url" :title="title"/>
+    
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-10">
         <div v-if="formStatus" class="card">
             <div class="card-header mb-5 mt-5">
               <h2>Users Selection <b>:</b></h2>
@@ -31,49 +31,75 @@
               <h2>User Details</h2>
             </div>
             <div class="card-body">
-              <table class="table table-hover">
+              <table v-if="result" class="table table-hover user-table">
+                <modal v-show="isModalVisible" @close="closeModal" :url="delete_url" :title="title"/>
                 <thead>
                 </thead>
                 <tbody>
                   <tr>
                     <th>Name</th>
                     <td>{{result.name}}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Email</th>
                     <td>{{result.email}}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Register Provider</th>
                     <td>{{result.provider}}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Ref_Id</th>
                     <td>{{result.ref_id}}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Since</th>
                     <td>{{result.created_at}}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Total Views</th>
                     <td>{{result.views.length}}</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <th>Hospitals</th>
+                    <th><a href="" @click.prevent="hospitalShow">Hospitals</a></th>
                     <td>{{result.hospitals.length}}</td>
+                    <td></td>
+                  </tr>
+                  <tr v-if="hospitalStatus" v-for="hospital in result.hospitals">
+                    <td>{{hospital.name}}</td>
+                    <td>{{hospital.email}}</td>
+                    <td>{{hospital.website}}</td>
                   </tr>
                   <tr>
-                    <th>Pharmacies</th>
+                    <th><a href="" @click.prevent="pharmacyShow">Pharmacies</a></th>
                     <td>{{result.pharmacies.length}}</td>
                   </tr>
-                  <tr>
-                    <th>Clinics</th>
-                    <td>{{result.clinics.length}}</td>
+                  <tr v-if="pharmacyStatus" v-for="pharmacy in result.pharmacies">
+                      <td>{{pharmacy.en_name}}</td>
+                      <td>{{pharmacy.email}}</td>
+                      <td>{{pharmacy.website}}</td>
                   </tr>
                   <tr>
-                    <th>Cosmetic Clinics</th>
+                    <th><a href="" @click.prevent="clinicShow">Clinics</a></th>
+                    <td>{{result.clinics.length}}</td>
+                  </tr>
+                  <tr v-if="clinicStatus" v-for="clinic in result.clinics">
+                      <td>{{clinic.en_name}}</td>
+                      <td>{{clinic.email}}</td>
+                  </tr>
+                  <tr>
+                    <th><a href="" @click.prevent="cosmeticShow">Cosmetic Clinics</a></th>
                     <td>{{result.beauty_centers.length}}</td>
+                  </tr>
+                  <tr v-if="cosmeticStatus" v-for="cosmetic in result.beauty_centers">
+                      <td>{{cosmetic.en_name}}</td>
+                      <td>{{cosmetic.email}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -100,9 +126,13 @@ export default {
       formStatus: true,
       select_option: "",
       filter_value: "",
-      result: "",
+      result: null,
       isModalVisible: false,
-      title: "Are you Sure You want to Delete this user?"
+      title: "Are you Sure You want to Delete this user?",
+      hospitalStatus: false,
+      pharmacyStatus: false,
+      clinicStatus: false,
+      cosmeticStatus: false,
     };
   },
 
@@ -126,7 +156,19 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    }
+    },
+    hospitalShow(){
+        this.hospitalStatus = !this.hospitalStatus;
+    },
+    pharmacyShow(){
+        this.pharmacyStatus = !this.pharmacyStatus;
+    },
+    clinicShow(){
+        this.clinicStatus = !this.clinicStatus;
+    },
+    cosmeticShow(){
+        this.cosmticStatus = !this.cosmticStatus;
+    },
   },
 
   mounted() {},

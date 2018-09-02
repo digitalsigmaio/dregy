@@ -39,13 +39,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Pharmacy Arabic Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic Name</label>
                                 <div  class="col-md-9 col-sm-9 col-xs-12">
-                                    <input style="text-align:right" type="text" class="form-control" value="{{ $pharmacy->ar_name}}" name="ar_name" required>
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" value="{{ $pharmacy->ar_name}}" name="ar_name" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Pharmacy English Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">English Name</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input type="text" class="form-control" value="{{ $pharmacy->en_name}}" name="en_name" required>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic address</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input style="text-align:right" type="text" class="form-control" value="{{ $pharmacy->ar_address}}" name="ar_address" required>
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" value="{{ $pharmacy->ar_address}}" name="ar_address" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -66,7 +66,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic Note <span class="required"></span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <textarea style="text-align:right" class="form-control" rows="3" name="ar_note">{{$pharmacy->ar_note}}</textarea>
+                                    <textarea dir="rtl" style="text-align:right" class="form-control" rows="3" name="ar_note">{{$pharmacy->ar_note}}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -76,20 +76,25 @@
                                     <textarea class="form-control" rows="3" name="en_note">{{$pharmacy->en_note}}</textarea>
                                 </div>
                             </div>
-                            <region-city :regions = "{{$regions}}"></region-city>
+                            <edit-region-city   :regions = "{{$regions}}" 
+                                                :current_region = "{{ json_encode($pharmacy->region->id) }}"
+                                                :current_city = "{{ json_encode($pharmacy->city->id) }}">
                             
-                            <premium-check></premium-check>
+                            ></edit-region-city>
+                            <premium-edit :premium = "{{ json_encode($pharmacy->premium) }}"
+                                            :status = "{{ json_encode($pharmacy->featured) }}"
+                            ></premium-edit>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Time</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="checkbox" name="full_time" value="{{$pharmacy->full_time}}"> Yes<br>
+                                    <input type="checkbox" name="full_time" {{$pharmacy->full_time == 1 ? 'checked': ''}} value="{{$pharmacy->full_time}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arbic Work Times</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" value="{{$pharmacy->ar_work_times}}" name="ar_work_times">
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" value="{{$pharmacy->ar_work_times}}" name="ar_work_times">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -101,7 +106,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="checkbox" name="delivery" value="{{$pharmacy->delivery}}"> Yes
+                                    <input type="checkbox" name="delivery" {{$pharmacy->delivery == 1 ? 'checked': ''}} value="{{$pharmacy->delivery}}">
                                 </div>
                             </div>
                             <div class="form-group">

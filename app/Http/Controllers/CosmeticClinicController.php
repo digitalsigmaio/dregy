@@ -78,10 +78,11 @@ class CosmeticClinicController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'ref_id' => 'required',
-            'speciality_id'=> 'required'
+            'speciality_id'=> 'required',
+            'phones*' => "required",
         ]);
 
         $user = User::where('ref_id', $request->ref_id)->first();
@@ -106,6 +107,22 @@ class CosmeticClinicController extends Controller
             ]);
             
             $cosmetic->specialities()->attach($request->speciality_id);
+
+            if (count($request->phones)) {
+                foreach ($request->phones as $phone) {
+                    $cosmetic->phoneNumbers()->create([
+                        'number' => $phone,
+                    ]);
+                }
+            }
+
+            if ($request->premium === 'true') {
+                $cosmetic->premium()->create([
+                    'admin_id' => $admin->id,
+                    'priority' => $request->priority,
+                    'expires_at' => $request->expires_at,
+                ]);
+            }
             
             if($request->hasFile('img')){
                 $cosmetic->uploadImage($request->img);
@@ -116,13 +133,14 @@ class CosmeticClinicController extends Controller
             session()->flash('message', 'Cosmetic Successfully Created');
             return redirect()->back();
         }else {
-            session()->flash('message', 'Invalid User Ref');
+            session()->flash('message', 'Invalid User Reference');
             return redirect()->back();
         }
     }
 
     public function edit(CosmeticClinic $cosmeticClinic)
     {
+        $cosmeticClinic->load(['specialities']);
         $admin = Auth('admin')->user();
         $regions = Region::with('cities')->get();
         $specialities = CosmeticClinicSpeciality::all();
@@ -144,7 +162,7 @@ class CosmeticClinicController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'speciality_id' => 'required'
         ]);
@@ -196,7 +214,7 @@ class CosmeticClinicController extends Controller
             $cosmetic->save();
 
             session()->flash('message', 'Cosmetic Successfully Updated');
-            return redirect()->route('listCosmeticClinic');
+            return redirect()->back();
         } else {
             session()->flash('message', 'Invalid');
             return redirect()->back();

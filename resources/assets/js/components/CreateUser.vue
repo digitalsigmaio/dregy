@@ -50,7 +50,15 @@
 
         </div>
         <div else class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
-            {{result}}
+                <div v-if="result" class="card">
+                    <div class="card-header mb-5">
+                    <h1><b>{{user.name}}</b></h1>
+                    </div>
+                    <div  class="card-body col-md-offset-2">
+                        <label for="ref">Reference Id</label>
+                        <h3 class="form-control">{{result}}</h3>
+                    </div>
+                </div>
         </div>
 </div>
 
@@ -68,8 +76,8 @@ export default{
                 password_confirmation:"",
             },
 
-            result:"",
-            resultshow: true
+            result:null,
+            resultshow: true,
         }
     },
     methods: {
