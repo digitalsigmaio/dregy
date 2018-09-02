@@ -63,8 +63,8 @@ Vue.component('premium-check', require('./components/PremiumCheck.vue'));
 
 
 
-/*const app = new Vue({
+const app = new Vue({
     el: '#app',
-});*/
+});
 
 

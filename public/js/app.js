@@ -14351,9 +14351,9 @@ Vue.component('modal', __webpack_require__(135));
 Vue.component('region-city', __webpack_require__(140));
 Vue.component('premium-check', __webpack_require__(143));
 
-/*const app = new Vue({
-    el: '#app',
-});*/
+var app = new Vue({
+  el: '#app'
+});
 
 /***/ }),
 /* 16 */
