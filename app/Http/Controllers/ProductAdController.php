@@ -34,7 +34,14 @@ class ProductAdController extends Controller
     {
         $admin = Auth('admin')->user();
         $products = ProductAdResource::collection(ProductAd::pending()->get());
-        return view('admin.products.pending-products', compact(['products', 'admin']));
+        return view('admin.products.pending', compact(['products', 'admin']));
+    }
+
+    public function pendingProductsOnHold()
+    {
+        $admin = Auth('admin')->user();
+        $products = ProductAdResource::collection($admin->productsOnHold);
+        return view('admin.products.on-hold', compact(['products', 'admin']));
     }
 
     public function productReview(ProductAd $productAd)

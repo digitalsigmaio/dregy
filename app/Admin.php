@@ -73,6 +73,6 @@ class Admin extends Authenticatable
 
     public function getProductsOnHoldAttribute()
     {
-        return $this->productAdReviews()->where('approved', null)->get()->count();
+        return $this->productAdReviews()->where('approved', null)->get();
     }
 }

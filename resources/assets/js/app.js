@@ -54,7 +54,8 @@ Vue.component('list-accounts', require('./components/ListAccounts.vue'));
 Vue.component('phone-numbers', require('./components/PhoneNumbers.vue'));
 Vue.component('phone-edit', require('./components/PhoneEdit.vue'));
 Vue.component('phone-input', require('./components/PhoneInput.vue'));
-Vue.component('pending-products', require('./components/review/ProductReview.vue'));
+Vue.component('pending-products', require('./components/review/ProductsPending.vue'));
+Vue.component('on-hold-products', require('./components/review/ProductsOnHold.vue'));
 
 
 //MISC
@@ -68,7 +69,6 @@ Vue.component('premium-edit', require('./components/PremiumEdit.vue'));
 
 const app = new Vue({
     el: '#app',
-
 });
 
 
