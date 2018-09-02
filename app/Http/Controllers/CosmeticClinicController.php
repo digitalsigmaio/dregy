@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CosmeticClinicController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin')->except(['index', 'show']);
-    }
-    
     public function index()
     {
 

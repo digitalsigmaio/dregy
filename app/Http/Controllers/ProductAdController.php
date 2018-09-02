@@ -26,7 +26,7 @@ class ProductAdController extends Controller
             'categories' => $categories,
             'status' => $status
         ]);
-
+            //dd($filters->all());
         return view('products', compact(['filters']));
     }
 

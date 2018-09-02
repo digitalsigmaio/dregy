@@ -85,11 +85,7 @@ Route::middleware('language')->group(function () {
     });
 
 
-
-
-
-
-// admin Login
+// Admin Login
     Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/home', 'AdminController@index')->name('admin.dashboard');
         Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');

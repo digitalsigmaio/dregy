@@ -70062,6 +70062,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['lang', 'words_featured', 'words_views', 'words_hospitals', 'words_pharmacies', 'words_clinics', 'words_cosmetics'],
@@ -70266,18 +70287,30 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "ul",
-                        { staticClass: "rating" },
-                        _vm._l(5, function(n) {
-                          return _c("li", [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              class: _vm.starColor(n, hospital.rate.rating)
+                      hospital.rate
+                        ? _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", { key: n }, [
+                                _c("i", {
+                                  staticClass: "fa fa-star",
+                                  class: _vm.starColor(n, hospital.rate.rating)
+                                })
+                              ])
                             })
-                          ])
-                        })
-                      ),
+                          )
+                        : _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", [
+                                _c("i", {
+                                  staticClass: "fa fa-star-o cyan-text"
+                                })
+                              ])
+                            })
+                          ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
@@ -70361,18 +70394,30 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "ul",
-                        { staticClass: "rating" },
-                        _vm._l(5, function(n) {
-                          return _c("li", [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              class: _vm.starColor(n, pharmacy.rate.rating)
+                      pharmacy.rate
+                        ? _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", { key: n }, [
+                                _c("i", {
+                                  staticClass: "fa fa-star",
+                                  class: _vm.starColor(n, pharmacy.rate.rating)
+                                })
+                              ])
                             })
-                          ])
-                        })
-                      ),
+                          )
+                        : _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", [
+                                _c("i", {
+                                  staticClass: "fa fa-star-o cyan-text"
+                                })
+                              ])
+                            })
+                          ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
@@ -70452,18 +70497,30 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "ul",
-                        { staticClass: "rating" },
-                        _vm._l(5, function(n) {
-                          return _c("li", [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              class: _vm.starColor(n, clinic.rate.rating)
+                      clinic.rate
+                        ? _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", { key: n }, [
+                                _c("i", {
+                                  staticClass: "fa fa-star",
+                                  class: _vm.starColor(n, clinic.rate.rating)
+                                })
+                              ])
                             })
-                          ])
-                        })
-                      ),
+                          )
+                        : _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", [
+                                _c("i", {
+                                  staticClass: "fa fa-star-o cyan-text"
+                                })
+                              ])
+                            })
+                          ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
@@ -70550,18 +70607,30 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "ul",
-                        { staticClass: "rating" },
-                        _vm._l(5, function(n) {
-                          return _c("li", [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              class: _vm.starColor(n, cosmetic.rate.rating)
+                      cosmetic.rate
+                        ? _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", { key: n }, [
+                                _c("i", {
+                                  staticClass: "fa fa-star",
+                                  class: _vm.starColor(n, cosmetic.rate.rating)
+                                })
+                              ])
                             })
-                          ])
-                        })
-                      ),
+                          )
+                        : _c(
+                            "ul",
+                            { staticClass: "rating" },
+                            _vm._l(5, function(n) {
+                              return _c("li", [
+                                _c("i", {
+                                  staticClass: "fa fa-star-o cyan-text"
+                                })
+                              ])
+                            })
+                          ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer pb-0" }, [
                         _c("div", { staticClass: "row mb-0" }, [
