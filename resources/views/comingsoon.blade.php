@@ -147,7 +147,7 @@
 <script type="text/javascript" src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#countdown').countdown('2018/06/01 12:00:00', function(event) {
+        $('#countdown').countdown('2018/09/22 12:00:00', function(event) {
             $('#count-days').html(event.strftime('%D'));
             $('#count-hours').html(event.strftime('%H'));
             $('#count-minutes').html(event.strftime('%M'));
