@@ -2,7 +2,7 @@
 <div id="jobList">
     <h2 class="blue-grey-text">My Jobs</h2>
     <section  class="mt-5">
-            <div v-if="jobs.count()" class="col-md-8 card">
+            <div v-if="jobs.length" class="col-md-8 card">
 
                 <div class="table-responsive">
                     <table class="table text-center">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         
-            <div v-else class="row p-3 rgba-grey-light">
+            <div  class="row p-3 rgba-grey-light" v-else>
                 <h1 class="white-text m-auto">You have no job listed yet</h1>
             </div>
 
@@ -106,7 +106,7 @@
                                         </div>
                                     </div>
                                     <div class="card card-ecommerce">
-                                        <div class="card-header pl-0" role="tab" id="headingThree">
+                                        <div class="card-header pl-0" role="tab" id="headingFour">
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#phone" aria-expanded="false" aria-controls="collapseThree">
                                                 <h5 class="mb-0">
                                                     Phone
@@ -114,7 +114,7 @@
                                                 </h5>
                                             </a>
                                         </div>
-                                        <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div id="phone" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
                                             <div class="dark-grey-text pl-0">
                                                 <p v-for="phone in job.phone"><i class="fa fa-phone pr-2 blue-text"></i>{{ phone }}</p>
                                             </div>

@@ -128,7 +128,6 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/mdb.min.js') }}"></script>
-<script src="{{ asset('js/jquery.barrating.min.js') }}"></script>
 <script src="{{ asset('js/wow.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 
