@@ -146,9 +146,9 @@
                                 </ul>
 
                             </li>
-                            @if($admin->productsOnHold)
+                            @if($count = count($admin->productsOnHold))
                             <li>
-                                <a href="#" class="btn btn-warning white-text" style="margin-top: 12px; padding: 2px 10px; color: white!important;">Products on hold <span class="badge">{{ $admin->productsOnHold }}</span></a>
+                                <a href="{{ route('admin.products.on-hold') }}" class="btn btn-warning white-text" style="margin-top: 12px; padding: 2px 10px; color: white!important;">Products on hold <span class="badge">{{ $count }}</span></a>
                             </li>
                             @endif
 
