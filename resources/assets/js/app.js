@@ -57,6 +57,9 @@ Vue.component('phone-input', require('./components/PhoneInput.vue'));
 Vue.component('pending-products', require('./components/review/ProductsPending.vue'));
 Vue.component('on-hold-products', require('./components/review/ProductsOnHold.vue'));
 
+Vue.component('pending-jobs', require('./components/review/JobsPending.vue'));
+Vue.component('on-hold-jobs', require('./components/review/JobsOnHold.vue'));
+
 
 Vue.component('modal', require('./components/Modal.vue'));
 Vue.component('region-city', require('./components/RegionCity.vue'));

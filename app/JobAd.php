@@ -19,6 +19,9 @@ class JobAd extends Model
         'status'
     ];
 
+    protected $fillable = [
+        'admin_id'
+    ];
 
     public function region()
     {
@@ -187,5 +190,11 @@ class JobAd extends Model
         return self::paginate($sorted, 12, null, ['path'=> $request->url(), 'query' => $request->query()]);
     }
 
-
+    public function scopePending($query)
+    {
+        return $query
+            ->where('approved', null)
+            ->where('admin_id', null)
+            ->orderBy('created_at', 'asc');
+    }
 }

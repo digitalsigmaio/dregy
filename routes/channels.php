@@ -18,3 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('review-product', function () {
     return true;
 });
+
+Broadcast::channel('review-job', function () {
+    return true;
+});

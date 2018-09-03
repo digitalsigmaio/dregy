@@ -135,6 +135,10 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/on-hold-products', 'ProductAdController@pendingProductsOnHold')->name('admin.products.on-hold');
     Route::get('/pending-products/{productAd}', 'ProductAdController@productReview')->middleware('product-pending');
 
+    Route::get('/pending-jobs', 'JobAdController@pendingJobs')->name('admin.jobs.review');
+    Route::get('/on-hold-jobs', 'JobAdController@pendingJobsOnHold')->name('admin.jobs.on-hold');
+    Route::get('/pending-jobs/{jobAd}', 'JobAdController@jobReview')->middleware('job-pending');
+
 });
 
 // Admin login

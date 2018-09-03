@@ -35,7 +35,6 @@ class JobAdController extends Controller
         return new JobAdCollection($jobAds);
     }
 
-
     public function show(JobAd $jobAd)
     {
         $jobAd->load([

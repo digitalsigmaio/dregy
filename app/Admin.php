@@ -75,4 +75,9 @@ class Admin extends Authenticatable
     {
         return $this->productAdReviews()->where('approved', null)->get();
     }
+
+    public function getJobsOnHoldAttribute()
+    {
+        return $this->jobAdReviews()->where('approved', null)->get();
+    }
 }

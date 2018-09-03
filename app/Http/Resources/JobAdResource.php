@@ -17,6 +17,8 @@ class JobAdResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'user_name'  => $this->user->name,
+            'user_email' => $this->user->email,
             'title' => $this->title,
             'description' => $this->description,
             'slug' => $this->slug,

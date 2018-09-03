@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReviewJob;
 use App\Http\Resources\JobAdCollection;
 use App\Http\Resources\JobAdResource;
 use App\Http\Resources\ProductAdCollection;
@@ -205,5 +206,23 @@ class JobAdController extends Controller
         }
     }
 
+    public function pendingJobs()
+    {
+        $admin = Auth('admin')->user();
+        $jobs = JobAdResource::collection(JobAd::pending()->get());
+        return view('admin.jobs.pending', compact(['jobs', 'admin']));
+    }
 
+    public function pendingJobsOnHold()
+    {
+        $admin = Auth('admin')->user();
+        $jobs = JobAdResource::collection($admin->jobsOnHold);
+        return view('admin.jobs.on-hold', compact(['jobs', 'admin']));
+    }
+
+    public function jobReview(JobAd $jobAd)
+    {
+        $adminId = Auth::guard('admin')->user()->id;
+        broadcast(new ReviewJob($jobAd, $adminId));
+    }
 }

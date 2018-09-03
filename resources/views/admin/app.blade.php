@@ -71,7 +71,7 @@
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('admin.products.review') }}">Pending Products</a></li>
-                                        <li><a href="index2.html">Pending Jobs</a></li>
+                                        <li><a href="{{ route('admin.jobs.review') }}">Pending Jobs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-user"></i> Users <span class="fa fa-chevron-down"></span></a>
@@ -148,8 +148,14 @@
                             </li>
                             @if($count = count($admin->productsOnHold))
                             <li>
-                                <a href="{{ route('admin.products.on-hold') }}" class="btn btn-warning white-text" style="margin-top: 12px; padding: 2px 10px; color: white!important;">Products on hold <span class="badge">{{ $count }}</span></a>
+                                <a href="{{ route('admin.products.on-hold') }}" class="btn btn-warning white-text" style="margin: 12px 12px; padding: 2px 10px; color: white!important;">Products on hold <span class="badge">{{ $count }}</span></a>
                             </li>
+                            @endif
+
+                            @if($count = count($admin->jobsOnHold))
+                                <li>
+                                    <a href="{{ route('admin.jobs.on-hold') }}" class="btn btn-info white-text" style="margin: 12px 12px; padding: 2px 10px; color: white!important;">Jobs on hold <span class="badge">{{ $count }}</span></a>
+                                </li>
                             @endif
 
                         </ul>

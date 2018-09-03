@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'language' => \App\Http\Middleware\LanguageSwitcher::class,
-        'product-pending' => \App\Http\Middleware\PendingProduct::class
+        'product-pending' => \App\Http\Middleware\PendingProduct::class,
+        'job-pending' => \App\Http\Middleware\PendingJob::class
     ];
 }
