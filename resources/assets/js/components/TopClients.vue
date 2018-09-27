@@ -60,7 +60,7 @@
                                     </li>
                                 </ul>
                                 <ul class="rating" v-else>
-                                    <li v-for="n in 5">
+                                    <li v-for="n in 5" :key="n">
                                         <i class="fa fa-star-o cyan-text"></i>
                                     </li>
                                 </ul>

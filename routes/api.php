@@ -22,7 +22,6 @@ Route::post('/auth/{provider}/callback', 'Auth\AuthController@appHandleProviderC
 
 
 
-
 // User
 
 Route::post('/login', 'Auth\ApiLoginController@login');
@@ -61,8 +60,6 @@ Route::delete('/hospitals/{hospital}/users/{id}/fav', 'Api\HospitalController@un
 Route::post('/hospitals/{hospital}/users/{id}/rate', 'Api\HospitalController@storeRate');
 Route::post('/hospitals/{hospital}/view', 'Api\HospitalController@view');
 Route::post('/hospitals/search', 'Api\HospitalController@search');
-
-
 
 
 // Cosmetic Clinic

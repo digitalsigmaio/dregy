@@ -109,6 +109,7 @@ class ProductAdController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'userId' => 'required',
             'title' => 'required | min:3',

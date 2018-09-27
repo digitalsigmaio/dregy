@@ -97,30 +97,19 @@ class ProductAdController extends Controller
         try {
             $product->uploadImage($request->img);
             $product->save();
-            if(count($request->phone) > 2) {
-                for($i=0;$i<count($request->phone);$i++) {
-                    if($i==2) {
-                        break;
-                    }
-                    $phone = new PhoneNumber;
-                    $phone->number = $phone[$i];
-                    $product->phoneNumbers()->save($phone);
-                }
-            } else {
-                foreach($request->phone as $number) {
+            $phonesarray = explode(',', $request->phones);
+            if (count($phonesarray)) {
+                foreach ($phonesarray as $number) {
                     $phone = new PhoneNumber;
                     $phone->number = $number;
                     $product->phoneNumbers()->save($phone);
                 }
             }
-            session()->flash('success', 'Product has been added and waiting for review');
-            return redirect()->back();
-        } catch (QueryException $e) {
-            return $e->getMessage();
+            //session()->flash('success', 'Product has been added and waiting for review');
+            return response()->json(['success' => 'Job has been added and waiting for review'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
-
-
-
     }
 
     public function edit(ProductAd $productAd) {
@@ -137,6 +126,7 @@ class ProductAdController extends Controller
 
     public function update(Request $request, ProductAd $productAd)
     {
+            //dd($request->all());
         if ($product = Auth::user()->productAds()->find($productAd->id)) {
             $request->validate([
                 'title' => 'required | min:3',
@@ -157,7 +147,6 @@ class ProductAdController extends Controller
                 $product->uploadImage($request->img);
             }
 
-
             $product->title = $request->title;
             $product->slug = str_slug($request->title);
             $product->approved = null;
@@ -170,28 +159,19 @@ class ProductAdController extends Controller
             $product->address = $request->address;
             try {
                 $product->save();
-                if (count($request->phone)) {
-                    $i = 0;
-                    if($i < 2) {
-
-                        foreach ($request->phone as $key => $number) {
-                            $phone = $product->phoneNumbers()->find($key);
-                            if ($phone) {
-                                $phone->number = $number;
-                                $phone->save();
-                            } else {
-                                $phone = new PhoneNumber;
-                                $phone->number = $number;
-                                $product->phoneNumbers()->save($phone);
-                            }
-                            $i++;
-                        }
+                $phonesarray = explode(',', $request->phones);
+                if (count($phonesarray)) {
+                    $product->phoneNumbers()->delete();
+                    foreach ($phonesarray as $number) {
+                        $phone = new PhoneNumber;
+                        $phone->number = $number;
+                        $product->phoneNumbers()->save($phone);
                     }
                 }
-                session()->flash('success', 'Product has been updated and waiting for review');
-                return redirect()->back();
-            } catch (QueryException $e) {
-                return $e->getMessage();
+                //session()->flash('success', 'Product has been updated and waiting for review');
+                return response()->json(['success' => 'Product has been Updated and waiting for review'], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => $e->getMessage()], 400);
             }
         } else {
             return redirect()->back()->withErrors(['Unauthenticated']);

@@ -20,7 +20,6 @@ Route::middleware('language')->group(function () {
     Route::get('/', 'MainPageController@index')->name('main');
     Route::get('/contact', 'MainPageController@contact')->name('contact');
 
-
     // Job Ads
     Route::get('/jobs', 'JobAdController@index')->name('jobs');
     Route::get('/jobs/{jobAd}/{slug}', 'JobAdController@show');
@@ -41,11 +40,9 @@ Route::middleware('language')->group(function () {
     Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
     Route::get('/hospitals/{hospital}/{slug}', 'HospitalController@show');
 
-
     // Clinics
     Route::get('/clinics', 'ClinicController@index')->name('clinics');
     Route::get('/clinics/{clinic}/{slug}', 'ClinicController@show');
-
 
 
     // Cosmetic Clinics
@@ -53,12 +50,9 @@ Route::middleware('language')->group(function () {
     Route::get('/cosmetic-clinics/{cosmeticClinic}/{slug}', 'CosmeticClinicController@show');
 
 
-
     // Pharmacies
     Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
     Route::get('/pharmacies/{pharmacy}/{slug}', 'PharmacyController@show');
-
-
 
 
     // Users

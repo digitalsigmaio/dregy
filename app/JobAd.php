@@ -19,7 +19,6 @@ class JobAd extends Model
         'status'
     ];
 
-
     public function region()
     {
         return $this->belongsTo(Region::class);

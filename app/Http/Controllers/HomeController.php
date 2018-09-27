@@ -143,4 +143,5 @@ class HomeController extends Controller
 
         return view('client.productList', compact('products'));
     }
+    
 }

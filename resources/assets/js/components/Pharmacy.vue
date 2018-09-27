@@ -25,8 +25,6 @@
                                 <div class="row text-center pt-3">
 
                                     <a class="btn-floating btn-sm sky-gradient mr-0 mt-0" data-toggle="tooltip" data-placement="top" title="Open 24 hour" v-if="pharmacy.full_time"><div class="m-auto pt-2 white-text"><strong>24</strong></div></a>
-
-
                                     <a class="btn-floating btn-sm purple-gradient ml-1 mt-0" data-toggle="tooltip" data-placement="top" title="Home Delivery" v-if="pharmacy.delivery"><i class="fa fa-truck"></i></a>
 
                                 </div>
