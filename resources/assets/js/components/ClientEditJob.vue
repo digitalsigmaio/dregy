@@ -80,7 +80,7 @@
                                     <label for="city"></label>
                                     <select class="form-control custom-select-lg" name="regionId" v-model="regionId" id="city" required>
                                         <option value="101" selected disabled>Choose City</option>
-                                        <option :value="region.id" v-for="region in regions">{{ region.en_name }}</option>
+                                        <option :value="region.id" v-for="region in regions" :key="region.id">{{ region.en_name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                     <label for="area"></label>
                                     <select class="form-control custom-select-lg" name="cityId" v-model="cityId" id="area" required>
                                         <option value="101" selected disabled>Choose Area</option>
-                                        <option :value="city.id" v-for="city in cities">{{ city.en_name }}</option>
+                                        <option :value="city.id" v-for="city in cities" :key="city.id">{{ city.en_name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                     <label for="category"></label>
                                     <select class="form-control custom-select-lg" name="categoryId" v-model="categoryId" id="category" required>
                                         <option value="101" selected disabled>Choose Category</option>
-                                        <option :value="category.id" v-for="category in categories">{{ category.en_name }}</option>
+                                        <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.en_name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                     <label for="experienceLevel"></label>
                                     <select class="form-control custom-select-lg" name="experienceLevelId" v-model="experienceLevelId" id="experienceLevel" required>
                                         <option value="101" selected disabled>Experience Level</option>
-                                        <option :value="experienceLevel.id" v-for="experienceLevel in experienceLevels">{{ experienceLevel.en_name }}</option>
+                                        <option :value="experienceLevel.id" v-for="experienceLevel in experienceLevels" :key="experienceLevel.id">{{ experienceLevel.en_name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                                     <label for="educationLevel"></label>
                                     <select class="form-control custom-select-lg" name="educationLevelId" v-model="educationLevelId" id="educationLevel" required>
                                         <option value="101" selected disabled>Education Level</option>
-                                        <option :value="educationLevel.id" v-for="educationLevel in educationLevels">{{ educationLevel.en_name }}</option>
+                                        <option :value="educationLevel.id" v-for="educationLevel in educationLevels" :key="educationLevel.id">{{ educationLevel.en_name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,18 +156,16 @@
                                     <label for="employmentType"></label>
                                     <select class="form-control custom-select-lg" name="employmentTypeId" v-model="employmentTypeId" id="employmentType" required>
                                         <option value="101" selected disabled>Employment Type</option>
-                                        <option :value="employmentType.id" v-for="employmentType in employmentTypes">{{ employmentType.en_name }}</option>
+                                        <option :value="employmentType.id" v-for="employmentType in employmentTypes" :key="employmentType.id">{{ employmentType.en_name }}</option>
                                     </select>
                                 </div>
                             </div>
                             <!--Grid column-->
 
 
-
                         </div>
 
                         <div class="row">
-
 
 
                             <!--Grid column-->
