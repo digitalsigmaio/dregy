@@ -25,7 +25,7 @@
     <style>
 
         .intro-2 {
-            background: url("/img/home.jpg")no-repeat center center;
+            background: url({{ asset("/img/home.jpg") }})no-repeat center center;
             background-size: cover;
         }
         .top-nav-collapse {
@@ -137,22 +137,29 @@
                                 <!--Header-->
                                 <div class="form-header sky-gradient">
                                     <h3><i class="fa fa-user mt-2 mb-2"></i> Admin {{ __('Login') }}</h3>
+                                    @if($errors->any())
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
 
                                 <!--Body-->
-                                <form action="{{ route('admin.login') }}" method="post">
+                                <form action="{{ route('admin.login.submit') }}" method="post">
                                     @csrf
                                     <div class="md-form">
                                         <i class="fa fa-envelope prefix white-text"></i>
                                         <input type="text" id="orangeForm-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
-                                               v-model="email" required autofocus>
+                                                required autofocus>
                                         <label for="orangeForm-email">{{ __('E-Mail Address') }}</label>
                                     </div>
 
                                     <div class="md-form">
                                         <i class="fa fa-lock prefix white-text"></i>
                                         <input type="password" id="orangeForm-pass" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
-                                               v-model="password" @keyup.enter="login" required>
+                                               @keyup.enter="login" required>
                                         <label for="orangeForm-pass">{{ __('Password') }}</label>
                                     </div>
                                     <div class="md-form row">
@@ -185,99 +192,12 @@
 </header>
 <!--Main Navigation-->
 
-<!-- Central Modal Medium Danger -->
-<div class="modal fade" id="centerModalDanger" tabindex="-1" role="dialog" aria-labelledby="errorLabel" aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-danger" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header">
-                <p class="heading lead">Error</p>
-
-                <button type="button" class="close" @click.prevent="dismissModal">
-                    <span aria-hidden="true" class="white-text">&times;</span>
-                </button>
-            </div>
-
-            <!--Body-->
-            <div class="modal-body">
-                <div class="text-center">
-                    <i class="fas fa-exclamation-circle fa-4x mb-3 animated flash"></i>
-                    <p>@{{ emailError }}</p>
-                    <p>@{{ passwordError }}</p>
-                </div>
-            </div>
-
-
-        </div>
-        <!--/.Content-->
-    </div>
-</div>
-<!-- Central Modal Medium Danger-->
 
 <!--  SCRIPTS  -->
 <!-- JQuery -->
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
-<script>
-    new WOW().init();
 
-    const app = new Vue({
-        el: '#app',
-        data () {
-            return {
-                email: '',
-                password: '',
-                errors: {},
-                emailError: '',
-                passwordError: ''
-            }
-        },
-        methods: {
-            login() {
-                let vm = this;
-                axios.post('{!! route('admin.login') !!}', this.loginData)
-                    .then(function (res) {
-                        if (res.status === 200) {
-                            window.location.href = res.data.callback;
-                        }
-                    })
-                    .catch(function (err) {
-                        vm.errors = err.response.data.errors;
-                    })
-            },
-            dismissModal() {
-                $('#centerModalDanger').modal('hide');
-                this.emailError = '';
-                this.passwordError = '';
-            },
-        },
-        computed: {
-            loginData: function() {
-                return {
-                    email: this.email,
-                    password: this.password,
-                    url: window.location.href
-                }
-            }
-        },
-        watch: {
-            errors: function (val) {
-                if(val.email) {
-                    this.emailError = val.email.shift();
-                }
-                if(val.password) {
-                    this.passwordError = val.password.shift();
-                }
-                $('#centerModalDanger').modal('show');
-            }
-        }
-    });
-    $('#centerModalDanger').on('hidden.bs.modal', function () {
-        elegantModalForm.emailError = '';
-        elegantModalForm.passwordError = '';
-    });
-</script>
 </body>
 </html>

@@ -21,6 +21,7 @@ class AdminLoginController extends Controller
     |
     */
 
+
     use AuthenticatesUsers;
 
     /**
@@ -29,6 +30,11 @@ class AdminLoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/admin';
+
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
 
     /**
      * Create a new controller instance.
@@ -45,17 +51,6 @@ class AdminLoginController extends Controller
         return view('auth.admin-login');
     }
 
-    public function login(Request $request)
-    {
-        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->filled('remember'))) {
-            //$admin = Admin::find(Auth('admin')->user()->id);
-            Auth('admin')->user()->loggedIn();
-            return redirect()->intended(route('admin.dashboard'));
-        } else {
-            return redirect()->back();
-        }
-    }
-
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
@@ -64,5 +59,4 @@ class AdminLoginController extends Controller
 
         return redirect('/');
     }
-
 }
