@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ClinicController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin')->except(['index', 'show']);
-    }
-    
     public function index()
     {
         $regions = Region::with('cities')->get();
@@ -88,9 +83,10 @@ class ClinicController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'ref_id' => 'required',
+            'phones*' => "required",
         ]);
         $user = USER::where('ref_id', $request->ref_id)->first();
 
@@ -133,7 +129,7 @@ class ClinicController extends Controller
             session()->flash('message', 'Clinic Successfully Created');
             return redirect()->back();
         }else{
-            session()->flash('message', 'Invalid User Ref');
+            session()->flash('message', 'Invalid User Reference');
             return redirect()->back();
 
         }
@@ -142,7 +138,7 @@ class ClinicController extends Controller
 
     public function edit(Clinic $clinic)
     {
-        $clinic->load(['phoneNumbers']);
+        $clinic->load(['phoneNumbers', 'degree', 'specialities']);
         $admin = Auth('admin')->user();
         $regions = Region::with('cities')->get();
         $regions = json_encode($regions);
@@ -167,7 +163,7 @@ class ClinicController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
         ]);
 
@@ -218,8 +214,8 @@ class ClinicController extends Controller
 
             $clinic->save();
 
-            session()->flash('message', 'Clinic Successfully Created');
-            return redirect()->route('listClinic');
+            session()->flash('message', 'Clinic Successfully Updated');
+            return redirect()->back();
         } else {
             session()->flash('message', 'Invalid');
             return redirect()->back();

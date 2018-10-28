@@ -54,9 +54,14 @@
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="hospital.premium">{{ words_featured }}</span>
                                 <!-- Rating -->
-                                <ul class="rating">
-                                    <li v-for="n in 5">
+                                <ul class="rating" v-if="hospital.rate">
+                                    <li v-for="n in 5" :key=n>
                                         <i class="fa fa-star" :class="starColor(n, hospital.rate.rating)"></i>
+                                    </li>
+                                </ul>
+                                <ul class="rating" v-else>
+                                    <li v-for="n in 5" :key="n">
+                                        <i class="fa fa-star-o cyan-text"></i>
                                     </li>
                                 </ul>
 
@@ -117,11 +122,17 @@
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="pharmacy.premium">{{ words_featured }}</span>
                                 <!-- Rating -->
-                                <ul class="rating">
-                                    <li v-for="n in 5">
+                                <ul class="rating" v-if="pharmacy.rate">
+                                    <li v-for="n in 5" :key=n>
                                         <i class="fa fa-star" :class="starColor(n, pharmacy.rate.rating)"></i>
                                     </li>
                                 </ul>
+                                <ul class="rating" v-else>
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star-o cyan-text"></i>
+                                    </li>
+                                </ul>
+                                    
 
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
@@ -178,9 +189,14 @@
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="clinic.premium">{{ words_featured }}</span>
                                 <!-- Rating -->
-                                <ul class="rating">
-                                    <li v-for="n in 5">
+                                <ul class="rating" v-if="clinic.rate">
+                                    <li v-for="n in 5" :key=n>
                                         <i class="fa fa-star" :class="starColor(n, clinic.rate.rating)"></i>
+                                    </li>
+                                </ul>
+                                <ul class="rating" v-else>
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star-o cyan-text"></i>
                                     </li>
                                 </ul>
 
@@ -240,9 +256,14 @@
                                 </h5>
                                 <span class="badge badge-primary mb-2 p-2" v-if="cosmetic.premium">{{ words_featured }}</span>
                                 <!-- Rating -->
-                                <ul class="rating">
-                                    <li v-for="n in 5">
+                                <ul class="rating" v-if="cosmetic.rate">
+                                    <li v-for="n in 5" :key=n>
                                         <i class="fa fa-star" :class="starColor(n, cosmetic.rate.rating)"></i>
+                                    </li>
+                                </ul>
+                                <ul class="rating" v-else>
+                                    <li v-for="n in 5">
+                                        <i class="fa fa-star-o cyan-text"></i>
                                     </li>
                                 </ul>
 

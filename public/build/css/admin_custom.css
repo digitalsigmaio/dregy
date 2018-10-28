@@ -17,3 +17,11 @@ th{
 text-center{
     text-align:center;
 }
+
+.user-table{
+    margin-left: 50px;
+    margin-top: 20px;
+    table-layout: fixed;
+    empty-cells: hide;
+    width: 100%;
+}

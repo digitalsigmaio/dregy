@@ -93,45 +93,35 @@ class JobAdController extends Controller
         try {
             $job->uploadImage($request->img);
             $job->save();
-            if(count($request->phone) > 2) {
-                for($i=0;$i<count($request->phone);$i++) {
-                    if($i==2) {
-                        break;
+            $phonesarray = explode(',', $request->phones);
+            if (count($phonesarray)) {
+                    foreach ($phonesarray as $number) {
+                        $phone = new PhoneNumber;
+                        $phone->number = $number;
+                        $job->phoneNumbers()->save($phone);
                     }
-                    $phone = new PhoneNumber;
-                    $phone->number = $phone[$i];
-                    $job->phoneNumbers()->save($phone);
                 }
-            } else {
-                foreach($request->phone as $number) {
-                    $phone = new PhoneNumber;
-                    $phone->number = $number;
-                    $job->phoneNumbers()->save($phone);
-                }
-            }
             //session()->flash('success', 'Job has been added and waiting for review');
-            return response()->json(['message'=> 'Job has been added and waiting for review' ], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return response()->json(['success'=> 'Job has been added and waiting for review' ], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => $e->getMessage()], 400);
+            }
+            
         }
-
-
-
-    }
-
-    public function edit(JobAd $jobAd) {
-        if (Auth::user()->jobAds()->find($jobAd->id)) {
-            $categories = JobAdCategory::all();
-            $regions = Region::with('cities')->get();
-            $experienceLevels = JobExperienceLevel::all();
-            $educationLevels = JobEducationLevel::all();
-            $employmentTypes = JobEmploymentType::all();
-            $jobAd->load('phoneNumbers');
-
-            return view('client.jobEdit', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes', 'jobAd']));
-        } else {
-            return redirect()->back();
-        }
+        
+        public function edit(JobAd $jobAd) {
+            if (Auth::user()->jobAds()->find($jobAd->id)) {
+                $categories = JobAdCategory::all();
+                $regions = Region::with('cities')->get();
+                $experienceLevels = JobExperienceLevel::all();
+                $educationLevels = JobEducationLevel::all();
+                $employmentTypes = JobEmploymentType::all();
+                $jobAd->load('phoneNumbers');
+                
+                return view('client.jobEdit', compact(['categories', 'regions', 'experienceLevels', 'educationLevels', 'employmentTypes', 'jobAd']));
+            } else {
+                return redirect()->back();
+            }
     }
 
     public function update(Request $request, JobAd $jobAd)
@@ -149,8 +139,9 @@ class JobAdController extends Controller
                 'regionId' => 'required',
                 'cityId' => 'required',
                 'address' => 'required',
-                'phone' => 'required | numeric',
-            ]);
+                'phone.*' => 'required | numeric',
+                ]);
+            try {
             if ($request->hasFile('img')) {
                 $request->validate([
                     'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -170,19 +161,19 @@ class JobAdController extends Controller
             $job->region_id = $request->regionId;
             $job->city_id = $request->cityId;
             $job->address = $request->address;
-            try {
-                $job->save();
-                if (count($request->phone)) {
-                    foreach ($request->phone as $key => $number) {
-                        $phone = $job->phoneNumbers()->find($key);
-                        if ($phone) {
-                            $phone->number = $number;
-                            $phone->save();
-                        }
-                    }
+            $job->save();
+            $phonesarray = explode(',', $request->phones);
+            //dd($phonesarray);
+            if (count($phonesarray)) {
+                $job->phoneNumbers()->delete();
+                foreach ($phonesarray as $number) {
+                    $phone = new PhoneNumber;
+                    $phone->number = $number;
+                    $job->phoneNumbers()->save($phone);
                 }
-                session()->flash('success', 'Job has been update and waiting for review');
-                return redirect()->back();
+            }
+            //session()->flash('success', 'Job has been update and waiting for review');
+            return response()->json(['success' => 'Product has been Updated and waiting for review'], 200);
             } catch (QueryException $e) {
                 return $e->getMessage();
             }

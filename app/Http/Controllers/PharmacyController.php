@@ -11,10 +11,6 @@ use App\User;
 
 class PharmacyController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin')->except(['index', 'show']);
-    }
     
     public function index()
     {
@@ -74,9 +70,10 @@ class PharmacyController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'ref_id' => 'required',
+            'phones*' => "required",
         ]);
 
         //dd($request->all());
@@ -110,6 +107,13 @@ class PharmacyController extends Controller
             ]);
             }
 
+            if (count($request->phones)) {
+                foreach ($request->phones as $phone) {
+                    $hospital->phoneNumbers()->create([
+                        'number' => $phone,
+                    ]);
+                }
+            }
 
 
             if ($request->hasFile('img')) {
@@ -121,7 +125,7 @@ class PharmacyController extends Controller
             session()->flash('message', 'Pharmacy Successfully Created');
             return redirect()->back();
         } else {
-            session()->flash('message', 'Invalid Pharmacy User Ref');
+            session()->flash('message', 'Invalid User Reference');
             return redirect()->back();
         }
 
@@ -149,7 +153,7 @@ class PharmacyController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
         ]);
 
@@ -197,7 +201,7 @@ class PharmacyController extends Controller
 
             $pharmacy->save();
 
-            session()->flash('message', 'Pharmacy Successfully Created');
+            session()->flash('message', 'Pharmacy Successfully Updated');
             return redirect()->back();
         } else {
             session()->flash('message', 'Invalid Pharmacy User Ref');

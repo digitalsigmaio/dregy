@@ -1,7 +1,7 @@
 @extends('client.home')
 
 @section('userContent')
-<job-list
-:jobs = {{ $jobs->toJson() }}>
-</job-list>
+<clientjob-list
+:jobs = "{{ json_encode($jobs) }}">
+</clientjob-list>
 @endsection

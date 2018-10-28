@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HospitalController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin')->except(['index', 'show']);
-    }
-
     public function index()
     {
         $regions = Region::with('cities')->get();
@@ -80,9 +75,10 @@ class HospitalController extends Controller
             'ar_work_times' => 'required',
             'en_work_times' => 'required',
             'website' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:hospitals',
+            'email' => 'nullable|email',
             'img' => 'image|nullable|mimes:jpeg,bmp,png|max:5000',
             'ref_id' => 'required',
+            'phones*' => "required",
         ]);
        
         $user = User::where('ref_id', $request->ref_id)->first();
@@ -135,7 +131,7 @@ class HospitalController extends Controller
             session()->flash('message', 'Hospital Successfully Created');
             return redirect()->back();
         }else{
-            session()->flash('message', 'Invalid User Ref');
+            session()->flash('message', 'Invalid User Reference');
             return redirect()->back();
         }
     }
@@ -143,7 +139,7 @@ class HospitalController extends Controller
     public function edit(Hospital $hospital)
     {
         //dd($hospital);
-        $hospital->load(['phoneNumbers']);
+        $hospital->load(['phoneNumbers', 'specialities', 'premium']);
         $admin = Auth('admin')->user();
         $regions = Region::with('cities')->get();
         $regions = json_encode($regions);
@@ -216,10 +212,10 @@ class HospitalController extends Controller
 
             $hospital->save();
 
-            session()->flash('message', 'Hospital Successfully Created');
-            return redirect()->route('listHospital');
+            session()->flash('message', 'Hospital Successfully Updated');
+            return redirect()->back();
         } else {
-            session()->flash('message', 'Invalid User Ref');
+            session()->flash('message', 'Invalid');
             return redirect()->back();
         }
     }

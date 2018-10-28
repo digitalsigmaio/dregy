@@ -407,6 +407,13 @@ export default {
         return 0;
       }
     },
+      rating(val) {
+          if(val !== null) {
+              return val.rating;
+          } else {
+              return 0;
+          }
+      },
     fetchClinics() {
       let vm = this;
       $(".clinics").hide();

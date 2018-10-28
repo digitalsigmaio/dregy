@@ -18,11 +18,8 @@
                 Priority
             </label>
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <select name="priority">
-                    <option selected="selected" disabled>Select Priority</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                <select v-model="selected" name="priority">
+                    <option v-for="n in priorities">{{n}}</option>
                 </select>
             </div>
         
@@ -31,7 +28,7 @@
                 Expires At
             </label>
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <input id="expires_at" type="date"  name="expires_at">
+                <input id="expires_at" type="date"  v-model="expires_at" name="expires_at">
             </div>
         
         
@@ -45,8 +42,11 @@ export default {
     props:['premium', 'status'],
     data(){
         return {
-            premiumShow:false,
+            premiumShow:null,
             picked:null,
+            priorities:[1,2,3],
+            selected:null,
+            expires_at:null,
         }
     },
     methods:{
@@ -57,6 +57,11 @@ export default {
                 return "false"
             }
         }
+    },
+    created() {
+        this.premiumShow = this.status.toString();
+        this.selected = this.premium.priority;
+        this.expires_at = this.premium.expires_at.split(" ")[0];
     }
 
 }

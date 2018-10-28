@@ -39,13 +39,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Clinic Arabic Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic Name</label>
                                 <div  class="col-md-9 col-sm-9 col-xs-12">
-                                    <input style="text-align:right" type="text" class="form-control" value="{{ $clinic->ar_name}}" name="ar_name" required>
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" value="{{ $clinic->ar_name}}" name="ar_name" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">clinic English Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">English Name</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input type="text" class="form-control" value="{{ $clinic->en_name}}" name="en_name" required>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic address</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input style="text-align:right" type="text" class="form-control" value="{{ $clinic->ar_address}}" name="ar_address" required>
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" value="{{ $clinic->ar_address}}" name="ar_address" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -66,7 +66,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arabic Note <span class="required"></span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <textarea style="text-align:right" class="form-control" rows="3" name="ar_note">{{ $clinic->ar_note}}</textarea>
+                                    <textarea dir="rtl" style="text-align:right" class="form-control" rows="3" name="ar_note">{{ $clinic->ar_note}}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -76,14 +76,18 @@
                                     <textarea class="form-control" rows="3" name="en_note">{{ $clinic->en_note}}</textarea>
                                 </div>
                             </div>
-                            <region-city :regions = "{{$regions}}"></region-city>
+                            <edit-region-city :regions = "{{$regions}}" 
+                                                :current_region = "{{ json_encode($clinic->region->id) }}"
+                                                :current_city = "{{ json_encode($clinic->city->id) }}">
+                            
+                            ></edit-region-city>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Degree</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <select name="degree_id" class="form-control">
-                                        <option selected disabled>Choose Degree</option>
+                                        <option disabled>Choose Degree</option>
                                         @foreach($degrees as $degree)
-                                        <option value="{{$degree->id}}">{{$degree->en_name}}</option>
+                                        <option {{$degree->id === $clinic->degree->first()->id ? 'selected': ''}} value="{{$degree->id}}">{{$degree->en_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -92,18 +96,20 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Speciality</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <select name="speciality_id" class="form-control">
-                                        <option selected disabled>Choose Speciality</option>
+                                        <option disabled>Choose Speciality</option>
                                         @foreach($specialities as $speciality)
-                                        <option value="{{$speciality->id}}">{{$speciality->en_name}}</option>
+                                        <option {{$speciality->id === $clinic->specialities->first()->id ? 'selected': ''}} value="{{$speciality->id}}">{{$speciality->en_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <premium-check></premium-check>  
+                            <premium-edit :premium = "{{ json_encode($clinic->premium) }}"
+                                        :status = "{{ json_encode($clinic->featured) }}"
+                            ></premium-edit>  
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Arbic Work Times</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" value="{{ $clinic->ar_work_times}}" name="ar_work_times">
+                                    <input dir="rtl" style="text-align:right" type="text" class="form-control" value="{{ $clinic->ar_work_times}}" name="ar_work_times">
                                 </div>
                             </div>
                             <div class="form-group">

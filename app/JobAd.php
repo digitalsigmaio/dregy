@@ -19,9 +19,11 @@ class JobAd extends Model
         'status'
     ];
 
+
     protected $fillable = [
         'admin_id'
     ];
+
 
     public function region()
     {
