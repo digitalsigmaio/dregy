@@ -74,8 +74,8 @@ class AdminLoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            if($id = $this->guard()->user()->id) {
-                $admin = Admin::find($id);
+            // Log admin login
+            if($admin = $this->guard()->user()) {
                 $admin->loggedIn();
             }
             return $this->sendLoginResponse($request);
