@@ -104,6 +104,14 @@
                                         <li><a href="{{ route('listPharmacy') }}">Pharmacies List</a></li>
                                     </ul>
                                 </li>
+                                <!--
+                                <li><a><i class="fa fa-plus-square"></i> Free Ads <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="">New Job</a></li>
+                                        <li><a href="">new Product</a></li>
+                                    </ul>
+                                </li>
+                                -->
                             </ul>
                         </div>
 

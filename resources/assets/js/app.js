@@ -67,6 +67,7 @@ Vue.component('on-hold-products', require('./components/review/ProductsOnHold.vu
 Vue.component('pending-jobs', require('./components/review/JobsPending.vue'));
 Vue.component('on-hold-jobs', require('./components/review/JobsOnHold.vue'));
 
+Vue.component('adminjob-new', require('./components/AdminNewJob.vue'));
 
 //MISC
 Vue.component('modal', require('./components/Modal.vue'));
@@ -75,7 +76,8 @@ Vue.component('edit-region-city', require('./components/EditRegionCity.vue'));
 Vue.component('premium-check', require('./components/PremiumCheck.vue'));
 Vue.component('premium-edit', require('./components/PremiumEdit.vue'));
 
-
+//use instead of region-city Cause we switch region_id--> regionId
+Vue.component('custom-regioncity', require('./components/CustomRegionCity.vue'));
 
 const app = new Vue({
     el: '#app',

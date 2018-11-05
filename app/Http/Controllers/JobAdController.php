@@ -59,6 +59,7 @@ class JobAdController extends Controller
 
     public function store(Request $request)
     {
+        ($request->all());
         $request->validate([
             'title' => 'required | min:3',
             'salary' => 'required | numeric',
@@ -90,6 +91,7 @@ class JobAdController extends Controller
         $job->city_id = $request->cityId;
         $job->address = $request->address;
         $job->expires_at = now()->addDays(30);
+
         try {
             $job->uploadImage($request->img);
             $job->save();
@@ -195,25 +197,5 @@ class JobAdController extends Controller
         } catch (QueryException $e) {
             return $e->getMessage();
         }
-    }
-
-    public function pendingJobs()
-    {
-        $admin = Auth('admin')->user();
-        $jobs = JobAdResource::collection(JobAd::pending()->get());
-        return view('admin.jobs.pending', compact(['jobs', 'admin']));
-    }
-
-    public function pendingJobsOnHold()
-    {
-        $admin = Auth('admin')->user();
-        $jobs = JobAdResource::collection($admin->jobsOnHold);
-        return view('admin.jobs.on-hold', compact(['jobs', 'admin']));
-    }
-
-    public function jobReview(JobAd $jobAd)
-    {
-        $adminId = Auth::guard('admin')->user()->id;
-        broadcast(new ReviewJob($jobAd, $adminId));
     }
 }
