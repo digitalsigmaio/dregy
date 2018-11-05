@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <modal v-show="isModalVisible" @close="closeModal" :url="deleteUrl" :title="title"/>
+        <modal v-show="isModalVisible" @close="closeModal" :url="deleteUrl" :title="title" :admin="admin"></modal>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -12,7 +12,7 @@
                         <!-- Search -->
                         <div class="md-form form-lg ml-1">
                             <input type="text" id="keyword" class="form-control form-control-lg" placeholder="Search" v-model="search.keyword" @keyup="searchByKeyword">
-                            <label for="keyword"></b></label>
+                            <label for="keyword"></label>
                         </div>
 
                         <!-- Account Grid -->
@@ -122,7 +122,7 @@
 
 <script>
 export default {
-    props: ['account_url', 'account_name', 'delete_url', 'edit_url'],
+    props: ['account_url', 'account_name', 'delete_url', 'edit_url', 'admin'],
     data () {
         return {
             endpoint: this.account_url,
@@ -190,8 +190,8 @@ export default {
         }, 500),
         
         showModal(id) {
-        this.account_id = id
-        this.isModalVisible = true;
+            this.account_id = id;
+            this.isModalVisible = true;
         },
         closeModal() {
             this.isModalVisible = false;

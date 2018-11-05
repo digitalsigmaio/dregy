@@ -212,10 +212,15 @@ class ClinicController extends Controller
                 $clinic->uploadImage($request->img);
             }
 
-            $clinic->save();
+            if ($clinic->save()) {
+                $admin = $request->user('admin');
+                $admin->updatedProperty($clinic);
 
-            session()->flash('message', 'Clinic Successfully Updated');
-            return redirect()->back();
+                session()->flash('message', 'Clinic Successfully Updated');
+                return redirect()->back();
+            }
+
+
         } else {
             session()->flash('message', 'Invalid');
             return redirect()->back();

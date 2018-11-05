@@ -206,10 +206,14 @@ class CosmeticClinicController extends Controller
                 $cosmetic->uploadImage($request->img);
             }
 
-            $cosmetic->save();
+            if ($cosmetic->save()) {
+                $admin = $request->user('admin');
+                $admin->updatedProperty($cosmetic);
 
-            session()->flash('message', 'Cosmetic Successfully Updated');
-            return redirect()->back();
+                session()->flash('message', 'Cosmetic Successfully Updated');
+                return redirect()->back();
+            }
+
         } else {
             session()->flash('message', 'Invalid');
             return redirect()->back();

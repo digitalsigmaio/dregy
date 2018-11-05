@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Admin;
 use App\Hospital;
 use App\Http\Resources\HospitalCollection;
 use App\Http\Resources\HospitalResource;
@@ -76,7 +77,6 @@ class HospitalController extends Controller
         }
     }
 
-
     public function view(Hospital $hospital, Request $request)
     {
         View::new($hospital, $request);
@@ -93,9 +93,12 @@ class HospitalController extends Controller
         }
     }
 
-    public function destroy(Hospital $hospital)
+    public function destroy(Hospital $hospital, Request $request)
     {
         if ($hospital->delete()){
+            $admin = Admin::find($request->id);
+            $admin->deletedProperty($hospital);
+
             return response()->json('Job has been deleted');
         } 
         else {

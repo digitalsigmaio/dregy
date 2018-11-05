@@ -80,7 +80,18 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/admin/login.log'),
             'level' => 'info',
+        ],
+        'adminupdate' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/admin/update.log'),
+            'level' => 'info',
+        ],
+        'admindelete' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/admin/delete.log'),
+            'level' => 'info',
         ]
+
     ],
 
 ];

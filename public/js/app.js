@@ -84805,7 +84805,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['account_url', 'account_name', 'delete_url', 'edit_url'],
+    props: ['account_url', 'account_name', 'delete_url', 'edit_url', 'admin'],
     data: function data() {
         return {
             endpoint: this.account_url,
@@ -84918,7 +84918,7 @@ var render = function() {
             expression: "isModalVisible"
           }
         ],
-        attrs: { url: _vm.deleteUrl, title: _vm.title },
+        attrs: { url: _vm.deleteUrl, title: _vm.title, admin: _vm.admin },
         on: { close: _vm.closeModal }
       }),
       _vm._v(" "),
@@ -87028,7 +87028,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'modal',
-  props: ['url', 'title'],
+  props: ['url', 'title', 'admin'],
   data: function data() {
     return {
       message: ""
@@ -87038,7 +87038,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     YES: function YES() {
       var vm = this;
-      axios.delete(this.url).then(function (res) {
+      axios.delete(this.url, {
+        data: { id: this.admin.id }
+      }).then(function (res) {
         vm.message = res.data;
       });
       this.$emit('close');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Admin;
 use App\Clinic;
 use App\Http\Resources\ClinicCollection;
 use App\Http\Resources\ClinicResource;
@@ -92,9 +93,12 @@ class ClinicController extends Controller
         }
     }
 
-    public function destroy(Clinic $clinic)
+    public function destroy(Clinic $clinic, Request $request)
     {
         if ($clinic->delete()){
+            $admin = Admin::find($request->id);
+            $admin->deletedProperty($clinic);
+
             return response()->json('Clinic has been deleted');
         } 
         else {
