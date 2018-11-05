@@ -14286,7 +14286,7 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(182);
+module.exports = __webpack_require__(185);
 
 
 /***/ }),
@@ -14358,18 +14358,19 @@ Vue.component('on-hold-products', __webpack_require__(150));
 
 Vue.component('pending-jobs', __webpack_require__(153));
 Vue.component('on-hold-jobs', __webpack_require__(156));
+Vue.component('review-ads', __webpack_require__(159));
 
-Vue.component('adminjob-new', __webpack_require__(159));
+Vue.component('adminjob-new', __webpack_require__(162));
 
 //MISC
-Vue.component('modal', __webpack_require__(162));
-Vue.component('region-city', __webpack_require__(167));
-Vue.component('edit-region-city', __webpack_require__(170));
-Vue.component('premium-check', __webpack_require__(173));
-Vue.component('premium-edit', __webpack_require__(176));
+Vue.component('modal', __webpack_require__(165));
+Vue.component('region-city', __webpack_require__(170));
+Vue.component('edit-region-city', __webpack_require__(173));
+Vue.component('premium-check', __webpack_require__(176));
+Vue.component('premium-edit', __webpack_require__(179));
 
 //use instead of region-city Cause we switch region_id--> regionId
-Vue.component('custom-regioncity', __webpack_require__(179));
+Vue.component('custom-regioncity', __webpack_require__(182));
 
 var app = new Vue({
   el: '#app'
@@ -82120,6 +82121,563 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources\\assets\\js\\components\\review\\ReviewAds.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1aaa53eb", Component.options)
+  } else {
+    hotAPI.reload("data-v-1aaa53eb", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 160 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['jobad'],
+  data: function data() {
+    return {
+      formStatus: true,
+      select_option: "",
+      filter_value: "",
+      result: null,
+      isModalVisible: false,
+      title: "Are you Sure You want to Delete this user?",
+      hospitalStatus: false,
+      pharmacyStatus: false,
+      clinicStatus: false,
+      cosmeticStatus: false
+    };
+  },
+
+
+  methods: {
+    getUser: function getUser() {
+      var vm = this;
+      this.formStatus = false;
+      axios.post("/api/users/info", {
+        select_option: this.select_option,
+        filter_value: this.filter_value
+      }).then(function (res) {
+        vm.result = res.data.data;
+      });
+    },
+    showModal: function showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal: function closeModal() {
+      this.isModalVisible = false;
+    },
+    hospitalShow: function hospitalShow() {
+      this.hospitalStatus = !this.hospitalStatus;
+    },
+    pharmacyShow: function pharmacyShow() {
+      this.pharmacyStatus = !this.pharmacyStatus;
+    },
+    clinicShow: function clinicShow() {
+      this.clinicStatus = !this.clinicStatus;
+    },
+    cosmeticShow: function cosmeticShow() {
+      this.cosmticStatus = !this.cosmticStatus;
+    }
+  },
+
+  mounted: function mounted() {},
+
+
+  watch: {},
+
+  computed: {
+    edit_url: function edit_url() {
+      return "/admin/users/edit/";
+    },
+    delete_url: function delete_url() {
+      return "/admin/users/delete/";
+    },
+    newjob: function newjob() {
+      window.location.href = "/admin/jobs/new/" + this.result.id;
+    },
+    newproduct: function newproduct() {
+      window.location.href = "/admin/products/new/" + this.result.id;
+    }
+  }
+});
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-10" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "table",
+              { staticClass: "table table-hover user-table" },
+              [
+                _c("modal", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isModalVisible,
+                      expression: "isModalVisible"
+                    }
+                  ],
+                  attrs: { url: _vm.delete_url, title: _vm.title },
+                  on: { close: _vm.closeModal }
+                }),
+                _vm._v(" "),
+                _c("thead"),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("th", [_vm._v("Title")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.title))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Description")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.description))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Address")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.address))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Expires at")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.expires_at))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Category")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.category.en_name))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Experience Level")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.jobad.experience_level.en_name))
+                    ]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Employment Type")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.employment_type_id))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Education Level")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.education_level_id))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("Region Id")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.region_id))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("City Id")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.jobad.city_id))]),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.hospitalShow($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Hospitals")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _vm.hospitalStatus
+                    ? _c("tr", [
+                        _c("td", [_vm._v(_vm._s(_vm.hospital.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.hospital.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.hospital.website))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.pharmacyShow($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Pharmacies")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.result))])
+                  ]),
+                  _vm._v(" "),
+                  _vm.pharmacyStatus
+                    ? _c("tr", [
+                        _c("td", [_vm._v(_vm._s(_vm.pharmacy.en_name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.pharmacy.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.pharmacy.website))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.clinicShow($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Clinics")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.result))])
+                  ]),
+                  _vm._v(" "),
+                  _vm.clinicStatus
+                    ? _c("tr", [
+                        _c("td", [_vm._v(_vm._s(_vm.clinic.en_name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.clinic.email))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.cosmeticShow($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Cosmetic Clinics")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.result))])
+                  ]),
+                  _vm._v(" "),
+                  _vm.cosmeticStatus
+                    ? _c("tr", [
+                        _c("td", [_vm._v(_vm._s(_vm.cosmetic.en_name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.cosmetic.email))])
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("ul", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-block my-2 mt-5",
+                on: { click: _vm.showModal }
+              },
+              [_vm._v("Delete")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info btn-block my-2 mt-5",
+                    on: {
+                      click: function($event) {
+                        _vm.newjob()
+                      }
+                    }
+                  },
+                  [_vm._v("New Job")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info btn-block my-2 mt-5",
+                    on: {
+                      click: function($event) {
+                        _vm.newproduct()
+                      }
+                    }
+                  },
+                  [_vm._v("New Product")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header mb-5 mt-5" }, [
+      _c("h2", [_vm._v("Job Details")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1aaa53eb", module.exports)
+  }
+}
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(163)
+/* template */
+var __vue_template__ = __webpack_require__(164)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources\\assets\\js\\components\\AdminNewJob.vue"
 
 /* hot reload */
@@ -82142,7 +82700,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 160 */
+/* 163 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82561,7 +83119,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 161 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -83539,19 +84097,19 @@ if (false) {
 }
 
 /***/ }),
-/* 162 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(163)
+  __webpack_require__(166)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(165)
+var __vue_script__ = __webpack_require__(168)
 /* template */
-var __vue_template__ = __webpack_require__(166)
+var __vue_template__ = __webpack_require__(169)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -83590,13 +84148,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 163 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(164);
+var content = __webpack_require__(167);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -83616,7 +84174,7 @@ if(false) {
 }
 
 /***/ }),
-/* 164 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -83630,7 +84188,7 @@ exports.push([module.i, "\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  b
 
 
 /***/ }),
-/* 165 */
+/* 168 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83760,7 +84318,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 166 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -83828,15 +84386,15 @@ if (false) {
 }
 
 /***/ }),
-/* 167 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(168)
+var __vue_script__ = __webpack_require__(171)
 /* template */
-var __vue_template__ = __webpack_require__(169)
+var __vue_template__ = __webpack_require__(172)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -83875,7 +84433,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 168 */
+/* 171 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83940,7 +84498,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 169 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -84074,15 +84632,15 @@ if (false) {
 }
 
 /***/ }),
-/* 170 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(171)
+var __vue_script__ = __webpack_require__(174)
 /* template */
-var __vue_template__ = __webpack_require__(172)
+var __vue_template__ = __webpack_require__(175)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -84121,7 +84679,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 171 */
+/* 174 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84187,7 +84745,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 172 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -84308,15 +84866,15 @@ if (false) {
 }
 
 /***/ }),
-/* 173 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(174)
+var __vue_script__ = __webpack_require__(177)
 /* template */
-var __vue_template__ = __webpack_require__(175)
+var __vue_template__ = __webpack_require__(178)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -84355,7 +84913,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 174 */
+/* 177 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84425,7 +84983,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 175 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -84554,15 +85112,15 @@ if (false) {
 }
 
 /***/ }),
-/* 176 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(177)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(178)
+var __vue_template__ = __webpack_require__(181)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -84601,7 +85159,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 177 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84675,7 +85233,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 178 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -84829,15 +85387,15 @@ if (false) {
 }
 
 /***/ }),
-/* 179 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(180)
+var __vue_script__ = __webpack_require__(183)
 /* template */
-var __vue_template__ = __webpack_require__(181)
+var __vue_template__ = __webpack_require__(184)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -84876,7 +85434,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 180 */
+/* 183 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84941,7 +85499,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 181 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -85075,7 +85633,7 @@ if (false) {
 }
 
 /***/ }),
-/* 182 */
+/* 185 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

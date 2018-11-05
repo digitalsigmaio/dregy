@@ -169,7 +169,11 @@ class AdminJobAdController extends Controller
 
     public function jobReview(JobAd $jobAd)
     {
+        $jobAd->load(['category', 'region', 'city', 'experienceLevel', 'educationLevel']);
         $adminId = Auth::guard('admin')->user()->id;
+        $admin = Auth('admin')->user();
         broadcast(new ReviewJob($jobAd, $adminId));
+        return view('admin.reviewing', compact('jobAd','admin'));
     }
+
 }

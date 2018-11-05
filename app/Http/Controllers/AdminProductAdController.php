@@ -156,4 +156,5 @@ class AdminProductAdController extends Controller
         $adminId = Auth::guard('admin')->user()->id;
         broadcast(new ReviewProduct($productAd, $adminId));
     }
+    
 }

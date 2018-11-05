@@ -141,9 +141,6 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     //Route::put('/users/update/{user}', 'AdminUserController@update')->name('admin.user.update'); [HOLD ON USAGE]
     Route::delete('/users/delete/{ref_id}', 'AdminUserController@destroy')->name('admin.user.delete');
     
-
-
-
 });
 
 // Admin login
