@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Admin;
 use App\CosmeticClinic;
 use App\BeautyCenterFav;
 use App\Http\Resources\CosmeticClinicCollection;
@@ -94,9 +95,11 @@ class CosmeticClinicController extends Controller
         }
     }
 
-    public function destroy(CosmeticClinic $cosmeticClinic)
+    public function destroy(CosmeticClinic $cosmeticClinic, Request $request)
     {
         if ($cosmeticClinic->delete()){
+            $admin = Admin::find($request->id);
+            $admin->deletedProperty($cosmeticClinic);
             return response()->json('Cosmetic Clinic has been deleted');
         } 
         else {
