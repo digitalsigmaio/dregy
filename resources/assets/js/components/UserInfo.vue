@@ -109,6 +109,14 @@
               <li><a :href="edit_url">Edit</a></li>
               -->
               <button class="btn btn-danger btn-block my-2 mt-5" @click="showModal">Delete</button>
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="btn btn-info btn-block my-2 mt-5" @click="newjob()">New Job</button>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-info btn-block my-2 mt-5" @click="newproduct()">New Product</button>
+                </div>
+              </div>
               </ul>
             </div>
           </div>
@@ -179,9 +187,17 @@ export default {
     edit_url() {
       return "/admin/users/edit/" + this.result.ref_id;
     },
+
     delete_url() {
       return "/admin/users/delete/" + this.result.ref_id;
-    }
+    },
+    newjob() {
+      window.location.href = "/admin/jobs/new/"+this.result.id;
+    },
+
+    newproduct() {
+      window.location.href = "/admin/products/new/"+this.result.id;
+    },
   }
 };
 </script>

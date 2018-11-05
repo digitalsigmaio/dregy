@@ -113,6 +113,21 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/pharmacies/edit/{pharmacy}', 'PharmacyController@edit')->name('editPharmacy');
     Route::patch('/pharmacies/edit', 'PharmacyController@update')->name('updatePharmacy');
 
+    // Job
+    Route::get('/jobs/new/{user_id}', 'AdminJobAdController@create')->name('newjob');
+    Route::post('/jobs/ads', 'AdminJobAdController@store');
+    Route::get('/pending-jobs', 'AdminJobAdController@pendingJobs')->name('admin.jobs.review');
+    Route::get('/on-hold-jobs', 'AdminJobAdController@pendingJobsOnHold')->name('admin.jobs.on-hold');
+    Route::get('/pending-jobs/{jobAd}', 'AdminJobAdController@jobReview')->middleware('job-pending');
+
+
+    // Product
+    Route::get('/products/new/{user_id}', 'AdminProductAdController@create')->name('newproduct');
+    Route::post('/products/ads', 'AdminProductAdController@store');
+    Route::get('/pending-products', 'AdminProductAdController@pendingProducts')->name('admin.products.review');
+    Route::get('/on-hold-products', 'AdminProductAdController@pendingProductsOnHold')->name('admin.products.on-hold');
+    Route::get('/pending-products/{productAd}', 'AdminProductAdController@productReview')->middleware('product-pending');
+
     Route::POST('password/email',           'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::POST('password/reset',           'Auth\AdminResetPasswordController@reset');
     Route::GET('password/reset',            'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
@@ -125,13 +140,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/users/edit/{ref_id}', 'AdminUserController@edit')->name('admin.user.edit');
     //Route::put('/users/update/{user}', 'AdminUserController@update')->name('admin.user.update'); [HOLD ON USAGE]
     Route::delete('/users/delete/{ref_id}', 'AdminUserController@destroy')->name('admin.user.delete');
-    Route::get('/pending-products', 'ProductAdController@pendingProducts')->name('admin.products.review');
-    Route::get('/on-hold-products', 'ProductAdController@pendingProductsOnHold')->name('admin.products.on-hold');
-    Route::get('/pending-products/{productAd}', 'ProductAdController@productReview')->middleware('product-pending');
+    
 
-    Route::get('/pending-jobs', 'JobAdController@pendingJobs')->name('admin.jobs.review');
-    Route::get('/on-hold-jobs', 'JobAdController@pendingJobsOnHold')->name('admin.jobs.on-hold');
-    Route::get('/pending-jobs/{jobAd}', 'JobAdController@jobReview')->middleware('job-pending');
+
 
 });
 

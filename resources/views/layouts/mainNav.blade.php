@@ -44,7 +44,6 @@
                         <a class="nav-link font-weight-bold white-text mr-4" href="{{ route('jobs') }}">{{ __('words.jobs.title') }}</a>
                     </li>
 
-
                 </ul>
                 <!-- Links -->
                 <!--

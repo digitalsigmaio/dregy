@@ -30,25 +30,7 @@ class ProductAdController extends Controller
         return view('products', compact(['filters']));
     }
 
-    public function pendingProducts()
-    {
-        $admin = Auth('admin')->user();
-        $products = ProductAdResource::collection(ProductAd::pending()->get());
-        return view('admin.products.pending', compact(['products', 'admin']));
-    }
-
-    public function pendingProductsOnHold()
-    {
-        $admin = Auth('admin')->user();
-        $products = ProductAdResource::collection($admin->productsOnHold);
-        return view('admin.products.on-hold', compact(['products', 'admin']));
-    }
-
-    public function productReview(ProductAd $productAd)
-    {
-        $adminId = Auth::guard('admin')->user()->id;
-        broadcast(new ReviewProduct($productAd, $adminId));
-    }
+    
 
     public function show(ProductAd $productAd, $slug){
         $relatedProducts = $productAd->category->productAds()->inrandomOrder()->take(9)->get();
