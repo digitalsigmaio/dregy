@@ -111,7 +111,7 @@ class JobAdController extends Controller
             
         }
         
-        public function edit(JobAd $jobAd) {
+    public function edit(JobAd $jobAd) {
             if (Auth::user()->jobAds()->find($jobAd->id)) {
                 $categories = JobAdCategory::all();
                 $regions = Region::with('cities')->get();

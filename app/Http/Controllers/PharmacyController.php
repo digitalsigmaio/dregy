@@ -199,10 +199,14 @@ class PharmacyController extends Controller
                 $pharmacy->uploadImage($request->img);
             }
 
-            $pharmacy->save();
+            if ($pharmacy->save()) {
+                $admin = $request->user('admin');
+                $admin->updatedProperty($pharmacy);
 
-            session()->flash('message', 'Pharmacy Successfully Updated');
-            return redirect()->back();
+                session()->flash('message', 'Pharmacy Successfully Updated');
+                return redirect()->back();
+            }
+
         } else {
             session()->flash('message', 'Invalid Pharmacy User Ref');
             return redirect()->back();

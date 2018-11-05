@@ -210,10 +210,14 @@ class HospitalController extends Controller
                 $hospital->uploadImage($request->img);
             }
 
-            $hospital->save();
+            if ($hospital->save()) {
+                $admin = $request->user('admin');
+                $admin->updatedProperty($hospital);
 
-            session()->flash('message', 'Hospital Successfully Updated');
-            return redirect()->back();
+                session()->flash('message', 'Hospital Successfully Updated');
+                return redirect()->back();
+            }
+
         } else {
             session()->flash('message', 'Invalid');
             return redirect()->back();

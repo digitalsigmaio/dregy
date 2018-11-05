@@ -101,7 +101,7 @@
 <script>
   export default {
     name: 'modal',
-    props:['url','title'],
+    props:['url','title', 'admin'],
     data() {
       return{
         message:""
@@ -110,7 +110,9 @@
     methods: {
       YES() {
         let vm = this;
-        axios.delete(this.url)
+        axios.delete(this.url, {
+            data: { id: this.admin.id}
+      })
         .then(function(res){
           vm.message = res.data;
         });
