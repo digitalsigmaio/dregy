@@ -58248,7 +58248,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row pt-4" }, [
-    _c("div", { staticClass: "col-md-2" }, [
+    _c("div", { staticClass: "col-md-4 mt-5" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-lg-12 mb-4" }, [
@@ -58652,7 +58652,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-10", attrs: { id: "clinics" } }, [
+    _c("div", { staticClass: "col-md-8 mt-1", attrs: { id: "clinics" } }, [
       _c("div", { staticClass: "row mb-0" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "md-form form-lg ml-1" }, [
@@ -58842,7 +58842,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body col-md-6" }, [
-                          _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "row property-section" }, [
                             _c("div", { staticClass: "col-md-9" }, [
                               _c("h5", { staticClass: "card-title mb-1" }, [
                                 _c("i", {
@@ -58869,115 +58869,117 @@ var render = function() {
                               ])
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "col-md-3 mt-1 text-center" },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: {
-                                      "data-toggle": "tooltip",
-                                      "data-placement": "top",
-                                      "data-original-title": _vm.originalTitle(
-                                        clinic.id
-                                      )
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.fav(clinic.id)
-                                      }
+                            _c("div", { staticClass: "col-md-3 mt-1" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    "data-toggle": "tooltip",
+                                    "data-placement": "top",
+                                    "data-original-title": _vm.originalTitle(
+                                      clinic.id
+                                    )
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.fav(clinic.id)
                                     }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-heart pr-1 animated",
-                                      class: _vm.favClass(clinic.id)
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "light-green-text text-sm-right"
-                                  },
-                                  [_vm._v(_vm._s(_vm.favorites(clinic)))]
-                                )
-                              ]
-                            )
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-heart pr-1 animated",
+                                    class: _vm.favClass(clinic.id)
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "light-green-text text-sm-right"
+                                },
+                                [_vm._v(_vm._s(_vm.favorites(clinic)))]
+                              )
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "divider" }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "row mt-1" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-md-6" }, [
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "m-auto h2-responsive grey-text"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                               " +
-                                            _vm._s(_vm.rating(clinic.rate)) +
-                                            "\n                                           "
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "ul",
-                                    { staticClass: "rating mt-1" },
-                                    _vm._l(5, function(n) {
-                                      return _c("li", [
-                                        _c("i", {
-                                          class: _vm.starColor(
-                                            n,
-                                            _vm.rating(clinic.rate)
+                          _c(
+                            "div",
+                            { staticClass: "row mt-1 property-description" },
+                            [
+                              _c("div", { staticClass: "col-md-12 pl-3" }, [
+                                _c("div", { staticClass: "row rate-section" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c("div", { staticClass: "col-md-12" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "m-auto h2-responsive grey-text"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                               " +
+                                              _vm._s(_vm.rating(clinic.rate)) +
+                                              "\n                                           "
                                           )
-                                        })
-                                      ])
-                                    })
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "ul",
+                                      { staticClass: "rating mt-1" },
+                                      _vm._l(5, function(n) {
+                                        return _c("li", [
+                                          _c("i", {
+                                            class: _vm.starColor(
+                                              n,
+                                              _vm.rating(clinic.rate)
+                                            )
+                                          })
+                                        ])
+                                      })
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "about " }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fa fa-map-marker cyan-text pr-1"
+                                  }),
+                                  _vm._v(_vm._s(clinic.en_address))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", {}, [
+                                  _c("i", {
+                                    staticClass: "fa fa-at pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text" },
+                                    [_vm._v(_vm._s(clinic.email))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", {}, [
+                                  _c("i", {
+                                    staticClass: "fa fa-home pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text" },
+                                    [_vm._v(_vm._s(clinic.website))]
                                   )
                                 ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "about" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-map-marker cyan-text pr-1"
-                                }),
-                                _vm._v(_vm._s(clinic.en_address))
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-at pr-1 cyan-text"
-                                }),
-                                _c(
-                                  "span",
-                                  { staticClass: "light-grey-text " },
-                                  [_vm._v(_vm._s(clinic.email))]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-home pr-1 cyan-text"
-                                }),
-                                _c("span", { staticClass: "light-grey-text" }, [
-                                  _vm._v(_vm._s(clinic.website))
-                                ])
                               ])
-                            ])
-                          ])
+                            ]
+                          )
                         ])
                       ])
                     ]
@@ -61051,7 +61053,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row pt-4" }, [
-    _c("div", { staticClass: "col-md-2" }, [
+    _c("div", { staticClass: "col-md-4 mt-5" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-lg-12 mb-4" }, [
@@ -61395,7 +61397,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-10", attrs: { id: "hospitals" } }, [
+    _c("div", { staticClass: "col-md-8 mt-1", attrs: { id: "hospitals" } }, [
       _c("div", { staticClass: "row mb-0" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "md-form form-lg ml-1" }, [
@@ -61588,7 +61590,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body col-md-6" }, [
-                          _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "row property-section" }, [
                             _c("div", { staticClass: "col-md-9" }, [
                               _c("h5", { staticClass: "card-title mb-1" }, [
                                 _c("i", {
@@ -61658,85 +61660,98 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "divider" }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "row mt-1" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-md-6" }, [
-                                  _c("div", { staticClass: "col-md-12" }, [
+                          _c(
+                            "div",
+                            { staticClass: "row property-description mt-1" },
+                            [
+                              _c("div", { staticClass: "col-md-12 pl-3" }, [
+                                _c("div", { staticClass: "row rate-section" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c("div", { staticClass: "col-md-12" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "m-auto h2-responsive grey-text"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(
+                                                _vm.rating(hospital.rate)
+                                              ) +
+                                              "\n                                                    "
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
                                     _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "m-auto h2-responsive grey-text"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                                        " +
-                                            _vm._s(_vm.rating(hospital.rate)) +
-                                            "\n                                                    "
-                                        )
-                                      ]
+                                      "ul",
+                                      { staticClass: "rating mt-1" },
+                                      _vm._l(5, function(n) {
+                                        return _c("li", [
+                                          _c("i", {
+                                            class: _vm.starColor(
+                                              n,
+                                              _vm.rating(hospital.rate)
+                                            )
+                                          })
+                                        ])
+                                      })
                                     )
                                   ]),
                                   _vm._v(" "),
                                   _c(
-                                    "ul",
-                                    { staticClass: "rating mt-1" },
-                                    _vm._l(5, function(n) {
-                                      return _c("li", [
-                                        _c("i", {
-                                          class: _vm.starColor(
-                                            n,
-                                            _vm.rating(hospital.rate)
+                                    "div",
+                                    { staticClass: "col-md-6 m-auto" },
+                                    [
+                                      hospital.premium
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "badge badge-primary mb-2 p-2"
+                                            },
+                                            [_vm._v("Featured")]
                                           )
-                                        })
-                                      ])
-                                    })
+                                        : _vm._e()
+                                    ]
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "col-md-6 m-auto" }, [
-                                  hospital.premium
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "badge badge-primary mb-2 p-2"
-                                        },
-                                        [_vm._v("Featured")]
-                                      )
-                                    : _vm._e()
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "about" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-map-marker cyan-text pr-1"
-                                }),
-                                _vm._v(_vm._s(hospital.en_address))
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-at pr-1 cyan-text"
-                                }),
-                                _c(
-                                  "span",
-                                  { staticClass: "light-grey-text " },
-                                  [_vm._v(_vm._s(hospital.email))]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-home pr-1 cyan-text"
-                                }),
-                                _c("span", { staticClass: "light-grey-text" }, [
-                                  _vm._v(_vm._s(hospital.website))
+                                _c("p", { staticClass: "about" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fa fa-map-marker cyan-text pr-1"
+                                  }),
+                                  _vm._v(_vm._s(hospital.en_address))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _c("i", {
+                                    staticClass: "fa fa-at pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text " },
+                                    [_vm._v(_vm._s(hospital.email))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _c("i", {
+                                    staticClass: "fa fa-home pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text" },
+                                    [_vm._v(_vm._s(hospital.website))]
+                                  )
                                 ])
                               ])
-                            ])
-                          ])
+                            ]
+                          )
                         ])
                       ])
                     ]
@@ -63800,7 +63815,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row pt-4" }, [
-    _c("div", { staticClass: "col-md-2" }, [
+    _c("div", { staticClass: "col-md-4 mt-5" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-lg-12 mb-4" }, [
@@ -64144,7 +64159,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-10", attrs: { id: "cosmetics" } }, [
+    _c("div", { staticClass: "col-md-8 mt-1", attrs: { id: "cosmetics" } }, [
       _c("div", { staticClass: "row mb-0" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "md-form form-lg ml-1" }, [
@@ -64337,7 +64352,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body col-md-6" }, [
-                          _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "row property-section" }, [
                             _c("div", { staticClass: "col-md-9" }, [
                               _c("h5", { staticClass: "card-title mb-1" }, [
                                 _c("i", {
@@ -64407,72 +64422,81 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "divider" }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "row mt-1" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-md-6" }, [
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "m-auto h2-responsive grey-text"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                                " +
-                                            _vm._s(_vm.rating(cosmetic.rate)) +
-                                            "\n                                            "
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "ul",
-                                    { staticClass: "rating mt-1" },
-                                    _vm._l(5, function(n) {
-                                      return _c("li", [
-                                        _c("i", {
-                                          class: _vm.starColor(
-                                            n,
-                                            _vm.rating(cosmetic.rate)
+                          _c(
+                            "div",
+                            { staticClass: "row property-description mt-1" },
+                            [
+                              _c("div", { staticClass: "col-md-12 pl-3" }, [
+                                _c("div", { staticClass: "row rate-section" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c("div", { staticClass: "col-md-12" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "m-auto h2-responsive grey-text"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                " +
+                                              _vm._s(
+                                                _vm.rating(cosmetic.rate)
+                                              ) +
+                                              "\n                                            "
                                           )
-                                        })
-                                      ])
-                                    })
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "ul",
+                                      { staticClass: "rating mt-1" },
+                                      _vm._l(5, function(n) {
+                                        return _c("li", [
+                                          _c("i", {
+                                            class: _vm.starColor(
+                                              n,
+                                              _vm.rating(cosmetic.rate)
+                                            )
+                                          })
+                                        ])
+                                      })
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "about" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fa fa-map-marker cyan-text pr-1"
+                                  }),
+                                  _vm._v(_vm._s(cosmetic.en_address))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _c("i", {
+                                    staticClass: "fa fa-at pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text " },
+                                    [_vm._v(_vm._s(cosmetic.email))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _c("i", {
+                                    staticClass: "fa fa-home pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text" },
+                                    [_vm._v(_vm._s(cosmetic.website))]
                                   )
                                 ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "about" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-map-marker cyan-text pr-1"
-                                }),
-                                _vm._v(_vm._s(cosmetic.en_address))
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-at pr-1 cyan-text"
-                                }),
-                                _c(
-                                  "span",
-                                  { staticClass: "light-grey-text " },
-                                  [_vm._v(_vm._s(cosmetic.email))]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-home pr-1 cyan-text"
-                                }),
-                                _c("span", { staticClass: "light-grey-text" }, [
-                                  _vm._v(_vm._s(cosmetic.website))
-                                ])
                               ])
-                            ])
-                          ])
+                            ]
+                          )
                         ])
                       ])
                     ]
@@ -66324,7 +66348,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['filters', 'user_object', 'auth_user'],
@@ -66527,7 +66550,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row pt-4" }, [
-    _c("div", { staticClass: "col-md-2" }, [
+    _c("div", { staticClass: "col-lg-4 col-md-12" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-lg-12 mb-4" }, [
@@ -66903,7 +66926,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-9", attrs: { id: "jobs" } }, [
+    _c("div", { staticClass: "col-lg-8 col-md-12", attrs: { id: "jobs" } }, [
       _c("div", { staticClass: "row mb-0" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "md-form form-lg ml-1" }, [
@@ -67099,7 +67122,7 @@ var render = function() {
                           _c(
                             "span",
                             {
-                              staticClass: "badge p-2 float-right",
+                              staticClass: "badge p-2 float-md-right mb-3",
                               class: {
                                 "blue-gradient": job.type.en_name == "Job",
                                 "aqua-gradient":
@@ -67158,22 +67181,18 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer pb-0 px-0" }, [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-md-7 text-left" }, [
+                          _c("div", { staticClass: "col-7 text-left" }, [
                             _c("i", {
                               staticClass: "far fa-circle cyan-text pr-2"
                             }),
                             _c("strong", [_vm._v(_vm._s(job.salary) + " L.E")])
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-md-5 text-center pr-0" },
-                            [
-                              _c("span", { staticClass: "small" }, [
-                                _vm._v(_vm._s(job.created_at))
-                              ])
-                            ]
-                          )
+                          _c("div", { staticClass: "col-5 text-center pr-0" }, [
+                            _c("span", { staticClass: "small" }, [
+                              _vm._v(_vm._s(job.created_at))
+                            ])
+                          ])
                         ])
                       ])
                     ])
@@ -69083,7 +69102,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row pt-4" }, [
-    _c("div", { staticClass: "col-md-2" }, [
+    _c("div", { staticClass: "col-md-4 mt-5" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-lg-12 mb-4" }, [
@@ -69479,7 +69498,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-10", attrs: { id: "pharmacies" } }, [
+    _c("div", { staticClass: "col-md-8 mt-1", attrs: { id: "pharmacies" } }, [
       _c("div", { staticClass: "row mb-0" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "md-form form-lg ml-1" }, [
@@ -69672,7 +69691,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body col-md-6" }, [
-                          _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "row property-section" }, [
                             _c("div", { staticClass: "col-md-9" }, [
                               _c("h5", { staticClass: "card-title mb-1" }, [
                                 _c("i", {
@@ -69742,70 +69761,81 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "divider" }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "row mt-1" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-md-6" }, [
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "m-auto h2-responsive grey-text"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                                        " +
-                                            _vm._s(_vm.rating(pharmacy.rate)) +
-                                            "\n                                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "ul",
-                                    { staticClass: "rating mt-1" },
-                                    _vm._l(5, function(n) {
-                                      return _c("li", [
-                                        _c("i", {
-                                          class: _vm.starColor(
-                                            n,
-                                            _vm.rating(pharmacy.rate)
+                          _c(
+                            "div",
+                            { staticClass: "row property-description mt-1" },
+                            [
+                              _c("div", { staticClass: "col-md-12 pl-3" }, [
+                                _c("div", { staticClass: "row rate-section" }, [
+                                  _c("div", { staticClass: "col-md-6" }, [
+                                    _c("div", { staticClass: "col-md-12" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "m-auto h2-responsive grey-text"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(
+                                                _vm.rating(pharmacy.rate)
+                                              ) +
+                                              "\n                                                    "
                                           )
-                                        })
-                                      ])
-                                    })
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "ul",
+                                      { staticClass: "rating mt-1" },
+                                      _vm._l(5, function(n) {
+                                        return _c("li", [
+                                          _c("i", {
+                                            class: _vm.starColor(
+                                              n,
+                                              _vm.rating(pharmacy.rate)
+                                            )
+                                          })
+                                        ])
+                                      })
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "about" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fa fa-map-marker cyan-text pr-1"
+                                  }),
+                                  _vm._v(_vm._s(pharmacy.en_address))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _c("i", {
+                                    staticClass: "fa fa-at pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text" },
+                                    [_vm._v(_vm._s(pharmacy.email))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _c("i", {
+                                    staticClass: "fa fa-home pr-1 cyan-text"
+                                  }),
+                                  _c(
+                                    "span",
+                                    { staticClass: "light-grey-text" },
+                                    [_vm._v(_vm._s(pharmacy.website))]
                                   )
                                 ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "about" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-map-marker cyan-text pr-1"
-                                }),
-                                _vm._v(_vm._s(pharmacy.en_address))
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-at pr-1 cyan-text"
-                                }),
-                                _c("span", { staticClass: "light-grey-text" }, [
-                                  _vm._v(_vm._s(pharmacy.email))
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _c("i", {
-                                  staticClass: "fa fa-home pr-1 cyan-text"
-                                }),
-                                _c("span", { staticClass: "light-grey-text" }, [
-                                  _vm._v(_vm._s(pharmacy.website))
-                                ])
                               ])
-                            ])
-                          ])
+                            ]
+                          )
                         ])
                       ])
                     ]
@@ -71854,7 +71884,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row pt-4" }, [
-    _c("div", { staticClass: "col-lg-3" }, [
+    _c("div", { staticClass: "col-lg-3 mt-5" }, [
       _c("div", {}, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-lg-12 mb-4" }, [
@@ -72056,7 +72086,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-9", attrs: { id: "products" } }, [
+    _c("div", { staticClass: "col-lg-9 mt-1", attrs: { id: "products" } }, [
       _c("div", { staticClass: "row mb-0" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "md-form form-lg ml-1" }, [
@@ -72293,7 +72323,7 @@ var render = function() {
                             _c(
                               "a",
                               {
-                                staticClass: "h3-responsive mr-2 float-left",
+                                staticClass: "h3-responsive mr-2",
                                 attrs: {
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
@@ -72328,15 +72358,22 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "card-footer pb-0 pl-0" }, [
                           _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-6 text-left" }, [
-                              _c("strong", [
-                                _vm._v(_vm._s(product.price) + " L.E")
-                              ])
-                            ]),
+                            _c(
+                              "div",
+                              { staticClass: "col-6 pl-5 pl-md-2 text-left" },
+                              [
+                                _c("strong", [
+                                  _vm._v(_vm._s(product.price) + " L.E")
+                                ])
+                              ]
+                            ),
                             _vm._v(" "),
                             _c(
                               "div",
-                              { staticClass: "col-md-6 text-center pr-0" },
+                              {
+                                staticClass:
+                                  "col-6 pl-5 pl-md-2 text-center pr-0"
+                              },
                               [
                                 _c("span", { staticClass: "small" }, [
                                   _vm._v(

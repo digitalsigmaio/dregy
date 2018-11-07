@@ -2,7 +2,7 @@
     <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
-        <div class="col-md-2">
+        <div class="col-md-4 mt-5">
 
             <div class="">
 
@@ -130,7 +130,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-md-10" id="pharmacies" v-cloak>
+        <div class="col-md-8 mt-1" id="pharmacies" v-cloak>
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -195,7 +195,7 @@
                                 <div class="card-body col-md-6">
                                     <!--Category & Title-->
 
-                                    <div class="row">
+                                    <div class="row property-section">
 
                                         <div class="col-md-9">
                                             <h5 class="card-title mb-1"><i class="fa fa-medkit brown-text fa-2x pr-1 pb-1"></i> <strong><a :href="'/pharmacies/' + pharmacy.id + '/' + pharmacy.slug" class="dark-grey-text">{{ pharmacy.en_name }}</a></strong></h5>
@@ -209,11 +209,11 @@
 
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="row mt-1">
-                                        <div class="col-md-12">
+                                    <div class="row property-description mt-1">
+                                        <div class="col-md-12 pl-3">
 
                                             <!-- Cosmetic Clinic Rating -->
-                                            <div class="row">
+                                            <div class="row rate-section">
                                                 <div class="col-md-6">
                                                     <div class="col-md-12">
                                                         <div class="m-auto h2-responsive grey-text">

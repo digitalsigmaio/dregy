@@ -2,7 +2,7 @@
    <div class="row pt-4" v-cloak>
 
       <!-- Sidebar -->
-      <div class="col-md-2">
+      <div class="col-md-4 mt-5">
 
          <div class="">
             <!-- Grid row -->
@@ -151,7 +151,7 @@
       <!-- /.Sidebar -->
 
       <!-- Content -->
-      <div class="col-md-10" id="clinics">
+      <div class="col-md-8 mt-1" id="clinics">
 
          <div class="row mb-0">
             <div class="col-md-6">
@@ -216,12 +216,12 @@
                         <div class="card-body col-md-6">
                            <!--Category & Title-->
 
-                           <div class="row">
+                           <div class="row property-section">
 
                               <div class="col-md-9">
                                  <h5 class="card-title mb-1"><i class="fa fa-user-md blue-text fa-2x pr-2"></i> <strong><a :href="'/clinics/' + clinic.id + '/' + clinic.slug" class="dark-grey-text">{{ clinic.en_name }}</a></strong></h5>
                               </div>
-                               <div class="col-md-3 mt-1 text-center">
+                               <div class="col-md-3 mt-1">
                                    <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(clinic.id)" @click.prevent="fav(clinic.id)" >
                                        <i class="fa fa-heart pr-1 animated"  :class="favClass(clinic.id)"></i>
                                    </a>
@@ -231,10 +231,10 @@
                            </div>
                            <div class="divider"></div>
 
-                           <div class="row mt-1">
-                              <div class="col-md-12">
+                           <div class="row mt-1 property-description">
+                              <div class="col-md-12 pl-3">
                                   <!-- Clinic Rating -->
-                                  <div class="row">
+                                  <div class="row rate-section">
                                       <div class="col-md-6">
                                           <div class="col-md-12">
                                               <div class="m-auto h2-responsive grey-text">
@@ -251,13 +251,13 @@
 
 
                                  <!-- Address -->
-                                 <p class="about"><i class="fa fa-map-marker cyan-text pr-1"></i>{{ clinic.en_address }}</p>
+                                 <p class="about "><i class="fa fa-map-marker cyan-text pr-1"></i>{{ clinic.en_address }}</p>
 
-                                 <p><i class="fa fa-at pr-1 cyan-text">
-                                    </i><span class="light-grey-text ">{{ clinic.email }}</span>
+                                 <p class=""><i class="fa fa-at pr-1 cyan-text">
+                                    </i><span class="light-grey-text">{{ clinic.email }}</span>
                                  </p>
 
-                                 <p><i class="fa fa-home pr-1 cyan-text">
+                                 <p class=""><i class="fa fa-home pr-1 cyan-text">
                                     </i><span class="light-grey-text">{{ clinic.website }}</span>
                                  </p>
 

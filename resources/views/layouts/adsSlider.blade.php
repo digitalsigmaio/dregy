@@ -11,7 +11,7 @@
         <!--First slide-->
         <div class="carousel-item active">
             <div class="view h-100">
-                <img class="d-block h-100 w-lg-100" src="/img/slider/2.jpg" alt="First slide">
+                <img class="d-block h-100 w-lg-100 img-fluid" src="/img/slider/2.jpg" alt="First slide">
                 <div class="mask">
 
                 </div>
@@ -21,7 +21,7 @@
         <!--Second slide-->
         <div class="carousel-item h-100">
             <div class="view h-100">
-                <img class="d-block h-100 w-lg-100" src="/img/slider/1.jpg" alt="Second slide">
+                <img class="d-block h-100 w-lg-100 img-fluid" src="/img/slider/1.jpg" alt="Second slide">
                 <div class="mask">
 
                 </div>
@@ -31,7 +31,7 @@
         <!--Third slide-->
         <div class="carousel-item">
             <div class="view h-100">
-                <img class="d-block h-100 w-lg-100" src="/img/slider/3.jpg" alt="Third slide">
+                <img class="d-block h-100 w-lg-100 img-fluid" src="/img/slider/3.jpg" alt="Third slide">
                 <div class="mask">
                 </div>
             </div>

@@ -187,4 +187,44 @@ select {
     display: block;
 }
 
+@media (max-width: 1199px) {
+    .nav-item a span {
+        display: none;
+    }
+}
+
+[type=checkbox] + label, [type=radio] + label {
+    font-size: 0.9rem;
+}
+
+fieldset#speciality {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+@media (max-width: 766px) {
+    .property-section, .rate-section {
+        text-align: center;
+    }
+
+    .property-description p {
+        padding-left: 3%;
+    }
+
+    .card-body .divider {
+        display: none;
+    }
+}
+
+.card-ecommerce ul.rating li{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+
+
+
+
 
