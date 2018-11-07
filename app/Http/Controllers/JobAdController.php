@@ -90,7 +90,7 @@ class JobAdController extends Controller
         $job->region_id = $request->regionId;
         $job->city_id = $request->cityId;
         $job->address = $request->address;
-        $job->expires_at = now()->addDays(30);
+        //$job->expires_at = now()->addDays(30);
 
         try {
             $job->uploadImage($request->img);

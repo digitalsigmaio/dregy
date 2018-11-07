@@ -153,8 +153,23 @@ class AdminProductAdController extends Controller
 
     public function productReview(ProductAd $productAd)
     {
+        $productAd->load(['category', 'region', 'city']);
         $adminId = Auth::guard('admin')->user()->id;
+        $admin = Auth::guard('admin')->user();
         broadcast(new ReviewProduct($productAd, $adminId));
+        return view('admin.products.reviewing', compact('productAd','admin'));
     }
-    
+
+    public function productReviewResponse(ProductAd $productAd)
+    {
+        //dd($jobAd->load('user'));
+        $productAd->approved = boolval ($request->status);
+        if($request->status){
+            $productAd->expires_at = now()->addDays(30);
+        }
+        $productAd->save();
+        event(new AdApprovedEvent ($productAd->load('user'), $request->reason) );
+        return redirect('/admin/home');    
+    }
+
 }

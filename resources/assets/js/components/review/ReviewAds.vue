@@ -1,10 +1,21 @@
+<style>
+  #adjust_row{
+    margin-left:3%;
+  }
+
+  .red{
+    color: red;
+  }
+
+  .blue {
+    color: blue
+  }
+
+</style>
 <template>
-<div class="container">
-    
+<div class="container">    
     <div class="row justify-content-center">
       <div class="col-md-10">
-
-
           <div class="card">
             <div class="card-header mb-5 mt-5">
               <h2>Job Details</h2>
@@ -26,8 +37,23 @@
                     <td></td>
                   </tr>
                   <tr>
+                    <th>Stauts</th>
+                    <td>{{jobad.status}}</td>
+                    <td></td>
+                  </tr>
+                  <tr>
                     <th>Address</th>
                     <td>{{jobad.address}}</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>Region</th>
+                    <td>{{jobad.region.en_name}}</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>City</th>
+                    <td>{{jobad.city.en_name}}</td>
                     <td></td>
                   </tr>
                   <tr>
@@ -47,75 +73,45 @@
                   </tr>
                   <tr>
                     <th>Employment Type</th>
-                    <td>{{jobad.employment_type_id}}</td>
+                    <td>{{jobad.employment_type.en_name}}</td>
                     <td></td>
                   </tr>
                   <tr>
                     <th>Education Level</th>
-                    <td>{{jobad.education_level_id}}</td>
+                    <td>{{jobad.education_level.en_name}}</td>
                     <td></td>
-                  </tr>
-                  <tr>
-                    <th>Region Id</th>
-                    <td>{{jobad.region_id}}</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th>City Id</th>
-                    <td>{{jobad.city_id}}</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th><a href="" @click.prevent="hospitalShow">Hospitals</a></th>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr v-if="hospitalStatus" v-for="">
-                    <td>{{hospital.name}}</td>
-                    <td>{{hospital.email}}</td>
-                    <td>{{hospital.website}}</td>
-                  </tr>
-                  <tr>
-                    <th><a href="" @click.prevent="pharmacyShow">Pharmacies</a></th>
-                    <td>{{result}}</td>
-                  </tr>
-                  <tr v-if="pharmacyStatus" v-for="">
-                      <td>{{pharmacy.en_name}}</td>
-                      <td>{{pharmacy.email}}</td>
-                      <td>{{pharmacy.website}}</td>
-                  </tr>
-                  <tr>
-                    <th><a href="" @click.prevent="clinicShow">Clinics</a></th>
-                    <td>{{result}}</td>
-                  </tr>
-                  <tr v-if="clinicStatus" v-for="">
-                      <td>{{clinic.en_name}}</td>
-                      <td>{{clinic.email}}</td>
-                  </tr>
-                  <tr>
-                    <th><a href="" @click.prevent="cosmeticShow">Cosmetic Clinics</a></th>
-                    <td>{{result}}</td>
-                  </tr>
-                  <tr v-if="cosmeticStatus" v-for="">
-                      <td>{{cosmetic.en_name}}</td>
-                      <td>{{cosmetic.email}}</td>
                   </tr>
                 </tbody>
               </table>
-              </div>
-              <ul>
-              <!-- HOLD ON USAGE
-              <li><a :href="edit_url">Edit</a></li>
-              -->
-              <button class="btn btn-danger btn-block my-2 mt-5" @click="showModal">Delete</button>
-              <div class="row">
-                <div class="col-md-6">
-                  <button class="btn btn-info btn-block my-2 mt-5" @click="newjob()">New Job</button>
+              <ul class="m-auto">
+                <!-- HOLD ON USAGE
+                <li><a :href="edit_url">Edit</a></li>
+                -->
+                <div id="adjust_row" class="row p-0 ml-4">
+                  <form action="/" method="post">
+                      <div class="col-md">
+                        <div class="md-form">
+                          <i class="fa fa-pencil prefix"></i>
+                          <label for="form10">Declined Reason</label>
+                          <textarea type="text" id="form10" class="md-textarea form-control" placeholder="Reason if declined" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <!-- Group of default radios - option 1 -->
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios" checked>
+                        <label class="custom-control-label blue" for="defaultGroupExample1">Approved</label>
+                      </div>
+
+                      <!-- Group of default radios - option 2 -->
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios">
+                        <label class="custom-control-label red" for="defaultGroupExample2">Declined</label>
+                      </div>
+                      <div class="col-md-12">
+                        <button class="btn btn-info danger btn-block my-2 mt-5" @click="deletejob()">Submit</button>
+                      </div>
+                  </form>
                 </div>
-                <div class="col-md-6">
-                  <button class="btn btn-info btn-block my-2 mt-5" @click="newproduct()">New Product</button>
-                </div>
-              </div>
               </ul>
             </div>
           </div>
@@ -136,10 +132,6 @@ export default {
       result: null,
       isModalVisible: false,
       title: "Are you Sure You want to Delete this user?",
-      hospitalStatus: false,
-      pharmacyStatus: false,
-      clinicStatus: false,
-      cosmeticStatus: false,
     };
   },
 
@@ -162,17 +154,13 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
-    hospitalShow(){
-        this.hospitalStatus = !this.hospitalStatus;
+    approvejob() {
+      window.confirm("Are you sure you want to approve this?");
+
     },
-    pharmacyShow(){
-        this.pharmacyStatus = !this.pharmacyStatus;
-    },
-    clinicShow(){
-        this.clinicStatus = !this.clinicStatus;
-    },
-    cosmeticShow(){
-        this.cosmticStatus = !this.cosmticStatus;
+
+    deletejob() {
+      window.location.href = "/admin/products/new/"+this.result.id;
     },
   },
 
@@ -188,13 +176,7 @@ export default {
     delete_url() {
       return "/admin/users/delete/";
     },
-    newjob() {
-      window.location.href = "/admin/jobs/new/"+this.result.id;
-    },
 
-    newproduct() {
-      window.location.href = "/admin/products/new/"+this.result.id;
-    },
   }
 };
 </script>

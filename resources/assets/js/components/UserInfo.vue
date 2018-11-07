@@ -15,7 +15,7 @@
                           <option value="email">E-mail</option>
                           <option value="ref_id">Reference Id</option>
                       </select>
-                        <input type="text" id="form1" v-model="filter_value" class="form-control">
+                        <input type="text" id="form1" v-model="filter_value" class="form-control" required>
                     </div>
 
                     <!-- Submit button -->
