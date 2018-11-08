@@ -43,7 +43,7 @@
     </div>
 
     <!--Footer Links-->
-    <div class="container mt-5 mb-4 text-center text-md-left">
+    <div class="container mt-5 mb-4 text-center text-md-left d-none">
         <div class="row mt-3">
 
             <!--First column-->
@@ -122,7 +122,7 @@
     <!-- Copyright-->
     <div class="footer-copyright py-3 text-center">
         <div class="container-fluid">
-            © 2018 Developed and designed by <a href="http://teleone.tech/" target="_blank">TeleOne</a>
+            © 2018 Developed and designed by <a href="https://digitalsigma.io" target="_blank">Digital Sigma</a>
         </div>
     </div>
     <!--/.Copyright -->

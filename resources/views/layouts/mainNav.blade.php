@@ -58,22 +58,22 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item" title="{{ __('words.contact') }}">
                         <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('contact') }}" target="_blank">
-                            <i class="fa fa-envelope white-text"></i> {{ __('words.contact') }}
+                            <i class="fa fa-envelope white-text"></i> <span>{{ __('words.contact') }}</span>
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     @checklang('en')
-                    <li class="nav-item">
+                    <li class="nav-item" title="عربي">
                         <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('lang', 'ar') }}">
-                            <i class="fa fa-language white-text pl-1"></i> عربي
+                            <i class="fa fa-language white-text pl-1"></i> <span>عربي</span>
                         </a>
                     </li>
                     @else
-                        <li class="nav-item">
+                        <li class="nav-item" title="English">
                             <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="{{ route('lang', 'en') }}">
-                                <i class="fa fa-language white-text pl-1"></i> English
+                                <i class="fa fa-language white-text pl-1"></i> <span>English</span>
                             </a>
                         </li>
                         @endchecklang
@@ -81,7 +81,7 @@
                         <li class="nav-item dropdown ml-3">
                             <a class="nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user white-text"></i> {{ Auth::user()->name }} </a>
+                                <i class="fa fa-user white-text"></i> <span>{{ Auth::user()->name }}</span> </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                                 <a class="dropdown-item waves-effect waves-light" href="{{ route('home') }}">My account</a>
                                 <div id="logout">
@@ -90,9 +90,9 @@
                             </div>
                         </li>
                     @else
-                        <li class="nav-item">
+                        <li class="nav-item" title="{{ __('words.login') }}">
                             <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" data-toggle="modal" data-target="#elegantModalForm">
-                                <i class="fa fa-sign-in white-text"></i> {{ __('words.login') }}
+                                <i class="fa fa-sign-in white-text"></i> <span>{{ __('words.login') }}</span>
                                 <span class="sr-only">Sign In</span>
                             </a>
                         </li>

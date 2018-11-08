@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Admin;
 use App\Http\Resources\PharmacyCollection;
 use App\Http\Resources\PharmacyResource;
 use App\Pharmacy;
@@ -92,10 +93,13 @@ class PharmacyController extends Controller
 
     }
 
-    public function destroy(Pharmacy $pharmacy)
+    public function destroy(Pharmacy $pharmacy, Request $request)
     {
         if($pharmacy->delete())
         {
+            $admin = Admin::find($request->id);
+            $admin->deletedProperty($pharmacy);
+
             return response()->json('Pharmacy Successfully Deleted');
         }else{
             return response()->json('Pharmacy Not Found');

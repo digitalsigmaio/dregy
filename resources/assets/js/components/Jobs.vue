@@ -2,7 +2,7 @@
     <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
-        <div class="col-md-2">
+        <div class="col-lg-4 col-md-12">
 
             <div class="">
                 <!-- Grid row -->
@@ -135,7 +135,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9" id="jobs">
+        <div class="col-lg-8 col-md-12" id="jobs">
             <!-- Search Area -->
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -209,7 +209,7 @@
                                 </h5>
                                 <div class="row my-2">
                                     <div class="col-md-6 pt-1">
-                                        <span class="badge p-2 float-right" :class="{ 'blue-gradient': job.type.en_name == 'Job', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
+                                        <span class="badge p-2 float-md-right mb-3" :class="{ 'blue-gradient': job.type.en_name == 'Job', 'aqua-gradient' : job.type.en_name == 'Job Seeker' }">
                                     {{ job.type.en_name }}</span>
                                     </div>
                                     <div class="col-md-6">
@@ -223,7 +223,6 @@
                                     <li v-for="phone in job.phone" class="text-grey">
                                         <i class="fa fa-phone blue-text"></i> <strong class="teal-text">{{ phone }}</strong>
                                     </li>
-
                                 </ul>
 
 
@@ -231,10 +230,10 @@
                                 <!--Card footer-->
                                 <div class="card-footer pb-0 px-0">
                                     <div class="row">
-                                        <div class="col-md-7 text-left">
+                                        <div class="col-7 text-left">
                                             <i class="far fa-circle cyan-text pr-2"></i><strong>{{ job.salary }} L.E</strong>
                                         </div>
-                                        <div class="col-md-5 text-center pr-0">
+                                        <div class="col-5 text-center pr-0">
                                             <span class="small">{{ job.created_at }}</span>
                                         </div>
                                     </div>

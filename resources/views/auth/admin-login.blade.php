@@ -137,13 +137,6 @@
                                 <!--Header-->
                                 <div class="form-header sky-gradient">
                                     <h3><i class="fa fa-user mt-2 mb-2"></i> Admin {{ __('Login') }}</h3>
-                                    @if($errors->any())
-                                        <ul>
-                                            @foreach($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
                                 </div>
 
                                 <!--Body-->
@@ -154,6 +147,12 @@
                                         <input type="text" id="orangeForm-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
                                                 required autofocus>
                                         <label for="orangeForm-email">{{ __('E-Mail Address') }}</label>
+
+                                        @if ($errors->has('email'))
+                                            <span class="red-text" style="margin-left: 40px">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
 
                                     <div class="md-form">
@@ -161,6 +160,12 @@
                                         <input type="password" id="orangeForm-pass" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} validate" name="password"
                                                @keyup.enter="login" required>
                                         <label for="orangeForm-pass">{{ __('Password') }}</label>
+
+                                        @if ($errors->has('password'))
+                                            <span class="red-text" style="margin-left: 40px">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="md-form row">
                                         <div class="form-check col-md-6">

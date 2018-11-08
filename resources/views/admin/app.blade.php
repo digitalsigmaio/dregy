@@ -182,7 +182,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    Doctor Egypt - Developed and designed by <a href="http://teleone.tech" target="_blank">TeleOne</a>
+                    Doctor Egypt - Developed and designed by <a href="https://digitalsigma.io" target="_blank">Digital Sigma</a>
                 </div>
                 <div class="clearfix"></div>
             </footer>
@@ -196,7 +196,7 @@
     <!-- jQuery -->
     <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
-    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"--></script>
+    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- FastClick -->
     <script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->

@@ -2,7 +2,7 @@
     <div class="row pt-4" v-cloak>
 
         <!-- Sidebar -->
-        <div class="col-lg-3">
+        <div class="col-lg-3 mt-5">
 
             <div class="">
                 <!-- Grid row -->
@@ -76,7 +76,7 @@
         <!-- /.Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9" id="products">
+        <div class="col-lg-9 mt-1" id="products">
 
             <div class="row mb-0">
                 <div class="col-md-6">
@@ -150,7 +150,7 @@
                                     {{ product.status == '1' ? 'New' : 'Used' }}</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" class="h3-responsive mr-2 float-left">
+                                        <a data-toggle="tooltip" data-placement="top" :data-original-title="originalTitle(product.id)" @click.prevent="fav(product.id)" class="h3-responsive mr-2">
                                             <i class="fas fa-heart pr-1 animated"  :class="favClass(product.id)"></i>
                                         </a>
                                     </div>
@@ -163,10 +163,10 @@
                                 <!--Card footer-->
                                 <div class="card-footer pb-0 pl-0">
                                     <div class="row">
-                                        <div class="col-md-6 text-left">
+                                        <div class="col-6 pl-5 pl-md-2 text-left">
                                             <strong>{{ product.price }} L.E</strong>
                                         </div>
-                                        <div class="col-md-6 text-center pr-0">
+                                        <div class="col-6 pl-5 pl-md-2 text-center pr-0">
                                             <span class="small">
                                                 {{ product.created_at }}
                                             </span>
