@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FreeAdMail;
 
-class AdApprovedListener
+class AdApprovedListener implements ShouldQueue
 {
     /**
      * Create the event listener.
