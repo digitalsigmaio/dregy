@@ -75,7 +75,7 @@ class ProductAdController extends Controller
         $product->region_id = $request->regionId;
         $product->city_id = $request->cityId;
         $product->address = $request->address;
-        $product->expires_at = now()->addDays(30);
+        //$product->expires_at = now()->addDays(30);
         try {
             $product->uploadImage($request->img);
             $product->save();

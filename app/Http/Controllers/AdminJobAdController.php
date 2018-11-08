@@ -14,7 +14,7 @@ use App\Region;
 use App\Http\Resources\JobAdResource;
 use Illuminate\Support\Facades\Auth;
 use App\Events\ReviewJob;
-
+use App\Events\AdApprovedEvent;
 
 class AdminJobAdController extends Controller
 {
@@ -169,7 +169,26 @@ class AdminJobAdController extends Controller
 
     public function jobReview(JobAd $jobAd)
     {
+        $jobAd->load(['category', 'region', 'city', 'experienceLevel', 'educationLevel', 'employmentType']);
         $adminId = Auth::guard('admin')->user()->id;
+        $admin = Auth('admin')->user();
         broadcast(new ReviewJob($jobAd, $adminId));
+        //dd($jobAd);
+
+        return view('admin.jobs.reviewing', compact('jobAd','admin'));
     }
+
+    public function jobReviewResponse(JobAd $jobAd, Request $request)
+    {
+        //dd($jobAd->load('user'));
+        $jobAd->approved = boolval ($request->status);
+        if($request->status){
+            $jobAd->expires_at = now()->addDays(30);
+        }
+        $jobAd->save();
+        event(new AdApprovedEvent ($jobAd->load('user'), $request->reason) );
+        return redirect('/admin/home');
+    }
+
+
 }

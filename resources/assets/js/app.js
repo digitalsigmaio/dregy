@@ -66,6 +66,7 @@ Vue.component('on-hold-products', require('./components/review/ProductsOnHold.vu
 
 Vue.component('pending-jobs', require('./components/review/JobsPending.vue'));
 Vue.component('on-hold-jobs', require('./components/review/JobsOnHold.vue'));
+Vue.component('review-ads', require('./components/review/ReviewAds.vue'));
 
 Vue.component('adminjob-new', require('./components/AdminNewJob.vue'));
 
