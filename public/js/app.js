@@ -83907,8 +83907,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             formStatus: true,
             userDetails: false,
             userDeleteSuccess: false,
-            select_option: null,
-            filter_value: null,
+            select_option: '',
+            filter_value: '',
             result: null,
             isModalVisible: false,
             title: "Are you Sure You want to Delete this user?",
@@ -83919,8 +83919,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newjob: null,
             newproduct: null,
             required_fields: {
-                select_option: null,
-                filter_value: null
+                select_option: '',
+                filter_value: ''
             },
             error: null
         };
@@ -83930,14 +83930,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         getUser: function getUser() {
             var vm = this;
-            if (vm.select_option !== null) {
-                if (vm.required_fields.select_option !== null) {
-                    vm.required_fields.select_option = null;
+            vm.error = null;
+            if (vm.select_option !== '') {
+                if (vm.required_fields.select_option !== '') {
+                    vm.required_fields.select_option = '';
                 }
-                if (vm.filter_value !== null) {
-                    if (vm.required_fields.filter_value !== null) {
-                        vm.required_fields.filter_value = null;
+                if (vm.filter_value !== '') {
+                    console.log(vm.filter_value !== '');
+                    if (vm.required_fields.filter_value !== '') {
+                        vm.required_fields.filter_value = '';
                     }
+
                     axios.post("/api/users/info", {
                         select_option: vm.select_option,
                         filter_value: vm.filter_value

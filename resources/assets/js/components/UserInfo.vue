@@ -179,14 +179,17 @@ export default {
   methods: {
     getUser() {
         let vm = this;
+        vm.error = null;
       if (vm.select_option !== '') {
           if (vm.required_fields.select_option !== '') {
               vm.required_fields.select_option = '';
           }
           if (vm.filter_value !== '') {
+              console.log(vm.filter_value !== '');
               if (vm.required_fields.filter_value !== '') {
                   vm.required_fields.filter_value = '';
               }
+
               axios.post("/api/users/info", {
                       select_option: vm.select_option,
                       filter_value: vm.filter_value
