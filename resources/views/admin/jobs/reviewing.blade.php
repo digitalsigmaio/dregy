@@ -25,7 +25,7 @@
             </div>
             <div class="card-body">
               <table class="table table-hover user-table">
-                <modal v-show="isModalVisible" @close="closeModal" :url="delete_url" :title="title"/>
+                
                 <thead>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@
                   </tr>
                   <tr>
                     <th>Expires at</th>
-                    <td>{{$jobAd->expires_at}}</td>
+                    <td>{{date( "M d, Y", (time() + 30 * 24 * 60 *60) )}}</td>
                     <td></td>
                   </tr>
                   <tr>

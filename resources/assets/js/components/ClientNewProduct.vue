@@ -153,11 +153,14 @@
                                             <span v-if="errors.img" class="invalid-feedback">
                                                 <strong>{{ errors.img[0] }}</strong>
                                             </span>
-
                                     </div>
 
                                 </div>
                                 <!--Grid column-->
+
+                                
+                                
+                                            
 
                             </div>
 
@@ -200,17 +203,16 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="waves-input-wrapper waves-effect waves-light float-right mt-2">
+                                            <input type="submit" value="Add Product" class="btn btn-primary">
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--Grid column-->
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12 mb-4">
-                                    <div class="waves-input-wrapper waves-effect waves-light float-right mt-2">
-                                        <input type="submit" value="Add Product" class="btn btn-primary">
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                         </div>
 
