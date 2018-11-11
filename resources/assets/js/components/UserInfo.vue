@@ -169,8 +169,8 @@ export default {
         newjob: null,
         newproduct: null,
         required_fields: {
-            select_option: null,
-            filter_value: null
+            select_option: '',
+            filter_value: ''
         },
         error: null
     };
