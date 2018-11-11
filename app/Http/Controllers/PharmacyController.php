@@ -7,6 +7,7 @@ use App\Pharmacy;
 use App\Region;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class PharmacyController extends Controller
@@ -109,7 +110,7 @@ class PharmacyController extends Controller
 
             if (count($request->phones)) {
                 foreach ($request->phones as $phone) {
-                    $hospital->phoneNumbers()->create([
+                    $pharmacy->phoneNumbers()->create([
                         'number' => $phone,
                     ]);
                 }

@@ -81,7 +81,7 @@
                 <li><a :href="edit_url">Edit</a></li>
                 -->
                 <div id="adjust_row" class="row p-0 ml-4">
-                    <form action="/admin/review/{{ $productAd->id }}" method="post">
+                    <form action="/admin/review/product/{{ $productAd->id }}" method="post">
                         @csrf
                         <div class="col-md">
                             <div class="md-form">

@@ -51,7 +51,7 @@
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">#</th>
                                     </tr>
-                                    <tr v-for="(account, index) in accounts">
+                                    <tr v-for="(account, index) in accounts" v-bind:key="index">
                                         <td>{{ account.en_name }}</td>
                                         <td>{{ account.email }}</td>
                                         <td>{{ account.website }}</td>

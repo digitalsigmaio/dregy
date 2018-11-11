@@ -10,6 +10,7 @@ use App\PhoneNumber;
 use App\Http\Resources\ProductAdResource;
 use Illuminate\Support\Facades\Auth;
 use App\Events\ReviewProduct;
+use App\Events\AdApprovedEvent;
 
 class AdminProductAdController extends Controller
 {
@@ -86,7 +87,9 @@ class AdminProductAdController extends Controller
                 }
             }
             //session()->flash('success', 'Product has been added and waiting for review');
-            return response()->json(['success' => 'Job has been added and waiting for review'], 200);
+            //return response()->json(['success' => 'Job has been added and waiting for review'], 200);
+            session()->flash('message', 'Product Successfully Created');
+            return redirect()->back();
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
@@ -160,7 +163,7 @@ class AdminProductAdController extends Controller
         return view('admin.products.reviewing', compact('productAd','admin'));
     }
 
-    public function productReviewResponse(ProductAd $productAd)
+    public function productReviewResponse(ProductAd $productAd, Request $request)
     {
         //dd($jobAd->load('user'));
         $productAd->approved = boolval ($request->status);
