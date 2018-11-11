@@ -78938,6 +78938,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
+//
 //
 //
 //
@@ -79068,7 +79071,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: [],
+  props: ['admin'],
   data: function data() {
     return {
       formStatus: true,
@@ -79080,7 +79083,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       hospitalStatus: false,
       pharmacyStatus: false,
       clinicStatus: false,
-      cosmeticStatus: false
+      cosmeticStatus: false,
+      newjob: null,
+      newproduct: null
     };
   },
 
@@ -79121,7 +79126,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {},
 
 
-  watch: {},
+  watch: {
+    result: function result(val) {
+
+      _this.newjob = "/admin/jobs/new/" + _this.result.id;
+      _this.newproduct = "/admin/products/new/" + _this.result.id;
+    }
+  },
 
   computed: {
     edit_url: function edit_url() {
@@ -79129,12 +79140,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     delete_url: function delete_url() {
       return "/admin/users/delete/" + this.result.ref_id;
-    },
-    newjob: function newjob() {
-      window.location.href = "/admin/jobs/new/" + this.result.id;
-    },
-    newproduct: function newproduct() {
-      window.location.href = "/admin/products/new/" + this.result.id;
     }
   }
 });
@@ -79262,7 +79267,11 @@ var render = function() {
                               expression: "isModalVisible"
                             }
                           ],
-                          attrs: { url: _vm.delete_url, title: _vm.title },
+                          attrs: {
+                            url: _vm.delete_url,
+                            admin: _vm.admin,
+                            title: _vm.title
+                          },
                           on: { close: _vm.closeModal }
                         }),
                         _vm._v(" "),
@@ -79469,46 +79478,42 @@ var render = function() {
                   : _vm._e()
               ]),
               _vm._v(" "),
-              _c("ul", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger btn-block my-2 mt-5",
-                    on: { click: _vm.showModal }
-                  },
-                  [_vm._v("Delete")]
-                ),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger btn-block my-2 mt-5",
+                      on: {
+                        click: function($event) {
+                          _vm.showModal()
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-info btn-block my-2 mt-5",
-                        on: {
-                          click: function($event) {
-                            _vm.newjob()
-                          }
-                        }
-                      },
-                      [_vm._v("New Job")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-info btn-block my-2 mt-5",
-                        on: {
-                          click: function($event) {
-                            _vm.newproduct()
-                          }
-                        }
-                      },
-                      [_vm._v("New Product")]
-                    )
-                  ])
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-info btn-block my-2 mt-5",
+                      attrs: { href: _vm.newjob }
+                    },
+                    [_vm._v("New Job")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-info btn-block my-2 mt-5",
+                      attrs: { href: _vm.newproduct }
+                    },
+                    [_vm._v("New Product")]
+                  )
                 ])
               ])
             ])
@@ -84316,6 +84321,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     YES: function YES() {
       var vm = this;
+      console.log(this.url);
       axios.delete(this.url, {
         data: { id: this.admin.id }
       }).then(function (res) {

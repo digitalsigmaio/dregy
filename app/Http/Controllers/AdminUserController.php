@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\UserResource;
+use League\Flysystem\Exception;
 
 class AdminUserController extends Controller
 {
@@ -121,21 +122,25 @@ class AdminUserController extends Controller
         return redirect()->back();
 
     }
-        
-        
+
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param string $ref_id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($ref_id)
+    public function destroy(string $ref_id)
     {
-        //
         $user = User::where('ref_id', $ref_id)->first();
 
-        $user->delete();
-        return redirect('admin.user.info');
+        if ($user !== null) {
+            try {
+                $user->delete();
+
+                return response()->json('User has been deleted successfully', 204);
+            } catch (\Exception $e) {
+                return response()->json($e->getMessage(), $e->getCode());
+            }
+        }
     
     }
 }
