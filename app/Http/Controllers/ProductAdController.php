@@ -80,6 +80,7 @@ class ProductAdController extends Controller
             $product->uploadImage($request->img);
             $product->save();
             $phonesarray = explode(',', $request->phones);
+            //dd($phonesarray);
             if (count($phonesarray)) {
                 foreach ($phonesarray as $number) {
                     $phone = new PhoneNumber;
@@ -88,7 +89,7 @@ class ProductAdController extends Controller
                 }
             }
             //session()->flash('success', 'Product has been added and waiting for review');
-            return response()->json(['success' => 'Job has been added and waiting for review'], 200);
+            return response()->json(['success' => 'Product has been added and waiting for review'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }

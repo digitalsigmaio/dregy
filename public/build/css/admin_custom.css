@@ -25,3 +25,7 @@ text-center{
     empty-cells: hide;
     width: 100%;
 }
+
+.pagination>li>a, .pagination>li>span {
+    cursor: pointer;
+}

@@ -25,7 +25,7 @@
             </div>
             <div class="card-body">
               <table class="table table-hover user-table">
-                <modal v-show="isModalVisible" @close="closeModal" :url="delete_url" :title="title"/>
+                
                 <thead>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@
                   </tr>
                   <tr>
                     <th>Expires at</th>
-                    <td>{{$productAd->expires_at}}</td>
+                    <td>{{date( "M d, Y", (time() + 30 * 24 * 60 *60) ) }}</td>
                     <td></td>
                   </tr>
                   <tr>
@@ -81,7 +81,7 @@
                 <li><a :href="edit_url">Edit</a></li>
                 -->
                 <div id="adjust_row" class="row p-0 ml-4">
-                    <form action="/admin/review/{{ $productAd->id }}" method="post">
+                    <form action="/admin/review/product/{{ $productAd->id }}" method="post">
                         @csrf
                         <div class="col-md">
                             <div class="md-form">

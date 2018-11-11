@@ -119,7 +119,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/pending-jobs', 'AdminJobAdController@pendingJobs')->name('admin.jobs.review');
     Route::get('/on-hold-jobs', 'AdminJobAdController@pendingJobsOnHold')->name('admin.jobs.on-hold');
     Route::get('/pending-jobs/{jobAd}', 'AdminJobAdController@jobReview')->middleware('job-pending');
-    Route::post('/review/{jobAd}', 'AdminJobAdController@jobReviewResponse')->name('jobreview-response');
+    Route::post('/review/job/{jobAd}', 'AdminJobAdController@jobReviewResponse')->name('jobreview-response');
 
 
     // Product
@@ -128,7 +128,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/pending-products', 'AdminProductAdController@pendingProducts')->name('admin.products.review');
     Route::get('/on-hold-products', 'AdminProductAdController@pendingProductsOnHold')->name('admin.products.on-hold');
     Route::get('/pending-products/{productAd}', 'AdminProductAdController@productReview')->middleware('product-pending');
-    Route::post('/review/{productbAd}', 'AdminProductAdController@productReviewResponse')->name('productreview-response');
+    Route::post('/review/product/{productAd}', 'AdminProductAdController@productReviewResponse')->name('productreview-response');
 
     Route::POST('password/email',           'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::POST('password/reset',           'Auth\AdminResetPasswordController@reset');

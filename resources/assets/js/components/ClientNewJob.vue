@@ -233,18 +233,15 @@
                                         </div>
                                     </div>
 
-                                </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 mb-4">
-                                    <div class="waves-input-wrapper waves-effect waves-light float-right mt-2">
-                                        <input type="submit" value="Add Job" class="btn btn-primary">
+                                    <div class="col-md-12 mb-4">
+                                        <div class="waves-input-wrapper waves-effect waves-light float-right mt-2">
+                                            <input type="submit" value="Add Job" class="btn btn-primary">
+                                        </div>
                                     </div>
                                 </div>
+                                <!--Grid column-->
+                                <!--Grid column-->
+
                             </div>
 
                         </div>

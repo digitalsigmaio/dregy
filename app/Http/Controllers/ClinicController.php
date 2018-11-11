@@ -70,6 +70,7 @@ class ClinicController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
         $admin= Auth('admin')->user();
         $request->validate([
             'ar_name' => 'required|string|max:255',
@@ -118,6 +119,16 @@ class ClinicController extends Controller
                 'priority' => $request->priority,
                 'expires_at' => $request->expires_at,
             ]);
+            }
+
+            if(count($request->phones))
+            {
+                foreach($request->phones as $phone)
+                {
+                    $clinic->phoneNumbers()->create([
+                        'number' => $phone,
+                    ]);
+                }
             }
 
             if ($request->hasFile('img')) {

@@ -101,7 +101,9 @@ class AdminJobAdController extends Controller
                     }
                 }
             //session()->flash('success', 'Job has been added and waiting for review');
-            return response()->json(['success'=> 'Job has been added and waiting for review' ], 200);
+            //return response()->json(['success'=> 'Job has been added and waiting for review' ], 200);
+            session()->flash('message', 'JOB Successfully Created');
+            return redirect()->back();
             } catch (\Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 400);
             }

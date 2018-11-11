@@ -95,7 +95,8 @@ class JobAdController extends Controller
         try {
             $job->uploadImage($request->img);
             $job->save();
-            $phonesarray = explode(',', $request->phones);
+            $phonesarray = json_decode($request->phones);
+            //dd($phonesarray);
             if (count($phonesarray)) {
                     foreach ($phonesarray as $number) {
                         $phone = new PhoneNumber;

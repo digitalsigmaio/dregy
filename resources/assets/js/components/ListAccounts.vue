@@ -51,7 +51,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(account, index) in accounts">
+                                    <tr v-for="(account, index) in accounts" v-bind:key="index">
+
                                         <td>{{ account.en_name }}</td>
                                         <td>{{ account.email }}</td>
                                         <td>{{ account.website }}</td>
