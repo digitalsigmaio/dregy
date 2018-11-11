@@ -89,7 +89,7 @@ class ClinicController extends Controller
         if (count($clinics)) {
             return new ClinicCollection($clinics);
         } else {
-            return null;
+            return response()->json('No data found', 404);
         }
     }
 

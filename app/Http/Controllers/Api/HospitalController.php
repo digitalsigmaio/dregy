@@ -89,7 +89,7 @@ class HospitalController extends Controller
         if (count($hospitals)) {
             return new HospitalCollection($hospitals);
         } else {
-            return null;
+            return response()->json('No data found', 404);
         }
     }
 

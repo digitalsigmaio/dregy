@@ -227,7 +227,7 @@ class UserController extends Controller
         if($user){
             return new UserResource($user);
         }else{
-            return response()->json(['data' => 'User Not Found']);
+            return response()->json('User not found', 404);
         }
     }
 }

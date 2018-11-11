@@ -88,7 +88,7 @@ class PharmacyController extends Controller
         if (count($pharmacies)) {
             return new PharmacyCollection($pharmacies);
         } else {
-            return null;
+            return response()->json('No data found', 404);
         }
 
     }

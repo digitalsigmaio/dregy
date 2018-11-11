@@ -430,7 +430,10 @@ export default {
           vm.endpoint = data.meta.path + "?page=" + vm.pagination.current_page;
         })
         .catch(response => {
-          console.log(response);
+            $('.fetching').hide();
+            $('.clinics').show();
+            vm.clinics = null;
+            console.log(e.response);
         });
     },
     changeEndpoint(page) {

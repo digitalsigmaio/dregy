@@ -408,6 +408,9 @@
                         vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                     })
                     .catch((e) => {
+                        $('.fetching').hide();
+                        $('.hospitals').show();
+                        vm.hospitals = null;
                         console.log(e.response);
                     });
             },

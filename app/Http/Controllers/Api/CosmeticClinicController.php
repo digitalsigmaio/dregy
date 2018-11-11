@@ -91,7 +91,7 @@ class CosmeticClinicController extends Controller
         if (count($cosmeticClinics)) {
             return new CosmeticClinicCollection($cosmeticClinics);
         } else {
-            return null;
+            return response()->json('No data found', 404);
         }
     }
 

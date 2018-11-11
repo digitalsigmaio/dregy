@@ -138,9 +138,15 @@ class AdminUserController extends Controller
 
                 return response()->json('User has been deleted successfully', 204);
             } catch (\Exception $e) {
-                return response()->json($e->getMessage(), $e->getCode());
+
+                return response()->json('Server error', $e->getCode());
+
             }
+        } else {
+            return response()->json('User not found', 404);
         }
+
+
     
     }
 }

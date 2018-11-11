@@ -392,7 +392,10 @@
                         vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                    })
                    .catch((response) => {
-                       console.log(response);
+                       $('.fetching').hide();
+                       $('.cosmetics').show();
+                       vm.cosmetics = null;
+                       console.log(e.response);
                    });
            },
            changeEndpoint(page) {

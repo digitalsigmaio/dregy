@@ -16,7 +16,7 @@
                         </div>
 
                         <!-- Account Grid -->
-                        <section class="fetching" >
+                        <section class="fetching">
                             <div class="row">
                                 <div class="preloader-wrapper big active crazy m-auto">
                                     <div class="spinner-layer spinner-blue-only">
@@ -36,21 +36,21 @@
                             </div>
                         </section>
 
-                        <section class="accounts" id="accounts">
+                        <section class="accounts" id="accounts" v-if="accounts.length">
                             <table class="table table-hover">
                                 <thead>
-                                </thead>
-                                <tbody>
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Website</th>
                                         <th>Region</th>
                                         <th>Owner [Ref-id]</th>
-                                        <th class="text-center">Premium</th> 
+                                        <th class="text-center">Premium</th>
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">#</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     <tr v-for="(account, index) in accounts">
                                         <td>{{ account.en_name }}</td>
                                         <td>{{ account.email }}</td>
@@ -112,7 +112,9 @@
                             <!--/Pagination -->
                         </section>
                         <!-- Accounts Grid -->
-                        
+                        <section class="text-center" style="display: block" v-else>
+                            <h1>{{ message }}</h1>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -130,13 +132,14 @@ export default {
             links: {},
             pagination: {},
             search: {
-                region: '',
-                city: '',
+
                 keyword: '',
+
             },
             isModalVisible: false,
             title:"Are you Sure You want to Delete this account?",
             account_id:null,
+            message: ''
         }
     },
     methods: {
@@ -148,20 +151,17 @@ export default {
                 .then(function (response) {
                     $('.fetching').hide();
                     $('.accounts').show();
-                    if (typeof response.data.data !== 'undefined') {
-                        let data = response.data;
-                        vm.accounts = data.data;
-                        vm.links = data.links;
-                        vm.pagination = data.meta;
-                        vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
-                    } else if (typeof response.status !== 'undefined') {
-                        vm.accounts = null;
-                        console.log(response.data.message)
-                    }
+
+                    let data = response.data;
+                    vm.accounts = data.data;
+                    vm.links = data.links;
+                    vm.pagination = data.meta;
+                    vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
 
                 })
-                .catch((response) => {
-                    console.log(response);
+                .catch((error) => {
+                    vm.accounts = [];
+                    vm.message = error.response.data;
                 });
         },
         changeEndpoint(page) {
@@ -185,7 +185,7 @@ export default {
         
         
         searchByKeyword: _.debounce(function () {
-            this.endpoint = '/api/cosmetic-clinics/search';
+            this.endpoint = this.account_url;
             this.fetchAccounts()
         }, 500),
         

@@ -2,7 +2,7 @@
 <div class="container">
     
     <div class="row justify-content-center">
-      <div class="col-md-10">
+      <div class="col-md-10" style="margin-top: 50px">
         <div v-if="formStatus" class="card">
             <div class="card-header mb-5 mt-5">
               <h2>Users Selection <b>:</b></h2>
@@ -10,29 +10,42 @@
             <div  class="card-body">
                 <form class="col-md-8">
                     <div class="form-group">
-                      <select class="mb-5 mt-5" v-model="select_option">
-                          <option value="" disabled selected>Choose your Search option</option>
-                          <option value="email">E-mail</option>
-                          <option value="ref_id">Reference Id</option>
-                      </select>
-                      <input type="text" id="form1" v-model="filter_value" class="form-control" required>
+                        <label for="selections">Identified by</label>
+                          <select class="mb-5 mt-5 form-control" v-model="select_option" id="selections" required>
+                              <option value="null" disabled selected>Choose your Search option</option>
+                              <option value="email">E-mail</option>
+                              <option value="ref_id">Reference Id</option>
+                          </select>
                     </div>
-
+                    <div class="form-group">
+                        <label for="identification">Value</label>
+                        <input type="text" id="identification" v-model="filter_value" class="form-control" required>
+                    </div>
                     <!-- Submit button -->
                     <div class="form-group"> 
                         <button class="btn btn-info btn-block my-4" @click.prevent="getUser()" type="submit">Search</button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div id="required_fields" >
+                            <ul class="list-unstyled">
+                                <li v-if="required_fields.select_option" class="alert-danger" style="padding: 5px">{{ required_fields.select_option }}</li>
+                                <li v-if="required_fields.filter_value" class="alert-danger" style="padding: 5px">{{ required_fields.filter_value }}</li>
+                                <li v-if="error" class="alert-danger" style="padding: 5px">{{ error }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div v-else class="card">
+        <div class="card" v-if="userDetails">
           <div class="card-header mb-5 mt-5">
             <h2>User Details</h2>
           </div>
           <div class="card-body">
             <table v-if="result" class="table table-hover user-table">
-              <modal v-show="isModalVisible" @close="closeModal" :url="delete_url" :admin="admin" :title="title"></modal>
+              <modal v-show="isModalVisible" @deleted="userDeleted" @close="closeModal" :url="delete_url" :admin="admin" :title="title"></modal>
               <thead>
               </thead>
               <tbody>
@@ -119,6 +132,15 @@
           </div>
         </div>
 
+        <div class="card" v-if="userDeleteSuccess">
+            <div class="card-body text-center">
+                <div class="col-md-12">
+                    <h1>User has been deleted successfully</h1>
+                    <a href="/admin/users/info">Back to user search</a>
+                </div>
+            </div>
+        </div>
+
       </div>
     </div>
 
@@ -132,34 +154,60 @@ export default {
   props: ['admin'],
   data() {
     return {
-      formStatus: true,
-      select_option: "",
-      filter_value: "",
-      result: null,
-      isModalVisible: false,
-      title: "Are you Sure You want to Delete this user?",
-      hospitalStatus: false,
-      pharmacyStatus: false,
-      clinicStatus: false,
-      cosmeticStatus: false,
+        formStatus: true,
+        userDetails: false,
+        userDeleteSuccess: false,
+        select_option: null,
+        filter_value: null,
+        result: null,
+        isModalVisible: false,
+        title: "Are you Sure You want to Delete this user?",
+        hospitalStatus: false,
+        pharmacyStatus: false,
+        clinicStatus: false,
+        cosmeticStatus: false,
         newjob: null,
-        newproduct: null
+        newproduct: null,
+        required_fields: {
+            select_option: null,
+            filter_value: null
+        },
+        error: null
     };
   },
 
   methods: {
     getUser() {
-      if (this.select_option === "email" || "ref_id") {
         let vm = this;
-        this.formStatus = false;
-        axios
-          .post("/api/users/info", {
-            select_option: this.select_option,
-            filter_value: this.filter_value
-          })
-          .then(function(res) {
-            vm.result = res.data.data;
-          });
+      if (vm.select_option !== null) {
+          if (vm.required_fields.select_option !== null) {
+              vm.required_fields.select_option = null;
+          }
+          if (vm.filter_value !== null) {
+              if (vm.required_fields.filter_value !== null) {
+                  vm.required_fields.filter_value = null;
+              }
+              axios.post("/api/users/info", {
+                      select_option: vm.select_option,
+                      filter_value: vm.filter_value
+                  })
+                  .then(function(res) {
+                      vm.formStatus = false;
+                      vm.userDetails = true;
+                      vm.error = null;
+                      vm.required_fields = null;
+                      vm.result = res.data.data;
+                      vm.newjob = "/admin/jobs/new/" + vm.result.id;
+                      vm.newproduct = "/admin/products/new/" + vm.result.id;
+                  })
+                  .catch(function (error) {
+                      vm.error = error.response.data;
+                  });
+          } else {
+              vm.required_fields.filter_value = 'Value is required';
+          }
+      } else {
+          vm.required_fields.select_option = 'Option is required';
       }
     },
     showModal() {
@@ -167,6 +215,11 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
+    },
+    userDeleted() {
+        this.formStatus = false;
+        this.userDetails = false;
+        this.userDeleteSuccess = true;
     },
     hospitalShow(){
         this.hospitalStatus = !this.hospitalStatus;
@@ -185,13 +238,7 @@ export default {
   mounted() {},
 
   watch: {
-      result: (val)=> {
 
-
-          this.newjob = "/admin/jobs/new/" + this.result.id;
-          this.newproduct = "/admin/products/new/" + this.result.id;
-
-      }
   },
 
   computed: {
@@ -201,7 +248,7 @@ export default {
 
     delete_url() {
       return "/admin/users/delete/" + this.result.ref_id;
-    }
+    },
   }
 };
 </script>

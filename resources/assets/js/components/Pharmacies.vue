@@ -397,6 +397,9 @@
                             vm.endpoint = data.meta.path + '?page=' + vm.pagination.current_page;
                         })
                         .catch((e) => {
+                            $('.fetching').hide();
+                            $('.pharmacies').show();
+                            vm.pharmacies = null;
                             console.log(e.response);
                         });
                 },

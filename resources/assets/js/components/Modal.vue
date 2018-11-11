@@ -15,25 +15,25 @@
     display: flex;
     flex-direction: column;
     max-width: 400px;
-    height: 150px;
+    max-height: 150px;
     margin-left: 40%;
     margin-top: 10%;
   }
 
   .modal-header,
   .modal-footer {
-    
+    border: none!important;
     display: flex;
   }
 
   .modal-header {
-    border-bottom: 1px solid #eeeeee;
+    /*border-bottom: 1px solid #eeeeee;*/
     color: #4AAE9B;
     justify-content: space-between;
   }
 
   .modal-footer {
-    border-top: 1px solid #eeeeee;
+    /*border-top: 1px solid #eeeeee;*/
     margin-top: 10px;
     display: flex;
     justify-content: space-around;
@@ -57,8 +57,8 @@
   .btn-green {
     color: white;
     background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
+    /*border: 1px solid #4AAE9B;
+    border-radius: 2px;*/
   }
 </style>
 
@@ -71,10 +71,13 @@
         aria-describedby="modalDescription">
 
         <header class="modal-header" id="modalTitle">
-          <slot name="header">
+
             {{title}}
-          </slot>
+
         </header>
+          <div v-if="message" class="modal-body">
+              <p>{{message}}</p>
+          </div>
         <section class="modal-footer">
             <button
               type="button"
@@ -104,23 +107,29 @@
     props:['url','title', 'admin'],
     data() {
       return{
-        message:""
+        message:null
       }
     },
     methods: {
       YES() {
         let vm = this;
-        console.log(this.url);
+        //console.log(this.url);
         axios.delete(this.url, {
             data: { id: this.admin.id }
       })
-        .then(function(res){
-          vm.message = res.data;
+        .then(function(res){console.log(res.data);
+            vm.message = res.data;
+            vm.$emit('close');
+            vm.$emit('deleted');
+        }).catch(function (error) {
+            console.log(error);
+            vm.message = error.response.data;
         });
-        this.$emit('close');
       },
 
       NO() {
+          let vm = this;
+          console.log(this.url);
         this.$emit('close');
       },
     },
