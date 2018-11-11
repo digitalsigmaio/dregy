@@ -157,8 +157,8 @@ export default {
         formStatus: true,
         userDetails: false,
         userDeleteSuccess: false,
-        select_option: null,
-        filter_value: null,
+        select_option: '',
+        filter_value: '',
         result: null,
         isModalVisible: false,
         title: "Are you Sure You want to Delete this user?",
@@ -179,13 +179,13 @@ export default {
   methods: {
     getUser() {
         let vm = this;
-      if (vm.select_option !== null) {
-          if (vm.required_fields.select_option !== null) {
-              vm.required_fields.select_option = null;
+      if (vm.select_option !== '') {
+          if (vm.required_fields.select_option !== '') {
+              vm.required_fields.select_option = '';
           }
-          if (vm.filter_value !== null) {
-              if (vm.required_fields.filter_value !== null) {
-                  vm.required_fields.filter_value = null;
+          if (vm.filter_value !== '') {
+              if (vm.required_fields.filter_value !== '') {
+                  vm.required_fields.filter_value = '';
               }
               axios.post("/api/users/info", {
                       select_option: vm.select_option,
