@@ -1,5 +1,5 @@
 @extends('admin.app')
 
 @section('content')
-<user-info></user-info>
+<user-info :admin="{{ Auth::guard('admin')->user() }}"></user-info>
 @endsection

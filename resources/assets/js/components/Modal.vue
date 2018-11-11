@@ -110,8 +110,9 @@
     methods: {
       YES() {
         let vm = this;
+        console.log(this.url);
         axios.delete(this.url, {
-            data: { id: this.admin.id}
+            data: { id: this.admin.id }
       })
         .then(function(res){
           vm.message = res.data;
