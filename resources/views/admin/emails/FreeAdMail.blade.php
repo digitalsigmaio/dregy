@@ -1,10 +1,11 @@
 @component('mail::message')
 # Dear Mr.{{$freeAd->user->name}},
 
-Your Job Ad has been {{$freeAd->approved}}
+Your Ad has been "{{ ($freeAd->approved) ? 'approved' : 'decined'}}" {{ !$reason ? "due to $reason" : "."}}
 
-@component('mail::button', ['url' => ''])
-review It
+
+@component('mail::button', ['url' => '/'])
+Review It
 @endcomponent
 
 Thanks,<br>
