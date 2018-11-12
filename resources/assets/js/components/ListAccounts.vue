@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <modal v-show="isModalVisible" @close="closeModal" :url="deleteUrl" :title="title" :admin="admin"></modal>
+        <modal v-show="isModalVisible" @deleted="accountDeleted" @close="closeModal" :url="deleteUrl" :title="title" :admin="admin"></modal>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -140,7 +140,8 @@ export default {
             isModalVisible: false,
             title:"Are you Sure You want to Delete this account?",
             account_id:null,
-            message: ''
+            message: '',
+            deleteAccount: null
         }
     },
     methods: {
@@ -180,11 +181,9 @@ export default {
         fetchFilter($key, $value){
             let vm = this;
             vm.search[$key] = $value;
-            vm.endpoint = '/api/cosmetic-clinics/search';
+            vm.endpoint = this.account_url;
             this.fetchAccounts();
         },
-        
-        
         searchByKeyword: _.debounce(function () {
             this.endpoint = this.account_url;
             this.fetchAccounts()
@@ -192,6 +191,7 @@ export default {
         
         showModal(id) {
             this.account_id = id;
+            this.deleteAccount = id;
             this.isModalVisible = true;
         },
         closeModal() {
@@ -206,7 +206,14 @@ export default {
                 return "No";
             }
         },
-        
+        accountDeleted() {
+            let id = this.deleteAccount;
+            let index = this.accounts.filter(function(account) {
+                return account.id === id;
+            });
+            let account = this.accounts.indexOf(index[0]);
+            this.accounts.splice(account, 1)
+        }
     },
     mounted() {
         this.fetchAccounts();

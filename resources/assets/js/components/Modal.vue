@@ -75,9 +75,7 @@
             {{title}}
 
         </header>
-          <div v-if="message" class="modal-body">
-              <p>{{message}}</p>
-          </div>
+
         <section class="modal-footer">
             <button
               type="button"
@@ -107,7 +105,6 @@
     props:['url','title', 'admin'],
     data() {
       return{
-        message:null
       }
     },
     methods: {
@@ -117,19 +114,18 @@
         axios.delete(this.url, {
             data: { id: this.admin.id }
       })
-        .then(function(res){console.log(res.data);
-            vm.message = res.data;
+        .then(function(res){
+            //console.log(res.data);
             vm.$emit('close');
             vm.$emit('deleted');
         }).catch(function (error) {
-            console.log(error);
-            vm.message = error.response.data;
+            //console.log(error);
         });
       },
 
       NO() {
           let vm = this;
-          console.log(this.url);
+          //console.log(this.url);
         this.$emit('close');
       },
     },
